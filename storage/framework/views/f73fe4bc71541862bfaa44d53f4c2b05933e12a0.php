@@ -225,7 +225,8 @@
                         $('#lawsuit_error').empty();
                         $('#To_error').empty();
                     }, success: function (data) {
-                        toastr.success(data.msg);
+                        // toastr.success(data.msg);
+                        console.log(data);
                         $("#new_case").trigger('reset');
                     }, error: function (data_error, exception) {
                         if (exception == 'error') {

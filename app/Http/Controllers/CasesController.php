@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Case_client;
 use App\Cases;
 use App\Clients;
 use App\Sessions;
@@ -16,10 +17,10 @@ class CasesController extends Controller
      */
     public function getClients()
     {
-        $clients =  Clients::select('id', 'client_Name')->where('type','client')->get();
-        $khesm   =  Clients::select('id', 'client_Name')->where('type','khesm')->get();
+        $clients = Clients::select('id', 'client_Name')->where('type', 'client')->get();
+        $khesm = Clients::select('id', 'client_Name')->where('type', 'khesm')->get();
 
-                return view('cases.add_case', compact(['clients','khesm']));
+        return view('cases.add_case', compact(['clients', 'khesm']));
     }
 
     public function index()
@@ -48,8 +49,8 @@ class CasesController extends Controller
         if ($request->ajax()) {
 
             $data = $this->validate(request(), [
-                'mokel_name' => 'required',
-                'khesm_name' => 'required',
+//                'mokel_name' => 'required',
+//                'khesm_name' => 'required',
                 'invetation_num' => 'required',
                 'circle_num' => 'required',
                 'court' => 'required',
@@ -57,19 +58,26 @@ class CasesController extends Controller
                 'inventation_type' => 'required',
                 'to_whome' => 'required'
             ]);
-            $mokel = implode(',', $request->mokel_name);
-            $khesm = implode(',', $request->khesm_name);
             $month = date('m', strtotime($request->first_session_date));
             $year = date('yy', strtotime($request->first_session_date));
-
-            $case = Cases::create(array_merge($request->except('mokel_name', 'khesm_name', 'month', 'year'), ['mokel_name' => $mokel, 'khesm_name' => $khesm, 'month' => $month, 'year' => $year]));
+//            // saving case data
+            $case = Cases::create($data);
+            $case['month'] = $month;
+            $case['year'] = $year;
+            $case->save();
+            //saving session data
             $sessions = new Sessions();
             $sessions->session_date = $request->first_session_date;
             $sessions->case_Id = $case->id;
             $sessions->month = $month;
             $sessions->year = $year;
             $sessions->save();
-            return response(['status' => true, 'msg' => 'Case Added successfully']);
+            // saving case clients data
+            $res = array_merge($request->mokel_name, $request->khesm_name);
+            foreach ($res as $client) {
+                Case_client::create(['case_id' => $case->id, 'client_id' => $client]);
+            }
+            return response(['status' => true, 'msg' => "تمت الاضافه بنجاح"]);
         }
         return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
 

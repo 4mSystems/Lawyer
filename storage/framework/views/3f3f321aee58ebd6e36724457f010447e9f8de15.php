@@ -303,6 +303,8 @@
                         $('#notes').val(html.data.notes);
                          $('#type').val(html.data.type);
                         $('#id').val(html.data.id);
+                        $('#add_client_model').modal('show');
+
                     }
                 })
             });
