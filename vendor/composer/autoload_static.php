@@ -533,6 +533,7 @@ class ComposerStaticInit7112b40322d34f455efb7a629f8e3589
     );
 
     public static $classMap = array (
+        'App\\Case_client' => __DIR__ . '/../..' . '/app/Case_client.php',
         'App\\Cases' => __DIR__ . '/../..' . '/app/Cases.php',
         'App\\Clients' => __DIR__ . '/../..' . '/app/Clients.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -549,6 +550,7 @@ class ComposerStaticInit7112b40322d34f455efb7a629f8e3589
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MohdareenController' => __DIR__ . '/../..' . '/app/Http/Controllers/MohdareenController.php',
+        'App\\Http\\Controllers\\Session_NotesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Session_NotesController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
