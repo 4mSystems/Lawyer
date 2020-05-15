@@ -10,7 +10,7 @@
             </div>
             <div class="user-profile border-top padding-horizontal-10 block">
                 <div class="inline-block">
-                    <img src="{{url('/images/avatar-1.jpg') }}" alt="">
+                    <img src="<?php echo e(url('/images/avatar-1.jpg')); ?>" alt="">
                 </div>
                 <div class="inline-block">
                     <h5 class="no-margin"> Welcome </h5>
@@ -21,25 +21,25 @@
             <!-- start: MAIN NAVIGATION MENU -->
             <ul class="main-navigation-menu">
                 <li class="active open">
-                    <a href="{{route('home')}}"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
+                    <a href="<?php echo e(route('home')); ?>"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
                 </li>
                 <li>
-                    <a href="{{ url('/users') }}"><i class="fa fa-desktop"></i> <span class="title"> Users </span></a>
+                    <a href="<?php echo e(url('/users')); ?>"><i class="fa fa-desktop"></i> <span class="title"> Users </span></a>
                 </li>
                 <li>
-                    <a href="{{ url('/clients') }}"><i class="fa fa-cogs"></i> <span class="title"> Clients </span> </a>
+                    <a href="<?php echo e(url('/clients')); ?>"><i class="fa fa-cogs"></i> <span class="title"> Clients </span> </a>
                 </li>
                 <li>
                     <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> Cases </span><i
                             class="icon-arrow"></i> </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="{{url('/addCase')}}">
+                            <a href="<?php echo e(url('/addCase')); ?>">
                                 <span class="title">Add Case</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/caseDetails') }}">
+                            <a href="<?php echo e(url('/caseDetails')); ?>">
                                 <span class="title">Search Case</span>
                             </a>
                         </li>
@@ -47,7 +47,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{url('/mohdareen')}}"><i class="fa fa-pencil-square-o"></i> <span
+                    <a href="<?php echo e(url('/mohdareen')); ?>"><i class="fa fa-pencil-square-o"></i> <span
                             class="title"> Mohdareen </span> </a>
 
                 </li>
@@ -71,3 +71,4 @@
     </div>
 </nav>
 
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/layouts/navbar.blade.php ENDPATH**/ ?>

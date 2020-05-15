@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cases;
 use App\Clients;
 use App\Exports\MohdareenExport;
 use App\Mohdareen;
@@ -15,7 +16,8 @@ class MohdareenController extends Controller
     public function index()
     {
         $mohdareen = mohdr::get();
-        return view('mohdareen.mohdareen', compact('mohdareen'));
+        $Cases = Cases::all();
+        return view('mohdareen.mohdareen', compact('mohdareen','Cases'));
     }
 
     public function create()
@@ -29,7 +31,6 @@ class MohdareenController extends Controller
         return response(['status' => true, 'result' => $clients]);
     }
 
-
     public function store(Request $request)
     {
         if ($request->ajax()) {
@@ -40,8 +41,6 @@ class MohdareenController extends Controller
                 'deliver_data' => 'required',
                 'paper_Number' => 'required',
                 'session_Date' => 'required',
-                'mokel_Name' => 'required',
-                'khesm_Name' => 'required',
                 'case_number' => 'required',
             ]);
             $mokel = implode(',', $request->mokel_Name);
@@ -51,6 +50,19 @@ class MohdareenController extends Controller
             return response(['status' => true, 'result' => $html, 'msg' => 'تم إضافة المحضر بنجاح']);
         }
         return redirect()->route('mohdareen.mohdareen')->with('success', 'تم إضافة المحضر بنجاح');
+    }
+
+    public function getCase($search)
+    {
+        if (!empty($search)) {
+            $cases = Cases::query()
+                ->where('mokel_name', 'LIKE', "%{$search}%")
+                ->orWhere('khesm_name', 'LIKE', "%{$search}%")
+                ->orWhere('invetation_num', 'LIKE', "%{$search}%")
+                ->orWhere('circle_num', 'LIKE', "%{$search}%")
+                ->get();
+            return response(['status' => true, 'result' => $cases]);
+        }
     }
 
     public function show($id)

@@ -11,7 +11,7 @@
 
 <!-- Mirrored from www.cliptheme.com/demo/rapido/ by HTTrack Website Copier/3.x [XR&CO'2013], Sat, 01 Nov 2014 18:47:21 GMT -->
 <head>
-    <title>Rapido - Responsive Admin Template</title>
+    <title>Lawyer Website</title>
     <!-- start: META -->
     <meta charset="utf-8"/>
     <!--[if IE]>

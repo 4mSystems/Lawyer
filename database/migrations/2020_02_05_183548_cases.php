@@ -17,6 +17,7 @@ class Cases extends Migration
             $table->bigIncrements('id');
             $table->string('mokel_name');
             $table->string('khesm_name');
+            $table->string('Case_num');
             $table->string('invetation_num');
             $table->string('circle_num');
             $table->string('court');

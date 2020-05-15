@@ -36,7 +36,7 @@ Route::get('mohdareen-export', 'MohdareenController@export');
 
 
 
-Route::get('mohdareendata/{id}', 'HomeController@showMohData'); 
+Route::get('mohdareendata/{id}', 'HomeController@showMohData');
 
 Route::get('sessionnotes/{id}', 'HomeController@showSessionNotes');
 
@@ -61,5 +61,5 @@ Route::get('notes/updateStatus/{id}', 'Session_NotesController@updateStatus');
 Route::get('notes/exportNotes/{id}', 'Session_NotesController@exportNotes');
 
 
- 
+
 
