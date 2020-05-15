@@ -226,11 +226,9 @@
                         $('#To_error').empty();
                     }, success: function (data) {
                         toastr.success(data.msg);
-                        $("#new_case").trigger('reset');
+                         $("#new_case").trigger('reset');
                     }, error: function (data_error, exception) {
                         if (exception == 'error') {
-                            // 01094407238
-
                             $('#mokel_error').html(data_error.responseJSON.errors.mokel_name);
                             $('#khesm_error').html(data_error.responseJSON.errors.khesm_name);
                             $('#case_Number_error').html(data_error.responseJSON.errors.invetation_num);
