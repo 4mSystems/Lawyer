@@ -176,14 +176,10 @@
                                         <label for="form-field-select-4">
                                             رقم الدعوه
                                         </label>
-                                        <select id="form-field-select-4"
-                                                id="case_number" name="case_number"
-                                                class="form-control search-select">
-                                            <?php $__currentLoopData = $Cases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Case): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option
-                                                    value='<?php echo e($Case->id); ?>'><?php echo e($Case->invetation_num); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+
+                                        <select class="form-control" name="case_number" id="case_number">
+                                            <option value="1">1</option>
                                         </select>
 
 
@@ -465,6 +461,22 @@
 
                     }
                 })
+            });
+            $('#case_number').on('input', function (e) {
+
+                var data = $(this).val();
+
+                $.ajax({
+                    url: "mohdareen/getCase/" + data,
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (data) {
+                        $.each(data, function(index) {
+                            $('#case_number').append($('<option>', { value : data[index].value}).text(data[index].label));
+                        });
+                    }
+
+                });
             });
             $(document).on('click', '#showMohdar', function () {
                 var id = $(this).data('moh-Id');

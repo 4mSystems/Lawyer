@@ -29,6 +29,7 @@ Route::get('addCase', 'CasesController@getClients');
 Route::resource('cases', 'CasesController');
 //Mohdareen
 Route::resource('mohdareen', 'MohdareenController');
+Route::get('mohdareen/getCase/{case_num}', 'MohdareenController@getCaseToSelect');
 Route::post('mohdareen/update', 'MohdareenController@update')->name('mohdareen.update');
 Route::get('mohdareen/destroy/{id}', 'MohdareenController@destroy');
 Route::get('mohdareen/updateStatus/{id}', 'MohdareenController@updateStatus');
