@@ -26,7 +26,7 @@ Route::get('clients/destroy/{id}', 'ClientsController@destroy');
 
 //cases
 Route::get('addCase', 'CasesController@getClients');
-Route::resource('cases', 'CasesController');
+
 //Mohdareen
 Route::resource('mohdareen', 'MohdareenController');
 Route::post('mohdareen/update', 'MohdareenController@update')->name('mohdareen.update');
@@ -35,11 +35,9 @@ Route::get('mohdareen/updateStatus/{id}', 'MohdareenController@updateStatus');
 Route::get('mohdareen-export', 'MohdareenController@export');
 
 
-
 Route::get('mohdareendata/{id}', 'HomeController@showMohData');
 
 Route::get('sessionnotes/{id}', 'HomeController@showSessionNotes');
-
 
 
 Route::get('/getClients', 'MohdareenController@getClients')->name('getClients');
@@ -48,6 +46,8 @@ Route::get('/getClients', 'MohdareenController@getClients')->name('getClients');
 Route::resource('caseDetails', 'CaseDetailsController');
 Route::get('caseDetails/getSearchResult/{search}', 'CaseDetailsController@getSearchResult');
 Route::post('caseDetails/update', 'CaseDetailsController@update')->name('caseDetails.update');
+Route::post('caseDetails/updateCase', 'CaseDetailsController@updateCase')->name('caseDetails.updateCase');
+
 Route::get('caseDetails/showSessionData/{id}', 'CaseDetailsController@showSessionData');
 Route::get('caseDetails/destroy/{id}', 'CaseDetailsController@destroy');
 Route::get('caseDetails/updateStatus/{id}', 'CaseDetailsController@updateStatus');

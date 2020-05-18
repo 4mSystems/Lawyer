@@ -24,12 +24,10 @@
                     <a href="<?php echo e(route('home')); ?>"><i class="fa fa-home"></i> <span class="title"> Dashboard </span></a>
                 </li>
                 <li>
-                    <a href="<?php echo e(url('/users')); ?>"><i class="fa fa-desktop"></i> <span class="title"> Users </span><i
-                            class="icon-arrow"></i> </a>
+                    <a href="<?php echo e(url('/users')); ?>"><i class="fa fa-desktop"></i> <span class="title"> Users </span></a>
                 </li>
                 <li>
-                    <a href="<?php echo e(url('/clients')); ?>"><i class="fa fa-cogs"></i> <span class="title"> Clients </span><i
-                            class="icon-arrow"></i> </a>
+                    <a href="<?php echo e(url('/clients')); ?>"><i class="fa fa-cogs"></i> <span class="title"> Clients </span> </a>
                 </li>
                 <li>
                     <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> Cases </span><i
@@ -50,7 +48,7 @@
                 </li>
                 <li>
                     <a href="<?php echo e(url('/mohdareen')); ?>"><i class="fa fa-pencil-square-o"></i> <span
-                            class="title"> Mohdareen </span><i class="icon-arrow"></i> </a>
+                            class="title"> Mohdareen </span> </a>
 
                 </li>
 

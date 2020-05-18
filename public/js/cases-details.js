@@ -43,9 +43,7 @@ data-case-id="${index.id}"
                                         </div>
                                     </td>
                                     <td class="hidden-xs center">${index.court}</td>
-                                    <td class="hidden-xs center">${index.invetation_num}</td>
-                                    <td class="hidden-xs center">${index.khesm_name}</td>
-                                    <td class="hidden-xs center">${index.mokel_name}</td>
+                                    <td class="hidden-xs center">${index.invetation_num}</td> 
                                     <td class="hidden-xs center">${index.id}</td>
                                 </tr>`);
                     if (data.status) {
