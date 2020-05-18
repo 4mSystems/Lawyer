@@ -16,8 +16,7 @@ class MohdareenController extends Controller
     public function index()
     {
         $mohdareen = mohdr::get();
-        $Cases = Cases::all();
-        return view('mohdareen.mohdareen', compact('mohdareen','Cases'));
+        return view('mohdareen.mohdareen', compact('mohdareen'));
     }
 
     public function create()
@@ -29,6 +28,15 @@ class MohdareenController extends Controller
     {
         $clients = Clients::all();
         return response(['status' => true, 'result' => $clients]);
+    }
+
+
+
+    public function getCaseToSelect($case_num)
+    {
+        $Cases = Cases::where('invetation_num','LIKE','%'.$case_num.'%');
+
+        return response(['status' => true, 'result' => $Cases]);
     }
 
     public function store(Request $request)
