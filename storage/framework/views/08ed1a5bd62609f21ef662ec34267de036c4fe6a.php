@@ -81,8 +81,6 @@
                                     <th class="hidden-xs center"></th>
                                     <th class="hidden-xs center">المحكمة</th>
                                     <th class="hidden-xs center">رقم الدعوى</th>
-                                    <th class="hidden-xs center">إسم الخصم</th>
-                                    <th class="hidden-xs center">إسم الموكل</th>
                                     <th class="hidden-xs center">#</th>
                                 </tr>
                                 </thead>
@@ -160,20 +158,20 @@
                                                             جلسة
                                                         </b>
                                                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover table-full-width"
+                                                        id="sessions_table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="hidden-xs center"></th>
+                                                            <th class="hidden-xs center">الاسم</th>
+                                                            <th class="hidden-xs center">#</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <td></td>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
 
@@ -188,6 +186,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="panel-body panel-scroll height-300">
+
+
+
+
+
 
                                                 </div>
                                             </div>
@@ -267,7 +270,7 @@
                                     </div>
                                 </div>
                                 <div id="panel_edit_account" class="tab-pane fade" style="direction: rtl">
-                                    <form  id="edit_case_form" method="post">
+                                    <form  id="edit_case_form"  method="post">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3>بيانات الدعوى</h3>
@@ -444,7 +447,7 @@
                 update_session_route: "<?php echo e(route('caseDetails.update')); ?>",
                 add_note_route: "<?php echo e(route('notes.store')); ?>",
                 update_note_route: "<?php echo e(route('notes.update')); ?>",
-                update_case_data: "<?php echo e(route('cases.update')); ?>",
+                update_case_data: "<?php echo e(route('caseDetails.updateCase')); ?>",
             }
         };
     </script>

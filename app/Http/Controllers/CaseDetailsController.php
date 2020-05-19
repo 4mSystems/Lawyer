@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Case_client;
 use App\Cases;
 use App\mohdr;
 use App\Sessions;
@@ -25,9 +26,7 @@ class CaseDetailsController extends Controller
     {
         if (!empty($search)) {
             $cases = Cases::query()
-                ->where('mokel_name', 'LIKE', "%{$search}%")
-                ->orWhere('khesm_name', 'LIKE', "%{$search}%")
-                ->orWhere('invetation_num', 'LIKE', "%{$search}%")
+                ->Where('invetation_num', 'LIKE', "%{$search}%")
                 ->orWhere('circle_num', 'LIKE', "%{$search}%")
                 ->get();
             return response(['status' => true, 'result' => $cases]);
@@ -92,6 +91,13 @@ class CaseDetailsController extends Controller
      */
     public function show($id)
     {
+
+    }
+
+
+    public function getCaseClients($id){
+
+        Case_client::where('case_id',$id)->andWhere('type','client');
 
     }
 
@@ -175,5 +181,20 @@ class CaseDetailsController extends Controller
         return response()->json(['result' => $note_table]);
     }
 
+public function updateCase(Request $request){
+    $data = $this->validate(request(), [
+        'invetation_num' => 'required',
+        'circle_num' => 'required',
+        'court' => 'required',
+        'inventation_type' => 'required',
+        'to_whome' => 'required|in:private,company'
+    ]);
 
+
+
+    Cases::where('id',$request->case_Id)->update($data);
+    return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
+
+
+}
 }

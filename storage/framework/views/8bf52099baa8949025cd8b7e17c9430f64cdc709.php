@@ -112,6 +112,7 @@
             </div>
         </div>
         <!-- end: PAGE -->
+        <!-- Start: add mohdar model -->
         <div id="add_mohdar_model" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
              class="modal bs-example-modal-basic fade">
             <div class="modal-dialog">
@@ -168,6 +169,28 @@
                                         <span class="text-danger" id="paper_Number_error"></span>
                                     </div>
                                 </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group<?php echo e($errors->has('case_number')?' has-error':''); ?>">
+
+                                        <label for="form-field-select-4">
+                                            رقم الدعوه
+                                        </label>
+                                        <select id="form-field-select-4"
+                                                id="case_number" name="case_number"
+                                                class="form-control search-select">
+                                            <?php $__currentLoopData = $Cases; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Case): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option
+                                                    value='<?php echo e($Case->id); ?>'><?php echo e($Case->invetation_num); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                        </select>
+
+
+                                        <span class="text-danger" id="case_number_error"></span>
+                                    </div>
+                                </div>
+
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('session_Date')?' has-error':''); ?>">
                                         <div class="input-group">
@@ -181,40 +204,7 @@
                                         <span class="text-danger" id="session_Date_error"></span>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12" id="mokel_container">
-                                    <div class="form-group<?php echo e($errors->has('mokel_Name')?' has-error':''); ?>">
-                                        <strong for="mokel">
-                                            إسم الموكل
-                                        </strong>
-                                        <select multiple="multiple"
-                                                id="mokel_Name" name="mokel_Name[]"
-                                                class="form-control search-select">
-                                        </select>
-                                        <span class="text-danger" id="mokel_Name_error"></span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12" id="khesm_container">
-                                    <div class="form-group<?php echo e($errors->has('khesm_Name')?' has-error':''); ?>">
-                                        <strong for="khesm_Name">
-                                            إسم الخصم
-                                        </strong>
-                                        <select multiple="multiple"
-                                                id="khesm_Name" name="khesm_Name[]"
-                                                class="form-control search-select">
 
-                                        </select>
-                                        <span class="text-danger" id="khesm_Name_error"></span>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group<?php echo e($errors->has('case_number')?' has-error':''); ?>">
-
-                                        <input name="case_number" id="case_number" placeholder="رقم القضية"
-                                               class="form-control"
-                                               value="<?php echo e(old('case_number')); ?>"/>
-                                        <span class="text-danger" id="case_number_error"></span>
-                                    </div>
-                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('notes')?' has-error':''); ?>">
 
@@ -452,6 +442,7 @@
                     });
                 }
             });
+
             $(document).on('click', '#editMohdar', function () {
                 var id = $(this).data('moh-Id');
                 $.ajax({

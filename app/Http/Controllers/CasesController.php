@@ -107,19 +107,20 @@ class CasesController extends Controller
 
     public function update(Request $request)
     {
-        dd($request);
-//        $data = $this->validate(request(), [
-//            'invetation_num' => 'required',
-//            'circle_num' => 'required',
-//            'court' => 'required',
-//            'inventation_type' => 'required',
-//            'to_whome' => 'required|in:private,company'
-//        ]);
-//
-//
-//
-//        Cases::where('id',$id)->update($data);
-//        return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
+
+
+         $data = $this->validate(request(), [
+            'invetation_num' => 'required',
+            'circle_num' => 'required',
+            'court' => 'required',
+            'inventation_type' => 'required',
+            'to_whome' => 'required|in:private,company'
+        ]);
+
+
+
+        Cases::where('id',$request->case_Id)->update($data);
+        return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
     }
 
     /**
