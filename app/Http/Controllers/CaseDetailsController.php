@@ -95,9 +95,10 @@ class CaseDetailsController extends Controller
     }
 
 
-    public function getCaseClients($id){
+    public function getCaseClients($id)
+    {
 
-        Case_client::where('case_id',$id)->andWhere('type','client');
+        Case_client::where('case_id', $id)->andWhere('type', 'client');
 
     }
 
@@ -125,7 +126,18 @@ class CaseDetailsController extends Controller
             $sessions_table = array();;
             foreach ($sessions as $session) {
                 $sessions_table [] = view('cases.session_item', compact('session'))->render();
-//                dd($sessions_table);
+            }
+
+            $clients = $case->clients;
+            $clients_array = [];
+            $khesm_array = [];
+            foreach ($clients as $key => $client) {
+                if ($client->type == 'khesm') {
+                    $khesm_array[] = view('cases.mokel_item', compact('client'))->render();
+                } else {
+                    $clients_array[] = view('cases.mokel_item', compact('client'))->render();
+                }
+
             }
             $res = [
                 "case" => $case,
@@ -133,6 +145,8 @@ class CaseDetailsController extends Controller
                 "attachments" => $attachments,
                 "sessions_counts" => $sessions->count(),
                 "sessions_notes_counts" => "0",
+                "clients" => $clients_array,
+                "khesm" => $khesm_array,
                 "attachments_counts" => $attachments->count(),
             ];
             return response()->json(['result' => $res]);
@@ -181,20 +195,20 @@ class CaseDetailsController extends Controller
         return response()->json(['result' => $note_table]);
     }
 
-public function updateCase(Request $request){
-    $data = $this->validate(request(), [
-        'invetation_num' => 'required',
-        'circle_num' => 'required',
-        'court' => 'required',
-        'inventation_type' => 'required',
-        'to_whome' => 'required|in:private,company'
-    ]);
+    public function updateCase(Request $request)
+    {
+        $data = $this->validate(request(), [
+            'invetation_num' => 'required',
+            'circle_num' => 'required',
+            'court' => 'required',
+            'inventation_type' => 'required',
+            'to_whome' => 'required|in:private,company'
+        ]);
 
 
+        Cases::where('id', $request->case_Id)->update($data);
+        return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
 
-    Cases::where('id',$request->case_Id)->update($data);
-    return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
 
-
-}
+    }
 }

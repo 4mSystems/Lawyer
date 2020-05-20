@@ -81,9 +81,13 @@ data-case-id="${index.id}"
                 //for sessions tabel
                 $('#sessions_table tbody').prepend(html.result.sessions);
                 $('#sessions_table').DataTable();
+                //for mokel_table tabel
+                $('#mokel_table tbody').prepend(html.result.clients);
+                $('#mokel_table').DataTable();
+                //for khesm_table tabel
+                $('#khesm_table tbody').prepend(html.result.khesm);
+                $('#khesm_table').DataTable();
 
-                var array = html.result.case.mokel_name.split(",");
-                console.log(array);
             }
         })
     });

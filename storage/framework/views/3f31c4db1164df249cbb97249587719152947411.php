@@ -57,4 +57,4 @@
     <td class="hidden-xs center" id="session_date<?php echo e($session->id); ?>"><?php echo e($session->session_date); ?></td>
     <td class="hidden-xs center" id="id<?php echo e($session->id); ?>"><?php echo e($session->id); ?></td>
 </tr>
-<?php /**PATH C:\xampp\htdocs\LawerWeb\resources\views/cases/session_item.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/session_item.blade.php ENDPATH**/ ?>

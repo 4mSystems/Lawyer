@@ -13,4 +13,11 @@ class Cases extends Model
     ];
     protected $attributes = ['one_session_note' => ''];
 
+
+
+    public function clients()
+    {
+        return $this->belongsToMany(Clients::class, 'case_clients', 'case_id', 'client_id');
+    }
+
 }

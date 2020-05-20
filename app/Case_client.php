@@ -11,14 +11,14 @@ class Case_client extends Model
         'case_id', 'client_id'
     ];
 
-    public function cases()
+    public function case()
     {
-        return $this->hasMany(Cases::class,'case_id');
+        return $this->belongsTo(Cases::class,'case_id');
     }
 
-    public function clients()
+    public function client()
     {
-        return $this->hasMany(Clients::class,'client_id');
+        return $this->belongsTo(Clients::class,'client_id');
     }
 
 }

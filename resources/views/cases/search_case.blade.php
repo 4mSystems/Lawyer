@@ -138,15 +138,9 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="panel panel-white space20" style="direction: rtl">
+                                            <div class="panel panel-white" style="direction: rtl">
                                                 <div class="panel-heading">
-                                                    <i class="clip-menu"></i>
                                                     <h3>الموكلين</h3>
-                                                    <div class="panel-tools">
-                                                        <a class="btn btn-xs btn-link panel-close" href="#">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="alert alert-warning">
@@ -161,37 +155,47 @@
                                                     </div>
                                                     <table
                                                         class="table table-striped table-bordered table-hover table-full-width"
-                                                        id="sessions_table">
+                                                        id="mokel_table">
                                                         <thead>
                                                         <tr>
-                                                            <th class="hidden-xs center"></th>
-                                                            <th class="hidden-xs center">الاسم</th>
                                                             <th class="hidden-xs center">#</th>
+                                                            <th class="hidden-xs center">الاسم</th>
+                                                            <th class="hidden-xs center"></th>
+
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <td></td>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
 
-                                            <div class="panel panel-white space20">
+                                            <div class="panel panel-white" style="direction: rtl">
                                                 <div class="panel-heading">
-                                                    <i class="clip-checkmark-2"></i>
-                                                    الخصوم
-                                                    <div class="panel-tools">
-                                                        <a class="btn btn-xs btn-link panel-close" href="#">
-                                                            <i class="fa fa-times"></i>
-                                                        </a>
+                                                    <div class="panel-heading">
+                                                        <h3>الخصوم</h3>
                                                     </div>
                                                 </div>
-                                                <div class="panel-body panel-scroll height-300">
+                                                <div class="panel-body">
+                                                    <div class="alert alert-warning">
 
+                                                    </div>
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover table-full-width"
+                                                        id="khesm_table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="hidden-xs center">#</th>
+                                                            <th class="hidden-xs center">الاسم</th>
+                                                            <th class="hidden-xs center"></th>
 
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
 
-
-
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
                                             </div>
@@ -271,7 +275,7 @@
                                     </div>
                                 </div>
                                 <div id="panel_edit_account" class="tab-pane fade" style="direction: rtl">
-                                    <form  id="edit_case_form"  method="post">
+                                    <form id="edit_case_form" method="post">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3>بيانات الدعوى</h3>
@@ -312,14 +316,14 @@
                                                     </label>
 
 
-                                                    <select id="to_whome" name="to_whome"  class="form-control" data-toggle="tooltip" data-trigger="hover" data-placement="top" >
+                                                    <select id="to_whome" name="to_whome" class="form-control"
+                                                            data-toggle="tooltip" data-trigger="hover"
+                                                            data-placement="top">
 
                                                         <option value='private'>private</option>
                                                         <option value='company'>company</option>
 
                                                     </select>
-
-
 
 
                                                 </div>
