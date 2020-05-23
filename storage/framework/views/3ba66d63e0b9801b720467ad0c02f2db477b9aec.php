@@ -140,18 +140,13 @@
                                             <div class="panel panel-white" style="direction: rtl">
                                                 <div class="panel-heading">
                                                     <h3>الموكلين</h3>
+                                                    <div class="btn-group pull-left">
+                                                        <a class="btn btn-primary" id="addMokelModal"><i
+                                                                class="fa fa-plus"></i> إضافة موكل</a>
+                                                    </div>
+                                                    <br>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <div class="alert alert-warning">
-                                                        <strong>إنتبه!</strong><b class="font-italic">
-                                                            يجب الضغط على<p class="btn btn-blue tooltips"
-                                                                            style="margin-right: 8px;margin-left: 8px;">
-                                                                <i
-                                                                    class="fa fa-eye-slash"></i></p> لاظهار الملاحظات
-                                                            الخاصه بكل
-                                                            جلسة
-                                                        </b>
-                                                    </div>
                                                     <table
                                                         class="table table-striped table-bordered table-hover table-full-width"
                                                         id="mokel_table">
@@ -413,6 +408,9 @@
 
         
         
+        <?php echo $__env->make('cases.add_new_mokel_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
+        
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -425,7 +423,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">حذف</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">الفاء</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">إلغاء</button>
                     </div>
                 </div>
             </div>
@@ -452,6 +450,7 @@
                 add_note_route: "<?php echo e(route('notes.store')); ?>",
                 update_note_route: "<?php echo e(route('notes.update')); ?>",
                 update_case_data: "<?php echo e(route('caseDetails.updateCase')); ?>",
+                add_new_client: "<?php echo e(route('caseDetails.addNewClient')); ?>",
             }
         };
     </script>

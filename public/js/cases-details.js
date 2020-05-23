@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var caseId;
     var session_id;
+    var client_id;
     var note_id;
     var who_delete;
 
@@ -219,6 +220,20 @@ data-case-id="${index.id}"
                     }, 1000);
                 }
             })
+        } else if (who_delete == "clients") {
+            $.ajax({
+                url: "caseDetails/deleteClient/" + caseId + "/" + client_id,
+                beforeSend: function () {
+                    $('#ok_button').text('جارى الحذف ....');
+                },
+                success: function (data) {
+                    setTimeout(function () {
+                        $('#confirmModal').modal('hide');
+                        $('#userRow' + client_id).remove();
+                        $('#ok_button').text('حذف');
+                    }, 1000);
+                }
+            })
         } else {
             $.ajax({
                 url: "notes/destroy/" + note_id,
@@ -350,6 +365,56 @@ data-case-id="${index.id}"
 //print session Notes
     $(document).on('click', '#printNotes', function () {
         window.location.href = "notes/exportNotes/" + session_id;
+    });
+
+    //clients operations
+    // delete mokel
+    $(document).on('click', '#deleteSession', function () {
+        client_id = $(this).data('mokel-id');
+        who_delete = "clients";
+        $('#confirmModal').modal('show');
+    });
+    // show mokel modal
+    $('#addMokelModal').click(function () {
+        if (caseId != null) {
+            $('#form-field-select-4').empty();
+            $('#form-field-select-4').val("");
+            $.ajax({
+                url: "caseDetails/getClientByType/client/" + caseId,
+                dataType: "json",
+                success: function (html) {
+                    $('#form-field-select-4').append(html.result);
+                    $('.modal-title').text("إضافة موكلين جدد");
+                    $('#add_mokel').val("إضافة");
+                    $('#add_new_mokel_modal').modal('show');
+
+                }
+            })
+
+        } else {
+            toastr.error('يجب إختيار الدعوى اولا');
+        }
+    });
+    $('#add_mokel').click(function () {
+        var form = $('#addMokelForm').serialize() + "&case_id=" + caseId;
+        $.ajax({
+            url: config.routes.add_new_client,
+            dataType: 'json',
+            data: form,
+            type: 'post',
+            beforeSend: function () {
+                $('#mokel_error').empty();
+
+            }, success: function (data) {
+                $('#add_new_mokel_modal').modal('hide');
+                 $('#mokel_table').prepend(data.result);
+                toastr.success(data.msg);
+            }, error: function (data_error, exception) {
+                if (exception == 'error') {
+                    $('#mokel_error').html(data_error.responseJSON.errors.mokel_name);
+                }
+            }
+        });
     });
 });
 $(document).ready(function () {

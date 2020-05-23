@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Case_client;
 use App\Cases;
+use App\Clients;
 use App\mohdr;
 use App\Sessions;
 use Illuminate\Http\Request;
@@ -95,13 +96,6 @@ class CaseDetailsController extends Controller
     }
 
 
-    public function getCaseClients($id)
-    {
-
-        Case_client::where('case_id', $id)->andWhere('type', 'client');
-
-    }
-
     public function showSessionData($id)
     {
         if (request()->ajax()) {
@@ -110,12 +104,6 @@ class CaseDetailsController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         if (request()->ajax()) {
@@ -170,16 +158,18 @@ class CaseDetailsController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $data = Sessions::findOrFail($id);
         $data->delete();
+    }
+
+    public function deleteClient($case_id, $client_id)
+    {
+        $data = DB::table('case_clients')->where("case_id", "=", $case_id)
+            ->where("client_id", "=", $client_id);
+        $data->delete();
+
     }
 
     //sessions notes operations
@@ -193,6 +183,20 @@ class CaseDetailsController extends Controller
             $note_table [] = view('cases.session_note_item', compact('note'))->render();
         }
         return response()->json(['result' => $note_table]);
+    }
+
+    public function getClientByType($type, $caseId)
+    {
+        $exists_clients_ids = Case_client::select('client_id')->where("case_id", "=", $caseId)->get();
+        $clients = Clients::query()->orWhereNotIn('id', $exists_clients_ids)
+            ->where("type", "=", $type)->get();
+        $clientsArr = array();
+        foreach ($clients as $key => $client) {
+            $id = $client['id'];
+            $name = $client['client_Name'];
+            $clientsArr [] = '<option value=' . $id . '>' . $name . '</option>';
+        }
+        return response()->json(['result' => $clientsArr]);
     }
 
     public function updateCase(Request $request)
@@ -211,4 +215,25 @@ class CaseDetailsController extends Controller
 
 
     }
+
+    public function addNewClient(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = $this->validate(request(), [
+                'mokel_name' => 'required',
+            ]);
+            $res = array_merge($request->mokel_name);
+            $clients = array();
+            foreach ($res as $item) {
+                Case_client::create(['case_id' => $request->case_id, 'client_id' => $item]);
+                $client = Clients::select('id', 'client_Name')->where('id', '=', $item)->first();
+                $clients[] = view('cases.mokel_item', compact('client'))->render();
+            }
+            return response(['status' => true, 'msg' => "تمت الاضافه بنجاح", 'result' => $clients]);
+        }
+        return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
+
+    }
+
 }

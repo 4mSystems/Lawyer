@@ -48,11 +48,14 @@ Route::resource('caseDetails', 'CaseDetailsController');
 Route::get('caseDetails/getSearchResult/{search}', 'CaseDetailsController@getSearchResult');
 Route::post('caseDetails/update', 'CaseDetailsController@update')->name('caseDetails.update');
 Route::post('caseDetails/updateCase', 'CaseDetailsController@updateCase')->name('caseDetails.updateCase');
+Route::post('caseDetails/addNewClient', 'CaseDetailsController@addNewClient')->name('caseDetails.addNewClient');
 
 Route::get('caseDetails/showSessionData/{id}', 'CaseDetailsController@showSessionData');
 Route::get('caseDetails/destroy/{id}', 'CaseDetailsController@destroy');
+Route::get('caseDetails/deleteClient/{case_id}/{client_id}', 'CaseDetailsController@deleteClient');
 Route::get('caseDetails/updateStatus/{id}', 'CaseDetailsController@updateStatus');
 Route::get('caseDetails/getSessionNotes/{id}', 'CaseDetailsController@getSessionNotes');
+Route::get('caseDetails/getClientByType/{type}/{caseId}', 'CaseDetailsController@getClientByType');
 
 //notes operations
 Route::resource('notes', 'Session_NotesController');
