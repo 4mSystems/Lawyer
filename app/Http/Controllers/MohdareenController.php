@@ -26,8 +26,9 @@ class MohdareenController extends Controller
 
     public function getClients()
     {
-        $clients = Clients::all();
-        return response(['status' => true, 'result' => $clients]);
+        $clients = Clients::query()->where('type','=','client')->get();
+        $khesm = Clients::query()->where('type','=','khesm')->get();
+        return response(['status' => true, 'clients' => $clients,'khesm'=>$khesm]);
     }
 
 

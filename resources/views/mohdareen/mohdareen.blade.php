@@ -386,9 +386,11 @@
                     dataType: 'json',
                     type: 'get',
                     success: function (data) {
-                        $.each(data.result, function (i, index) {
-                            $('#mokel_Name').append(`<option value="${index.client_Name}">${index.client_Name}</option>`);
+                        $.each(data.khesm, function (i, index) {
                             $('#khesm_Name').append(`<option value="${index.client_Name}">${index.client_Name}</option>`);
+                        });
+                        $.each(data.clients, function (i, index) {
+                            $('#mokel_Name').append(`<option value="${index.client_Name}">${index.client_Name}</option>`);
                         });
                     }
                 });
