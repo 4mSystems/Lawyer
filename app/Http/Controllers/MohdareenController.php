@@ -31,10 +31,9 @@ class MohdareenController extends Controller
     }
 
 
-
     public function getCaseToSelect($case_num)
     {
-        $Cases = Cases::where('invetation_num','LIKE','%'.$case_num.'%');
+        $Cases = Cases::where('invetation_num', 'LIKE', '%' . $case_num . '%');
 
         return response(['status' => true, 'result' => $Cases]);
     }
@@ -42,7 +41,6 @@ class MohdareenController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-
             $data = $this->validate(request(), [
                 'court_mohdareen' => 'required',
                 'paper_type' => 'required',
@@ -51,9 +49,22 @@ class MohdareenController extends Controller
                 'session_Date' => 'required',
                 'case_number' => 'required',
             ]);
+//            dd($request);
             $mokel = implode(',', $request->mokel_Name);
             $khesm = implode(',', $request->khesm_Name);
-            $mohdar = mohdr::create(array_merge($request->except('mokel_Name', 'khesm_Name'), ['mokel_Name' => $mokel, 'khesm_Name' => $khesm]));
+            $mohdar = new mohdr();
+            $mohdar->mokel_Name = $mokel;
+            $mohdar->khesm_Name = $khesm;
+            $mohdar->status = 'لا';
+            $mohdar->court_mohdareen = $request->court_mohdareen;
+            $mohdar->deliver_data = $request->deliver_data;
+            $mohdar->paper_type = $request->paper_type;
+            $mohdar->paper_Number = $request->paper_Number;
+            $mohdar->session_Date = $request->session_Date;
+            $mohdar->case_number = $request->case_number;
+            $mohdar->notes = $request->notes;
+            $mohdar->save();
+//            $mohdar = mohdr::create(array_merge($request->except('mokel_Name', 'khesm_Name'), ['mokel_Name' => $mokel, 'khesm_Name' => $khesm]));
             $html = view('mohdareen.mohdareen_item', compact('mohdar'))->render();
             return response(['status' => true, 'result' => $html, 'msg' => 'تم إضافة المحضر بنجاح']);
         }

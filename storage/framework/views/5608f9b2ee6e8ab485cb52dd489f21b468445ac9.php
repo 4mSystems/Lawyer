@@ -84,7 +84,7 @@
                             </div>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover table-full-width"
-                                       id="sample_1">
+                                       id="mohdar_tbl">
                                     <thead>
                                     <tr>
                                         <th></th>
@@ -112,7 +112,6 @@
             </div>
         </div>
         <!-- end: PAGE -->
-        <!-- Start: add mohdar model -->
         <div id="add_mohdar_model" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
              class="modal bs-example-modal-basic fade">
             <div class="modal-dialog">
@@ -169,24 +168,6 @@
                                         <span class="text-danger" id="paper_Number_error"></span>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group<?php echo e($errors->has('case_number')?' has-error':''); ?>">
-
-                                        <label for="form-field-select-4">
-                                            رقم الدعوه
-                                        </label>
-
-
-                                        <select class="form-control" name="case_number" id="case_number">
-                                            <option value="1">1</option>
-                                        </select>
-
-
-                                        <span class="text-danger" id="case_number_error"></span>
-                                    </div>
-                                </div>
-
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('session_Date')?' has-error':''); ?>">
                                         <div class="input-group">
@@ -200,7 +181,40 @@
                                         <span class="text-danger" id="session_Date_error"></span>
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12" id="mokel_container">
+                                    <div class="form-group<?php echo e($errors->has('mokel_Name')?' has-error':''); ?>">
+                                        <strong for="mokel">
+                                            إسم الموكل
+                                        </strong>
+                                        <select multiple="multiple"
+                                                id="mokel_Name" name="mokel_Name[]"
+                                                class="form-control search-select">
+                                        </select>
+                                        <span class="text-danger" id="mokel_Name_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12" id="khesm_container">
+                                    <div class="form-group<?php echo e($errors->has('khesm_Name')?' has-error':''); ?>">
+                                        <strong for="khesm_Name">
+                                            إسم الخصم
+                                        </strong>
+                                        <select multiple="multiple"
+                                                id="khesm_Name" name="khesm_Name[]"
+                                                class="form-control search-select">
 
+                                        </select>
+                                        <span class="text-danger" id="khesm_Name_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group<?php echo e($errors->has('case_number')?' has-error':''); ?>">
+
+                                        <input name="case_number" id="case_number" placeholder="رقم القضية"
+                                               class="form-control"
+                                               value="<?php echo e(old('case_number')); ?>"/>
+                                        <span class="text-danger" id="case_number_error"></span>
+                                    </div>
+                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('notes')?' has-error':''); ?>">
 
@@ -336,7 +350,8 @@
 
                 <!-- /.modal-dialog -->
             </div>
-        </div>        
+        </div>
+        
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -361,6 +376,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#mohdar_tbl').DataTable();
             $('#addMohdarModal').click(function () {
                 $('#mokel_Name').empty();
                 $('#khesm_Name').empty();
@@ -373,7 +389,6 @@
                             $('#mokel_Name').append(`<option value="${index.client_Name}">${index.client_Name}</option>`);
                             $('#khesm_Name').append(`<option value="${index.client_Name}">${index.client_Name}</option>`);
                         });
-
                     }
                 });
                 $('.modal-title').text("إضافة محضر جديد");
@@ -390,7 +405,7 @@
                         type: 'post',
                         success: function (data) {
                             // if (data.status == true) {
-                            $('#sample_1 tbody').append(data.result);
+                            $('#mohdar_tbl tbody').append(data.result);
                             $('#add_mohdar_model').modal('hide');
                             toastr.success(data.msg);
                             $("#mohdars").trigger('reset');
@@ -437,7 +452,6 @@
                     });
                 }
             });
-
             $(document).on('click', '#editMohdar', function () {
                 var id = $(this).data('moh-Id');
                 $.ajax({
@@ -457,25 +471,8 @@
                         $('.modal-title').text("تعديل المحضر");
                         $('#add_mohdar').val("تعديل");
                         $('#add_mohdar_model').modal('show');
-
                     }
                 })
-            });
-            $('#case_number').on('input', function (e) {
-
-                var data = $(this).val();
-
-                $.ajax({
-                    url: "mohdareen/getCase/" + data,
-                    dataType: 'json',
-                    type: 'get',
-                    success: function (data) {
-                        $.each(data, function(index) {
-                            $('#case_number').append($('<option>', { value : data[index].value}).text(data[index].label));
-                        });
-                    }
-
-                });
             });
             $(document).on('click', '#showMohdar', function () {
                 var id = $(this).data('moh-Id');
@@ -494,7 +491,6 @@
                         $('#notes_show').html(html.data.notes);
                         $('.modal-title').text("المحضر");
                         $('#show_mohdar_model').modal('show');
-
                     }
                 })
             });
@@ -518,14 +514,11 @@
                     }
                 })
             });
-
             var user_id;
-
             $(document).on('click', '#deleteMohadr', function () {
                 user_id = $(this).data('moh-Id');
                 $('#confirmModal').modal('show');
             });
-
             $('#ok_button').click(function () {
                 $.ajax({
                     url: "mohdareen/destroy/" + user_id,
@@ -547,7 +540,6 @@
                 $("#mohdars").trigger('reset');
             });
         });
-
     </script>
     <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>"
@@ -572,6 +564,5 @@
     FormElements.init();
     UIButtons.init();
 <?php $__env->stopSection(); ?>
-
 
 <?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/mohdareen/mohdareen.blade.php ENDPATH**/ ?>
