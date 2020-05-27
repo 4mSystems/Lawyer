@@ -170,12 +170,14 @@
                                                 <div class="panel-heading">
                                                     <div class="panel-heading">
                                                         <h3>الخصوم</h3>
+                                                        <div class="btn-group pull-left">
+                                                            <a class="btn btn-success" id="addKhesmModal"><i
+                                                                    class="fa fa-plus"></i> إضافة خصم</a>
+                                                        </div>
+                                                        <br>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <div class="alert alert-warning">
-
-                                                    </div>
                                                     <table
                                                         class="table table-striped table-bordered table-hover table-full-width"
                                                         id="khesm_table">
@@ -271,6 +273,7 @@
                                 </div>
                                 <div id="panel_edit_account" class="tab-pane fade" style="direction: rtl">
                                     <form id="edit_case_form" method="post">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3>بيانات الدعوى</h3>

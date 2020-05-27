@@ -26,6 +26,7 @@ Route::get('clients/destroy/{id}', 'ClientsController@destroy');
 
 //cases
 Route::get('addCase', 'CasesController@getClients');
+Route::resource('cases', 'CasesController');
 
 //Mohdareen
 Route::resource('mohdareen', 'MohdareenController');

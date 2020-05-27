@@ -209,10 +209,8 @@ class CaseDetailsController extends Controller
             'to_whome' => 'required|in:private,company'
         ]);
 
-
         Cases::where('id', $request->case_Id)->update($data);
-        return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
-
+        return response(['status' => true, 'msg' => "تم التعديل بنجاح"]);
 
     }
 

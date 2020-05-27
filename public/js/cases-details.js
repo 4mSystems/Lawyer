@@ -84,10 +84,10 @@ data-case-id="${index.id}"
                 $('#sessions_table').DataTable();
                 //for mokel_table tabel
                 $('#mokel_table tbody').prepend(html.result.clients);
-                $('#mokel_table').DataTable();
+                // $('#mokel_table').DataTable();
                 //for khesm_table tabel
                 $('#khesm_table tbody').prepend(html.result.khesm);
-                $('#khesm_table').DataTable();
+                // $('#khesm_table').DataTable();
 
             }
         })
@@ -102,9 +102,7 @@ data-case-id="${index.id}"
             data: form,
             type: 'post',
             success: function (data) {
-
                 toastr.success(data.msg);
-
             }, error: function (data_error, exception) {
                 if (exception == 'error') {
                     $('#session_date_error').html(data_error.responseJSON.errors.session_date);
@@ -362,7 +360,7 @@ data-case-id="${index.id}"
             }
         })
     });
-//print session Notes
+    //print session Notes
     $(document).on('click', '#printNotes', function () {
         window.location.href = "notes/exportNotes/" + session_id;
     });
@@ -385,7 +383,7 @@ data-case-id="${index.id}"
                 success: function (html) {
                     $('#form-field-select-4').append(html.result);
                     $('.modal-title').text("إضافة موكلين جدد");
-                    $('#add_mokel').val("إضافة");
+                    $('#add_mokel').val("إضافة الموكل");
                     $('#add_new_mokel_modal').modal('show');
 
                 }
@@ -395,8 +393,31 @@ data-case-id="${index.id}"
             toastr.error('يجب إختيار الدعوى اولا');
         }
     });
+    // show khesm modal
+    $('#addKhesmModal').click(function () {
+        if (caseId != null) {
+            $('#form-field-select-4').empty();
+            $('#form-field-select-4').val("");
+            $.ajax({
+                url: "caseDetails/getClientByType/khesm/" + caseId,
+                dataType: "json",
+                success: function (html) {
+                    $('#form-field-select-4').append(html.result);
+                    $('.modal-title').text("إضافة خصوم جدد");
+                    $('#add_mokel').val("إضافة الخصم");
+                    $('#add_new_mokel_modal').modal('show');
+
+                }
+            })
+
+        } else {
+            toastr.error('يجب إختيار الدعوى اولا');
+        }
+    });
+
     $('#add_mokel').click(function () {
         var form = $('#addMokelForm').serialize() + "&case_id=" + caseId;
+
         $.ajax({
             url: config.routes.add_new_client,
             dataType: 'json',
@@ -407,7 +428,11 @@ data-case-id="${index.id}"
 
             }, success: function (data) {
                 $('#add_new_mokel_modal').modal('hide');
-                 $('#mokel_table').prepend(data.result);
+                if ($('#add_mokel').val() == 'إضافة الموكل') {
+                    $('#mokel_table').prepend(data.result);
+                } else {
+                    $('#khesm_table').prepend(data.result);
+                }
                 toastr.success(data.msg);
             }, error: function (data_error, exception) {
                 if (exception == 'error') {
@@ -415,6 +440,7 @@ data-case-id="${index.id}"
                 }
             }
         });
+
     });
 });
 $(document).ready(function () {

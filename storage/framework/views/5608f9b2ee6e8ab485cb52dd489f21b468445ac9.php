@@ -1,20 +1,19 @@
-@extends('welcome')
-@section('styles')
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet"
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css')); ?>" rel="stylesheet"
           type="text/css"/>
-    <link rel="stylesheet" href="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/select2/select2.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap-select/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/datepicker/css/datepicker.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/DataTables/media/css/DT_bootstrap.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/ladda-bootstrap/dist/ladda-themeless.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/ladda-bootstrap/dist/ladda.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap-social-buttons/bootstrap-social.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/select2/select2.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/datepicker/css/datepicker.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/DataTables/media/css/DT_bootstrap.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/ladda-bootstrap/dist/ladda-themeless.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/ladda-bootstrap/dist/ladda.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap-social-buttons/bootstrap-social.css')); ?>">
 
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal.css')); ?>" rel="stylesheet" type="text/css"/>
 
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
@@ -35,7 +34,7 @@
                     <div class="col-md-12">
                         <ol class="breadcrumb">
                             <li>
-                                <a href="{{route('home')}}">
+                                <a href="<?php echo e(route('home')); ?>">
                                     الرئيسية
                                 </a>
                             </li>
@@ -70,7 +69,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="panel-config" href="{{url('/mohdareen-export')}}"
+                                                <a class="panel-config" href="<?php echo e(url('/mohdareen-export')); ?>"
                                                    data-toggle="modal"> <i
                                                         class="fa fa-wrench"></i> <span>Export</span></a>
                                             </li>
@@ -100,9 +99,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($mohdareen as $mohdar)
-                                        @include('mohdareen.mohdareen_item')
-                                    @endforeach
+                                    <?php $__currentLoopData = $mohdareen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mohdar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo $__env->make('mohdareen.mohdareen_item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -126,36 +125,36 @@
                     </div>
                     <div class="modal-body">
                         <form method="post" id="mohdars">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                             <input type="hidden" name="id" id="id">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('court_mohdareen')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('court_mohdareen')?' has-error':''); ?>">
 
                                         <input type="text" name="court_mohdareen" class="form-control"
                                                id="court_mohdareen" placeholder="محضرين محكمة"
-                                               value="{{ old('court_mohdareen') }}">
+                                               value="<?php echo e(old('court_mohdareen')); ?>">
                                         <span class="text-danger" id="court_mohdareen_error"></span>
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('paper_type')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('paper_type')?' has-error':''); ?>">
 
                                         <input name="paper_type" id="paper_type" placeholder="نوع الورقة"
                                                class="form-control"
-                                               value="{{ old('paper_type') }}"/>
+                                               value="<?php echo e(old('paper_type')); ?>"/>
                                         <span class="text-danger" id="paper_type_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('paper_type')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('paper_type')?' has-error':''); ?>">
                                         <div class="input-group">
                                             <input type="text" data-date-format="dd-mm-yyyy"
                                                    data-date-viewmode="years" class="form-control date-picker"
                                                    id="deliver_data" name="deliver_data"
                                                    placeholder="تاريخ تسليم الورقة"
-                                                   value="{{ old('deliver_data') }}">
+                                                   value="<?php echo e(old('deliver_data')); ?>">
                                             <span class="input-group-addon"> <i
                                                     class="fa fa-calendar"></i> </span>
                                         </div>
@@ -163,16 +162,16 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('paper_Number')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('paper_Number')?' has-error':''); ?>">
                                         <input name="paper_Number" id="paper_Number" placeholder="رقم الورقة"
                                                class="form-control"
-                                               value="{{ old('paper_Number') }}"/>
+                                               value="<?php echo e(old('paper_Number')); ?>"/>
                                         <span class="text-danger" id="paper_Number_error"></span>
                                     </div>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('case_number')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('case_number')?' has-error':''); ?>">
 
                                         <label for="form-field-select-4">
                                             رقم الدعوه
@@ -189,12 +188,12 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('session_Date')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('session_Date')?' has-error':''); ?>">
                                         <div class="input-group">
                                             <input type="text" data-date-format="dd-mm-yyyy" placeholder="تاريخ الجلسة"
                                                    data-date-viewmode="years" class="form-control date-picker"
                                                    id="session_Date" name="session_Date"
-                                                   value="{{ old('session_Date') }}">
+                                                   value="<?php echo e(old('session_Date')); ?>">
                                             <span class="input-group-addon"> <i
                                                     class="fa fa-calendar"></i> </span>
                                         </div>
@@ -203,11 +202,11 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group{{$errors->has('notes')?' has-error':''}}">
+                                    <div class="form-group<?php echo e($errors->has('notes')?' has-error':''); ?>">
 
                                         <input name="notes" id="notes" placeholder="الملاحظات"
                                                class="form-control"
-                                               value="{{ old('notes') }}"/>
+                                               value="<?php echo e(old('notes')); ?>"/>
                                         <span class="text-danger" id="notes_error"></span>
                                     </div>
                                 </div>
@@ -313,7 +312,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group{{$errors->has('notes')?' has-error':''}}">
+                                <div class="form-group<?php echo e($errors->has('notes')?' has-error':''); ?>">
                                     <strong>
                                         الملاحظات
                                     </strong>
@@ -337,7 +336,7 @@
 
                 <!-- /.modal-dialog -->
             </div>
-        </div>        {{--confirm modal--}}
+        </div>        
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -356,9 +355,9 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -366,7 +365,7 @@
                 $('#mokel_Name').empty();
                 $('#khesm_Name').empty();
                 $.ajax({
-                    url: "{{route('getClients')}}",
+                    url: "<?php echo e(route('getClients')); ?>",
                     dataType: 'json',
                     type: 'get',
                     success: function (data) {
@@ -385,7 +384,7 @@
                 var form = $('#mohdars').serialize();
                 if ($('#add_mohdar').val() == 'إضافة') {
                     $.ajax({
-                        url: "{{route('mohdareen.store')}}",
+                        url: "<?php echo e(route('mohdareen.store')); ?>",
                         dataType: 'json',
                         data: form,
                         type: 'post',
@@ -411,7 +410,7 @@
                     });
                 } else {
                     $.ajax({
-                        url: "{{ route('mohdareen.update') }}",
+                        url: "<?php echo e(route('mohdareen.update')); ?>",
                         dataType: 'json',
                         data: form,
                         type: 'post',
@@ -550,27 +549,29 @@
         });
 
     </script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>"
             type="text/javascript"></script>
-    <script src="{{url('/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
-    <script src="{{url('/plugins/ladda-bootstrap/dist/ladda.min.js') }}"></script>
-    <script src="{{url('/plugins/ladda-bootstrap/dist/spin.min.js') }}"></script>
-    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/form-elements.js') }}"></script>
-    <script src="{{url('/js/table-data.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/ui-buttons.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/main.js') }}" type="text/javascript"></script>
-@endsection
-@section('scriptDocument')
+    <script src="<?php echo e(url('/plugins/select2/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/DT_bootstrap.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/ladda-bootstrap/dist/ladda.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/ladda-bootstrap/dist/spin.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/form-elements.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/table-data.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/ui-buttons.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/main.js')); ?>" type="text/javascript"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptDocument'); ?>
     TableData.init();
     UIModals.init();
     FormElements.init();
     UIButtons.init();
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/mohdareen/mohdareen.blade.php ENDPATH**/ ?>
