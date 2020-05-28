@@ -53,9 +53,7 @@
                 <div class="toolbar row" style="direction:rtl;">
                     <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1>attachments
-                                <small>{{trans('site_lang.side_welcome')}}</small>
-                            </h1>
+                            <h1>{{trans('site_lang.side_home')}} <small>{{trans('site_lang.side_welcome')}}</small></h1>
                         </div>
                     </div>
                 </div>
@@ -65,95 +63,44 @@
                 <!-- start: PAGE CONTENT -->
 
 
+
+
                 <div class="row">
-                    <div class="col-md-12"><br>
-                        <a href="{{url('attachment/'.$case_id.'/create')}}" class="btn btn-primary">add new
-                            attachment</a>
+                    <div class="col-md-12">
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                <h5 class="text-bold">case attachments</h5>
+                                <h5 class="text-bold">{{trans('site_lang.add_new_attachments')}}</h5>
                             </div>
-                            <div class="panel-body">
-                                <table class="table table-striped table-bordered table-hover table-full-width"
-                                       id="sample_1">
-                                    <thead class="black white-text">
-                                    <tr>
-                                        <th scope="col" class="hidden-xs center">#</th>
 
-                                        <th scope="col"
-                                            class="hidden-xs center">file
-                                        </th>
-                                        <th scope="col"
-                                            class="hidden-xs center">desc
-                                        </th>
-                                        <th scope="col"
-                                            class="hidden-xs center">case id
-                                        </th>
-                                        <th scope="col"
-                                            class="hidden-xs center">
-                                        </th>
+                            <div class="card-body">
+                                {!! Form::model($attachment, ['url' => ['attachment/'.$attachment->id.'/update'] , 'method'=>'post' ,'files'=> true]) !!}
+                                {!! csrf_field() !!}
 
+                                <div class="form-group">
+                                    {{ Form::label('img_Description','Description ') }}
+                                    {{ Form::textarea('img_Description',$attachment->img_Description,["class"=>"form-control"]) }}
+                                </div>
 
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($case_attachment as $case_attachment)
-                                        <tr>
-                                            <th scope="row" class="hidden-xs center">{{$case_attachment->id}}</th>
+                                <div class="form-group">
+                                    {{ Form::label('img_Url','attachments Files') }}
+                                    {{ Form::file('img_Url', ["class"=>"form-control"]) }}
 
-                                            <td class="hidden-xs center">
-                                                @if(!empty($case_attachment->img_Url))
-                                                    @php
-                                                        $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
-                                                    @endphp
-                                                    @if(! in_array( mime_content_type('uploads/attachments/'.$case_attachment->img_Url), $allowedMimeTypes))
-                                                        <a href="{{url('uploads/attachments/'.$case_attachment->img_Url) }}"
-                                                           target="_blank"> <img
-                                                                src="{{url('uploads/attachments/file.jpg') }}"
-                                                                style="width:75px;height:50px;"/>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{url('uploads/attachments/'.$case_attachment->img_Url) }}"
-                                                           target="_blank"> <img
-                                                                src="{{url('uploads/attachments/'.$case_attachment->img_Url) }}"
-                                                                style="width:50px;height:50px;"/>
-                                                        </a>
-                                                    @endif
-                                                @endif
+                                    <img
+                                        src="{{url('uploads/attachments/'.$attachment->img_Url) }}"
+                                        style="width:150px;height:150px;"/>
+                                </div>
 
-                                            </td>
-                                            <td class="hidden-xs center">{{$case_attachment->img_Description}}</td>
-                                            <td class="hidden-xs center">{{$case_attachment->case_Id}}</td>
-
-                                            <td><a class='btn btn-raised btn-primary btn-sml'
-                                                   href=" {{url('attachment/'.$case_attachment->id.'/edit')}}"><i
-                                                        class="fa fa-edit"></i></a>
-
-
-                                                <form method="get" id='delete-form' action="{{url('attachment/'.$case_attachment->id.'/delete')}}"
-                                                      style='display: none;'>
-                                                {{csrf_field()}}
-                                                <!-- {{method_field('delete')}}   -->
-                                                </form>
-                                                <button type="submit" class='btn btn-danger btn-primary btn-sml' form="delete-form">
-
-                                                    <i
-                                                        class="fa fa-trash"></i>
-                                                </button>
-
-                                            </td>
-
-
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                {{ Form::submit( trans('admin.edit') ,['class'=>'btn btn-primary']) }}
+                                {{ Form::close() }}
                             </div>
                         </div>
                         <!-- end: TABLE WITH IMAGES PANEL -->
                     </div>
                 </div>
+
+
+
 
 
             </div>
@@ -165,12 +112,14 @@
     </div>
 
 
-
 @endsection
 @section('scripts')
     <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
 
     <script>
+
+
+
     </script>
     <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
     <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"

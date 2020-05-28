@@ -75,4 +75,6 @@ return [
     'add_case_first_session_date' => 'نوع الدعوى',
     'add_case_court' => 'المحكمة',
     'add_case_circle_num' => 'رقم الدائرة',
+    'search_case_sessions'=>'الجلسات',
+    'permission'=>'الصلاحيات'
  ];

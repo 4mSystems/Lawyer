@@ -1,21 +1,20 @@
-@extends('welcome')
-@section('styles')
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet"
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css')); ?>" rel="stylesheet"
           type="text/css"/>
-    <link rel="stylesheet" href="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/select2/select2.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap-select/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/datepicker/css/datepicker.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/DataTables/media/css/DT_bootstrap.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/ladda-bootstrap/dist/ladda-themeless.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/ladda-bootstrap/dist/ladda.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap-social-buttons/bootstrap-social.css')}}">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/select2/select2.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/datepicker/css/datepicker.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/DataTables/media/css/DT_bootstrap.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/ladda-bootstrap/dist/ladda-themeless.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/ladda-bootstrap/dist/ladda.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap-social-buttons/bootstrap-social.css')); ?>">
 
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal.css')); ?>" rel="stylesheet" type="text/css"/>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
@@ -54,7 +53,7 @@
                     <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
                             <h1>attachments
-                                <small>{{trans('site_lang.side_welcome')}}</small>
+                                <small><?php echo e(trans('site_lang.side_welcome')); ?></small>
                             </h1>
                         </div>
                     </div>
@@ -67,7 +66,7 @@
 
                 <div class="row">
                     <div class="col-md-12"><br>
-                        <a href="{{url('attachment/'.$case_id.'/create')}}" class="btn btn-primary">add new
+                        <a href="<?php echo e(url('attachment/'.$case_id.'/create')); ?>" class="btn btn-primary">add new
                             attachment</a>
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
@@ -98,43 +97,44 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($case_attachment as $case_attachment)
+                                    <?php $__currentLoopData = $case_attachment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $case_attachment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <th scope="row" class="hidden-xs center">{{$case_attachment->id}}</th>
+                                            <th scope="row" class="hidden-xs center"><?php echo e($case_attachment->id); ?></th>
 
                                             <td class="hidden-xs center">
-                                                @if(!empty($case_attachment->img_Url))
-                                                    @php
+                                                <?php if(!empty($case_attachment->img_Url)): ?>
+                                                    <?php
                                                         $allowedMimeTypes = ['image/jpeg','image/gif','image/png','image/bmp','image/svg+xml'];
-                                                    @endphp
-                                                    @if(! in_array( mime_content_type('uploads/attachments/'.$case_attachment->img_Url), $allowedMimeTypes))
-                                                        <a href="{{url('uploads/attachments/'.$case_attachment->img_Url) }}"
+                                                    ?>
+                                                    <?php if(! in_array( mime_content_type('uploads/attachments/'.$case_attachment->img_Url), $allowedMimeTypes)): ?>
+                                                        <a href="<?php echo e(url('uploads/attachments/'.$case_attachment->img_Url)); ?>"
                                                            target="_blank"> <img
-                                                                src="{{url('uploads/attachments/file.jpg') }}"
+                                                                src="<?php echo e(url('uploads/attachments/file.jpg')); ?>"
                                                                 style="width:75px;height:50px;"/>
                                                         </a>
-                                                    @else
-                                                        <a href="{{url('uploads/attachments/'.$case_attachment->img_Url) }}"
+                                                    <?php else: ?>
+                                                        <a href="<?php echo e(url('uploads/attachments/'.$case_attachment->img_Url)); ?>"
                                                            target="_blank"> <img
-                                                                src="{{url('uploads/attachments/'.$case_attachment->img_Url) }}"
+                                                                src="<?php echo e(url('uploads/attachments/'.$case_attachment->img_Url)); ?>"
                                                                 style="width:50px;height:50px;"/>
                                                         </a>
-                                                    @endif
-                                                @endif
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
 
                                             </td>
-                                            <td class="hidden-xs center">{{$case_attachment->img_Description}}</td>
-                                            <td class="hidden-xs center">{{$case_attachment->case_Id}}</td>
+                                            <td class="hidden-xs center"><?php echo e($case_attachment->img_Description); ?></td>
+                                            <td class="hidden-xs center"><?php echo e($case_attachment->case_Id); ?></td>
 
                                             <td><a class='btn btn-raised btn-primary btn-sml'
-                                                   href=" {{url('attachment/'.$case_attachment->id.'/edit')}}"><i
+                                                   href=" <?php echo e(url('attachment/'.$case_attachment->id.'/edit')); ?>"><i
                                                         class="fa fa-edit"></i></a>
 
 
-                                                <form method="get" id='delete-form' action="{{url('attachment/'.$case_attachment->id.'/delete')}}"
+                                                <form method="get" id='delete-form' action="<?php echo e(url('attachment/'.$case_attachment->id.'/delete')); ?>"
                                                       style='display: none;'>
-                                                {{csrf_field()}}
-                                                <!-- {{method_field('delete')}}   -->
+                                                <?php echo e(csrf_field()); ?>
+
+                                                <!-- <?php echo e(method_field('delete')); ?>   -->
                                                 </form>
                                                 <button type="submit" class='btn btn-danger btn-primary btn-sml' form="delete-form">
 
@@ -146,7 +146,7 @@
 
 
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -166,35 +166,37 @@
 
 
 
-@endsection
-@section('scripts')
-    <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
 
     <script>
     </script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>"
             type="text/javascript"></script>
-    <script src="{{url('/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
-    <script src="{{url('/plugins/ladda-bootstrap/dist/ladda.min.js') }}"></script>
-    <script src="{{url('/plugins/ladda-bootstrap/dist/spin.min.js') }}"></script>
-    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/form-elements.js') }}"></script>
-    <script src="{{url('/js/table-data.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/ui-buttons.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/main.js') }}" type="text/javascript"></script>
-    {{--    <script type="text/javascript">--}}
-    {{--        $('#mohdar_table').DataTable();--}}
-    {{--    </script>--}}
-@endsection
-@section('scriptDocument')
+    <script src="<?php echo e(url('/plugins/select2/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/DT_bootstrap.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/ladda-bootstrap/dist/ladda.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/ladda-bootstrap/dist/spin.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/form-elements.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/table-data.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/ui-buttons.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/main.js')); ?>" type="text/javascript"></script>
+    
+    
+    
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptDocument'); ?>
     TableData.init();
     UIModals.init();
     FormElements.init();
     UIButtons.init();
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/attachment/index.blade.php ENDPATH**/ ?>

@@ -14,7 +14,13 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']],function ()
+{
+
+
+
+
+    Route::get('home', 'HomeController@index')->name('home');
 Route::resource('users', 'UsersController');
 Route::post('users/update', 'UsersController@update')->name('users.update');
 Route::get('users/destroy/{id}', 'UsersController@destroy');
@@ -87,6 +93,7 @@ Route::get('dailyReport/searchMonthly/{month}/{year}/{type}', 'ReportsController
 Route::get('monthlyPdf/{month}/{year}/{type}','ReportsController@pdfMonthexport');
 
 
+//id is for case id
 
 Route::get('attachment/{id}', 'CaseAttachmentController@index');
 
@@ -95,3 +102,20 @@ Route::get('attachment/{id}/create', 'CaseAttachmentController@create');
 Route::post('attachment/{id}/store', 'CaseAttachmentController@store');
 
 
+//id is for attachment
+Route::get('attachment/{id}/edit', 'CaseAttachmentController@edit');
+
+Route::get('attachment/{id}/delete', 'CaseAttachmentController@destroy');
+
+
+Route::post('attachment/{id}/update', 'CaseAttachmentController@update');
+
+//permission
+
+Route::resource('permission','PermissionController');
+
+
+
+}
+
+);

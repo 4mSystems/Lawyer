@@ -7,6 +7,7 @@ use App\Clients;
 use App\Exports\MohdareenExport;
 use App\Mohdareen;
 use App\mohdr;
+use App\Permission;
 use Illuminate\Http\Request;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
@@ -15,8 +16,15 @@ class MohdareenController extends Controller
 
     public function index()
     {
-        $mohdareen = mohdr::get();
-        return view('mohdareen.mohdareen', compact('mohdareen'));
+        $user_id=auth()->user()->id;
+        $permission = Permission::where('user_id',$user_id)->first();
+        $enabled =  $permission->mohdreen;
+        if($enabled == 'yes') {
+            $mohdareen = mohdr::get();
+            return view('mohdareen.mohdareen', compact('mohdareen'));
+        }else {
+            return redirect(url('home'));
+        }
     }
 
     public function create()

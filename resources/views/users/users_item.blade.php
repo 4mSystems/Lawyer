@@ -12,6 +12,9 @@
                data-original-title="Edit" data-user-id="{{$user->id}}"><i class="fa fa-edit"></i></a>
             <a id="deleteUser" data-user-id="{{$user->id}}" class="btn btn-xs btn-red tooltips" data-placement="top"
                data-original-title="Remove"><i class="fa fa-times fa fa-white"></i></a>
+
+            <a  href="{{url('permission/'.$user->id.'/edit')}}" class="btn btn-xs btn-green tooltips" data-placement="top"
+               ><i class="fa fa-edit fa fa-white"></i>{{trans('site_lang.permission')}}</a>
         </div>
         <div class="visible-xs visible-sm hidden-md hidden-lg">
             <div class="btn-group">

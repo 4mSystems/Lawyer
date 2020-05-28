@@ -75,17 +75,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="{{url('publicusers')}}"
+                                <a href="{{url('users')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_more_options')}}"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="{{url('publicusers')}}"
+                                <a href="{{url('users')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_add_user')}}"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="{{url('publicusers')}}"
+                                <a href="{{url('users')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_see_more')}}"><i
@@ -106,17 +106,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="{{url('publiccaseDetails')}}"
+                                <a href="{{url('caseDetails')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_more_options')}}"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="{{url('publicaddCase')}}"
+                                <a href="{{url('addCase')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.side_add_case')}}"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="{{url('publiccaseDetails')}}"
+                                <a href="{{url('caseDetails')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_see_more')}}"><i
@@ -132,23 +132,23 @@
                                     <i class="fa fa-shopping-cart fa-2x icon-big"></i>
                                 </div>
                                 <div class="padding-20 core-content">
-                                    <h3 class="text-bold">{{trans('site_lang.side_mohdar')}}</h3>
+                                    <h3 class="text-bold">{{trans('site_lang.search_case_sessions')}}</h3>
                                     <span
-                                        class="text-bold">#{{$mohdreen->count()}}</span>
+                                        class="text-bold">#{{$sessions->count()}}</span>
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="{{url('publicmohdareen')}}"
+                                <a href="{{url('caseDetails')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_more_options')}}"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="{{url('publicmohdareen')}}"
+                                <a href="{{url('caseDetails')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.mohdar_add_mohdar')}}"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="{{url('publicmohdareen')}}"
+                                <a href="{{url('caseDetails')}}"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="{{trans('site_lang.home_see_more')}}"><i
@@ -209,7 +209,7 @@
                                                 class="hidden-xs center">{{trans('site_lang.home_session_month')}}</th>
                                             <th scope="col"
                                                 class="hidden-xs center">{{trans('site_lang.home_session_case_number')}}</th>
-                                            <th scope="col" class="hidden-xs center"></th>
+
 
                                         </tr>
                                         </thead>
@@ -221,13 +221,6 @@
                                                 <td class="hidden-xs center">{{$session->status}}</td>
                                                 <td class="hidden-xs center">{{$session->month}}</td>
                                                 <td class="hidden-xs center">{{$session->case_Id}}</td>
-                                                <td class="hidden-xs center"><a id="shownotes"
-                                                                                class="btn btn-xs btn-blue tooltips"
-                                                                                data-placement="top"
-                                                                                data-original-title="show"
-                                                                                data-session-Id="{{$session->id}}"><i
-                                                            class="fa fa-eye"></i></a></td>
-
 
                                             </tr>
                                         @endforeach
@@ -263,7 +256,7 @@
                                                 class="hidden-xs center">{{trans('site_lang.home_session_month')}}</th>
                                             <th scope="col"
                                                 class="hidden-xs center">{{trans('site_lang.home_session_case_number')}}</th>
-                                            <th scope="col" class="hidden-xs center"></th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -461,45 +454,6 @@
     </div>
 
     <!-- modal session note -->
-    <div id="show_note_model" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-         class="modal bs-example-modal-basic fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">الملاحظات</h4>
-
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped table-bordered table-hover table-full-width"
-                           id="sessions-notes-table">
-                        <thead>
-                        <tr>
-
-                            <th class="hidden-xs center">الحالة</th>
-                            <th class="hidden-xs center">الملاحظات</th>
-                            <th class="hidden-xs center">م</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">
-                            Close
-                        </button>
-
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-
-
-            <!-- /.modal-dialog -->
-        </div>
-    </div>
 
 @endsection
 @section('scripts')
@@ -531,62 +485,6 @@
                 })
             });
 
-
-            //   $(document).on('click', '#shownotes', function () {
-            //        var id = $(this).data('session-Id');
-            //        $.ajax({
-            //            url: "sessionnotes/"+id,
-            //            dataType: "json",
-            //            success: function (html) {
-            //                $('#note_show').html(html.data.note);
-            //                $('.modal-title').text("ملاحظات الجلسة");
-            //                $('#show_note_model').modal('show');
-
-            //            }
-            //        })
-            //    });
-
-            //get notes for one session
-            $(document).on('click', '#shownotes', function () {
-                $('#sessions-notes-table tbody tr').remove();
-                var id = $(this).data('session-Id');
-                $.ajax({
-                    url: "sessionnotes/" + id,
-                    dataType: "json",
-                    success: function (html) {
-                        $('#sessions-notes-table tbody').prepend(html.result);
-
-                        $('#show_note_model').modal('show');
-                    }
-                })
-            });
-
         });
 
-    </script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"
-            type="text/javascript"></script>
-    <script src="{{url('/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
-    <script src="{{url('/plugins/ladda-bootstrap/dist/ladda.min.js') }}"></script>
-    <script src="{{url('/plugins/ladda-bootstrap/dist/spin.min.js') }}"></script>
-    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/form-elements.js') }}"></script>
-    <script src="{{url('/js/table-data.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/ui-buttons.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/main.js') }}" type="text/javascript"></script>
-{{--    <script type="text/javascript">--}}
-{{--        $('#mohdar_table').DataTable();--}}
-{{--    </script>--}}
-@endsection
-@section('scriptDocument')
-    TableData.init();
-    UIModals.init();
-    FormElements.init();
-    UIButtons.init();
-@endsection
+        </script>

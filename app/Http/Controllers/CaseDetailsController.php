@@ -10,6 +10,8 @@ use App\Session_Notes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use App\Permission;
+
 
 class CaseDetailsController extends Controller
 {
@@ -20,7 +22,14 @@ class CaseDetailsController extends Controller
      */
     public function index()
     {
-        return view('cases.search_case');
+        $user_id = auth()->user()->id;
+        $permission = Permission::where('user_id', $user_id)->first();
+        $enabled = $permission->search_case;
+        if ($enabled == 'yes') {
+            return view('cases.search_case');
+        } else{
+            return redirect(url('home'));
+        }
     }
 
     public function getSearchResult($search)

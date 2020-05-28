@@ -9,6 +9,7 @@ use App\mohdr;
 use App\Sessions;
 use Carbon\Carbon;
 use App\Session_Notes;
+
 class HomeController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+       $this->middleware('auth');
     }
 
     /**
@@ -27,38 +28,42 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    { 
- 
-                $users= User::all();
-                $cases=Cases::all();
-                        $mohdreen = mohdr::all();  
-                        $today=Carbon::today();
-                        $date =Carbon::today()->addDays(10);  
-                        $session = Sessions::whereBetween('session_date',array($today, $date))->get();    
-                        $sessionNo=Sessions::where('session_date','<=',$today)->where('status','no')->get(); 
-                        $datee =Carbon::today()->addDays(15); 
-                        $mohder = mohdr::whereBetween('session_date',array($today, $datee))->get(); 
-        return view('home',compact(['users','cases','mohdreen','session','mohder','sessionNo']));
- 
+    {
+
+        $users = User::all();
+        $cases = Cases::all();
+        $sessions = Sessions::all();
+        $mohdreen = mohdr::all();
+        $today = Carbon::today();
+        $date = Carbon::today()->addDays(10);
+        $session = Sessions::whereBetween('session_date', array($today, $date))->get();
+        $sessionNo = Sessions::where('session_date', '<=', $today)->where('status', 'waiting')->get();
+        $datee = Carbon::today()->addDays(15);
+        $mohder = mohdr::whereBetween('session_date', array($today, $datee))->get();
+
+        return view('home', compact(['users', 'cases', 'mohdreen', 'session', 'mohder', 'sessionNo','sessions']));
+
     }
 
 
-    public function showMohData($id){
+    public function showMohData($id)
+    {
         if (request()->ajax()) {
             $data = mohdr::findOrFail($id);
             return response()->json(['data' => $data]);
-        } 
+        }
     }
 
-public function showSessionNotes($id){
-    $session_notes = Session_Notes::where('session_Id', $id)->orderBy('id', 'desc')->get();
-    $note_table = array();
+    public function showSessionNotes($id)
+    {
+        $session_notes = Session_Notes::where('session_Id', $id)->orderBy('id', 'desc')->get();
+        $note_table = array();
 
-    foreach ($session_notes as $note) {
-        $note_table [] = view('cases.session_note_home_item', compact('note'))->render();
+        foreach ($session_notes as $note) {
+            $note_table [] = view('cases.session_note_home_item', compact('note'))->render();
+        }
+        return response()->json(['result' => $note_table]);
     }
-    return response()->json(['result' => $note_table]);
-}
 
 
 }

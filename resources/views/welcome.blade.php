@@ -10,5 +10,8 @@
 
 <!-- start: MAIN CONTAINER -->
 @yield('content')
+
+
+@include('layouts.modals')
 <!-- end: MAIN CONTAINER -->
 @include('layouts.footer')

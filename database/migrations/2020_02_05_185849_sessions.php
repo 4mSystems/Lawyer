@@ -15,7 +15,7 @@ class Sessions extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('session_date');
+            $table->date('session_date');
             $table->bigInteger('case_Id')->unsigned();
             $table->foreign('case_Id')->references('id')->on('cases');
             $table->string('month');

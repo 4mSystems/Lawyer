@@ -93,7 +93,9 @@ class CaseAttachmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $attachment=attachment::findOrFail($id);
+        return view('attachment.edit',compact('attachment'));
+
     }
 
     /**
@@ -105,7 +107,49 @@ class CaseAttachmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=$this->validate(\request(),
+            [
+                'img_Description'=>'required',
+                'img_Url'=>'',
+                'case_id'=>''
+            ]);
+
+
+
+        if($request['img_Url'] != null)
+        {
+
+                $slash =trim("uploads\attachments\ ");
+            $file_name = attachment::where('id',$id)->first('img_Url');
+          //  dd($file_name);
+             unlink(public_path($slash.$file_name->img_Url));
+
+            // This is Image Information ...
+            $file	 = $request->file('img_Url');
+            $name    = $file->getClientOriginalName();
+            $ext 	 = $file->getClientOriginalExtension();
+            $size 	 = $file->getSize();
+            $path 	 = $file->getRealPath();
+            $mime 	 = $file->getMimeType();
+
+            // Move Image To Folder ..
+            $fileNewName = 'img_'.time().'.'.$ext;
+            $file->move(public_path('uploads/attachments'), $fileNewName);
+
+            $data = $request->all();
+            $data['img_Url'] = $fileNewName;
+        }else
+        {
+            unset($data['img_Url']);
+        }
+
+
+        $case_id= attachment::where('id',$id)->first('case_Id');
+           $cid = $case_id->case_Id;
+//           dd($cid);
+        attachment::find($id)->update($data);
+        return redirect(url('attachment/'.$cid));
+
     }
 
     /**
@@ -116,6 +160,14 @@ class CaseAttachmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $attachment =  attachment::find($id);
+        $slash =trim("uploads\attachments\ ");
+        //  dd($file_name);
+        unlink(public_path($slash.$attachment->img_Url));
+        $attachment->delete();
+        $cid = $attachment->case_Id;
+        session()->flash('success',trans('admin.deleted'));
+        return redirect(url('attachment/'.$cid));
+
     }
 }
