@@ -117,7 +117,7 @@
 
                                             <div class="row space20">
                                                 <div class="col-sm-4">
-                                                    <button class="btn btn-icon btn-block pulsate">
+                                                    <button href="" class="btn btn-icon btn-block pulsate">
                                                         <i class="clip-bubble-2"></i>
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>
@@ -377,7 +377,7 @@
                                             <h4 style="float:right;">الملاحظات</h4>
                                         </div>
                                         <div class="panel-body">
-                                            <table class="table table-striped  table-hover" id="session-notes-table">
+                                            <table class="table table-striped table-bordered table-hover table-full-width" id="session-notes-table">
                                                 <thead>
                                                 <tr>
                                                     <th class="hidden-xs center"></th>

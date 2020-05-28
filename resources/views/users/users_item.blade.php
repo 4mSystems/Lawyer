@@ -1,11 +1,11 @@
 <tr id="userRow{{$user->id}}" >
-    <td class="center"><p id="userId{{$user->id}}">{{$user->id}}</p></td>
+    <td class="hidden-xs center"><p id="userId{{$user->id}}">{{$user->id}}</p></td>
     </td>
-    <td ><p id="userName{{$user->id}}">{{$user->name}}</p></td>
-    <td ><p id="userEmail{{$user->id}}">{{$user->email}}</p></td>
-    <td class="hidden-xs" ><p id="userType{{$user->id}}">{{$user->type}}</p></td>
+    <td class="hidden-xs center"><p id="userName{{$user->id}}">{{$user->name}}</p></td>
+    <td class="hidden-xs center"><p id="userEmail{{$user->id}}">{{$user->email}}</p></td>
+    <td class="hidden-xs center"><p id="userType{{$user->id}}">{{$user->type}}</p></td>
 
-    <td class="center">
+    <td class="hidden-xs center">
         <div class="visible-md visible-lg hidden-sm hidden-xs">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <a id="editUser" class="btn btn-xs btn-blue tooltips" data-placement="top"

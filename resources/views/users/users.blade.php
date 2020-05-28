@@ -13,9 +13,9 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
-                    <div class="col-sm-6 hidden-xs">
+                    <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1>Users <small>overview &amp; stats </small></h1>
+                            <h3 class="text-bold">{{trans('site_lang.side_users')}}</h3>
                         </div>
                     </div>
                 </div>
@@ -27,11 +27,11 @@
                         <ol class="breadcrumb">
                             <li>
                                 <a href="{{route('home')}}">
-                                    Home
+                                    {{trans('site_lang.side_home')}}
                                 </a>
                             </li>
                             <li class="active">
-                                Users
+                                {{trans('site_lang.side_users')}}
                             </li>
                         </ol>
                     </div>
@@ -43,48 +43,25 @@
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><span class="text-bold">All Users</span></h4>
-                                <div class="panel-tools">
-                                    <div class="dropdown">
-                                        <a data-toggle="dropdown"
-                                           class="btn btn-xs dropdown-toggle btn-transparent-grey">
-                                            <i class="fa fa-cog"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-light pull-right" role="menu">
-                                            <li>
-                                                <a class="panel-collapse collapses" href="#"><i
-                                                        class="fa fa-angle-up"></i> <span>Collapse</span> </a>
-                                            </li>
-                                            <li>
-                                                <a class="panel-refresh" href="#"> <i class="fa fa-refresh"></i> <span>Refresh</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="panel-config" href="#panel-config" data-toggle="modal"> <i
-                                                        class="fa fa-wrench"></i> <span>Configurations</span></a>
-                                            </li>
-                                            <li>
-                                                <a class="panel-expand" href="#"> <i class="fa fa-expand"></i> <span>Fullscreen</span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <a class="btn btn-xs btn-link panel-close" href="#"> <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
+                                <h4 class="panel-title"><span class="text-bold">{{trans('site_lang.users_all')}}</span>
+                                </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="btn-group pull-right">
-                                    <a class="btn btn-primary" id="addUserModal"><i class="fa fa-plus"></i> Add User</a>
+                                    <a class="btn btn-primary" id="addUserModal"><i
+                                            class="fa fa-plus"></i>{{trans('site_lang.home_add_user')}}</a>
+                                    <br>
+
                                 </div>
                                 <table class="table table-striped table-hover" id="list_users">
                                     <thead>
                                     <tr>
-                                        <th class="center">#</th>
+                                        <th class="hidden-xs center">#</th>
                                         {{--                                        <th class="center">Photo</th>--}}
-                                        <th>user Name</th>
-                                        <th class="hidden-xs">Email</th>
-                                        <th class="hidden-xs">type</th>
-                                        <th></th>
+                                        <th class="hidden-xs center">{{trans('site_lang.users_username')}}</th>
+                                        <th class="hidden-xs center">{{trans('site_lang.users_email')}}</th>
+                                        <th class="hidden-xs center">{{trans('site_lang.users_type')}}</th>
+                                        <th class="hidden-xs center"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -106,10 +83,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
-                            ×
-                        </button>
-                        <h4 class="modal-title"></h4>
+                        <h4 class="modal-title" id="user_modal_title"></h4>
                     </div>
                     <div class="modal-body">
                         <form method="post" id="users">
@@ -118,8 +92,8 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('name')?' has-error':''}}">
-                                        <strong>Name:</strong>
-                                        <input type="text" name="name" class="form-control" id="name" placeholder="Name"
+                                        <input type="text" name="name" class="form-control" id="name" required
+                                               placeholder="{{trans('site_lang.users_username')}}"
                                                value="{{ old('name') }}">
                                         <span class="text-danger" id="name_error"></span>
                                     </div>
@@ -127,8 +101,8 @@
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('email')?' has-error':''}}">
-                                        <strong>Detail:</strong>
-                                        <input name="email" id="email" rows="10" placeholder="email"
+                                        <input name="email" id="email" placeholder="{{trans('site_lang.users_email')}}"
+                                               required
                                                class="form-control"
                                                value="{{ old('email') }}"/>
                                         <span class="text-danger" id="email_error"></span>
@@ -136,16 +110,16 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('password')?' has-error':''}}">
-                                        <strong>Password:</strong>
                                         <input type="password" name="password" id="password" class="form-control"
-                                               placeholder="password"
+                                               required
+                                               placeholder="{{trans('site_lang.auth_password')}}"
                                                value="{{ old('password') }}">
                                         <span class="text-danger" id="password_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('type')?' has-error':''}}">
-                                        <select id="form-field-select-1" name="form-field-select-1"
+                                        <select id="form-field-select-1" name="form-field-select-1" required
                                                 class="form-control">
                                             <option value="" selected="selected">&nbsp;</option>
                                             <option value="Admin">ِAdmin</option>
@@ -160,9 +134,10 @@
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">
-                            Close
+                            {{trans('site_lang.public_close_btn_text')}}
                         </button>
-                        <input type="submit" class="btn btn-primary" id="add_user" name="add_user" value="Add"/>
+                        <input type="submit" class="btn btn-primary" id="add_user" name="add_user"
+                               value="{{trans('site_lang.public_add_btn_text')}}"/>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -175,16 +150,14 @@
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h2 class="modal-title">Confirmation</h2>
-                    </div>
                     <div class="modal-body">
-                        <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+                        <h4 align="center" style="margin:0;">{{trans('site_lang.public_delete_modal_text')}}</h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" name="ok_button" id="ok_button"
+                                class="btn btn-danger">{{trans('site_lang.public_accept_btn_text')}}</button>
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">{{trans('site_lang.public_close_btn_text')}}</button>
                     </div>
                 </div>
             </div>
@@ -196,14 +169,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#addUserModal').click(function () {
-                $('.modal-title').text("Add New User");
-                $('#add_user').val("Add");
+                $('#user_modal_title').text("{{trans('site_lang.users_add_new')}}");
+                $('#add_user').val("{{trans('site_lang.public_add_btn_text')}}");
                 $('#add_user_model').modal('show');
             });
 
             $('#add_user').click(function () {
                 var form = $('#users').serialize() + '&type=' + $('select option:selected').text();
-                if ($('#add_user').val() == 'Add') {
+                if ($('#add_user').val() == '{{trans('site_lang.public_add_btn_text')}}') {
                     $.ajax({
                         url: "{{route('users.store')}}",
                         dataType: 'json',
@@ -274,8 +247,8 @@
                         } else {
                             $('#form-field-select-1 option[value=User]').attr('selected', 'selected');
                         }
-                        $('.modal-title').text("Edit User");
-                        $('#add_user').val("Edit");
+                        $('#user_modal_title').text("{{trans('site_lang.users_edit_user')}}");
+                        $('#add_user').val("{{trans('site_lang.public_edit_btn_text')}}");
                         $('#add_user_model').modal('show');
 
                     }
@@ -292,7 +265,7 @@
                 $.ajax({
                     url: "users/destroy/" + user_id,
                     beforeSend: function () {
-                        $('#ok_button').text('Deleting...');
+                        $('#ok_button').text('{{trans('site_lang.public_continue_delete_modal_text')}}');
                     },
                     success: function (data) {
                         setTimeout(function () {

@@ -14,9 +14,9 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
-                    <div class="col-sm-6 hidden-xs">
+                    <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1>Clients <small>overview &amp; stats </small></h1>
+                            <h3 class="text-bold">{{trans('site_lang.side_clients')}} </h3>
                         </div>
                     </div>
                 </div>
@@ -28,11 +28,11 @@
                         <ol class="breadcrumb">
                             <li>
                                 <a href="{{route('home')}}">
-                                    Home
+                                    {{trans('site_lang.side_home')}}
                                 </a>
                             </li>
                             <li class="active">
-                                Clients
+                                {{trans('site_lang.side_clients')}}
                             </li>
                         </ol>
                     </div>
@@ -44,37 +44,7 @@
                         <div class="panel panel-white">
                             <div class="panel-heading">
                                 <a class="btn btn-primary" id="addClientModal"><i
-                                        class="fa fa-plus"></i> Add Client</a>
-
-                                <div class="panel-tools">
-                                    <div class="dropdown">
-                                        <a data-toggle="dropdown"
-                                           class="btn btn-xs dropdown-toggle btn-transparent-grey">
-                                            <i class="fa fa-cog"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-light pull-right" role="menu">
-                                            <li>
-                                                <a class="panel-collapse collapses" href="#"><i
-                                                        class="fa fa-angle-up"></i> <span>Collapse</span> </a>
-                                            </li>
-                                            <li>
-                                                <a class="panel-refresh" href="#">
-                                                    <i class="fa fa-refresh"></i> <span>Refresh</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="panel-config" href="#panel-config" data-toggle="modal">
-                                                    <i class="fa fa-wrench"></i> <span>Configurations</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="panel-expand" href="#">
-                                                    <i class="fa fa-expand"></i> <span>Fullscreen</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                        class="fa fa-plus"></i>{{trans('site_lang.clients_add_new_client_text')}} </a>
                             </div>
                             <div class="panel-body">
 
@@ -83,11 +53,11 @@
                                     <thead>
                                     <tr>
                                         <th class="center">#</th>
-                                        <th class="center">Client Name</th>
-                                        <th class="center">Client Unit</th>
-                                        <th class="center"> Client Address</th>
-                                        <th class="center">Notes</th>
-                                        <th class="center">type</th>
+                                        <th class="center">{{trans('site_lang.clients_client_name')}}</th>
+                                        <th class="center">{{trans('site_lang.clients_client_unit')}}</th>
+                                        <th class="center">{{trans('site_lang.clients_client_address')}}</th>
+                                        <th class="center">{{trans('site_lang.clients_client_notes')}}</th>
+                                        <th class="center">{{trans('site_lang.clients_client_type')}}</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -111,10 +81,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
-                            ×
-                        </button>
-                        <h4 class="modal-title"></h4>
+                        <h4 class="modal-title" id="modal_title"></h4>
                     </div>
                     <div class="modal-body">
                         <form method="post" id="clients">
@@ -123,18 +90,17 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('client_Name')?' has-error':''}}">
-                                        <strong>Client Name:</strong>
                                         <input type="text" name="client_Name" class="form-control" id="client_Name"
-                                               placeholder="Client Name"
+                                               placeholder="{{trans('site_lang.clients_client_name')}}"
                                                value="{{ old('client_Name') }}">
                                         <span class="text-danger" id="client_Name_error"></span>
                                     </div>
                                 </div>
-
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('client_Unit')?' has-error':''}}">
-                                        <strong>Client Unit:</strong>
-                                        <input name="client_Unit" id="client_Unit" placeholder="Client Unit"
+
+                                        <input name="client_Unit" id="client_Unit"
+                                               placeholder="{{trans('site_lang.clients_client_unit')}}"
                                                class="form-control"
                                                value="{{ old('client_Unit') }}"/>
                                         <span class="text-danger" id="client_Unit_error"></span>
@@ -142,44 +108,44 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('client_Address')?' has-error':''}}">
-                                        <strong>Client Address:</strong>
+
                                         <input type="text" name="client_Address" id="client_Address"
                                                class="form-control"
-                                               placeholder="Client Address"
+                                               placeholder="{{trans('site_lang.clients_client_address')}}"
                                                value="{{ old('client_Address') }}">
                                         <span class="text-danger" id="client_Address_error"></span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('notes')?' has-error':''}}">
-                                        <strong>Notes:</strong>
                                         <textarea type="text" name="notes" id="notes" class="form-control"
-                                                  placeholder="Notes"
+                                                  placeholder="{{trans('site_lang.clients_client_notes')}}"
                                                   value="{{ old('notes') }}" rows="10"></textarea>
                                         <span class="text-danger" id="notes_error"></span>
                                     </div>
                                 </div>
 
 
-                                   <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('notes')?' has-error':''}}">
-                                        <strong>type:</strong>
                                         <select type="select" name="type" id="type" class="form-control"
-                                                  
-                                                  value="{{ old('type') }}" rows="10">
-                                                      
 
-                                          <option value="" selected data-default>select type  </option>
-                                          <option value="client">client</option>
-                                          <option value="khesm">khesm</option>
-                                         
+                                                value="{{ old('type') }}">
 
 
-                                                  </select>
-                                         
+                                            <option value="" selected
+                                                    data-default>{{trans('site_lang.clients_client_type')}}
+                                            </option>
+                                            <option
+                                                value="client">{{trans('site_lang.clients_client_type_client')}}</option>
+                                            <option
+                                                value="khesm">{{trans('site_lang.clients_client_type_khesm')}}</option>
+
+
+                                        </select>
+
                                     </div>
                                 </div>
-
 
 
                             </div>
@@ -188,9 +154,10 @@
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">
-                            Close
+                            {{trans('site_lang.public_close_btn_text')}}
                         </button>
-                        <input type="submit" class="btn btn-primary" id="add_client" name="add_client" value="Add"/>
+                        <input type="submit" class="btn btn-primary" id="add_client" name="add_client"
+                               value="{{trans('site_lang.public_add_btn_text')}}"/>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -203,16 +170,15 @@
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h2 class="modal-title">Confirmation</h2>
-                    </div>
+
                     <div class="modal-body">
-                        <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+                        <h4 align="center" style="margin:0;">{{trans('site_lang.public_delete_modal_text')}}</h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" name="ok_button" id="ok_button"
+                                class="btn btn-danger">{{trans('site_lang.public_accept_btn_text')}}</button>
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">{{trans('site_lang.public_close_btn_text')}}</button>
                     </div>
                 </div>
             </div>
@@ -225,14 +191,14 @@
         $(document).ready(function () {
 
             $('#addClientModal').click(function () {
-                $('.modal-title').text("Add New Client");
-                $('#add_client').val("Add");
+                $('#modal_title').text("{{trans('site_lang.clients_add_new_client_text')}}");
+                $('#add_client').val("{{trans('site_lang.public_add_btn_text')}}");
                 $('#add_client_model').modal('show');
             });
 
             $('#add_client').click(function () {
                 var form = $('#clients').serialize();
-                if ($('#add_client').val() == 'Add') {
+                if ($('#add_client').val() == '{{trans('site_lang.public_add_btn_text')}}') {
                     $.ajax({
                         url: "{{route('clients.store')}}",
                         dataType: 'json',
@@ -277,7 +243,7 @@
                             $("#clientUnit" + data.result.id).html(data.result.client_Unit);
                             $("#clientAddress" + data.result.id).html(data.result.client_Address);
                             $("#clientNotes" + data.result.id).html(data.result.notes);
-                             $("#clientType" + data.result.id).html(data.result.type);
+                            $("#clientType" + data.result.id).html(data.result.type);
                             toastr.success(data.msg);
                             $('#add_client_model').modal('hide');
                             $("#clients").trigger('reset');
@@ -302,7 +268,7 @@
                         $('#client_Unit').val(html.data.client_Unit);
                         $('#client_Address').val(html.data.client_Address);
                         $('#notes').val(html.data.notes);
-                         $('#type').val(html.data.type);
+                        $('#type').val(html.data.type);
                         $('#id').val(html.data.id);
                         $('#add_client_model').modal('show');
 
@@ -320,7 +286,7 @@
                 $.ajax({
                     url: "clients/destroy/" + client_id,
                     beforeSend: function () {
-                        $('#ok_button').text('Deleting...');
+                        $('#ok_button').text('{{trans('site_lang.public_continue_delete_modal_text')}}');
                     },
                     success: function (data) {
                         setTimeout(function () {

@@ -33,26 +33,26 @@
         </div>
     </td>
     <?php if($mohdar->status =='لا'): ?>
-        <td class="hidden-xs">
+        <td class="hidden-xs center">
             <p class="btn btn-lg" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>">
                 <span class="label label-danger" id="status<?php echo e($mohdar->moh_Id); ?>"> <?php echo e($mohdar->status); ?></span>
 
             </p>
         </td>
     <?php else: ?>
-        <td class="hidden-xs">
+        <td class="hidden-xs center">
             <p class="btn btn-lg" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>" >
                     <span class="label label-success" id="status<?php echo e($mohdar->moh_Id); ?>"> <?php echo e($mohdar->status); ?></span>
                 </p>
 
         </td>
     <?php endif; ?>
-    <td class="hidden-xs"><p id="session_Date<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->session_Date); ?></p></td>
-    <td class="hidden-xs"><p id="paper_Number<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->paper_Number); ?></p></td>
-    <td class="hidden-xs"><p id="deliver_data<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->deliver_data); ?></p></td>
-    <td><p id="paper_type<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->paper_type); ?></p></td>
-    <td><p id="court_mohdareen<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->court_mohdareen); ?></p></td>
-    <td class="center"><p id="moh_Id<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->moh_Id); ?></p></td>
+    <td class="hidden-xs center"><p id="session_Date<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->session_Date); ?></p></td>
+    <td class="hidden-xs center"><p id="paper_Number<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->paper_Number); ?></p></td>
+    <td class="hidden-xs center"><p id="deliver_data<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->deliver_data); ?></p></td>
+    <td class="hidden-xs center"><p id="paper_type<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->paper_type); ?></p></td>
+    <td class="hidden-xs center"><p id="court_mohdareen<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->court_mohdareen); ?></p></td>
+    <td class="hidden-xs center"><p id="moh_Id<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->moh_Id); ?></p></td>
 
 
 </tr>

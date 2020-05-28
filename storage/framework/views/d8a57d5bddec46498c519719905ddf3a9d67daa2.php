@@ -24,8 +24,9 @@
     <meta content="" name="author"/>
     <!-- end: META -->
     <!-- start: MAIN CSS -->
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,200,100,800' rel='stylesheet'
-          type='text/css'>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap/css/bootstrap.min.css')); ?>">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

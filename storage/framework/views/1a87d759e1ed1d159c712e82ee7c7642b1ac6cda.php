@@ -1,11 +1,11 @@
 <tr id="userRow<?php echo e($user->id); ?>" >
-    <td class="center"><p id="userId<?php echo e($user->id); ?>"><?php echo e($user->id); ?></p></td>
+    <td class="hidden-xs center"><p id="userId<?php echo e($user->id); ?>"><?php echo e($user->id); ?></p></td>
     </td>
-    <td ><p id="userName<?php echo e($user->id); ?>"><?php echo e($user->name); ?></p></td>
-    <td ><p id="userEmail<?php echo e($user->id); ?>"><?php echo e($user->email); ?></p></td>
-    <td class="hidden-xs" ><p id="userType<?php echo e($user->id); ?>"><?php echo e($user->type); ?></p></td>
+    <td class="hidden-xs center"><p id="userName<?php echo e($user->id); ?>"><?php echo e($user->name); ?></p></td>
+    <td class="hidden-xs center"><p id="userEmail<?php echo e($user->id); ?>"><?php echo e($user->email); ?></p></td>
+    <td class="hidden-xs center"><p id="userType<?php echo e($user->id); ?>"><?php echo e($user->type); ?></p></td>
 
-    <td class="center">
+    <td class="hidden-xs center">
         <div class="visible-md visible-lg hidden-sm hidden-xs">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <a id="editUser" class="btn btn-xs btn-blue tooltips" data-placement="top"

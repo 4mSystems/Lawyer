@@ -4,7 +4,7 @@
     <td class="hidden-xs center">
         <div class="visible-md visible-lg hidden-sm hidden-xs">
 
-            <a class="btn btn-red tooltips" data-placement="top" id="deleteSession"
+            <a class="btn btn-red tooltips" data-placement="top" id="deleteClient"
                data-mokel-id="{{$client->id}}"
                data-original-title="Remove"><i
                     class="fa fa-times fa fa-white"></i></a>

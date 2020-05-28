@@ -18,22 +18,12 @@ class UsersController extends Controller
         return view('users/users', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         if ($request->ajax()) {
@@ -52,9 +42,9 @@ class UsersController extends Controller
             ], [], $attribute);
             $user = User::create($data);
             $html = view('users.users_item', compact('user'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => 'Users Added successfully']);
+            return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }
-        return redirect()->route('users.users')->with('success', 'Users Added successfully');
+        return redirect()->route('users.users')->with('success', trans('site_lang.public_success_text'));
     }
 
     /**
@@ -82,13 +72,7 @@ class UsersController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
         if ($request->ajax()) {
@@ -100,7 +84,7 @@ class UsersController extends Controller
             ];
             $data = $this->validate(request(), [
                 'name' => 'required',
-                'email' => 'required|unique:users,email,'.$request->id,
+                'email' => 'required|unique:users,email,' . $request->id,
                 'password' => 'required',
                 'type' => 'required'
             ], [], $attribute);
@@ -110,19 +94,10 @@ class UsersController extends Controller
             $users->password = $request->input('password');
             $users->type = $request->input('type');
             $users->update();
-//
-//            $user = User::findOrFail($id)->update($request->only('name', 'email'));
-//            $html = view('users.users_item', compact('users'))->render();
-            return response(['msg' => 'Users Updated successfully', 'result' => $users]);
+            return response(['msg' => trans('site_lang.public_success_text'), 'result' => $users]);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $data = User::findOrFail($id);

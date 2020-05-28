@@ -6,7 +6,7 @@
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
                     ×
                 </button>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title" id="modal_title"></h4>
             </div>
             <div class="modal-body">
                 <form method="post" id="notesForm">
