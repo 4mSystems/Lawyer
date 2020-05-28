@@ -34,13 +34,18 @@ class CaseDetailsController extends Controller
 
     public function getSearchResult($search)
     {
+        $cases_table = array();
         if (!empty($search)) {
-            $cases = Cases::query()
+            $results = Cases::query()
                 ->Where('invetation_num', 'LIKE', "%{$search}%")
                 ->orWhere('circle_num', 'LIKE', "%{$search}%")
                 ->get();
-            return response(['status' => true, 'result' => $cases]);
+
         }
+        foreach ($results as  $result) {
+            $cases_table [] = view('cases.session_result_case_item', compact('result'))->render();
+        }
+        return response(['status' => true, 'result' => $cases_table]);
     }
 
     // update session status from waiting to done
@@ -228,6 +233,7 @@ class CaseDetailsController extends Controller
         return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
 
     }
+
     public function printSessionNotes($id)
     {
 
@@ -244,11 +250,24 @@ class CaseDetailsController extends Controller
 
     public function printCase($id)
     {
+        $cases = Cases::query()->where("id", "=", $id)->get();
 
-        $cases = Cases::query()->where("id","=",$id)->get();
+        $case = Cases::findOrFail($id);
+        $clients = array();
+        $khesm = array();
+        foreach ($case->clients as $key => $client) {
+            if ($client->type == 'khesm') {
+                $khesm[] = $client;
+            } else {
+                $clients [] = $client;
+            }
+        }
 
-//dd($cases);
-        $pdf = PDF::loadView('Reports.CasePDF', ['data' => $cases]);
+        $Sessions = Sessions::with( 'notes')
+            ->where('case_Id', '=', $id)
+            ->get();
+
+         $pdf = PDF::loadView('Reports.CasePDF', ['data' => $cases, 'clients' => $clients, 'khesm' => $khesm,'Sessions'=>$Sessions]);
 
         return $pdf->stream('My PDF' . 'pdf');
 
