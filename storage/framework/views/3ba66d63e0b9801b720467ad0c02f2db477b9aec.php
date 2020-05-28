@@ -116,7 +116,7 @@
 
                                             <div class="row space20">
                                                 <div class="col-sm-4">
-                                                    <button href="home" class="btn btn-icon btn-block pulsate">
+                                                    <button href="" class="btn btn-icon btn-block pulsate">
                                                         <i class="clip-bubble-2"></i>
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>

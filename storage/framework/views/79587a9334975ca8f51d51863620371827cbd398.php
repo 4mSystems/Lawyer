@@ -59,7 +59,7 @@
                                         <th class="center"><?php echo e(trans('site_lang.clients_client_address')); ?></th>
                                         <th class="center"><?php echo e(trans('site_lang.clients_client_notes')); ?></th>
                                         <th class="center"><?php echo e(trans('site_lang.clients_client_type')); ?></th>
-                                        <th></th>
+                                        <th class="center"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -273,6 +273,8 @@
                         $('#notes').val(html.data.notes);
                         $('#type').val(html.data.type);
                         $('#id').val(html.data.id);
+                        $('#modal_title').text("<?php echo e(trans('site_lang.clients_edit_client_text')); ?>");
+                        $('#add_client').val("<?php echo e(trans('site_lang.public_edit_btn_text')); ?>");
                         $('#add_client_model').modal('show');
 
                     }
