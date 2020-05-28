@@ -1,14 +1,13 @@
-@extends('welcome')
-@section('styles')
-    <link rel="stylesheet" href="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/select2/select2.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap-select/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/datepicker/css/datepicker.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/DataTables/media/css/DT_bootstrap.css')}}">
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
+<?php $__env->startSection('styles'); ?>
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/select2/select2.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/datepicker/css/datepicker.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/DataTables/media/css/DT_bootstrap.css')); ?>">
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal.css')); ?>" rel="stylesheet" type="text/css"/>
 
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
@@ -63,7 +62,7 @@
                     <div class="col-md-12">
                         <ol class="breadcrumb">
                             <li>
-                                <a href="{{route('home')}}">
+                                <a href="<?php echo e(route('home')); ?>">
                                     Home
                                 </a>
                             </li>
@@ -287,7 +286,7 @@
                                 </div>
                                 <div id="panel_edit_account" class="tab-pane fade" style="direction: rtl">
                                     <form id="edit_case_form" method="post">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3>بيانات الدعوى</h3>
@@ -420,17 +419,17 @@
             </div>
         </div>
         <!-- end: PAGE -->
-        {{--        start notes Modal--}}
-        @include('cases.add_session_notes_modal')
-        {{--        End notes Modal--}}
-        {{--Start Session Modal--}}
-        @include('cases.add_session_modal')
+        
+        <?php echo $__env->make('cases.add_session_notes_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
+        
+        <?php echo $__env->make('cases.add_session_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        {{--        End Session Modal--}}
-        {{--        start add mokel to case--}}
-        @include('cases.add_new_mokel_modal')
-        {{--        end add mokel to case--}}
-        {{--confirm modal--}}
+        
+        
+        <?php echo $__env->make('cases.add_new_mokel_modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        
+        
         <div id="confirmModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -449,40 +448,42 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    {{--    <script src="{{url('/plugins/jquery.pulsate/jquery.pulsate.min.js) }}"></script>--}}
-    {{--    <script src="{{url('/js/pages-user-profile.js) }}"></script>--}}
-    <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
-    <script src="{{url('/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
-    <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
-    <script src="{{url('/js/form-elements.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+    
+    
+    <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/select2/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/DT_bootstrap.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/form-elements.js')); ?>"></script>
     <script>
         // global app configuration object
         var config = {
             routes: {
-                add_session_route: "{{route('caseDetails.store')}}",
-                update_session_route: "{{route('caseDetails.update')}}",
-                add_note_route: "{{route('notes.store')}}",
-                update_note_route: "{{ route('notes.update') }}",
-                update_case_data: "{{ route('caseDetails.updateCase') }}",
-                add_new_client: "{{ route('caseDetails.addNewClient') }}",
+                add_session_route: "<?php echo e(route('caseDetails.store')); ?>",
+                update_session_route: "<?php echo e(route('caseDetails.update')); ?>",
+                add_note_route: "<?php echo e(route('notes.store')); ?>",
+                update_note_route: "<?php echo e(route('notes.update')); ?>",
+                update_case_data: "<?php echo e(route('caseDetails.updateCase')); ?>",
+                add_new_client: "<?php echo e(route('caseDetails.addNewClient')); ?>",
             }
         };
     </script>
-    <script src="{{url('/js/cases-details.js') }}"></script>
-    {{--    <script src="{{url('/js/table-data.js') }}" type="text/javascript"></script>--}}
-    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/cases-details.js')); ?>"></script>
+    
+    <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
 
-@endsection
-@section('scriptDocument')
-    {{--    TableData.init();--}}
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptDocument'); ?>
+    
     FormElements.init();
     UIModals.init();
     PagesUserProfile.init();
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/search_case.blade.php ENDPATH**/ ?>
