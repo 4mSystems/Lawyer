@@ -115,21 +115,25 @@
                                         <div class="col-sm-7 col-md-8">
 
                                             <div class="row space20">
-                                                <div class="col-sm-4">
-                                                    <button class="btn btn-icon btn-block pulsate">
+                                                <div class="col-sm-3">
+                                                    <a class="btn btn-icon btn-block pulsate" style="padding: 30px;" id="btnPrintCase" href="" target="_blank">
+                                                        <i class="clip-bubble-2"></i> طباعه الدعوى</a>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <button class="btn btn-icon btn-block pulsate" id="btnPrintCase">
                                                         <i class="clip-bubble-2"></i>
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>
                                                     </button>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <button class="btn btn-icon btn-block">
                                                         <i class="clip-calendar"></i>
                                                         الملاحظات <span class="badge badge-info"
                                                                         id="notes_count"></span>
                                                     </button>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <button class="btn btn-icon btn-block">
                                                         <i class="clip-list-3"></i>
                                                         الجلسات <span class="badge badge-info"
@@ -369,7 +373,7 @@
 
                                     <div class="panel panel space20">
                                         <div class="panel-heading">
-                                            <a class="btn btn-green" id="printNotes" target="_blank"><i
+                                            <a class="btn btn-green" id="btnPrintNotes" target="_blank"><i
                                                     class="fa fa-print"></i> طباعه الملاحظات</a>
                                             <a class="btn btn-primary" id="addNotesModal"><i
                                                     class="fa fa-plus"></i> إضافة ملاحظه </a>

@@ -51,6 +51,23 @@
                             class="title"> Mohdareen </span> </a>
 
                 </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> Reports </span><i
+                                class="icon-arrow"></i> </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{url('/dailyReport')}}">
+                                <span class="title">Daily Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/MonthlyReport') }}">
+                                <span class="title">Monthly Report</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
 
             </ul>
             <!-- end: MAIN NAVIGATION MENU -->

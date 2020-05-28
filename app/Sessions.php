@@ -19,4 +19,9 @@ class Sessions extends Model
     {
         return $this->hasMany(Session_Notes::class,'session_Id');
     }
+
+    public function Printnotes()
+    {
+        return $this->hasOne(Session_Notes::class,'session_Id');
+    }
 }

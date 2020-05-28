@@ -57,6 +57,13 @@ Route::get('caseDetails/deleteClient/{case_id}/{client_id}', 'CaseDetailsControl
 Route::get('caseDetails/updateStatus/{id}', 'CaseDetailsController@updateStatus');
 Route::get('caseDetails/getSessionNotes/{id}', 'CaseDetailsController@getSessionNotes');
 Route::get('caseDetails/getClientByType/{type}/{caseId}', 'CaseDetailsController@getClientByType');
+//Notes Report in Case Details
+Route::get('caseDetails/printSessionNotes/{id}', 'CaseDetailsController@printSessionNotes');
+//Case Report
+Route::get('caseDetails/printCase/{id}', 'CaseDetailsController@printCase');
+
+
+
 
 //notes operations
 Route::resource('notes', 'Session_NotesController');
@@ -64,6 +71,19 @@ Route::post('notes/update', 'Session_NotesController@update')->name('notes.updat
 Route::get('notes/destroy/{id}', 'Session_NotesController@destroy');
 Route::get('notes/updateStatus/{id}', 'Session_NotesController@updateStatus');
 Route::get('notes/exportNotes/{id}', 'Session_NotesController@exportNotes');
+
+
+//Reports
+
+Route::resource('dailyReport', 'ReportsController');
+
+Route::post('daily', 'ReportsController@search')->name('daily');
+Route::get('dailyReport/{id}/{type}', 'ReportsController@edit');
+Route::get('dailyPdf/{id}/{type}','ReportsController@pdfexport');
+
+Route::get('MonthlyReport', 'ReportsController@monthlyPage');
+Route::get('dailyReport/searchMonthly/{month}/{year}/{type}', 'ReportsController@searchMonthly');
+Route::get('monthlyPdf/{month}/{year}/{type}','ReportsController@pdfMonthexport');
 
 
 

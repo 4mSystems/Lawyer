@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Case_client;
 use App\Cases;
 use App\Clients;
-use App\mohdr;
 use App\Sessions;
+use App\Session_Notes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class CaseDetailsController extends Controller
 {
@@ -217,6 +217,31 @@ class CaseDetailsController extends Controller
             return response(['status' => true, 'msg' => "تمت الاضافه بنجاح", 'result' => $clients]);
         }
         return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
+
+    }
+    public function printSessionNotes($id)
+    {
+
+        $session_notes = Session_Notes::with('Session')
+            ->where('session_Id', '=', $id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+
+        $pdf = PDF::loadView('Reports.SessionNotesPDF', ['data' => $session_notes]);
+
+        return $pdf->stream('My PDF' . 'pdf');
+    }
+
+    public function printCase($id)
+    {
+
+        $cases = Cases::query()->where("id","=",$id)->get();
+
+//dd($cases);
+        $pdf = PDF::loadView('Reports.CasePDF', ['data' => $cases]);
+
+        return $pdf->stream('My PDF' . 'pdf');
 
     }
 
