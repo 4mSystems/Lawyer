@@ -37,14 +37,14 @@
             <table class="table table-striped  table-hover table-full-width"
                    style="font-family: 'Cairo';font-size: 13px;text-align: center;" id="PrintdailyTable">
                 <thead>
-                @foreach($data as $row)
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <th style="text-align: center;">محكمة</th>
-                    <th style="text-align: center;">{{$row->court}}</th>
+                    <th style="text-align: center;"><?php echo e($row->court); ?></th>
                     <th style="text-align: center;"> </th>
                     <th style="text-align: center;"></th>
                     <th style="text-align: center;">رقم الدائرة</th>
-                    <th style="text-align: center;">{{$row->circle_num}}</th>
+                    <th style="text-align: center;"><?php echo e($row->circle_num); ?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,16 +64,16 @@
                     <tr>
 
                         <td class="hidden-xs center">رقم القضية </td>
-                        <td class="hidden-xs center">{{$row->invetation_num}}</td>
+                        <td class="hidden-xs center"><?php echo e($row->invetation_num); ?></td>
                         <td class="hidden-xs center">لسنة</td>
-                        <td class="hidden-xs center">{{$row->year}}</td>
+                        <td class="hidden-xs center"><?php echo e($row->year); ?></td>
                         <td style="text-align: center;">نوع الدعوى</td>
-                        <td style="text-align: center;">{{$row->inventation_type}}</td>
+                        <td style="text-align: center;"><?php echo e($row->inventation_type); ?></td>
 
 
                     </tr>
 
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
                 </tbody>
@@ -95,16 +95,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($clients as $client)
+                <?php $__currentLoopData = $clients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $client): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                 <tr>
 
-                    <td class="hidden-xs center">{{$client->client_Name}} </td>
+                    <td class="hidden-xs center"><?php echo e($client->client_Name); ?> </td>
                     <td class="hidden-xs center"> </td>
 
                 </tr>
 
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
             </table>
@@ -126,16 +126,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($khesm as $kh)
+                <?php $__currentLoopData = $khesm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kh): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                     <tr>
 
-                        <td class="hidden-xs center">{{$kh->client_Name}} </td>
+                        <td class="hidden-xs center"><?php echo e($kh->client_Name); ?> </td>
                         <td class="hidden-xs center"> </td>
 
                     </tr>
 
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
             </table>
@@ -156,21 +156,22 @@
                 </thead>
                 <tbody>
                 @endphp
-                @foreach($Sessions as $row)
+                <?php $__currentLoopData = $Sessions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td class="hidden-xs center">{{$row->session_date}}</td>
+                        <td class="hidden-xs center"><?php echo e($row->session_date); ?></td>
                         <td class="hidden-xs center">
-                        @foreach($row->notes as $note)
+                        <?php $__currentLoopData = $row->notes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $note): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                {{$note->note}}
+                                <?php echo e($note->note); ?>
+
 <br>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </td>
 
 
                     </tr>
 
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
             </table>
@@ -185,3 +186,4 @@
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/Reports/CasePDF.blade.php ENDPATH**/ ?>

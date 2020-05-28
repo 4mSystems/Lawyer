@@ -12,16 +12,22 @@ class Sessions extends Model
 
     public function cases()
     {
-        return $this->belongsTo(Cases::class,'case_Id');
+        return $this->belongsTo(Cases::class, 'case_Id');
     }
 
     public function notes()
     {
-        return $this->hasMany(Session_Notes::class,'session_Id');
+        return $this->hasMany(Session_Notes::class, 'session_Id');
     }
 
     public function Printnotes()
     {
-        return $this->hasOne(Session_Notes::class,'session_Id');
+        return $this->hasOne(Session_Notes::class, 'session_Id');
     }
+
+    public function Sessions_notes()
+    {
+        return $this->belongsToMany(Sessions::class, 'session_Id');
+    }
+
 }

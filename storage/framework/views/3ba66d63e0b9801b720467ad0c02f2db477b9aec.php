@@ -92,7 +92,7 @@
                             </table>
 
                         </div>
-                        <div class="tabbable">
+                        <div class="tabbable" id="mainContainer">
                             <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
                                 <li class="active" style="float: right">
                                     <a data-toggle="tab" href="#panel_overview"

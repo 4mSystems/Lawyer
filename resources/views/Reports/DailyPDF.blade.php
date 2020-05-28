@@ -48,7 +48,7 @@
                 @endphp
                 @foreach($data as $row)
                     <tr>
-                        @if ($row->notes ==null)
+                        @if ($row->Printnotes ==null)
                             <td class="hidden-xs center">----</td>
                         @else
                             <td class="hidden-xs center">{{$row->Printnotes->note}}</td>
