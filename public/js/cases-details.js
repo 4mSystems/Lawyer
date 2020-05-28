@@ -59,6 +59,10 @@ data-case-id="${index.id}"
     });
     $(document).on('click', '#showCaseData', function () {
         caseId = $(this).data('case-id');
+
+        var href="caseDetails/printCase/"+caseId;
+        $('#btnPrintCase').attr("href", href);
+
         $.ajax({
             url: "/caseDetails/" + caseId + "/edit",
             dataType: "json",
@@ -260,6 +264,9 @@ data-case-id="${index.id}"
     $(document).on('click', '#showSessionNotes', function () {
         $('#session-notes-table tbody tr').remove();
         session_id = $(this).data('session-id');
+        var href="caseDetails/printSessionNotes/"+session_id;
+        $('#btnPrintNotes').attr("href", href);
+
         $.ajax({
             url: "caseDetails/getSessionNotes/" + session_id,
             dataType: "json",

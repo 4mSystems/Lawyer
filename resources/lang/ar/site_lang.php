@@ -57,6 +57,7 @@ return [
     'auth_password' => 'الرقم السرى',
     //clients
     'clients_add_new_client_text' => 'أضافة عميل جديد',
+    'clients_edit_client_text' => 'تعديل بيانات العميل',
     'clients_client_name' => 'الاسم',
     'clients_client_unit' => 'الوحدة',
     'clients_client_address' => 'العنوان',
@@ -64,5 +65,14 @@ return [
     'clients_client_type' => 'النوع',
     'clients_client_type_client' => 'موكل',
     'clients_client_type_khesm' => 'خصم',
-
-];
+    'clients_client_type_client_hint' => 'إختر الموكيلن',
+    'clients_client_type_khesm_hint' => 'إختر الخصوم',
+    //add new case
+    'add_case_title' => 'إضافة دعوى',
+    'add_case_header' => 'إضافة دعوى جديدة',
+    'add_case_to_whom' => 'موجهه الى ',
+    'add_case_inventation_type' => 'نوع الدعوى',
+    'add_case_first_session_date' => 'نوع الدعوى',
+    'add_case_court' => 'المحكمة',
+    'add_case_circle_num' => 'رقم الدائرة',
+ ];

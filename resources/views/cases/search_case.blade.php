@@ -9,7 +9,7 @@
 
 @endsection
 @section('content')
-    <div class="main-container inner">
+<div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
             <div class="container">
@@ -116,21 +116,33 @@
                                         <div class="col-sm-7 col-md-8">
 
                                             <div class="row space20">
+
                                                 <div class="col-sm-4">
                                                     <a  class="btn btn-icon btn-block pulsate" id="attachment" target="blank" style="padding-top: 33px">
                                                         <i class="clip-bubble-2"></i>
+
+                                                 <div class="col-sm-3">
+                                                    <a class="btn btn-icon btn-block pulsate" style="padding: 30px;" id="btnPrintCase" href="" target="_blank">
+                                                        <i class="clip-bubble-2"></i> طباعه الدعوى</a>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <button class="btn btn-icon btn-block pulsate" id="btnPrintCase">
+                                                 <div class="col-sm-4">
+                                                    <a href="" class="btn btn-icon btn-block pulsate">
+                                                         <i class="clip-bubble-2"></i>
+
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>
                                                     </a>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <button class="btn btn-icon btn-block">
                                                         <i class="clip-calendar"></i>
                                                         الملاحظات <span class="badge badge-info"
                                                                         id="notes_count"></span>
                                                     </button>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-3">
                                                     <button class="btn btn-icon btn-block">
                                                         <i class="clip-list-3"></i>
                                                         الجلسات <span class="badge badge-info"
@@ -370,7 +382,7 @@
 
                                     <div class="panel panel space20">
                                         <div class="panel-heading">
-                                            <a class="btn btn-green" id="printNotes" target="_blank"><i
+                                            <a class="btn btn-green" id="btnPrintNotes" target="_blank"><i
                                                     class="fa fa-print"></i> طباعه الملاحظات</a>
                                             <a class="btn btn-primary" id="addNotesModal"><i
                                                     class="fa fa-plus"></i> إضافة ملاحظه </a>

@@ -1,5 +1,6 @@
 var FormElements = function () {
     "use strict";
+    var select2_holder;
     //function to initiate jquery.inputlimiter
     var runInputLimiter = function () {
         $('.limited').inputlimiter({
@@ -15,13 +16,13 @@ var FormElements = function () {
     //function to initiate Select2
     var runSelect2 = function () {
         $(".search-select").select2({
-            placeholder: "Select Client",
+            placeholder: config.trans.select2_place_holder,
             allowClear: false
         });
     };
     var runSelect1 = function () {
         $("#Opponent").select2({
-            placeholder: "Select Opponent",
+            placeholder: config.trans.select1_place_holder,
             allowClear: false
         });
     };
