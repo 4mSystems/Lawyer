@@ -117,18 +117,18 @@
                                         <div class="col-sm-7 col-md-8">
 
                                             <div class="row space20">
-                                                <div class="col-sm-3">
-                                                    <a class="btn btn-icon btn-block pulsate" style="padding: 30px;"
-                                                       id="btnPrintCase" href="" target="_blank">
+
+                                                 <div class="col-sm-3">
+                                                    <a class="btn btn-icon btn-block pulsate" style="padding: 30px;" id="btnPrintCase" href="" target="_blank">
                                                         <i class="clip-bubble-2"></i> طباعه الدعوى</a>
                                                 </div>
+                                                 <div class="col-sm-3">
+                                                    <a href="" class="btn btn-icon btn-block pulsate" style="padding: 30px;">
+                                                         <i class="clip-bubble-2"></i>
 
-                                                <div class="col-sm-3">
-                                                    <button href="" class="btn btn-icon btn-block pulsate">
-                                                        <i class="clip-bubble-2"></i>
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <button class="btn btn-icon btn-block">

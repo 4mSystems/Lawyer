@@ -235,6 +235,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 //        'PDF' => Barryvdh\DomPDF\Facade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+        'Up' => App\Http\Controllers\Upload::class,
     ],
 
 ];

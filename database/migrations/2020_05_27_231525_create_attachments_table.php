@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Attachements extends Migration
+class CreateAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class Attachements extends Migration
      */
     public function up()
     {
-        Schema::create('Attachements', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('img_Url');
+            $table->string('img_Url')->nullable();
             $table->string('img_Description');
             $table->bigInteger('case_Id')->unsigned();
-            $table->foreign('case_Id')->references('id')->on('cases');;
+            $table->foreign('case_Id')->references('id')->on('cases');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -30,6 +31,6 @@ class Attachements extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('attachments');
     }
 }

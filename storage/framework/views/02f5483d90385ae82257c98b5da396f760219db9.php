@@ -74,17 +74,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="<?php echo e(url('users')); ?>"
+                                <a href="<?php echo e(url('publicusers')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_more_options')); ?>"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="<?php echo e(url('users')); ?>"
+                                <a href="<?php echo e(url('publicusers')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_add_user')); ?>"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="<?php echo e(url('users')); ?>"
+                                <a href="<?php echo e(url('publicusers')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_see_more')); ?>"><i
@@ -105,17 +105,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="<?php echo e(url('caseDetails')); ?>"
+                                <a href="<?php echo e(url('publiccaseDetails')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_more_options')); ?>"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="<?php echo e(url('addCase')); ?>"
+                                <a href="<?php echo e(url('publicaddCase')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.side_add_case')); ?>"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="<?php echo e(url('caseDetails')); ?>"
+                                <a href="<?php echo e(url('publiccaseDetails')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_see_more')); ?>"><i
@@ -137,17 +137,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="<?php echo e(url('mohdareen')); ?>"
+                                <a href="<?php echo e(url('publicmohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_more_options')); ?>"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="<?php echo e(url('mohdareen')); ?>"
+                                <a href="<?php echo e(url('publicmohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.mohdar_add_mohdar')); ?>"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="<?php echo e(url('mohdareen')); ?>"
+                                <a href="<?php echo e(url('publicmohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_see_more')); ?>"><i
@@ -169,17 +169,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="<?php echo e(url('mohdareen')); ?>"
+                                <a href="<?php echo e(url('publicmohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_more_options')); ?>"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="<?php echo e(url('mohdareen')); ?>"
+                                <a href="<?php echo e(url('publicmohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.mohdar_add_mohdar')); ?>"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="<?php echo e(url('mohdareen')); ?>"
+                                <a href="<?php echo e(url('publicmohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_see_more')); ?>"><i
@@ -502,7 +502,7 @@
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts'); ?>
-    <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
+    <script src="<?php echo e(url('public/plugins/toastr/toastr.js')); ?>"></script>
 
     <script>
 
