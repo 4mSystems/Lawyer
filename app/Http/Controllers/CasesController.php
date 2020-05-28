@@ -77,7 +77,7 @@ class CasesController extends Controller
             foreach ($res as $client) {
                 Case_client::create(['case_id' => $case->id, 'client_id' => $client]);
             }
-            return response(['status' => true, 'msg' => "تمت الاضافه بنجاح"]);
+            return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
         }
         return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
 

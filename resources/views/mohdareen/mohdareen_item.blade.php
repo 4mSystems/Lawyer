@@ -33,26 +33,26 @@
         </div>
     </td>
     @if($mohdar->status =='لا')
-        <td class="hidden-xs">
+        <td class="hidden-xs center">
             <p class="btn btn-lg" data-moh-Id="{{$mohdar->moh_Id}}">
                 <span class="label label-danger" id="status{{$mohdar->moh_Id}}"> {{$mohdar->status}}</span>
 
             </p>
         </td>
     @else
-        <td class="hidden-xs">
+        <td class="hidden-xs center">
             <p class="btn btn-lg" data-moh-Id="{{$mohdar->moh_Id}}" >
                     <span class="label label-success" id="status{{$mohdar->moh_Id}}"> {{$mohdar->status}}</span>
                 </p>
 
         </td>
     @endif
-    <td class="hidden-xs"><p id="session_Date{{$mohdar->moh_Id}}">{{$mohdar->session_Date}}</p></td>
-    <td class="hidden-xs"><p id="paper_Number{{$mohdar->moh_Id}}">{{$mohdar->paper_Number}}</p></td>
-    <td class="hidden-xs"><p id="deliver_data{{$mohdar->moh_Id}}">{{$mohdar->deliver_data}}</p></td>
-    <td><p id="paper_type{{$mohdar->moh_Id}}">{{$mohdar->paper_type}}</p></td>
-    <td><p id="court_mohdareen{{$mohdar->moh_Id}}">{{$mohdar->court_mohdareen}}</p></td>
-    <td class="center"><p id="moh_Id{{$mohdar->moh_Id}}">{{$mohdar->moh_Id}}</p></td>
+    <td class="hidden-xs center"><p id="session_Date{{$mohdar->moh_Id}}">{{$mohdar->session_Date}}</p></td>
+    <td class="hidden-xs center"><p id="paper_Number{{$mohdar->moh_Id}}">{{$mohdar->paper_Number}}</p></td>
+    <td class="hidden-xs center"><p id="deliver_data{{$mohdar->moh_Id}}">{{$mohdar->deliver_data}}</p></td>
+    <td class="hidden-xs center"><p id="paper_type{{$mohdar->moh_Id}}">{{$mohdar->paper_type}}</p></td>
+    <td class="hidden-xs center"><p id="court_mohdareen{{$mohdar->moh_Id}}">{{$mohdar->court_mohdareen}}</p></td>
+    <td class="hidden-xs center"><p id="moh_Id{{$mohdar->moh_Id}}">{{$mohdar->moh_Id}}</p></td>
 
 
 </tr>

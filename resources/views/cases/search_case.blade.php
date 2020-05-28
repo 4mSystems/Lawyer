@@ -9,7 +9,7 @@
 
 @endsection
 @section('content')
-    <div class="main-container inner">
+<div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
             <div class="container">
@@ -116,13 +116,15 @@
                                         <div class="col-sm-7 col-md-8">
 
                                             <div class="row space20">
-                                                <div class="col-sm-3">
+                                                 <div class="col-sm-3">
                                                     <a class="btn btn-icon btn-block pulsate" style="padding: 30px;" id="btnPrintCase" href="" target="_blank">
                                                         <i class="clip-bubble-2"></i> طباعه الدعوى</a>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <button class="btn btn-icon btn-block pulsate" id="btnPrintCase">
-                                                        <i class="clip-bubble-2"></i>
+                                                 <div class="col-sm-4">
+                                                    <button href="" class="btn btn-icon btn-block pulsate">
+                                                         <i class="clip-bubble-2"></i>
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>
                                                     </button>
@@ -381,7 +383,7 @@
                                             <h4 style="float:right;">الملاحظات</h4>
                                         </div>
                                         <div class="panel-body">
-                                            <table class="table table-striped  table-hover" id="session-notes-table">
+                                            <table class="table table-striped table-bordered table-hover table-full-width" id="session-notes-table">
                                                 <thead>
                                                 <tr>
                                                     <th class="hidden-xs center"></th>

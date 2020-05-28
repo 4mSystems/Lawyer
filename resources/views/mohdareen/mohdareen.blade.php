@@ -89,13 +89,13 @@
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="hidden-xs">الحالة</th>
-                                        <th class="hidden-xs">تاريخ الجلسة</th>
-                                        <th class="hidden-xs">رقم الورقة</th>
-                                        <th class="hidden-xs">تاريخ تسليم الورقة</th>
-                                        <th class="hidden-xs">نوع الورقة</th>
-                                        <th>محضرين المحكمه</th>
-                                        <th class="center">#</th>
+                                        <th class="hidden-xs center">الحالة</th>
+                                        <th class="hidden-xs center">تاريخ الجلسة</th>
+                                        <th class="hidden-xs center">رقم الورقة</th>
+                                        <th class="hidden-xs center">تاريخ تسليم الورقة</th>
+                                        <th class="hidden-xs center">نوع الورقة</th>
+                                        <th class="hidden-xs center">محضرين المحكمه</th>
+                                        <th class="hidden-xs center">#</th>
 
                                     </tr>
                                     </thead>

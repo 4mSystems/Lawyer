@@ -152,6 +152,7 @@ data-case-id="${index.id}"
                     // if (data.status == true) {
                     // $('#sessions-table tbody').append(data.result);
                     $('#sessions_table').prepend(data.result);
+                    $('#sessions_table').DataTable();
 
                     $('#add_session_model').modal('hide');
                     toastr.success(data.msg);
@@ -236,7 +237,7 @@ data-case-id="${index.id}"
                     }, 1000);
                 }
             })
-        } else {
+        } else if (who_delete == "note") {
             $.ajax({
                 url: "notes/destroy/" + note_id,
                 beforeSend: function () {
@@ -274,9 +275,8 @@ data-case-id="${index.id}"
     });
     //show modal form for adding notes
     $('#addNotesModal').click(function () {
-        console.log(session_id);
         if (session_id != null) {
-            $('.modal-title').text("إضافة ملاحظة جديدة");
+            $('#modal_title').text("إضافة ملاحظة جديدة");
             $('#add_note').val("إضافة");
             $('#add_note_model').modal('show');
         } else {
@@ -292,15 +292,14 @@ data-case-id="${index.id}"
                 dataType: 'json',
                 data: form,
                 type: 'post',
-
                 success: function (data) {
                     // if (data.status == true) {
                     // $('#sessions-table tbody').append(data.result);
-                    $('#session-notes-table').prepend(data.result);
-
                     $('#add_note_model').modal('hide');
-                    toastr.success(data.msg);
                     $("#notesForm").trigger('reset');
+                    $('#session-notes-table').prepend(data.result);
+                    $('#session-notes-table').DataTable();
+                    toastr.success(data.msg);
                 }, error: function (data_error, exception) {
                     if (exception == 'error') {
                         $('#note_error').html(data_error.responseJSON.errors.note);
@@ -374,7 +373,7 @@ data-case-id="${index.id}"
 
     //clients operations
     // delete mokel
-    $(document).on('click', '#deleteSession', function () {
+    $(document).on('click', '#deleteClient', function () {
         client_id = $(this).data('mokel-id');
         who_delete = "clients";
         $('#confirmModal').modal('show');
