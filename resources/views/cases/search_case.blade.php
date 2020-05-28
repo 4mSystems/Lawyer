@@ -117,11 +117,11 @@
 
                                             <div class="row space20">
                                                 <div class="col-sm-4">
-                                                    <button href="" class="btn btn-icon btn-block pulsate">
+                                                    <a  class="btn btn-icon btn-block pulsate" id="attachment" target="blank" style="padding-top: 33px">
                                                         <i class="clip-bubble-2"></i>
                                                         الملحقات <span class="badge badge-info"
                                                                        id="attach_count"> </span>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <button class="btn btn-icon btn-block">

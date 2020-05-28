@@ -27,18 +27,19 @@
     23 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     24 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     25 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    26 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    27 => 'Carbon\\Laravel\\ServiceProvider',
-    28 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
-    29 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    30 => 'App\\Providers\\AppServiceProvider',
-    31 => 'App\\Providers\\AuthServiceProvider',
-    32 => 'App\\Providers\\EventServiceProvider',
-    33 => 'App\\Providers\\RouteServiceProvider',
-    34 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    35 => 'PHPJasper\\PHPJasperServiceProvider',
-    36 => 'Barryvdh\\DomPDF\\ServiceProvider',
-    37 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
+    26 => 'Collective\\Html\\HtmlServiceProvider',
+    27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    28 => 'Carbon\\Laravel\\ServiceProvider',
+    29 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
+    30 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    31 => 'App\\Providers\\AppServiceProvider',
+    32 => 'App\\Providers\\AuthServiceProvider',
+    33 => 'App\\Providers\\EventServiceProvider',
+    34 => 'App\\Providers\\RouteServiceProvider',
+    35 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    36 => 'PHPJasper\\PHPJasperServiceProvider',
+    37 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    38 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
   ),
   'eager' => 
   array (
@@ -174,6 +175,10 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'html' => 'Collective\\Html\\HtmlServiceProvider',
+    'form' => 'Collective\\Html\\HtmlServiceProvider',
+    'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
+    'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
   ),
   'when' => 
@@ -215,6 +220,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 

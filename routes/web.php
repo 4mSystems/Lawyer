@@ -65,6 +65,13 @@ Route::get('notes/destroy/{id}', 'Session_NotesController@destroy');
 Route::get('notes/updateStatus/{id}', 'Session_NotesController@updateStatus');
 Route::get('notes/exportNotes/{id}', 'Session_NotesController@exportNotes');
 
+//case attacments
 
+
+Route::get('attachment/{id}', 'CaseAttachmentController@index');
+
+Route::get('attachment/{id}/create', 'CaseAttachmentController@create');
+
+Route::post('attachment/{id}/store', 'CaseAttachmentController@store');
 
 

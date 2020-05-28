@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "210a8136-adf3-4c3c-affd-2f656110fe2f",
+		"name": "Green Gold APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/site/api/getCategoriesService",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"site",
+						"api",
+						"getCategoriesService"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "$2y$10$MhZXXgZipzVXZn/wiH7lW.eR/aJb1PyjMBDqLwFdldeUMkofB6iBG",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get product by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/site/api/getProductService?id=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"site",
+						"api",
+						"getProductService"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get products by category id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/site/api/getProductsService?id=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"site",
+						"api",
+						"getProductsService"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@test.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/site/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"site",
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -89,6 +89,10 @@ data-case-id="${index.id}"
                 $('#khesm_table tbody').prepend(html.result.khesm);
                 // $('#khesm_table').DataTable();
 
+                //attachments url
+                var attachment_url ="attachment/"+caseId;
+                $('#attachment').attr("href",attachment_url);
+
             }
         })
     });
