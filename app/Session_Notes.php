@@ -13,7 +13,8 @@ class Session_Notes extends Model
 
     public function Session()
     {
-        return $this->belongsTo(Sessions::class,'session_Id');
+        return $this->belongsTo(Sessions::class, 'session_Id');
     }
+
 
 }

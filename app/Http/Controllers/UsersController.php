@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,15 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users/users', compact('users'));
+        $user_id=auth()->user()->id;
+        $permission = Permission::where('user_id',$user_id)->first();
+        $enabled =  $permission->users;
+        if($enabled == 'yes') {
+            $users = User::all();
+            return view('users/users', compact('users'));
+        } else {
+            return redirect(url('home'));
+        }
     }
 
     public function create()
@@ -26,6 +34,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+
         if ($request->ajax()) {
 
             $attribute = [
@@ -40,7 +49,21 @@ class UsersController extends Controller
                 'password' => 'required',
                 'type' => 'required'
             ], [], $attribute);
+            
+            $data['password']=bcrypt(request('password'));
+
             $user = User::create($data);
+            $user->save();
+
+
+
+            $user_id = $user->id;
+
+            $permissions['user_id'] = $user_id;
+            $per = Permission::create($permissions);
+            $per->save();
+
+
             $html = view('users.users_item', compact('user'))->render();
             return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }

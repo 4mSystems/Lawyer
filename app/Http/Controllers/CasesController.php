@@ -7,6 +7,8 @@ use App\Cases;
 use App\Clients;
 use App\Sessions;
 use Illuminate\Http\Request;
+use App\Permission;
+
 
 class CasesController extends Controller
 {
@@ -17,10 +19,18 @@ class CasesController extends Controller
      */
     public function getClients()
     {
-        $clients = Clients::select('id', 'client_Name')->where('type', 'client')->get();
-        $khesm = Clients::select('id', 'client_Name')->where('type', 'khesm')->get();
+        $user_id = auth()->user()->id;
+        $permission = Permission::where('user_id', $user_id)->first();
+        $enabled = $permission->addcases;
+        if ($enabled == 'yes') {
+            $clients = Clients::select('id', 'client_Name')->where('type', 'client')->get();
+            $khesm = Clients::select('id', 'client_Name')->where('type', 'khesm')->get();
 
-        return view('cases.add_case', compact(['clients', 'khesm']));
+            return view('cases.add_case', compact(['clients', 'khesm']));
+        }
+        else{
+            return redirect(url('home'));
+        }
     }
 
     public function index()
@@ -109,7 +119,7 @@ class CasesController extends Controller
     {
 
 
-         $data = $this->validate(request(), [
+        $data = $this->validate(request(), [
             'invetation_num' => 'required',
             'circle_num' => 'required',
             'court' => 'required',
@@ -118,8 +128,7 @@ class CasesController extends Controller
         ]);
 
 
-
-        Cases::where('id',$request->case_Id)->update($data);
+        Cases::where('id', $request->case_Id)->update($data);
         return redirect()->route('cases.add_case')->with('success', 'Case updated successfully');
     }
 

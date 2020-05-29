@@ -16,6 +16,7 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
+<<<<<<< HEAD
                     {{--                    <div class="col-sm-10 hidden-xs">--}}
                     {{--                        <div class="page-header">--}}
                     {{--                            <h3 class="text-bold">{{trans('site_lang.search_case_title')}}--}}
@@ -23,6 +24,15 @@
                     {{--                            </h3>--}}
                     {{--                        </div>--}}
                     {{--                    </div>--}}
+=======
+                    <div class="col-sm-6 hidden-xs">
+                        <div class="page-header">
+                            <h1>New Case
+                                <small>البحث عن الدعاوى</small>
+                            </h1>
+                        </div>
+                    </div>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                     <div class="toolbar-tools pull-right">
                         <!-- start: TOP NAVIGATION MENU -->
                         <ul class="nav navbar-right">
@@ -94,7 +104,7 @@
                             </table>
 
                         </div>
-                        <div class="tabbable">
+                        <div class="tabbable" id="mainContainer">
                             <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
                                 <li class="active" style="float: right">
                                     <a data-toggle="tab" href="#panel_overview"
@@ -104,7 +114,11 @@
                                 </li>
                                 <li style="float: right">
                                     <a data-toggle="tab" href="#panel_edit_account" class="text-large"><p
+<<<<<<< HEAD
                                             class="text-bold">{{trans('site_lang.search_case_edit')}}</p>
+=======
+                                                class="text-bold">تعديل الدعوى</p>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                     </a>
                                 </li>
                                 <li style="float: right">
@@ -121,6 +135,7 @@
 
                                             <div class="row space20">
 
+<<<<<<< HEAD
                                                 <div class="col-sm-3">
                                                     <a class="btn btn-icon btn-block pulsate" style="padding: 30px;"
                                                        id="btnPrintCase" href="" target="_blank">
@@ -131,6 +146,15 @@
                                                     <a href="" class="btn btn-icon btn-block pulsate"
                                                        style="padding: 30px;">
                                                         <i class="clip-bubble-2"></i>
+=======
+                                                 <div class="col-sm-3">
+                                                    <a class="btn btn-icon btn-block pulsate" style="padding: 30px;" id="btnPrintCase" href="" target="_blank">
+                                                        <i class="clip-bubble-2"></i> طباعه الدعوى</a>
+                                                </div>
+                                                 <div class="col-sm-3">
+                                                    <a href="" id="attachment" class="btn btn-icon btn-block pulsate" style="padding: 30px;">
+                                                         <i class="clip-bubble-2"></i>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
 
                                                         {{trans('site_lang.search_case_attachments')}} <span
                                                             class="badge badge-info"
@@ -159,15 +183,19 @@
                                                     <h3 class="text-bold">{{trans('site_lang.search_case_clients')}}</h3>
                                                     <div class="btn-group pull-left">
                                                         <a class="btn btn-primary" id="addMokelModal"><i
+<<<<<<< HEAD
                                                                 class="fa fa-plus">&nbsp;&nbsp;</i>{{trans('site_lang.search_case_add_client')}}
                                                         </a>
+=======
+                                                                    class="fa fa-plus"></i> إضافة موكل</a>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </div>
                                                     <br>
                                                 </div>
                                                 <div class="panel-body">
                                                     <table
-                                                        class="table table-striped table-bordered table-hover table-full-width"
-                                                        id="mokel_table">
+                                                            class="table table-striped table-bordered table-hover table-full-width"
+                                                            id="mokel_table">
                                                         <thead>
                                                         <tr>
                                                             <th class="hidden-xs center">#</th>
@@ -189,17 +217,21 @@
                                                         <h3 class="text-bold">{{trans('site_lang.search_case_khesms')}}</h3>
                                                         <div class="btn-group pull-left">
                                                             <a class="btn btn-success" id="addKhesmModal"><i
+<<<<<<< HEAD
                                                                     class="fa fa-plus">
                                                                     &nbsp;&nbsp;</i>{{trans('site_lang.search_case_add_khesm')}}
                                                             </a>
+=======
+                                                                        class="fa fa-plus"></i> إضافة خصم</a>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                         </div>
                                                         <br>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
                                                     <table
-                                                        class="table table-striped table-bordered table-hover table-full-width"
-                                                        id="khesm_table">
+                                                            class="table table-striped table-bordered table-hover table-full-width"
+                                                            id="khesm_table">
                                                         <thead>
                                                         <tr>
                                                             <th class="hidden-xs center">#</th>
@@ -232,44 +264,104 @@
                                                         <td>{{trans('site_lang.home_session_case_number')}}</td>
                                                         <td><a id="invetation_num"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+<<<<<<< HEAD
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+=======
+                                                                        class="fa fa-pencil edit-user-info"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a id="invetation_num">
+
+                                                            </a></td>
+                                                        <td>رقم الدعوى</td>
+
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </tr>
                                                     <tr>
                                                         <td>{{trans('site_lang.add_case_inventation_type')}}</td>
                                                         <td><a id="inventation_type"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+<<<<<<< HEAD
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+=======
+                                                                        class="fa fa-pencil edit-user-info"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a id="inventation_type">
+
+                                                            </a></td>
+                                                        <td>نوع الدعوى</td>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </tr>
                                                     <tr>
                                                         <td>{{trans('site_lang.add_case_circle_num')}}</td>
                                                         <td><a id="circle_num"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+<<<<<<< HEAD
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+=======
+                                                                        class="fa fa-pencil edit-user-info"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a id="circle_num">
+
+                                                            </a></td>
+                                                        <td>رقم الدائرة</td>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </tr>
                                                     <tr>
                                                         <td>{{trans('site_lang.add_case_court')}}</td>
                                                         <td><a id="court"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+<<<<<<< HEAD
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+=======
+                                                                        class="fa fa-pencil edit-user-info"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a id="court">
+
+                                                            </a></td>
+                                                        <td>المحكمة</td>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </tr>
                                                     <tr>
                                                         <td>{{trans('site_lang.search_case_first_session_date')}}</td>
                                                         <td><a id="first_session_date"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+<<<<<<< HEAD
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
 
 
+=======
+                                                                        class="fa fa-pencil edit-user-info"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a id="first_session_date">
+                                                            </a></td>
+                                                        <td>تاريخ اول جلسة</td>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </tr>
                                                     <tr>
                                                         <td>{{trans('site_lang.add_case_to_whom')}}</td>
                                                         <td><a id="to_whome"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+<<<<<<< HEAD
                                                                     class="fa fa-pencil edit-user-info"></i></a></td>
+=======
+                                                                        class="fa fa-pencil edit-user-info"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <a id="to_whome">
+
+                                                            </a></td>
+                                                        <td>موجهه الى</td>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -356,16 +448,29 @@
                                 <div id="panel_sessions" class="tab-pane fade">
                                     <div class="panel panel">
                                         <div class="panel-heading"><a class="btn btn-primary" id="addSessionModal"><i
+<<<<<<< HEAD
                                                     class="fa fa-plus">&nbsp;&nbsp;</i> {{trans('site_lang.search_case_case_add_session')}}
                                             </a></div>
                                         <div class="panel-body" id="session-div-table">
                                             <div class="alert alert-warning" style="text-align: right;">
                                                 {!!trans('site_lang.public_warn_text')!!}
 
+=======
+                                                        class="fa fa-plus"></i> إضافة جلسة </a></div>
+                                        <div class="panel-body" id="session-div-table">
+                                            <div class="alert alert-warning" style="text-align: right;">
+                                                <strong>إنتبه!</strong><b class="font-italic">
+                                                    يجب الضغط على<p class="btn btn-blue tooltips"
+                                                                    style="margin-right: 8px;margin-left: 8px;"><i
+                                                                class="fa fa-eye-slash"></i></p> لاظهار الملاحظات الخاصه
+                                                    بكل
+                                                    جلسة
+                                                </b>
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                             </div>
                                             <table
-                                                class="table table-striped table-bordered table-hover table-full-width"
-                                                id="sessions_table">
+                                                    class="table table-striped table-bordered table-hover table-full-width"
+                                                    id="sessions_table">
                                                 <thead>
                                                 <tr>
                                                     <th class="hidden-xs center">#</th>
@@ -386,6 +491,7 @@
                                         <div class="panel-heading">
                                             <h4 class="text-bold">{{trans('site_lang.mohdar_notes')}}</h4>
                                             <a class="btn btn-green" id="btnPrintNotes" target="_blank"><i
+<<<<<<< HEAD
                                                     class="fa fa-print"></i>&nbsp;&nbsp;{{trans('site_lang.search_case_case_print_notes')}}
                                             </a>
                                             <a class="btn btn-primary" id="addNotesModal"><i
@@ -396,6 +502,16 @@
                                             <table
                                                 class="table table-striped table-bordered table-hover table-full-width"
                                                 id="session-notes-table">
+=======
+                                                        class="fa fa-print"></i> طباعه الملاحظات</a>
+                                            <a class="btn btn-primary" id="addNotesModal"><i
+                                                        class="fa fa-plus"></i> إضافة ملاحظه </a>
+                                            <h4 style="float:right;">الملاحظات</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-striped table-bordered table-hover table-full-width"
+                                                   id="session-notes-table">
+>>>>>>> 7f018a9a8119f7ab159377203ee8ce589e4670e1
                                                 <thead>
                                                 <tr>
                                                     <th class="hidden-xs center">#</th>

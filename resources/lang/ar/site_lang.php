@@ -82,7 +82,7 @@ return [
     'add_case_first_session_date' => 'نوع الدعوى',
     'add_case_court' => 'المحكمة',
     'add_case_circle_num' => 'رقم الدائرة',
-    //search case
+     //search case
     'search_case_title' => 'البحث عن دعوى',
     'search_case_search' => 'البحث',
     'search_case_quick_view' => 'نظرة عامة',
@@ -106,4 +106,6 @@ return [
     'search_case_session_note' => 'الملاحظة',
     'search_case_session_modal_title' => 'إضافة ملاحظه جديده',
     'search_case_session_modal_title_edit' => 'تعديل البيانات',
- ];
+     'search_case_sessions'=>'الجلسات',
+    'permission'=>'الصلاحيات'
+  ];

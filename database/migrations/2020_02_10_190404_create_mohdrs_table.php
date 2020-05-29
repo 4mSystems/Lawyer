@@ -19,7 +19,7 @@ class CreateMohdrsTable extends Migration
             $table->string('paper_type');
             $table->string('deliver_data');
             $table->string('paper_Number');
-            $table->string('session_Date');
+            $table->date('session_Date');
             $table->string('mokel_Name');
             $table->string('khesm_Name');
             $table->string('notes');

@@ -28,53 +28,152 @@
     <![endif]-->
 </head>
 
-<body>
+<body style="direction: rtl;">
 <div class="container">
     <div class="row">
         <div class="col-md-12">
 
-            <div style="text-align:center;font-size: 30px;background-color: #8E9AA2;color: white;">
-
-                <hl class="center">الدعوى</hl>
-
-            </div>
-            <br>
-            <table class="table table-striped table-bordered table-hover table-full-width"
+            <hr>
+            <table class="table table-striped  table-hover table-full-width"
                    style="font-family: 'Cairo';font-size: 13px;text-align: center;" id="PrintdailyTable">
                 <thead>
+                @foreach($data as $row)
                 <tr>
-                    <th style="font-family: 'Cairo';font-size: 17px;text-align: center;">المحكمة</th>
-                    <th style="font-family: 'Cairo';font-size: 17px;text-align: center;width: 5%;">date</th>
-                    <th style="font-family: 'Cairo';font-size: 17px;text-align: center;width: 5%;">#</th>
+                    <th style="text-align: center;">محكمة</th>
+                    <th style="text-align: center;">{{$row->court}}</th>
+                    <th style="text-align: center;"> </th>
+                    <th style="text-align: center;"></th>
+                    <th style="text-align: center;">رقم الدائرة</th>
+                    <th style="text-align: center;">{{$row->circle_num}}</th>
                 </tr>
                 </thead>
-
                 <tbody>
-                @php
-                    $i=1;
-                @endphp
 
-                @foreach($data as $row)
+                <tr>
+
+                    <td ></td>
+                    <td ></td>
+                    <td class="hidden-xs center"></td>
+                    <td class="hidden-xs center"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"> &nbsp;&nbsp; </td>
+
+
+                </tr>
+
                     <tr>
 
-                        <td class="hidden-xs center">{{$row->court}}</td>
-                        <td class="hidden-xs center">{{$row->created_at->format('Y-m-d')}}</td>
-
-                        <td class="hidden-xs center">
-                            {{$i}}
-                        </td>
+                        <td class="hidden-xs center">رقم القضية </td>
+                        <td class="hidden-xs center">{{$row->invetation_num}}</td>
+                        <td class="hidden-xs center">لسنة</td>
+                        <td class="hidden-xs center">{{$row->year}}</td>
+                        <td style="text-align: center;">نوع الدعوى</td>
+                        <td style="text-align: center;">{{$row->inventation_type}}</td>
 
 
                     </tr>
-                    @php
-                        $i=$i+1;
-                    @endphp
+
                 @endforeach
 
 
                 </tbody>
             </table>
+            <hr>
 
+
+        </div>
+        <div class="col-md-12">
+            <label style="text-decoration: underline;">اسماء الموكلين :</label>
+            &nbsp;&nbsp;
+            <table class="table table-striped table-bordered table-hover table-full-width"
+                   style="font-family: 'Cairo';font-size: 13px;text-align: center;" id="PrintdailyTable">
+                <thead>
+
+                    <tr>
+                        <th style="text-align: center;">الاسم</th>
+                        <th style="text-align: center;width: 350px;">ملاحظة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($clients as $client)
+
+                <tr>
+
+                    <td class="hidden-xs center">{{$client->client_Name}} </td>
+                    <td class="hidden-xs center"> </td>
+
+                </tr>
+
+                @endforeach
+
+                </tbody>
+            </table>
+
+        </div>
+        <hr>
+
+
+        <div class="col-md-12">
+            <label style="text-decoration: underline;">اسماء الخصوم :</label>
+            &nbsp;&nbsp;
+            <table class="table table-striped table-bordered table-hover table-full-width"
+                   style="font-family: 'Cairo';font-size: 13px;text-align: center;" id="PrintdailyTable">
+                <thead>
+
+                <tr>
+                    <th style="text-align: center;">الاسم</th>
+                    <th style="text-align: center;width: 350px;">ملاحظة</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($khesm as $kh)
+
+                    <tr>
+
+                        <td class="hidden-xs center">{{$kh->client_Name}} </td>
+                        <td class="hidden-xs center"> </td>
+
+                    </tr>
+
+                @endforeach
+
+                </tbody>
+            </table>
+
+        </div>
+        <hr>
+        <div class="col-md-12">
+            <label style="text-decoration: underline;">الجلسات و الملاحظات  :</label>
+            &nbsp;&nbsp;
+            <table class="table table-striped table-bordered table-hover table-full-width"
+                   style="font-family: 'Cairo';font-size: 13px;text-align: center;" id="PrintdailyTable">
+                <thead>
+
+                <tr>
+                    <th style="text-align: center;">تاريخ الجلسة</th>
+                    <th style="text-align: center;width: 350px;">الملاحظة</th>
+                </tr>
+                </thead>
+                <tbody>
+                @endphp
+                @foreach($Sessions as $row)
+                    <tr>
+                        <td class="hidden-xs center">{{$row->session_date}}</td>
+                        <td class="hidden-xs center">
+                        @foreach($row->notes as $note)
+
+                                {{$note->note}}
+<br>
+                            @endforeach
+                        </td>
+
+
+                    </tr>
+
+                @endforeach
+
+                </tbody>
+            </table>
 
         </div>
     </div>
