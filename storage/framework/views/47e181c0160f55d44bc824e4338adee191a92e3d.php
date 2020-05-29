@@ -7,14 +7,14 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="notesForm">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <input type="hidden" name="noteId" id="noteId">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group{{$errors->has('note')?' has-error':''}}">
+                            <div class="form-group<?php echo e($errors->has('note')?' has-error':''); ?>">
                                  <textarea type="text" name="note" id="note" class="form-control"
-                                           placeholder="{{trans('site_lang.search_case_session_note')}}"
-                                           value="{{ old('note') }}" rows="3"></textarea>
+                                           placeholder="<?php echo e(trans('site_lang.search_case_session_note')); ?>"
+                                           value="<?php echo e(old('note')); ?>" rows="3"></textarea>
                                 <span class="text-danger" id="note_error"></span>
                             </div>
                         </div>
@@ -24,12 +24,14 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">
-                    {{trans('site_lang.public_close_btn_text')}}
+                    <?php echo e(trans('site_lang.public_close_btn_text')); ?>
+
                 </button>
-                <input type="submit" class="btn btn-dark-blue" id="add_note" name="add_note" value=" {{trans('site_lang.public_add_btn_text')}}"/>
+                <input type="submit" class="btn btn-dark-blue" id="add_note" name="add_note" value=" <?php echo e(trans('site_lang.public_add_btn_text')); ?>"/>
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/add_session_notes_modal.blade.php ENDPATH**/ ?>

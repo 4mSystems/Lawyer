@@ -122,8 +122,8 @@ data-case-id="${index.id}"
     //start sessions operations
     //show modal form for adding sessions
     $('#addSessionModal').click(function () {
-        $('.modal-title').text("إضافة جلسة جديدة");
-        $('#add_session').val("إضافة");
+        $('.modal-title').text(config.trans.add_session_modal_title);
+        $('#add_session').val(config.trans.add_session_btn);
         $('#add_session_model').modal('show');
     });
 
@@ -135,8 +135,8 @@ data-case-id="${index.id}"
             success: function (html) {
                 $('#session_date').val(html.data.session_date);
                 $('#sessionId').val(html.data.id);
-                $('.modal-title').text("تعديل تاريخ الجلسة");
-                $('#add_session').val("تعديل");
+                $('.modal-title').text(config.trans.edit_session_modal_title);
+                $('#add_session').val(config.trans.edit_public);
                 $('#add_session_model').modal('show');
 
             }
@@ -146,7 +146,7 @@ data-case-id="${index.id}"
     //adding /editnew session
     $('#add_session').click(function () {
         var form = $('#sessionForm').serialize() + "&case_Id=" + caseId;
-        if ($('#add_session').val() == 'إضافة') {
+        if ($('#add_session').val() == config.trans.add_session_btn) {
             $.ajax({
                 url: config.routes.add_session_route,
                 dataType: 'json',

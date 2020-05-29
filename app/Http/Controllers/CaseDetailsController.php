@@ -30,6 +30,7 @@ class CaseDetailsController extends Controller
                 ->Where('invetation_num', 'LIKE', "%{$search}%")
                 ->orWhere('circle_num', 'LIKE', "%{$search}%")
                 ->get();
+
             return response(['status' => true, 'result' => $cases]);
         }
     }
@@ -96,7 +97,7 @@ class CaseDetailsController extends Controller
             $res = [];
             $case = Cases::findOrFail($id);
             $sessions = DB::table('sessions')->where('case_Id', '=', $id)->orderBy('id', 'desc')->get();
-            $attachments = DB::table('Attachments')->where('case_Id', '=', $id)->get();
+            $attachments = DB::table('attachments')->where('case_Id', '=', $id)->get();
             $sessions_table = array();;
             foreach ($sessions as $session) {
                 $sessions_table [] = view('cases.session_item', compact('session'))->render();
