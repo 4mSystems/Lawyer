@@ -61,7 +61,7 @@ class CaseDetailsController extends Controller
             $status = false;
         }
         $session->update();
-        return response(['msg' => 'تم التعديل بنجاح', 'result' => $session, 'status' => $status]);
+        return response(['msg' => trans('site_lang.public_success_text'), 'result' => $session, 'status' => $status]);
 
     }
 
@@ -84,7 +84,7 @@ class CaseDetailsController extends Controller
             $case_Id = $request->case_Id;
             $session = Sessions::create(array_merge($request->except('month', 'year', 'case_Id'), ['month' => $month, 'year' => $year, 'case_Id' => $case_Id]));
             $html = view('cases.session_item', compact('session'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => 'تم إضافة الجلسة بنجاح']);
+            return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }
         return redirect()->route('cases.session_item')->with('success', 'تم إضافة الجلسة بنجاح');
     }
@@ -154,7 +154,7 @@ class CaseDetailsController extends Controller
             $session->year = $year;
             $session->session_date = $request->input('session_date');
             $session->update();
-            return response(['msg' => 'تم التعديل بنجاح', 'result' => $session]);
+            return response(['msg' => trans('site_lang.public_success_text'), 'result' => $session]);
         }
     }
 
@@ -210,7 +210,7 @@ class CaseDetailsController extends Controller
         ]);
 
         Cases::where('id', $request->case_Id)->update($data);
-        return response(['status' => true, 'msg' => "تم التعديل بنجاح"]);
+        return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
 
     }
 
@@ -228,7 +228,7 @@ class CaseDetailsController extends Controller
                 $client = Clients::select('id', 'client_Name')->where('id', '=', $item)->first();
                 $clients[] = view('cases.mokel_item', compact('client'))->render();
             }
-            return response(['status' => true, 'msg' => "تمت الاضافه بنجاح", 'result' => $clients]);
+            return response(['status' => true, 'msg' => trans('site_lang.public_success_text'), 'result' => $clients]);
         }
         return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
 

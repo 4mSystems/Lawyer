@@ -4,14 +4,13 @@
     @if ($session->status == "waiting")
         <td class="hidden-xs center">
             <p class="btn btn-lg" data-session-id="{{$session->id}}" id="change-session-status">
-                <span class="label label-danger" id="status{{$session->id}}"> {{$session->status}}</span>
-
+                <span class="label label-danger" id="status{{$session->id}}"> {{trans('site_lang.search_case_session_waiting')}}</span>
             </p>
         </td>
     @else
         <td class="hidden-xs center">
             <p class="btn btn-lg" data-session-id="{{$session->id}}" id="change-session-status">
-                <span class="label label-success" id="status{{$session->id}}"> {{$session->status}}</span>
+                <span class="label label-success" id="status{{$session->id}}"> {{trans('site_lang.search_case_session_done')}}</span>
 
             </p>
         </td>

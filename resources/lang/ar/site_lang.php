@@ -34,6 +34,9 @@ return [
     'side_add_case' => 'إضافة دعوى',
     'side_search_case' => 'البحث عن الدعاوى',
     'side_mohdar' => 'المحضرين',
+    'side_reports' => 'التقارير',
+    'side_reports_daily' => 'التقارير اليومية',
+    'side_reports_monthly' => 'التقارير الشهرية',
     'side_exit' => 'تسجيل الخروج',
     //users
     'users_all' => 'كل المستخدمين',
@@ -62,8 +65,13 @@ return [
     'mohdar_paper_deliver' => 'تاريخ تسليم الورقة',
     //Auth
     'auth_password' => 'الرقم السرى',
+    'auth_login_text' => 'تسجيل الدخول',
+    'auth_cont_title' => 'يرجى تسجيل الدخول لحسابك',
+    'auth_cont_body' => 'يرجى إدخال البريد والرقم السرى',
+    'auth_errors' => 'لديك أخطاء, يرجى التاكد منهم',
     //clients
     'clients_add_new_client_text' => 'أضافة عميل جديد',
+    'clients_add_new_khesm_text' => 'أضافة خصم جديد',
     'clients_edit_client_text' => 'تعديل بيانات العميل',
     'clients_client_name' => 'الاسم',
     'clients_client_unit' => 'الوحدة',
@@ -82,7 +90,7 @@ return [
     'add_case_first_session_date' => 'نوع الدعوى',
     'add_case_court' => 'المحكمة',
     'add_case_circle_num' => 'رقم الدائرة',
-     //search case
+    //search case
     'search_case_title' => 'البحث عن دعوى',
     'search_case_search' => 'البحث',
     'search_case_quick_view' => 'نظرة عامة',
@@ -100,12 +108,25 @@ return [
     'search_case_search_hint' => 'رقم القضية, اسم الموكل, اسم خصم',
     'search_case_case_private' => 'خاصة',
     'search_case_case_company' => 'شركات',
+    'search_case_session_waiting' => 'قيد الانتظار',
+    'search_case_session_done' => 'تم الانتهاء',
     'search_case_case_add_session' => 'إضافة جلسة',
     'search_case_case_add_note' => 'إضافة ملاحظة',
     'search_case_case_print_notes' => ' طباعه الملاحظات',
     'search_case_session_note' => 'الملاحظة',
     'search_case_session_modal_title' => 'إضافة ملاحظه جديده',
     'search_case_session_modal_title_edit' => 'تعديل البيانات',
-     'search_case_sessions'=>'الجلسات',
-    'permission'=>'الصلاحيات'
-  ];
+    'search_case_session_id_warning_text' => 'يجب إختيار الجلسة اولا',
+    'search_case_case_warning_text' => 'يجب إختيار الدعوى اولا',
+    'permission' => 'الصلاحيات',
+    //reports
+      'reports_print' => 'طباعه التقرير',
+      'reports_all' => 'الكل',
+      'reports_month' => 'الشهر',
+      'reports_year' => 'العام',
+      'reports_category' => 'التصنيف',
+      'reports_print_month_1' => 'كشف قضايا شهر',
+      'reports_print_month_2' => 'لعام',
+      'reports_print_daily_1' => 'كشف قضايا يوم',
+
+];

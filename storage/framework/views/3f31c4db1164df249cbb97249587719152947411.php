@@ -4,14 +4,13 @@
     <?php if($session->status == "waiting"): ?>
         <td class="hidden-xs center">
             <p class="btn btn-lg" data-session-id="<?php echo e($session->id); ?>" id="change-session-status">
-                <span class="label label-danger" id="status<?php echo e($session->id); ?>"> <?php echo e($session->status); ?></span>
-
+                <span class="label label-danger" id="status<?php echo e($session->id); ?>"> <?php echo e(trans('site_lang.search_case_session_waiting')); ?></span>
             </p>
         </td>
     <?php else: ?>
         <td class="hidden-xs center">
             <p class="btn btn-lg" data-session-id="<?php echo e($session->id); ?>" id="change-session-status">
-                <span class="label label-success" id="status<?php echo e($session->id); ?>"> <?php echo e($session->status); ?></span>
+                <span class="label label-success" id="status<?php echo e($session->id); ?>"> <?php echo e(trans('site_lang.search_case_session_done')); ?></span>
 
             </p>
         </td>

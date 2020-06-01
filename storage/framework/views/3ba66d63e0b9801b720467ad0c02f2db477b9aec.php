@@ -22,6 +22,8 @@
                     
                     
                     
+
+
                     <div class="toolbar-tools pull-right">
                         <!-- start: TOP NAVIGATION MENU -->
                         <ul class="nav navbar-right">
@@ -78,7 +80,6 @@
                 </div>
                 <!-- end: BREADCRUMB -->
                 <div class="row">
-
                     <div class="col-sm-12">
                         <div class="panel bg-white" id="searchContainer">
                             <table class="table table-striped table-bordered table-hover" id="cases">
@@ -96,7 +97,7 @@
                             </table>
 
                         </div>
-                        <div class="tabbable">
+                        <div class="tabbable" id="mainContainer">
                             <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
                                 <li class="active" style="float: right">
                                     <a data-toggle="tab" href="#panel_overview"
@@ -112,7 +113,6 @@
                                 <li style="float: right">
                                     <a data-toggle="tab" href="#panel_sessions" class="text-large"><p class="text-bold">
                                             <?php echo e(trans('site_lang.search_case_sessions')); ?></p>
-
                                     </a>
                                 </li>
                             </ul>
@@ -131,7 +131,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <a href="" class="btn btn-icon btn-block pulsate"
+                                                    <a href="" id="attachment" class="btn btn-icon btn-block pulsate"
                                                        style="padding: 30px;">
                                                         <i class="clip-bubble-2"></i>
 
@@ -162,7 +162,8 @@
                                                     <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_clients')); ?></h3>
                                                     <div class="btn-group pull-left">
                                                         <a class="btn btn-primary" id="addMokelModal"><i
-                                                                class="fa fa-plus">&nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_client')); ?>
+                                                                class="fa
+                                                            fa-plus">&nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_client')); ?>
 
                                                         </a>
                                                     </div>
@@ -193,6 +194,7 @@
                                                         <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_khesms')); ?></h3>
                                                         <div class="btn-group pull-left">
                                                             <a class="btn btn-success" id="addKhesmModal"><i
+
                                                                     class="fa fa-plus">
                                                                     &nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_khesm')); ?>
 
@@ -237,8 +239,12 @@
                                                         <td><?php echo e(trans('site_lang.home_session_case_number')); ?></td>
                                                         <td><a id="invetation_num"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+
+                                                        </td>
+
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo e(trans('site_lang.add_case_inventation_type')); ?></td>
@@ -246,35 +252,51 @@
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo e(trans('site_lang.add_case_circle_num')); ?></td>
                                                         <td><a id="circle_num"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+
                                                                     class="fa fa-pencil edit-user-info"></i></a>
+
                                                         </td>
+                                                        <td>
+                                                            <a id="circle_num">
+
+                                                            </a></td>
+
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo e(trans('site_lang.add_case_court')); ?></td>
                                                         <td><a id="court"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
+
+                                                        <td>
+                                                            <a id="court">
+
+                                                            </a></td>
+
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo e(trans('site_lang.search_case_first_session_date')); ?></td>
                                                         <td><a id="first_session_date"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+
                                                                     class="fa fa-pencil edit-user-info"></i></a>
                                                         </td>
-
-
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo e(trans('site_lang.add_case_to_whom')); ?></td>
                                                         <td><a id="to_whome"></a></td>
                                                         <td><a href="#panel_edit_account" class="show-tab"><i
+
                                                                     class="fa fa-pencil edit-user-info"></i></a></td>
+
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -366,13 +388,13 @@
                                 <div id="panel_sessions" class="tab-pane fade">
                                     <div class="panel panel">
                                         <div class="panel-heading"><a class="btn btn-primary" id="addSessionModal"><i
-                                                    class="fa fa-plus">&nbsp;&nbsp;</i> <?php echo e(trans('site_lang.search_case_case_add_session')); ?>
+                                                    class="fa
+                                                fa-plus">&nbsp;&nbsp;</i> <?php echo e(trans('site_lang.search_case_case_add_session')); ?>
 
                                             </a></div>
                                         <div class="panel-body" id="session-div-table">
                                             <div class="alert alert-warning" style="text-align: right;">
                                                 <?php echo trans('site_lang.public_warn_text'); ?>
-
 
                                             </div>
                                             <table
@@ -398,7 +420,9 @@
                                         <div class="panel-heading">
                                             <h4 class="text-bold"><?php echo e(trans('site_lang.mohdar_notes')); ?></h4>
                                             <a class="btn btn-green" id="btnPrintNotes" target="_blank"><i
-                                                    class="fa fa-print"></i>&nbsp;&nbsp;<?php echo e(trans('site_lang.search_case_case_print_notes')); ?>
+
+                                                    class="fa
+                                                    fa-print"></i>&nbsp;&nbsp;<?php echo e(trans('site_lang.search_case_case_print_notes')); ?>
 
                                             </a>
                                             <a class="btn btn-primary" id="addNotesModal"><i
@@ -406,6 +430,7 @@
 
                                             </a>
                                         </div>
+
                                         <div class="panel-body">
                                             <table
                                                 class="table table-striped table-bordered table-hover table-full-width"
@@ -485,13 +510,28 @@
                 update_note_route: "<?php echo e(route('notes.update')); ?>",
                 update_case_data: "<?php echo e(route('caseDetails.updateCase')); ?>",
                 add_new_client: "<?php echo e(route('caseDetails.addNewClient')); ?>",
-            },trans: {
+            }, trans: {
                 select2_place_holder: "<?php echo e(trans('site_lang.clients_client_type_client_hint')); ?>",
                 select1_place_holder: "<?php echo e(trans('site_lang.clients_client_type_khesm_hint')); ?>",
                 add_session_btn: "<?php echo e(trans('site_lang.search_case_case_add_session')); ?>",
+                search_case_session_waiting: "<?php echo e(trans('site_lang.search_case_session_waiting')); ?>",
+                search_case_session_waiting: "<?php echo e(trans('site_lang.search_case_session_waiting')); ?>",
                 add_session_modal_title: "<?php echo e(trans('site_lang.search_case_session_modal_title')); ?>",
                 edit_session_modal_title: "<?php echo e(trans('site_lang.search_case_session_modal_title_edit')); ?>",
+                public_continue_delete_modal_text: "<?php echo e(trans('site_lang.public_continue_delete_modal_text')); ?>",
+                public_delete_modal_text: "<?php echo e(trans('site_lang.public_delete_modal_text')); ?>",
+                public_delete_text: "<?php echo e(trans('site_lang.public_delete_text')); ?>",
+                search_case_case_add_note: "<?php echo e(trans('site_lang.search_case_case_add_note')); ?>",
+                public_add_btn_text: "<?php echo e(trans('site_lang.public_add_btn_text')); ?>",
                 edit_public: "<?php echo e(trans('site_lang.public_edit_btn_text')); ?>",
+                search_case_session_id_warning_text: "<?php echo e(trans('site_lang.search_case_session_id_warning_text')); ?>",
+                search_case_session_modal_title_edit: "<?php echo e(trans('site_lang.search_case_session_modal_title_edit')); ?>",
+                public_edit_btn_text: "<?php echo e(trans('site_lang.public_edit_btn_text')); ?>",
+                clients_add_new_client_text: "<?php echo e(trans('site_lang.clients_add_new_client_text')); ?>",
+                clients_add_new_khesm_text: "<?php echo e(trans('site_lang.clients_add_new_khesm_text')); ?>",
+                search_case_add_client: "<?php echo e(trans('site_lang.search_case_add_client')); ?>",
+                search_case_add_khesm: "<?php echo e(trans('site_lang.search_case_add_khesm')); ?>",
+                search_case_case_warning_text: "<?php echo e(trans('site_lang.search_case_case_warning_text')); ?>",
 
             }
 

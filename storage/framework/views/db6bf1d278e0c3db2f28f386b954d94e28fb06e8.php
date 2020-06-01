@@ -3,7 +3,7 @@
 <html class="ie9 no-js" lang="en">
 <html lang="en" class="no-js">
 <head>
-    <title>{{trans('site_lang.auth_login_text')}}</title>
+    <title><?php echo e(trans('site_lang.auth_login_text')); ?></title>
     <meta charset="utf-8"/>
     <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
     <meta name="viewport"
@@ -12,16 +12,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="" name="description"/>
     <meta content="" name="author"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{url('/plugins/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{url('/plugins/animate.css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{url('/plugins/iCheck/skins/all.css') }}">
-    <link rel="stylesheet" href="{{url('/css/styles.css') }}">
-    <link rel="stylesheet" href="{{url('/css/styles-responsive.css') }}">
-    <link rel="stylesheet" href="{{url('/plugins/iCheck/skins/all.css') }}">
-    {{--    <link rel="stylesheet" href="{{url('/plugins/font-awesome/css/font-awesome.min.css') }}">--}}
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap/css/bootstrap.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/font-awesome/css/font-awesome.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/animate.css/animate.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/iCheck/skins/all.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/css/styles.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/css/styles-responsive.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/iCheck/skins/all.css')); ?>">
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -32,51 +32,52 @@
 <div class="row">
     <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <div class="logo">
-            <img src="{{url('/images/logo.png') }}">
+            <img src="<?php echo e(url('/images/logo.png')); ?>">
         </div>
         <!-- start: LOGIN BOX -->
         <div class="box-login">
-            <h3 class="text-bold">{{trans('site_lang.auth_cont_title')}}</h3>
+            <h3 class="text-bold"><?php echo e(trans('site_lang.auth_cont_title')); ?></h3>
             <p class="text-bold">
-                {{trans('site_lang.auth_cont_body')}}
+                <?php echo e(trans('site_lang.auth_cont_body')); ?>
+
             </p>
-            <form class="form-login" action="{{ route('login') }}" method="POST">
-                @csrf
+            <form class="form-login" action="<?php echo e(route('login')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
                 <div class="errorHandler alert alert-danger no-display">
                     <i class="fa fa-remove-sign"></i>
-                    <h3 class="text-bold">{{trans('site_lang.auth_errors')}}</h3>
+                    <h3 class="text-bold"><?php echo e(trans('site_lang.auth_errors')); ?></h3>
                 </div>
                 <fieldset>
                     <div class="form-group">
                             <span class="input-icon">
                                 <input type="text" class="form-control text-bold" name="email"
-                                       placeholder="{{trans('site_lang.users_email')}}"
-                                       value="{{ old('email') }}">
+                                       placeholder="<?php echo e(trans('site_lang.users_email')); ?>"
+                                       value="<?php echo e(old('email')); ?>">
                                 <i class="fa fa-user"></i>
-                                @if ($errors->has('email'))
+                                <?php if($errors->has('email')): ?>
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong><?php echo e($errors->first('email')); ?></strong>
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </span>
                     </div>
                     <div class="form-group">
                             <span class="input-icon">
                                 <input type="password" class="form-control text-bold" name="password"
-                                       placeholder="{{trans('site_lang.auth_password')}}">
+                                       placeholder="<?php echo e(trans('site_lang.auth_password')); ?>">
                                 <i class="fa fa-lock"></i>
 
                             </span>
-                        @if ($errors->has('password'))
+                        <?php if($errors->has('password')): ?>
                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong><?php echo e($errors->first('password')); ?></strong>
                                     </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                     <div class="form-actions">
 
                         <button type="submit" class="btn btn-green pull-right text-bold">
-                            {{trans('site_lang.auth_login_text')}} <i class="fa fa-arrow-circle-left"></i>
+                            <?php echo e(trans('site_lang.auth_login_text')); ?> <i class="fa fa-arrow-circle-left"></i>
                         </button>
                     </div>
 
@@ -95,13 +96,14 @@
             <p>
                 Enter your e-mail address below to reset your password.
             </p>
-            @if (session('status'))
+            <?php if(session('status')): ?>
                 <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
+                    <?php echo e(session('status')); ?>
+
                 </div>
-            @endif
-            <form class="form-forgot" action="{{ route('password.email') }}" method="POST">
-                @csrf
+            <?php endif; ?>
+            <form class="form-forgot" action="<?php echo e(route('password.email')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
 
                 <div class="errorHandler alert alert-danger no-display">
                     <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
@@ -109,22 +111,22 @@
                 <fieldset>
                     <div class="form-group">
                             <span class="input-icon">
-                                <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                       value="{{ old('email') }}" name="email" placeholder="{{ __('E-Mail Address') }}">
+                                <input type="email" class="form-control<?php echo e($errors->has('email') ? ' is-invalid' : ''); ?>"
+                                       value="<?php echo e(old('email')); ?>" name="email" placeholder="<?php echo e(__('E-Mail Address')); ?>">
                                 <i class="fa fa-envelope"></i>
                             </span>
-                        @if ($errors->has('email'))
+                        <?php if($errors->has('email')): ?>
                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong><?php echo e($errors->first('email')); ?></strong>
                                     </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                     <div class="form-actions">
                         <a class="btn btn-light-grey go-back">
                             <i class="fa fa-chevron-circle-left"></i> Log-In
                         </a>
                         <button type="submit" class="btn btn-green pull-right">
-                            {{ __('Send Password Reset Link') }} <i class="fa fa-arrow-circle-right"></i>
+                            <?php echo e(__('Send Password Reset Link')); ?> <i class="fa fa-arrow-circle-right"></i>
                         </button>
                     </div>
                 </fieldset>
@@ -139,15 +141,15 @@
 
     </div>
 </div>
-<script src="{{ url('/plugins/jQuery/jquery-2.1.1.min.js') }}"></script>
-<script src="{{ url('/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js')}}"></script>
-<script src="{{ url('/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{ url('/plugins/iCheck/jquery.icheck.min.js')}}"></script>
-<script src="{{ url('/jquery.transit/jquery.transit.js')}}"></script>
-<script src="{{ url('/plugins/TouchSwipe/jquery.touchSwipe.min.js')}}"></script>
-<script src="{{ url('/js/main.js')}}"></script>
-<script src="{{ url('/plugins/jquery-validation/dist/jquery.validate.min.js')}}"></script>
-<script src="{{ url('/js/login.js')}}"></script>
+<script src="<?php echo e(url('/plugins/jQuery/jquery-2.1.1.min.js')); ?>"></script>
+<script src="<?php echo e(url('/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js')); ?>"></script>
+<script src="<?php echo e(url('/plugins/bootstrap/js/bootstrap.min.js')); ?>"></script>
+<script src="<?php echo e(url('/plugins/iCheck/jquery.icheck.min.js')); ?>"></script>
+<script src="<?php echo e(url('/jquery.transit/jquery.transit.js')); ?>"></script>
+<script src="<?php echo e(url('/plugins/TouchSwipe/jquery.touchSwipe.min.js')); ?>"></script>
+<script src="<?php echo e(url('/js/main.js')); ?>"></script>
+<script src="<?php echo e(url('/plugins/jquery-validation/dist/jquery.validate.min.js')); ?>"></script>
+<script src="<?php echo e(url('/js/login.js')); ?>"></script>
 <script>
     jQuery(document).ready(function () {
         Main.init();
@@ -159,3 +161,4 @@
 
 </html>
 
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/auth/login.blade.php ENDPATH**/ ?>

@@ -1,11 +1,9 @@
 <footer class="inner">
     <div class="footer-inner">
-        <div class="pull-left">
-            2014 &copy; Rapido by cliptheme.
+        <div class="pull-left col-12">
+            2020 &copy;  برنامج المحاماه الاول بواسطة 4mSystems
         </div>
-        <div class="pull-right">
-            <span class="go-top"><i class="fa fa-chevron-up"></i></span>
-        </div>
+
     </div>
 </footer>
 
@@ -63,7 +61,7 @@
 <script src="{{url('/js/main.js') }}"></script>
 <!-- end: CORE JAVASCRIPTS  -->
 <script>
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         Main.init();
         Index.init();
         @yield('scriptDocument')

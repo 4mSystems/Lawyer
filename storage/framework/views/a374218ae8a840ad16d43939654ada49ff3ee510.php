@@ -76,55 +76,56 @@
     <div class="row">
         <div class="col-md-12">
             <div style="text-align:center;font-size: 30px;background-color: #8E9AA2;color: white;">
-                <hl class="center">{{$year}}&nbsp; {{trans('site_lang.reports_print_month_1')}}</hl>
-                <hl class="center">{{$month}}&nbsp;{{trans('site_lang.reports_print_month_2')}}</hl>
+                <hl class="center"><?php echo e($year); ?>&nbsp; <?php echo e(trans('site_lang.reports_print_month_1')); ?></hl>
+                <hl class="center"><?php echo e($month); ?>&nbsp;<?php echo e(trans('site_lang.reports_print_month_2')); ?></hl>
             </div>
             <br>
             <table class="table table-striped table-bordered table-hover table-full-width"
                    id="PrintdailyTable">
                 <thead>
                 <tr>
-                    <th style="text-align: center;">{{trans('site_lang.mohdar_notes')}}</th>
-                    <th style="text-align: center;">{{trans('site_lang.home_session_date')}}</th>
-                    <th style="text-align: center;">{{trans('site_lang.add_case_inventation_type')}}</th>
-                    <th style="text-align: center;">{{trans('site_lang.add_case_circle_num')}}</th>
-                    <th style="text-align: center;">{{trans('site_lang.home_session_case_number')}}</th>
-                    <th style="text-align: center;">{{trans('site_lang.clients_client_type_khesm')}}</th>
-                    <th style="text-align: center;">{{trans('site_lang.clients_client_type_client')}}</th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.mohdar_notes')); ?></th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.home_session_date')); ?></th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.add_case_inventation_type')); ?></th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.add_case_circle_num')); ?></th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.home_session_case_number')); ?></th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.clients_client_type_khesm')); ?></th>
+                    <th style="text-align: center;"><?php echo e(trans('site_lang.clients_client_type_client')); ?></th>
                     <th style="text-align: center;">#</th>
                 </tr>
                 </thead>
 
                 <tbody>
 
-                {{--                @foreach($data as $caseSession)--}}
-                @php
+                
+                <?php
                     $i=1;
-                @endphp
+                ?>
 
-                @foreach($data as $row)
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        @if ($row->Printnotes ==null)
+                        <?php if($row->Printnotes ==null): ?>
                             <td style="text-align: center;">----</td>
-                        @else
-                            <td style="text-align: center;">{{$row->Printnotes->note}}</td>
-                        @endif
-                        <td style="text-align: center;">{{$row->session_date}}</td>
-                        <td style="text-align: center;">{{$row->cases->inventation_type}}</td>
-                        <td style="text-align: center;">{{$row->cases->circle_num}}</td>
-                        <td style="text-align: center;">{{$row->cases->invetation_num}}</td>
-                        <td style="text-align: center;">{{$khesm->client_Name}}</td>
-                        <td style="text-align: center;">{{$clients->client_Name}}</td>
+                        <?php else: ?>
+                            <td style="text-align: center;"><?php echo e($row->Printnotes->note); ?></td>
+                        <?php endif; ?>
+                        <td style="text-align: center;"><?php echo e($row->session_date); ?></td>
+                        <td style="text-align: center;"><?php echo e($row->cases->inventation_type); ?></td>
+                        <td style="text-align: center;"><?php echo e($row->cases->circle_num); ?></td>
+                        <td style="text-align: center;"><?php echo e($row->cases->invetation_num); ?></td>
+                        <td style="text-align: center;"><?php echo e($khesm->client_Name); ?></td>
+                        <td style="text-align: center;"><?php echo e($clients->client_Name); ?></td>
                         <td style="text-align: center;">
-                            {{$i}}
+                            <?php echo e($i); ?>
+
                         </td>
 
 
                     </tr>
-                    @php
+                    <?php
                         $i=$i+1;
-                    @endphp
-                @endforeach
+                    ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
                 </tbody>
@@ -141,3 +142,4 @@
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/Reports/MonthlyPDF.blade.php ENDPATH**/ ?>
