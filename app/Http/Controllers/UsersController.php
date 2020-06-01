@@ -15,10 +15,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user_id=auth()->user()->id;
-        $permission = Permission::where('user_id',$user_id)->first();
-        $enabled =  $permission->users;
-        if($enabled == 'yes') {
+        $user_id = auth()->user()->id;
+        $permission = Permission::where('user_id', $user_id)->first();
+        $enabled = $permission->users;
+        if ($enabled == 'yes') {
             $users = User::all();
             return view('users/users', compact('users'));
         } else {
@@ -49,16 +49,12 @@ class UsersController extends Controller
                 'password' => 'required',
                 'type' => 'required'
             ], [], $attribute);
-            
-            $data['password']=bcrypt(request('password'));
+
+            $data['password'] = bcrypt(request('password'));
 
             $user = User::create($data);
             $user->save();
-
-
-
             $user_id = $user->id;
-
             $permissions['user_id'] = $user_id;
             $per = Permission::create($permissions);
             $per->save();

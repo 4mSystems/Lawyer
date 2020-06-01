@@ -3,7 +3,7 @@
 <html class="ie9 no-js" lang="en">
 <html lang="en" class="no-js">
 <head>
-    <title>Rapido - Responsive Admin Template</title>
+    <title>{{trans('site_lang.auth_login_text')}}</title>
     <meta charset="utf-8"/>
     <meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1"/>
     <meta name="viewport"
@@ -21,12 +21,14 @@
     <link rel="stylesheet" href="{{url('/css/styles.css') }}">
     <link rel="stylesheet" href="{{url('/css/styles-responsive.css') }}">
     <link rel="stylesheet" href="{{url('/plugins/iCheck/skins/all.css') }}">
-    <link rel="stylesheet" href="../../../public/plugins/font-awesome/css/font-awesome-ie7.min.css">
+    {{--    <link rel="stylesheet" href="{{url('/plugins/font-awesome/css/font-awesome.min.css') }}">--}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <!-- end: HEAD -->
 <!-- start: BODY -->
 
-<body class="login">
+<body class=" login">
 <div class="row">
     <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <div class="logo">
@@ -34,19 +36,21 @@
         </div>
         <!-- start: LOGIN BOX -->
         <div class="box-login">
-            <h3>Sign in to your account</h3>
-            <p>
-                Please enter your name and password to log in.
+            <h3 class="text-bold">{{trans('site_lang.auth_cont_title')}}</h3>
+            <p class="text-bold">
+                {{trans('site_lang.auth_cont_body')}}
             </p>
             <form class="form-login" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="errorHandler alert alert-danger no-display">
-                    <i class="fa fa-remove-sign"></i> You have some form errors. Please check below.
+                    <i class="fa fa-remove-sign"></i>
+                    <h3 class="text-bold">{{trans('site_lang.auth_errors')}}</h3>
                 </div>
                 <fieldset>
                     <div class="form-group">
                             <span class="input-icon">
-                                <input type="text" class="form-control" name="email" placeholder="email"
+                                <input type="text" class="form-control text-bold" name="email"
+                                       placeholder="{{trans('site_lang.users_email')}}"
                                        value="{{ old('email') }}">
                                 <i class="fa fa-user"></i>
                                 @if ($errors->has('email'))
@@ -56,10 +60,10 @@
                                 @endif
                             </span>
                     </div>
-                    <div class="form-group form-actions">
+                    <div class="form-group">
                             <span class="input-icon">
-                                <input type="password" class="form-control password" name="password"
-                                       placeholder="Password">
+                                <input type="password" class="form-control text-bold" name="password"
+                                       placeholder="{{trans('site_lang.auth_password')}}">
                                 <i class="fa fa-lock"></i>
 
                             </span>
@@ -71,8 +75,8 @@
                     </div>
                     <div class="form-actions">
 
-                        <button type="submit" class="btn btn-green pull-right">
-                            Login <i class="fa fa-arrow-circle-right"></i>
+                        <button type="submit" class="btn btn-green pull-right text-bold">
+                            {{trans('site_lang.auth_login_text')}} <i class="fa fa-arrow-circle-left"></i>
                         </button>
                     </div>
 
@@ -80,7 +84,7 @@
             </form>
             <!-- start: COPYRIGHT -->
             <div class="copyright">
-                2014 &copy; by 4M.
+                2020 &copy; by 4M Systems.
             </div>
             <!-- end: COPYRIGHT -->
         </div>

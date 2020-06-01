@@ -38,12 +38,12 @@
                     <ul class="sub-menu">
                         <li>
                             <a href="{{url('/addCase')}}">
-                                <span class="title">{{trans('site_lang.side_add_case')}}</span>
+                                <i class="fa fa-plus"></i>&nbsp; <span class="title">{{trans('site_lang.side_add_case')}}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('/caseDetails') }}">
-                                <span class="title">{{trans('site_lang.side_search_case')}}</span>
+                                <i class="fa fa-eye-slash"></i> &nbsp;<span class="title">{{trans('site_lang.side_search_case')}}</span>
                             </a>
                         </li>
 
@@ -56,17 +56,17 @@
                 </li>
                 <li>
 
-                    <a href="javascript:void(0)"><i class="fa fa-th-large"></i> <span class="title"> Reports </span><i
+                    <a href="javascript:void(0)"><i class="fa fa-file-excel-o"></i> &nbsp;<span class="title"> {{trans('site_lang.side_reports')}} </span><i
                                 class="icon-arrow"></i> </a>
                     <ul class="sub-menu">
                         <li>
                             <a href="{{url('/dailyReport')}}">
-                                <span class="title">Daily Report</span>
+                                <i class="fa fa-hacker-news"></i>&nbsp;<span class="title">{{trans('site_lang.side_reports_daily')}}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('/MonthlyReport') }}">
-                                <span class="title">Monthly Report</span>
+                                <i class="fa fa-file-movie-o"></i>&nbsp;<span class="title">{{trans('site_lang.side_reports_monthly')}}</span>
                             </a>
                         </li>
 

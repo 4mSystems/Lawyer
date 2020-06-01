@@ -7,17 +7,17 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="sessionForm">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <input type="hidden" name="sessionId" id="sessionId">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group{{$errors->has('session_date')?' has-error':''}}">
+                            <div class="form-group<?php echo e($errors->has('session_date')?' has-error':''); ?>">
                                 <div class="input-group">
                                     <input type="text" data-date-format="dd-mm-yyyy"
                                            data-date-viewmode="years" class="form-control date-picker"
                                            id="session_date" name="session_date"
-                                           placeholder="{{trans('site_lang.home_session_date')}}"
-                                           value="{{ old('session_date') }}">
+                                           placeholder="<?php echo e(trans('site_lang.home_session_date')); ?>"
+                                           value="<?php echo e(old('session_date')); ?>">
                                     <span class="input-group-addon"> <i
                                             class="fa fa-calendar"></i> </span>
                                 </div>
@@ -31,13 +31,15 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">
-                    {{trans('site_lang.public_close_btn_text')}}
+                    <?php echo e(trans('site_lang.public_close_btn_text')); ?>
+
                 </button>
                 <input type="submit" class="btn btn-primary" id="add_session" name="add_session"
-                       value="{{trans('site_lang.search_case_case_add_session')}}"/>
+                       value="<?php echo e(trans('site_lang.search_case_case_add_session')); ?>"/>
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
+<?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/add_session_modal.blade.php ENDPATH**/ ?>

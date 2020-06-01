@@ -17,11 +17,10 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
-                    <div class="col-sm-6 hidden-xs">
+                    <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1>Reports
-                                <small>overview</small>
-                            </h1>
+                            <h3 class="text-bold">{{trans('site_lang.side_reports_daily')}}
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -33,14 +32,14 @@
                         <ol class="breadcrumb">
                             <li>
                                 <a href="{{route('home')}}">
-                                    Home
+                                    {{trans('site_lang.side_home')}}
                                 </a>
                             </li>
                             <li class="active">
-                                Reports
+                                {{trans('site_lang.side_reports')}}
                             </li>
                             <li class="active">
-                                Daily report
+                                {{trans('site_lang.side_reports_daily')}}
                             </li>
                         </ol>
                     </div>
@@ -54,7 +53,10 @@
                                 <div class="m-lg-4">
                                     <div class="row">
                                         <div class="col-md-6 col-lg-3 col-sm-6">
-                                            <a href="" target="_blank" id="btn_search_daily" class="btn btn-warning">Print</a>
+                                            <a href="" target="_blank" id="btn_search_daily"
+                                               class="btn btn-warning text-bold">
+                                                <li class="fa fa-print"></li>&nbsp;&nbsp;&nbsp;{{trans('site_lang.reports_print')}}
+                                            </a>
                                         </div>
 
                                         <div class="col-md-6 col-lg-5 col-sm-6">
@@ -65,7 +67,7 @@
                                                        id="search_daily" name="search_daily"
                                                 >
                                                 <span class="input-group-addon"> <i
-                                                            class="fa fa-calendar"></i> </span>
+                                                        class="fa fa-calendar"></i> </span>
                                             </div>
                                         </div>
 
@@ -73,9 +75,12 @@
                                             <div class="input-group">
                                                 <select id="Dailytype" name="Dailytype"
                                                         class="form-control">
-                                                    <option value="all" selected="selected">الكل</option>
-                                                    <option value="company">شركات</option>
-                                                    <option value="private">خاص</option>
+                                                    <option value="all"
+                                                            selected="selected">{{trans('site_lang.reports_all')}}</option>
+                                                    <option
+                                                        value="company">{{trans('site_lang.search_case_case_company')}}</option>
+                                                    <option
+                                                        value="private">{{trans('site_lang.search_case_case_private')}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -91,13 +96,14 @@
                                            id="dailyTable">
                                         <thead>
                                         <tr>
-                                            <th class="center">ملاحظات</th>
-                                            <th class="center">تاريخ الجلسة</th>
-                                            <th class="center">نوع الدعوى</th>
-                                            <th class="center">الدائرة</th>
-                                            <th class="center">رقم الدعوى</th>
-                                            <th class="center">اسم الخصم</th>
-                                            <th class="center">اسم الموكل</th>
+                                            <th class="center">{{trans('site_lang.clients_client_type_client')}}</th>
+                                            <th class="center">{{trans('site_lang.clients_client_type_khesm')}}</th>
+                                            <th class="center">{{trans('site_lang.home_session_case_number')}}</th>
+                                            <th class="center">{{trans('site_lang.add_case_circle_num')}}</th>
+                                            <th class="center">{{trans('site_lang.add_case_inventation_type')}}</th>
+                                            <th class="center">{{trans('site_lang.home_session_date')}}</th>
+                                            <th class="center">{{trans('site_lang.mohdar_notes')}}</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -118,33 +124,34 @@
 
 
         </div>
-        @endsection
-        @section('scripts')
-            <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
-            <script type="text/javascript">
+    </div>
+@endsection
+@section('scripts')
+    <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
+    <script type="text/javascript">
 
-            </script>
-            <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
-            <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"
-                    type="text/javascript"></script>
-            <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
-            <script type="text/javascript" src="{{url('/plugins/select2/select2.min.js') }}"></script>
-            <script type="text/javascript" src="{{url('/js/table-data.js') }}"></script>
-            <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
-            <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+    </script>
+    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
+    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"
+            type="text/javascript"></script>
+    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{url('/plugins/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{url('/js/table-data.js') }}"></script>
+    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
+    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
 
-            <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-            <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-            <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
-            <script src="{{url('/js/form-elements.js') }}"></script>
-            <script src="{{url('/js/daily_search.js') }}"></script>
+    <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
+    <script src="{{url('/js/form-elements.js') }}"></script>
+    <script src="{{url('/js/daily_search.js') }}"></script>
 
 
-        @endsection
-        @section('scriptDocument')
-            UIModals.init();
-            TableData.init();
-            FormElements.init();
+@endsection
+@section('scriptDocument')
+    UIModals.init();
+    TableData.init();
+    FormElements.init();
 
 @endsection
 

@@ -17,11 +17,10 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
-                    <div class="col-sm-6 hidden-xs">
+                    <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1>Reports
-                                <small>overview</small>
-                            </h1>
+                            <h3 class="text-bold">{{trans('site_lang.side_reports_monthly')}}
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -33,14 +32,14 @@
                         <ol class="breadcrumb">
                             <li>
                                 <a href="{{route('home')}}">
-                                    Home
+                                    {{trans('site_lang.side_home')}}
                                 </a>
                             </li>
                             <li class="active">
-                                Reports
+                                {{trans('site_lang.side_reports')}}
                             </li>
                             <li class="active">
-                                Monthly report
+                                {{trans('site_lang.side_reports_monthly')}}
                             </li>
                         </ol>
                     </div>
@@ -60,13 +59,16 @@
                                                 <label></label>
                                             </div>
 
-                                            <a href="" target="_blank" id="btn_search_monthly" class="btn btn-warning">Print</a>
+                                            <a href="" target="_blank" id="btn_search_monthly"
+                                               class="btn btn-success text-bold">
+                                                <li class="fa fa-print"></li>&nbsp;&nbsp;&nbsp;{{trans('site_lang.reports_print')}}
+                                            </a>
                                         </div>
                                         <div class="col-md-6 col-lg-3 col-sm-6">
 
                                             <div>
 
-                                                <label>الشهر</label>
+                                                <label>{{trans('site_lang.reports_month')}}</label>
                                             </div>
 
                                             <div class="input-group">
@@ -92,7 +94,7 @@
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div>
 
-                                                <label>السنة</label>
+                                                <label>{{trans('site_lang.reports_year')}}</label>
                                             </div>
                                             <div class="input-group">
                                                 <select id="year" name="form-field-select-1"
@@ -126,14 +128,17 @@
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div>
 
-                                                <label>التصنيف</label>
+                                                <label>{{trans('site_lang.reports_category')}}</label>
                                             </div>
                                             <div class="input-group">
                                                 <select id="type" name="type"
                                                         class="form-control">
-                                                    <option value="all" selected="selected">الكل</option>
-                                                    <option value="company">شركات</option>
-                                                    <option value="private">خاص</option>
+                                                    <option value="all"
+                                                            selected="selected">{{trans('site_lang.reports_all')}}</option>
+                                                    <option
+                                                        value="company">{{trans('site_lang.search_case_case_company')}}</option>
+                                                    <option
+                                                        value="private">{{trans('site_lang.search_case_case_private')}}</option>
                                                 </select>
 
                                             </div>
@@ -149,13 +154,14 @@
                                                id="MonthlyTable">
                                             <thead>
                                             <tr>
-                                                <th class="center">ملاحظات</th>
-                                                <th class="center">تاريخ الجلسة</th>
-                                                <th class="center">نوع الدعوى</th>
-                                                <th class="center">الدائرة</th>
-                                                <th class="center">رقم الدعوى</th>
-                                                <th class="center">اسم الخصم</th>
-                                                <th class="center">اسم الموكل</th>
+                                                <th class="center">{{trans('site_lang.clients_client_type_client')}}</th>
+                                                <th class="center">{{trans('site_lang.clients_client_type_khesm')}}</th>
+                                                <th class="center">{{trans('site_lang.home_session_case_number')}}</th>
+                                                <th class="center">{{trans('site_lang.add_case_circle_num')}}</th>
+                                                <th class="center">{{trans('site_lang.add_case_inventation_type')}}</th>
+                                                <th class="center">{{trans('site_lang.home_session_date')}}</th>
+                                                <th class="center">{{trans('site_lang.mohdar_notes')}}</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>

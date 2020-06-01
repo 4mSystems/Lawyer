@@ -1,8 +1,7 @@
-@extends('welcome')
-@section('styles')
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet"
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css')); ?>" rel="stylesheet"
           type="text/css"/>
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal.css')); ?>" rel="stylesheet" type="text/css"/>
 
     <style>
         .switch {
@@ -69,8 +68,8 @@
 
     </style>
 
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
@@ -80,7 +79,7 @@
                 <div class="toolbar row">
                     <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h3 class="text-bold">{{trans('site_lang.side_users')}}</h3>
+                            <h3 class="text-bold"><?php echo e(trans('site_lang.side_users')); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -91,12 +90,14 @@
                     <div class="col-md-12">
                         <ol class="breadcrumb">
                             <li>
-                                <a href="{{route('home')}}">
-                                    {{trans('site_lang.side_home')}}
+                                <a href="<?php echo e(route('home')); ?>">
+                                    <?php echo e(trans('site_lang.side_home')); ?>
+
                                 </a>
                             </li>
                             <li class="active">
-                                {{trans('site_lang.permission')}}
+                                <?php echo e(trans('site_lang.permission')); ?>
+
                             </li>
                         </ol>
                     </div>
@@ -108,7 +109,7 @@
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><span class="text-bold">{{trans('site_lang.permission')}}</span>
+                                <h4 class="panel-title"><span class="text-bold"><?php echo e(trans('site_lang.permission')); ?></span>
                                 </h4>
                             </div>
                             <div class="panel-body">
@@ -121,15 +122,18 @@
                              '>
 
 
-                                        {!! Form::model($permission, ['route' => ['permission.update',$permission->id] , 'method'=>'put' ,'files'=> true]) !!}
-                                        {{ csrf_field() }}
+                                        <?php echo Form::model($permission, ['route' => ['permission.update',$permission->id] , 'method'=>'put' ,'files'=> true]); ?>
+
+                                        <?php echo e(csrf_field()); ?>
+
 
 
                                         <div class="form-group">
-                                            <strong>{{trans('site_lang.empName')}}</strong>
-                                            {{ Form::label('user_id',$permission->getUser->name,
+                                            <strong><?php echo e(trans('site_lang.empName')); ?></strong>
+                                            <?php echo e(Form::label('user_id',$permission->getUser->name,
                                                 $permission->getUser->name
-                                            ,["class"=>"form-control " ]) }}
+                                            ,["class"=>"form-control " ])); ?>
+
                                         </div>
 
 
@@ -140,13 +144,14 @@
                                                 <table class="table mb-0">
                                                     <tbody>
                                                     <tr>
-                                                        <th>{{trans('site_lang.users')}}</th>
+                                                        <th><?php echo e(trans('site_lang.users')); ?></th>
                                                         <td>
 
 
                                                             <label class="switch">
                                                                 <input type="hidden" name="users" id='users' value="no">
-                                                                {{ Form::checkbox('users', 'yes',  $permission->users=="yes"?true:false) }}
+                                                                <?php echo e(Form::checkbox('users', 'yes',  $permission->users=="yes"?true:false)); ?>
+
 
                                                                 <span class="slider round"></span>
                                                             </label>
@@ -156,7 +161,7 @@
 
                                                     <div class="form-group">
                                                         <tr>
-                                                            <th>{{trans('site_lang.clients')}}</th>
+                                                            <th><?php echo e(trans('site_lang.clients')); ?></th>
                                                             <td>
 
 
@@ -164,7 +169,8 @@
 
                                                                     <input type="hidden" name="clients" id='clients'
                                                                            value="no">
-                                                                    {{ Form::checkbox('clients', 'yes',  $permission->clients=="yes"?true:false) }}
+                                                                    <?php echo e(Form::checkbox('clients', 'yes',  $permission->clients=="yes"?true:false)); ?>
+
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </td>
@@ -174,13 +180,14 @@
 
                                                     <div class="form-group">
                                                         <tr>
-                                                            <th>{{trans('site_lang.addcases')}}</th>
+                                                            <th><?php echo e(trans('site_lang.addcases')); ?></th>
                                                             <td>
 
                                                                 <label class="switch">
                                                                     <input type="hidden" name="addcases" id='addcases'
                                                                            value="no">
-                                                                    {{ Form::checkbox('addcases', 'yes',  $permission->addcases=="yes"?true:false) }}
+                                                                    <?php echo e(Form::checkbox('addcases', 'yes',  $permission->addcases=="yes"?true:false)); ?>
+
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </td>
@@ -190,13 +197,14 @@
 
                                                     <div class="form-group">
                                                         <tr>
-                                                            <th>{{trans('site_lang.search_case')}}</th>
+                                                            <th><?php echo e(trans('site_lang.search_case')); ?></th>
                                                             <td>
                                                                 <label class="switch">
 
                                                                     <input type="hidden" name="search_case"
                                                                            id='search_case' value="no">
-                                                                    {{ Form::checkbox('search_case', 'yes',  $permission->search_case=="yes"?true:false) }}
+                                                                    <?php echo e(Form::checkbox('search_case', 'yes',  $permission->search_case=="yes"?true:false)); ?>
+
                                                                     <span class="slider round"></span>
                                                                 </label>
 
@@ -207,13 +215,14 @@
 
                                                     <div class="form-group">
                                                         <tr>
-                                                            <th>{{trans('site_lang.mohdreen')}}</th>
+                                                            <th><?php echo e(trans('site_lang.mohdreen')); ?></th>
                                                             <td>
                                                                 <label class="switch">
 
                                                                     <input type="hidden" name="mohdreen" id='mohdreen'
                                                                            value="no">
-                                                                    {{ Form::checkbox('mohdreen', 'yes',  $permission->mohdreen=="yes"?true:false) }}
+                                                                    <?php echo e(Form::checkbox('mohdreen', 'yes',  $permission->mohdreen=="yes"?true:false)); ?>
+
                                                                     <span class="slider round"></span>
                                                                 </label>
 
@@ -223,13 +232,14 @@
 
                                                     <div class="form-group">
                                                         <tr>
-                                                            <th>{{trans('site_lang.daily_report')}}</th>
+                                                            <th><?php echo e(trans('site_lang.daily_report')); ?></th>
                                                             <td>
                                                                 <label class="switch">
 
                                                                     <input type="hidden" name="daily_report" id='daily_report'
                                                                            value="no">
-                                                                    {{ Form::checkbox('daily_report', 'yes',  $permission->daily_report=="yes"?true:false) }}
+                                                                    <?php echo e(Form::checkbox('daily_report', 'yes',  $permission->daily_report=="yes"?true:false)); ?>
+
                                                                     <span class="slider round"></span>
                                                                 </label>
 
@@ -240,13 +250,14 @@
 
                                                     <div class="form-group">
                                                         <tr>
-                                                            <th>{{trans('site_lang.monthly_report')}}</th>
+                                                            <th><?php echo e(trans('site_lang.monthly_report')); ?></th>
                                                             <td>
                                                                 <label class="switch">
 
                                                                     <input type="hidden" name="monthly_report" id='monthly_report'
                                                                            value="no">
-                                                                    {{ Form::checkbox('monthly_report', 'yes',  $permission->monthly_report=="yes"?true:false) }}
+                                                                    <?php echo e(Form::checkbox('monthly_report', 'yes',  $permission->monthly_report=="yes"?true:false)); ?>
+
                                                                     <span class="slider round"></span>
                                                                 </label>
 
@@ -273,9 +284,11 @@
                             padding-right: 15px;
                              padding-left: 20px;
                              '>
-                                        {{ Form::submit( trans('admin.edit') ,['class'=>'btn btn-primary']) }}
+                                        <?php echo e(Form::submit( trans('admin.edit') ,['class'=>'btn btn-primary'])); ?>
+
                                     </div>
-                                    {{ Form::close() }}
+                                    <?php echo e(Form::close()); ?>
+
                                 </div>
 
 
@@ -292,15 +305,17 @@
 
 
     </div>
-@endsection
-@section('scripts')
-    <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
-    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
 
-@endsection
-@section('scriptDocument')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptDocument'); ?>
     UIModals.init();
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/permission/permission.blade.php ENDPATH**/ ?>

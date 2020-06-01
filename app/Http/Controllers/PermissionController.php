@@ -59,6 +59,7 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $permission = Permission::where('user_id', $id)->first();
+       
 
         return view('permission.permission', \compact('permission'));
     }

@@ -21,9 +21,52 @@
 
     <style>
         body {
-            font-family: 'Cairo';
-            font-size: 22px;
+            font-size: 13px;
         }
+
+        .table > thead > tr > th {
+            border-bottom: 1px solid #dfe1e5;
+        }
+
+        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+            border-top: 1px solid #dfe1e5;
+        }
+
+        .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+            background-color: #fbfbfc;
+        }
+
+        .table > tbody > tr.active > td, .table > tbody > tr.active > th {
+            background-color: #f6f6f7;
+            color: #8b91a0;
+        }
+
+        .table > tbody > tr.active:hover > td, .table > tbody > tr.active:hover > th {
+            background-color: #f0f1f3;
+            color: #8b91a0;
+        }
+
+        th.center, td.center {
+            text-align: center;
+        }
+
+        td.small-width {
+            width: 15%;
+        }
+
+        .table thead tr {
+            color: #707070;
+            font-weight: normal;
+        }
+
+        .table.table-bordered thead tr th {
+            vertical-align: middle;
+        }
+
+        .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+            vertical-align: middle;
+        }
+
     </style>
     <![endif]-->
 </head>
@@ -33,22 +76,22 @@
     <div class="row">
         <div class="col-md-12">
             <div style="text-align:center;font-size: 30px;background-color: #8E9AA2;color: white;">
-                <hl class="center">{{$year}}كشف قضايا شهر</hl>
-                <hl class="center">{{$month}} لعام</hl>
+                <hl class="center">{{$year}}&nbsp; {{trans('site_lang.reports_print_month_1')}}</hl>
+                <hl class="center">{{$month}}&nbsp;{{trans('site_lang.reports_print_month_2')}}</hl>
             </div>
             <br>
             <table class="table table-striped table-bordered table-hover table-full-width"
-                   style="font-family: 'Cairo';font-size: 10px;text-align: center;" id="PrintdailyTable">
+                   id="PrintdailyTable">
                 <thead>
                 <tr>
-                    <th style="text-align: center;">ملاحظات</th>
-                    <th style="text-align: center;">تاريخ الجلسة</th>
-                    <th style="text-align: center;">نوع الدعوى</th>
-                    <th style="text-align: center;">الدائرة</th>
-                    <th style="text-align: center;">رقم الدعوى</th>
-                    <th style="text-align: center;">اسم الخصم</th>
-                    <th style="text-align: center;">اسم الموكل</th>
-                    <th style="text-align: center;">م</th>
+                    <th style="text-align: center;">{{trans('site_lang.mohdar_notes')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.home_session_date')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.add_case_inventation_type')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.add_case_circle_num')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.home_session_case_number')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.clients_client_type_khesm')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.clients_client_type_client')}}</th>
+                    <th style="text-align: center;">#</th>
                 </tr>
                 </thead>
 
@@ -62,17 +105,17 @@
                 @foreach($data as $row)
                     <tr>
                         @if ($row->Printnotes ==null)
-                            <td class="hidden-xs center">----</td>
+                            <td style="text-align: center;">----</td>
                         @else
-                            <td class="hidden-xs center">{{$row->Printnotes->note}}</td>
+                            <td style="text-align: center;">{{$row->Printnotes->note}}</td>
                         @endif
-                        <td class="hidden-xs center">{{$row->session_date}}</td>
-                        <td class="hidden-xs center">{{$row->cases->inventation_type}}</td>
-                        <td class="hidden-xs center">{{$row->cases->circle_num}}</td>
-                        <td class="hidden-xs center">{{$row->cases->invetation_num}}</td>
-                        <td class="hidden-xs center">{{$khesm->client_Name}}</td>
-                        <td class="hidden-xs center">{{$clients->client_Name}}</td>
-                        <td class="hidden-xs center">
+                        <td style="text-align: center;">{{$row->session_date}}</td>
+                        <td style="text-align: center;">{{$row->cases->inventation_type}}</td>
+                        <td style="text-align: center;">{{$row->cases->circle_num}}</td>
+                        <td style="text-align: center;">{{$row->cases->invetation_num}}</td>
+                        <td style="text-align: center;">{{$khesm->client_Name}}</td>
+                        <td style="text-align: center;">{{$clients->client_Name}}</td>
+                        <td style="text-align: center;">
                             {{$i}}
                         </td>
 

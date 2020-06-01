@@ -27,7 +27,7 @@ class CaseDetailsController extends Controller
         $enabled = $permission->search_case;
         if ($enabled == 'yes') {
             return view('cases.search_case');
-        } else{
+        } else {
             return redirect(url('home'));
         }
     }
@@ -41,11 +41,11 @@ class CaseDetailsController extends Controller
                 ->orWhere('circle_num', 'LIKE', "%{$search}%")
                 ->get();
 
+            foreach ($results as $result) {
+                $cases_table [] = view('cases.session_result_case_item', compact('result'))->render();
+            }
+            return response(['status' => true, 'result' => $cases_table]);
         }
-        foreach ($results as  $result) {
-            $cases_table [] = view('cases.session_result_case_item', compact('result'))->render();
-        }
-        return response(['status' => true, 'result' => $cases_table]);
     }
 
     // update session status from waiting to done
@@ -61,7 +61,7 @@ class CaseDetailsController extends Controller
             $status = false;
         }
         $session->update();
-        return response(['msg' => 'تم التعديل بنجاح', 'result' => $session, 'status' => $status]);
+        return response(['msg' => trans('site_lang.public_success_text'), 'result' => $session, 'status' => $status]);
 
     }
 
@@ -84,7 +84,7 @@ class CaseDetailsController extends Controller
             $case_Id = $request->case_Id;
             $session = Sessions::create(array_merge($request->except('month', 'year', 'case_Id'), ['month' => $month, 'year' => $year, 'case_Id' => $case_Id]));
             $html = view('cases.session_item', compact('session'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => 'تم إضافة الجلسة بنجاح']);
+            return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }
         return redirect()->route('cases.session_item')->with('success', 'تم إضافة الجلسة بنجاح');
     }
@@ -110,7 +110,7 @@ class CaseDetailsController extends Controller
             $res = [];
             $case = Cases::findOrFail($id);
             $sessions = DB::table('sessions')->where('case_Id', '=', $id)->orderBy('id', 'desc')->get();
-            $attachments = DB::table('Attachments')->where('case_Id', '=', $id)->get();
+            $attachments = DB::table('attachments')->where('case_Id', '=', $id)->get();
             $sessions_table = array();;
             foreach ($sessions as $session) {
                 $sessions_table [] = view('cases.session_item', compact('session'))->render();
@@ -154,7 +154,7 @@ class CaseDetailsController extends Controller
             $session->year = $year;
             $session->session_date = $request->input('session_date');
             $session->update();
-            return response(['msg' => 'تم التعديل بنجاح', 'result' => $session]);
+            return response(['msg' => trans('site_lang.public_success_text'), 'result' => $session]);
         }
     }
 
@@ -210,7 +210,7 @@ class CaseDetailsController extends Controller
         ]);
 
         Cases::where('id', $request->case_Id)->update($data);
-        return response(['status' => true, 'msg' => "تم التعديل بنجاح"]);
+        return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
 
     }
 
@@ -228,7 +228,7 @@ class CaseDetailsController extends Controller
                 $client = Clients::select('id', 'client_Name')->where('id', '=', $item)->first();
                 $clients[] = view('cases.mokel_item', compact('client'))->render();
             }
-            return response(['status' => true, 'msg' => "تمت الاضافه بنجاح", 'result' => $clients]);
+            return response(['status' => true, 'msg' => trans('site_lang.public_success_text'), 'result' => $clients]);
         }
         return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
 
@@ -263,11 +263,11 @@ class CaseDetailsController extends Controller
             }
         }
 
-        $Sessions = Sessions::with( 'notes')
+        $Sessions = Sessions::with('notes')
             ->where('case_Id', '=', $id)
             ->get();
 
-         $pdf = PDF::loadView('Reports.CasePDF', ['data' => $cases, 'clients' => $clients, 'khesm' => $khesm,'Sessions'=>$Sessions]);
+        $pdf = PDF::loadView('Reports.CasePDF', ['data' => $cases, 'clients' => $clients, 'khesm' => $khesm, 'Sessions' => $Sessions]);
 
         return $pdf->stream('My PDF' . 'pdf');
 

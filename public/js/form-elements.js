@@ -19,6 +19,7 @@ var FormElements = function () {
             placeholder: config.trans.select2_place_holder,
             allowClear: false
         });
+
     };
     var runSelect1 = function () {
         $("#Opponent").select2({

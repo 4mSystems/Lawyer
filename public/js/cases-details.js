@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#mainContainer').hide();
+    // $('#mainContainer').hide();
     var caseId;
     var session_id;
     var client_id;
@@ -23,12 +23,12 @@ $(document).ready(function () {
             success: function (data) {
                 // $.each(data.result, function (data) {
 
-                    $('#cases tbody').append(data.result);
-                    if (data.status) {
-                        $('#searchContainer').show();
-                    } else {
+                $('#cases tbody').append(data.result);
+                if (data.status) {
+                    $('#searchContainer').show();
+                } else {
 
-                    }
+                }
                 // });
             }
 
@@ -37,7 +37,7 @@ $(document).ready(function () {
     $(document).on('click', '#showCaseData', function () {
         caseId = $(this).data('case-id');
         $('#mainContainer').show();
-        var href="caseDetails/printCase/"+caseId;
+        var href = "caseDetails/printCase/" + caseId;
         $('#btnPrintCase').attr("href", href);
 
         $.ajax({
@@ -71,8 +71,8 @@ $(document).ready(function () {
                 // $('#khesm_table').DataTable();
 
                 //attachments url
-                var attachment_url ="attachment/"+caseId;
-                $('#attachment').attr("href",attachment_url);
+                var attachment_url = "attachment/" + caseId;
+                $('#attachment').attr("href", attachment_url);
 
             }
         })
@@ -99,9 +99,14 @@ $(document).ready(function () {
     //start sessions operations
     //show modal form for adding sessions
     $('#addSessionModal').click(function () {
-        $('.modal-title').text("إضافة جلسة جديدة");
-        $('#add_session').val("إضافة");
-        $('#add_session_model').modal('show');
+        if (caseId != null) {
+
+            $('.modal-title').text(config.trans.add_session_btn);
+            $('#add_session').val(config.trans.add_session_btn);
+            $('#add_session_model').modal('show');
+        } else {
+            toastr.error(config.trans.search_case_case_warning_text);
+        }
     });
 
     $(document).on('click', '#editSession', function () {
@@ -112,8 +117,8 @@ $(document).ready(function () {
             success: function (html) {
                 $('#session_date').val(html.data.session_date);
                 $('#sessionId').val(html.data.id);
-                $('.modal-title').text("تعديل تاريخ الجلسة");
-                $('#add_session').val("تعديل");
+                $('.modal-title').text(config.trans.edit_session_modal_title);
+                $('#add_session').val(config.trans.edit_public);
                 $('#add_session_model').modal('show');
 
             }
@@ -123,7 +128,7 @@ $(document).ready(function () {
     //adding /editnew session
     $('#add_session').click(function () {
         var form = $('#sessionForm').serialize() + "&case_Id=" + caseId;
-        if ($('#add_session').val() == 'إضافة') {
+        if ($('#add_session').val() == config.trans.add_session_btn) {
             $.ajax({
                 url: config.routes.add_session_route,
                 dataType: 'json',
@@ -194,13 +199,13 @@ $(document).ready(function () {
             $.ajax({
                 url: "caseDetails/destroy/" + session_id,
                 beforeSend: function () {
-                    $('#ok_button').text('جارى الحذف ....');
+                    $('#ok_button').text(config.trans.public_continue_delete_modal_text);
                 },
                 success: function (data) {
                     setTimeout(function () {
                         $('#confirmModal').modal('hide');
                         $('#userRow' + session_id).remove();
-                        $('#ok_button').text('حذف');
+                        $('#ok_button').text(config.trans.public_delete_text);
                     }, 1000);
                 }
             })
@@ -208,13 +213,13 @@ $(document).ready(function () {
             $.ajax({
                 url: "caseDetails/deleteClient/" + caseId + "/" + client_id,
                 beforeSend: function () {
-                    $('#ok_button').text('جارى الحذف ....');
+                    $('#ok_button').text(config.trans.public_continue_delete_modal_text);
                 },
                 success: function (data) {
                     setTimeout(function () {
                         $('#confirmModal').modal('hide');
                         $('#userRow' + client_id).remove();
-                        $('#ok_button').text('حذف');
+                        $('#ok_button').text(config.trans.public_delete_text);
                     }, 1000);
                 }
             })
@@ -222,13 +227,13 @@ $(document).ready(function () {
             $.ajax({
                 url: "notes/destroy/" + note_id,
                 beforeSend: function () {
-                    $('#ok_button').text('جارى الحذف ....');
+                    $('#ok_button').text(config.trans.public_continue_delete_modal_text);
                 },
                 success: function (data) {
                     setTimeout(function () {
                         $('#confirmModal').modal('hide');
                         $('#userRow' + note_id).remove();
-                        $('#ok_button').text('حذف');
+                        $('#ok_button').text(config.trans.public_delete_text);
                     }, 1000);
                 }
             })
@@ -241,7 +246,7 @@ $(document).ready(function () {
     $(document).on('click', '#showSessionNotes', function () {
         $('#session-notes-table tbody tr').remove();
         session_id = $(this).data('session-id');
-        var href="caseDetails/printSessionNotes/"+session_id;
+        var href = "caseDetails/printSessionNotes/" + session_id;
         $('#btnPrintNotes').attr("href", href);
 
         $.ajax({
@@ -257,17 +262,17 @@ $(document).ready(function () {
     //show modal form for adding notes
     $('#addNotesModal').click(function () {
         if (session_id != null) {
-            $('#modal_title').text("إضافة ملاحظة جديدة");
-            $('#add_note').val("إضافة");
+            $('#modal_title').text(config.trans.search_case_case_add_note);
+            $('#add_note').val(config.trans.public_add_btn_text);
             $('#add_note_model').modal('show');
         } else {
-            toastr.error('يجب إختيار الجلسة اولا');
+            toastr.error(config.trans.search_case_session_id_warning_text);
         }
     });
     //add notes
     $('#add_note').click(function () {
         var form = $('#notesForm').serialize() + "&session_Id=" + session_id;
-        if ($('#add_note').val() == 'إضافة') {
+        if ($('#add_note').val() == config.trans.public_add_btn_text) {
             $.ajax({
                 url: config.routes.add_note_route,
                 dataType: 'json',
@@ -315,8 +320,8 @@ $(document).ready(function () {
             success: function (html) {
                 $('#note').val(html.data.note);
                 $('#noteId').val(html.data.id);
-                $('.modal-title').text("تعديل الملاحظة ");
-                $('#add_note').val("تعديل");
+                $('.modal-title').text(config.trans.search_case_session_modal_title_edit);
+                $('#add_note').val(config.trans.public_edit_btn_text);
                 $('#add_note_model').modal('show');
 
             }
@@ -369,15 +374,15 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (html) {
                     $('#form-field-select-4').append(html.result);
-                    $('.modal-title').text("إضافة موكلين جدد");
-                    $('#add_mokel').val("إضافة الموكل");
+                    $('.modal-title').text(config.trans.clients_add_new_client_text);
+                    $('#add_mokel').val(config.trans.search_case_add_client);
                     $('#add_new_mokel_modal').modal('show');
 
                 }
             })
 
         } else {
-            toastr.error('يجب إختيار الدعوى اولا');
+            toastr.error(config.trans.search_case_case_warning_text);
         }
     });
     // show khesm modal
@@ -390,15 +395,15 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (html) {
                     $('#form-field-select-4').append(html.result);
-                    $('.modal-title').text("إضافة خصوم جدد");
-                    $('#add_mokel').val("إضافة الخصم");
+                    $('.modal-title').text(config.trans.clients_add_new_khesm_text);
+                    $('#add_mokel').val(config.trans.search_case_add_khesm);
                     $('#add_new_mokel_modal').modal('show');
 
                 }
             })
 
         } else {
-            toastr.error('يجب إختيار الدعوى اولا');
+            toastr.error(config.trans.search_case_case_warning_text);
         }
     });
 
@@ -415,7 +420,7 @@ $(document).ready(function () {
 
             }, success: function (data) {
                 $('#add_new_mokel_modal').modal('hide');
-                if ($('#add_mokel').val() == 'إضافة الموكل') {
+                if ($('#add_mokel').val() == config.trans.search_case_add_client) {
                     $('#mokel_table').prepend(data.result);
                 } else {
                     $('#khesm_table').prepend(data.result);

@@ -24,21 +24,21 @@
     <div class="row">
         <div class="col-md-12">
             <div style="text-align:center;font-size: 30px;background-color: #8E9AA2;color: white;">
-                <hl class="center">{{$search_date}}كشف قضايا يوم</hl>
+                <hl class="center">{{$search_date}}&nbsp; {{trans('site_lang.reports_print_daily_1')}}</hl>
             </div>
             <br>
             <table class="table table-striped table-bordered table-hover table-full-width"
                    style="font-family: 'Cairo';font-size: 10px;text-align: center;" id="PrintdailyTable">
                 <thead>
                 <tr>
-                    <th style="text-align: center;">ملاحظات</th>
-                    <th style="text-align: center;">تاريخ الجلسة</th>
-                    <th style="text-align: center;">نوع الدعوى</th>
-                    <th style="text-align: center;">الدائرة</th>
-                    <th style="text-align: center;">رقم الدعوى</th>
-                    <th style="text-align: center;">اسم الخصم</th>
-                    <th style="text-align: center;">اسم الموكل</th>
-                    <th style="text-align: center;">م</th>
+                    <th style="text-align: center;">{{trans('site_lang.mohdar_notes')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.home_session_date')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.add_case_inventation_type')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.add_case_circle_num')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.home_session_case_number')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.clients_client_type_khesm')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.clients_client_type_client')}}</th>
+                    <th style="text-align: center;">#</th>
                 </tr>
                 </thead>
 
@@ -49,19 +49,19 @@
                 @foreach($data as $row)
                     <tr>
                         @if ($row->Printnotes ==null)
-                            <td class="hidden-xs center">----</td>
+                            <td style="text-align: center;">----</td>
                         @else
-                            <td class="hidden-xs center">{{$row->Printnotes->note}}</td>
+                            <td style="text-align: center;">{{$row->Printnotes->note}}</td>
                         @endif
-                        <td class="hidden-xs center">{{$row->session_date}}</td>
-                        <td class="hidden-xs center">{{$row->cases->inventation_type}}</td>
-                        <td class="hidden-xs center">{{$row->cases->circle_num}}</td>
-                        <td class="hidden-xs center">{{$row->cases->invetation_num}}</td>
-                        <td class="hidden-xs center">{{$khesm->client_Name}}</td>
-                        <td class="hidden-xs center">{{$clients->client_Name}}</td>
-                            <td class="hidden-xs center">
-                                {{$i}}
-                            </td>
+                        <td style="text-align: center;">{{$row->session_date}}</td>
+                        <td style="text-align: center;">{{$row->cases->inventation_type}}</td>
+                        <td style="text-align: center;">{{$row->cases->circle_num}}</td>
+                        <td style="text-align: center;">{{$row->cases->invetation_num}}</td>
+                        <td style="text-align: center;">{{$khesm->client_Name}}</td>
+                        <td style="text-align: center;">{{$clients->client_Name}}</td>
+                        <td style="text-align: center;">
+                            {{$i}}
+                        </td>
                     </tr>
                     @php
                         $i=$i+1;

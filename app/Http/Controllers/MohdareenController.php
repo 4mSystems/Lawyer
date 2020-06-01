@@ -34,9 +34,9 @@ class MohdareenController extends Controller
 
     public function getClients()
     {
-        $clients = Clients::query()->where('type','=','client')->get();
-        $khesm = Clients::query()->where('type','=','khesm')->get();
-        return response(['status' => true, 'clients' => $clients,'khesm'=>$khesm]);
+        $clients = Clients::query()->where('type', '=', 'client')->get();
+        $khesm = Clients::query()->where('type', '=', 'khesm')->get();
+        return response(['status' => true, 'clients' => $clients, 'khesm' => $khesm]);
     }
 
 
@@ -75,9 +75,9 @@ class MohdareenController extends Controller
             $mohdar->save();
 //            $mohdar = mohdr::create(array_merge($request->except('mokel_Name', 'khesm_Name'), ['mokel_Name' => $mokel, 'khesm_Name' => $khesm]));
             $html = view('mohdareen.mohdareen_item', compact('mohdar'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => 'تم إضافة المحضر بنجاح']);
+            return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }
-        return redirect()->route('mohdareen.mohdareen')->with('success', 'تم إضافة المحضر بنجاح');
+        return redirect()->route('mohdareen.mohdareen')->with('success', trans('site_lang.public_success_text'));
     }
 
     public function getCase($search)
@@ -110,7 +110,7 @@ class MohdareenController extends Controller
             $status = false;
         }
         $mohdar->update();
-        return response(['msg' => 'تم التعديل بنجاح', 'result' => $mohdar, 'status' => $status]);
+        return response(['msg' => trans('site_lang.public_success_text'), 'result' => $mohdar, 'status' => $status]);
 
     }
 
@@ -150,7 +150,7 @@ class MohdareenController extends Controller
             $mohdar->case_number = $request->input('case_number');
             $mohdar->paper_Number = $request->input('paper_Number');
             $mohdar->update();
-            return response(['msg' => 'تم التعديل بنجاح', 'result' => $mohdar]);
+            return response(['msg' => trans('site_lang.public_success_text'), 'result' => $mohdar]);
         }
     }
 

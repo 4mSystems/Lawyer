@@ -14,106 +14,99 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']],function ()
-{
-
-
-
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('home', 'HomeController@index')->name('home');
-Route::resource('users', 'UsersController');
-Route::post('users/update', 'UsersController@update')->name('users.update');
-Route::get('users/destroy/{id}', 'UsersController@destroy');
+    Route::resource('users', 'UsersController');
+    Route::post('users/update', 'UsersController@update')->name('users.update');
+    Route::get('users/destroy/{id}', 'UsersController@destroy');
 
 //Clients
-Route::resource('clients', 'ClientsController');
-Route::post('clients/update', 'ClientsController@update')->name('clients.update');
-Route::get('clients/destroy/{id}', 'ClientsController@destroy');
+    Route::resource('clients', 'ClientsController');
+    Route::post('clients/update', 'ClientsController@update')->name('clients.update');
+    Route::get('clients/destroy/{id}', 'ClientsController@destroy');
 
 //cases
-Route::get('addCase', 'CasesController@getClients');
-Route::resource('cases', 'CasesController');
+    Route::get('addCase', 'CasesController@getClients');
+    Route::resource('cases', 'CasesController');
 
 //Mohdareen
-Route::resource('mohdareen', 'MohdareenController');
-Route::get('mohdareen/getCase/{case_num}', 'MohdareenController@getCaseToSelect');
-Route::post('mohdareen/update', 'MohdareenController@update')->name('mohdareen.update');
-Route::get('mohdareen/destroy/{id}', 'MohdareenController@destroy');
-Route::get('mohdareen/updateStatus/{id}', 'MohdareenController@updateStatus');
-Route::get('mohdareen-export', 'MohdareenController@export');
+    Route::resource('mohdareen', 'MohdareenController');
+    Route::get('mohdareen/getCase/{case_num}', 'MohdareenController@getCaseToSelect');
+    Route::post('mohdareen/update', 'MohdareenController@update')->name('mohdareen.update');
+    Route::get('mohdareen/destroy/{id}', 'MohdareenController@destroy');
+    Route::get('mohdareen/updateStatus/{id}', 'MohdareenController@updateStatus');
+    Route::get('mohdareen-export', 'MohdareenController@export');
 
 
-Route::get('mohdareendata/{id}', 'HomeController@showMohData');
+    Route::get('mohdareendata/{id}', 'HomeController@showMohData');
 
-Route::get('sessionnotes/{id}', 'HomeController@showSessionNotes');
+    Route::get('sessionnotes/{id}', 'HomeController@showSessionNotes');
 
 
-Route::get('/getClients', 'MohdareenController@getClients')->name('getClients');
+    Route::get('/getClients', 'MohdareenController@getClients')->name('getClients');
 
 //Case Details
-Route::resource('caseDetails', 'CaseDetailsController');
-Route::get('caseDetails/getSearchResult/{search}', 'CaseDetailsController@getSearchResult');
-Route::post('caseDetails/update', 'CaseDetailsController@update')->name('caseDetails.update');
-Route::post('caseDetails/updateCase', 'CaseDetailsController@updateCase')->name('caseDetails.updateCase');
-Route::post('caseDetails/addNewClient', 'CaseDetailsController@addNewClient')->name('caseDetails.addNewClient');
+    Route::resource('caseDetails', 'CaseDetailsController');
+    Route::get('caseDetails/getSearchResult/{search}', 'CaseDetailsController@getSearchResult');
+    Route::post('caseDetails/update', 'CaseDetailsController@update')->name('caseDetails.update');
+    Route::post('caseDetails/updateCase', 'CaseDetailsController@updateCase')->name('caseDetails.updateCase');
+    Route::post('caseDetails/addNewClient', 'CaseDetailsController@addNewClient')->name('caseDetails.addNewClient');
 
-Route::get('caseDetails/showSessionData/{id}', 'CaseDetailsController@showSessionData');
-Route::get('caseDetails/destroy/{id}', 'CaseDetailsController@destroy');
-Route::get('caseDetails/deleteClient/{case_id}/{client_id}', 'CaseDetailsController@deleteClient');
-Route::get('caseDetails/updateStatus/{id}', 'CaseDetailsController@updateStatus');
-Route::get('caseDetails/getSessionNotes/{id}', 'CaseDetailsController@getSessionNotes');
-Route::get('caseDetails/getClientByType/{type}/{caseId}', 'CaseDetailsController@getClientByType');
+    Route::get('caseDetails/showSessionData/{id}', 'CaseDetailsController@showSessionData');
+    Route::get('caseDetails/destroy/{id}', 'CaseDetailsController@destroy');
+    Route::get('caseDetails/deleteClient/{case_id}/{client_id}', 'CaseDetailsController@deleteClient');
+    Route::get('caseDetails/updateStatus/{id}', 'CaseDetailsController@updateStatus');
+    Route::get('caseDetails/getSessionNotes/{id}', 'CaseDetailsController@getSessionNotes');
+    Route::get('caseDetails/getClientByType/{type}/{caseId}', 'CaseDetailsController@getClientByType');
 //Notes Report in Case Details
-Route::get('caseDetails/printSessionNotes/{id}', 'CaseDetailsController@printSessionNotes');
+    Route::get('caseDetails/printSessionNotes/{id}', 'CaseDetailsController@printSessionNotes');
 //Case Report
-Route::get('caseDetails/printCase/{id}', 'CaseDetailsController@printCase');
-
-
+    Route::get('caseDetails/printCase/{id}', 'CaseDetailsController@printCase');
 
 
 //notes operations
-Route::resource('notes', 'Session_NotesController');
-Route::post('notes/update', 'Session_NotesController@update')->name('notes.update');
-Route::get('notes/destroy/{id}', 'Session_NotesController@destroy');
-Route::get('notes/updateStatus/{id}', 'Session_NotesController@updateStatus');
-Route::get('notes/exportNotes/{id}', 'Session_NotesController@exportNotes');
+    Route::resource('notes', 'Session_NotesController');
+    Route::post('notes/update', 'Session_NotesController@update')->name('notes.update');
+    Route::get('notes/destroy/{id}', 'Session_NotesController@destroy');
+    Route::get('notes/updateStatus/{id}', 'Session_NotesController@updateStatus');
+    Route::get('notes/exportNotes/{id}', 'Session_NotesController@exportNotes');
 
 //case attacments
 
 //Reports
 
-Route::resource('dailyReport', 'ReportsController');
+    Route::resource('dailyReport', 'ReportsController');
 
-Route::post('daily', 'ReportsController@search')->name('daily');
-Route::get('dailyReport/{id}/{type}', 'ReportsController@edit');
-Route::get('dailyPdf/{id}/{type}','ReportsController@pdfexport');
+    Route::post('daily', 'ReportsController@search')->name('daily');
+    Route::get('dailyReport/{id}/{type}', 'ReportsController@edit');
+    Route::get('dailyPdf/{id}/{type}', 'ReportsController@pdfexport');
 
-Route::get('MonthlyReport', 'ReportsController@monthlyPage');
-Route::get('dailyReport/searchMonthly/{month}/{year}/{type}', 'ReportsController@searchMonthly');
-Route::get('monthlyPdf/{month}/{year}/{type}','ReportsController@pdfMonthexport');
+    Route::get('MonthlyReport', 'ReportsController@monthlyPage');
+    Route::get('dailyReport/searchMonthly/{month}/{year}/{type}', 'ReportsController@searchMonthly');
+    Route::get('monthlyPdf/{month}/{year}/{type}', 'ReportsController@pdfMonthexport');
 
 
 //id is for case id
 
-Route::get('attachment/{id}', 'CaseAttachmentController@index');
+    Route::get('attachment/{id}', 'CaseAttachmentController@index');
 
-Route::get('attachment/{id}/create', 'CaseAttachmentController@create');
+    Route::get('attachment/{id}/create', 'CaseAttachmentController@create');
 
-Route::post('attachment/{id}/store', 'CaseAttachmentController@store');
+    Route::post('attachment/{id}/store', 'CaseAttachmentController@store');
 
 
 //id is for attachment
-Route::get('attachment/{id}/edit', 'CaseAttachmentController@edit');
+    Route::get('attachment/{id}/edit', 'CaseAttachmentController@edit');
 
-Route::get('attachment/{id}/delete', 'CaseAttachmentController@destroy');
+    Route::get('attachment/{id}/delete', 'CaseAttachmentController@destroy');
 
 
-Route::post('attachment/{id}/update', 'CaseAttachmentController@update');
+    Route::post('attachment/{id}/update', 'CaseAttachmentController@update');
 
 //permission
 
-Route::resource('permission','PermissionController');
-
+    Route::resource('permission', 'PermissionController');
 
 
 }
