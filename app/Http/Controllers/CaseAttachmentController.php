@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Up;
 
+use Session;
 class CaseAttachmentController extends Controller
 {
     /**
@@ -70,7 +71,7 @@ class CaseAttachmentController extends Controller
 
 
         $data['case_Id'] = $id;
-        attachment::create($data);
+        attachment::create($data); 
         return redirect(url('attachment/'.$id));
     }
 

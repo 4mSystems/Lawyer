@@ -10,12 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-
+    
+    Route::get('/', 'HomeController@index');
     Route::get('home', 'HomeController@index')->name('home');
     Route::resource('users', 'UsersController');
     Route::post('users/update', 'UsersController@update')->name('users.update');
@@ -87,8 +87,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('monthlyPdf/{month}/{year}/{type}', 'ReportsController@pdfMonthexport');
 
 
-//id is for case id
-
+//id is for case id  
     Route::get('attachment/{id}', 'CaseAttachmentController@index');
 
     Route::get('attachment/{id}/create', 'CaseAttachmentController@create');
@@ -97,13 +96,14 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 //id is for attachment
+
     Route::get('attachment/{id}/edit', 'CaseAttachmentController@edit');
 
     Route::get('attachment/{id}/delete', 'CaseAttachmentController@destroy');
 
 
     Route::post('attachment/{id}/update', 'CaseAttachmentController@update');
-
+ 
 //permission
 
     Route::resource('permission', 'PermissionController');

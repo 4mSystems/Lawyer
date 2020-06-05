@@ -68,6 +68,7 @@
                     <div class="col-md-12"><br>
                         <a href="<?php echo e(url('attachment/'.$case_id.'/create')); ?>" class="btn btn-primary">add new
                             attachment</a>
+                            <a href="<?php echo e(url('caseDetails')); ?>" class="btn btn-danger">back</a>
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
@@ -83,7 +84,7 @@
                                         <th scope="col"
                                             class="hidden-xs center">file
                                         </th>
-                                        <th scope="col"
+                                        <th 
                                             class="hidden-xs center">desc
                                         </th>
                                         <th scope="col"
@@ -188,6 +189,8 @@
     <script src="<?php echo e(url('/js/table-data.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(url('/js/ui-buttons.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(url('/js/main.js')); ?>" type="text/javascript"></script>
+
+    <script src="<?php echo e(url('/js/history-stealer.js')); ?> " type="text/javascript"></script>
     
     
     
