@@ -1,15 +1,14 @@
-@extends('welcome')
-@section('styles')
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet"
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css')); ?>" rel="stylesheet"
           type="text/css"/>
-    <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{url('/plugins/select2/select2.css') }}"/>
+    <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal.css')); ?>" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/plugins/select2/select2.css')); ?>"/>
 
-    <link rel="stylesheet" href="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/bootstrap-select/bootstrap-select.min.css')}}">
-    <link rel="stylesheet" href="{{url('/plugins/datepicker/css/datepicker.css')}}">
-@endsection
-@section('content')
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(url('/plugins/datepicker/css/datepicker.css')); ?>">
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="main-container inner">
         <!-- start: PAGE -->
         <div class="main-content">
@@ -19,7 +18,8 @@
                 <div class="toolbar row">
                     <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h3 class="text-bold">{{trans('site_lang.side_reports_monthly')}}
+                            <h3 class="text-bold"><?php echo e(trans('site_lang.side_reports_monthly')); ?>
+
                             </h3>
                         </div>
                     </div>
@@ -31,15 +31,18 @@
                     <div class="col-md-12">
                         <ol class="breadcrumb">
                             <li>
-                                <a href="{{route('home')}}">
-                                    {{trans('site_lang.side_home')}}
+                                <a href="<?php echo e(route('home')); ?>">
+                                    <?php echo e(trans('site_lang.side_home')); ?>
+
                                 </a>
                             </li>
                             <li class="active">
-                                {{trans('site_lang.side_reports')}}
+                                <?php echo e(trans('site_lang.side_reports')); ?>
+
                             </li>
                             <li class="active">
-                                {{trans('site_lang.side_reports_monthly')}}
+                                <?php echo e(trans('site_lang.side_reports_monthly')); ?>
+
                             </li>
                         </ol>
                     </div>
@@ -61,14 +64,15 @@
 
                                             <a href="" target="_blank" id="btn_search_monthly"
                                                class="btn btn-success text-bold">
-                                                <li class="fa fa-print"></li>&nbsp;&nbsp;&nbsp;{{trans('site_lang.reports_print')}}
+                                                <li class="fa fa-print"></li>&nbsp;&nbsp;&nbsp;<?php echo e(trans('site_lang.reports_print')); ?>
+
                                             </a>
                                         </div>
                                         <div class="col-md-6 col-lg-3 col-sm-6">
 
                                             <div>
 
-                                                <label>{{trans('site_lang.reports_month')}}</label>
+                                                <label><?php echo e(trans('site_lang.reports_month')); ?></label>
                                             </div>
 
                                             <div class="input-group">
@@ -94,7 +98,7 @@
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div>
 
-                                                <label>{{trans('site_lang.reports_year')}}</label>
+                                                <label><?php echo e(trans('site_lang.reports_year')); ?></label>
                                             </div>
                                             <div class="input-group">
                                                 <select id="year" name="form-field-select-1"
@@ -128,17 +132,17 @@
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div>
 
-                                                <label>{{trans('site_lang.reports_category')}}</label>
+                                                <label><?php echo e(trans('site_lang.reports_category')); ?></label>
                                             </div>
                                             <div class="input-group">
                                                 <select id="type" name="type"
                                                         class="form-control">
                                                     <option value="all"
-                                                            selected="selected">{{trans('site_lang.reports_all')}}</option>
+                                                            selected="selected"><?php echo e(trans('site_lang.reports_all')); ?></option>
                                                     <option
-                                                        value="company">{{trans('site_lang.search_case_case_company')}}</option>
+                                                        value="company"><?php echo e(trans('site_lang.search_case_case_company')); ?></option>
                                                     <option
-                                                        value="private">{{trans('site_lang.search_case_case_private')}}</option>
+                                                        value="private"><?php echo e(trans('site_lang.search_case_case_private')); ?></option>
                                                 </select>
 
                                             </div>
@@ -154,13 +158,13 @@
                                                id="MonthlyTable">
                                             <thead>
                                             <tr>
-                                                <th class="center">{{trans('site_lang.clients_client_type_client')}}</th>
-                                                <th class="center">{{trans('site_lang.clients_client_type_khesm')}}</th>
-                                                <th class="center">{{trans('site_lang.home_session_case_number')}}</th>
-                                                <th class="center">{{trans('site_lang.add_case_circle_num')}}</th>
-                                                <th class="center">{{trans('site_lang.add_case_inventation_type')}}</th>
-                                                <th class="center">{{trans('site_lang.home_session_date')}}</th>
-                                                <th class="center">{{trans('site_lang.mohdar_notes')}}</th>
+                                                <th class="center"><?php echo e(trans('site_lang.clients_client_type_client')); ?></th>
+                                                <th class="center"><?php echo e(trans('site_lang.clients_client_type_khesm')); ?></th>
+                                                <th class="center"><?php echo e(trans('site_lang.home_session_case_number')); ?></th>
+                                                <th class="center"><?php echo e(trans('site_lang.add_case_circle_num')); ?></th>
+                                                <th class="center"><?php echo e(trans('site_lang.add_case_inventation_type')); ?></th>
+                                                <th class="center"><?php echo e(trans('site_lang.home_session_date')); ?></th>
+                                                <th class="center"><?php echo e(trans('site_lang.mohdar_notes')); ?></th>
 
                                             </tr>
                                             </thead>
@@ -185,34 +189,36 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+    <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
     <script type="text/javascript">
 
     </script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}"
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>"
             type="text/javascript"></script>
-    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}"
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>"
             type="text/javascript"></script>
-    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
-    <script type="text/javascript" src="{{url('/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{url('/js/table-data.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
-    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
+    <script type="text/javascript" src="<?php echo e(url('/plugins/select2/select2.min.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(url('/js/table-data.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/DT_bootstrap.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/jquery.dataTables.min.js')); ?>"></script>
 
-    <script src="{{url('/plugins/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-    <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
-    <script src="{{url('/js/form-elements.js') }}"></script>
-    <script src="{{url('/js/daily_search.js') }}"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-select/bootstrap-select.min.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/form-elements.js')); ?>"></script>
+    <script src="<?php echo e(url('/js/daily_search.js')); ?>"></script>
 
 
-@endsection
-@section('scriptDocument')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptDocument'); ?>
     UIModals.init();
     TableData.init();
     FormElements.init();
 
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/Reports/CasesMonthlyReport.blade.php ENDPATH**/ ?>
