@@ -39,10 +39,16 @@ class CaseDetailsController extends Controller
             $results = Cases::query()
                 ->Where('invetation_num', 'LIKE', "%{$search}%")
                 ->orWhere('circle_num', 'LIKE', "%{$search}%")
+                ->orWhereHas('clients', function ($q) use ($search) {
+                    return $q->where('client_Name', 'LIKE', '%' . $search . '%');
+                })->with(['clients' => function ($query)use ($search) {
+                    return $query->where('client_Name', 'LIKE', '%' . $search . '%');
+                }])
                 ->get();
 
-            foreach ($results as $result) {
-                $cases_table [] = view('cases.session_result_case_item', compact('result'))->render();
+            foreach ($results as $key => $result) {
+                $client = $result->clients;
+                $cases_table [] = view('cases.session_result_case_item', compact('result','client'))->render();
             }
             return response(['status' => true, 'result' => $cases_table]);
         }

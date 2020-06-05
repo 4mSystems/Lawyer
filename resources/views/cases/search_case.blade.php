@@ -16,15 +16,6 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
-                    {{--                    <div class="col-sm-10 hidden-xs">--}}
-                    {{--                        <div class="page-header">--}}
-                    {{--                            <h3 class="text-bold">{{trans('site_lang.search_case_title')}}--}}
-
-                    {{--                            </h3>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-
-
                     <div class="toolbar-tools pull-right">
                         <!-- start: TOP NAVIGATION MENU -->
                         <ul class="nav navbar-right">
@@ -45,7 +36,7 @@
                                                        id="search">
                                                 <span class="input-group-btn">
 																<button class="btn btn-main-color btn-squared"
-                                                                        type="button">
+                                                                        type="button" id="search_case_btn">
 																	<i class="fa fa-search"></i>
 																</button> </span>
                                             </div>
@@ -84,6 +75,7 @@
                                 <thead>
                                 <tr>
                                     <th class="hidden-xs center">#</th>
+                                    <th class="hidden-xs center">اسم الموكل \ اسم الخصم</th>
                                     <th class="hidden-xs center">رقم الدعوى</th>
                                     <th class="hidden-xs center">المحكمة</th>
                                     <th class="hidden-xs center"></th>
@@ -138,7 +130,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button class="btn btn-icon btn-block">
+                                                    <button class="btn btn-icon btn-block" href="#panel_sessions">
                                                         <i class="clip-calendar"></i>
                                                         {{trans('site_lang.mohdar_notes')}} <span
                                                             class="badge badge-info"
@@ -146,7 +138,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button class="btn btn-icon btn-block">
+                                                    <button class="btn btn-icon btn-block" >
                                                         <i class="clip-list-3"></i>
                                                         {{trans('site_lang.search_case_sessions')}} <span
                                                             class="badge badge-info"

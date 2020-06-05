@@ -8,9 +8,35 @@ $(document).ready(function () {
 
     $('#searchContainer').hide();
 
-    $('#search').on('input', function (e) {
+    // $('#search').on('input', function (e) {
+    //     $('#cases tbody').empty();
+    //     var data = $(this).val();
+    //     if (data != '') {
+    //         $('#searchContainer').show();
+    //     } else {
+    //         $('#searchContainer').hide();
+    //     }
+    //     $.ajax({
+    //         url: "caseDetails/getSearchResult/" + data,
+    //         dataType: 'json',
+    //         type: 'get',
+    //         success: function (data) {
+    //             // $.each(data.result, function (data) {
+    //
+    //             $('#cases tbody').append(data.result);
+    //             if (data.status) {
+    //                 $('#searchContainer').show();
+    //             } else {
+    //
+    //             }
+    //             // });
+    //         }
+    //
+    //     });
+    // });
+    $(document).on('click', '#search_case_btn',function () {
         $('#cases tbody').empty();
-        var data = $(this).val();
+        var data = $('#search').val();
         if (data != '') {
             $('#searchContainer').show();
         } else {
