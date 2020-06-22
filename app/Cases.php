@@ -17,11 +17,4 @@ class Cases extends Model
     {
         return $this->belongsToMany(Clients::class, 'case_clients', 'case_id', 'client_id');
     }
-
-    public function getOneClient()
-    {
-        return $this->belongsToMany(Clients::class, 'case_clients', 'case_id', 'client_id')->first();
-    }
-
-
 }

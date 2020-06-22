@@ -50,7 +50,7 @@
                             <div class="panel-body">
 
                                 <table class="table table-striped table-bordered table-hover table-full-width"
-                                       id="sample_1">
+                                       id="client_tbl">
                                     <thead>
                                     <tr>
                                         <th class="center">#</th>
@@ -192,6 +192,7 @@
     <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#client_tbl').DataTable();
 
             $('#addClientModal').click(function () {
                 $('#modal_title').text("<?php echo e(trans('site_lang.clients_add_new_client_text')); ?>");
@@ -213,9 +214,8 @@
                             $('#client_Address_error').empty();
                             $('#notes_error').empty();
                         }, success: function (data) {
-                            // if (data.status == true) {
-                            console.log(data);
-                            $('#sample_1 tbody').append(data.result);
+                            $('#client_tbl tbody').prepend(data.result);
+                            $('#client_tbl').DataTable();
                             $('#add_client_model').modal('hide');
                             toastr.success(data.msg);
                             $("#clients").trigger('reset');

@@ -1,6 +1,6 @@
 <tr>
     <td class="hidden-xs center"><?php echo e($result->id); ?></td>
-    <td class="hidden-xs center"><?php echo e($client[0]->client_Name); ?></td>
+    <td class="hidden-xs center"><?php echo e($result->client_Name); ?></td>
     <td class="hidden-xs center"><?php echo e($result->invetation_num); ?></td>
     <td class="hidden-xs center"><?php echo e($result->court); ?></td>
     <td class="hidden-xs center">

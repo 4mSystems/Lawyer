@@ -120,13 +120,27 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('type')?' has-error':''); ?>">
-                                        <select id="form-field-select-1" name="form-field-select-1" required
+                                        <select id="type" name="type" required
                                                 class="form-control">
                                             <option value="" selected="selected">&nbsp;</option>
                                             <option value="Admin">ِAdmin</option>
                                             <option value="User">User</option>
                                         </select>
                                         <span class="text-danger" id=type_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group<?php echo e($errors->has('cat_id')?' has-error':''); ?>">
+                                        <select id="form-field-select-3" class="form-control select2-arrow"
+                                                name="cat_id">
+                                            <option value="">
+                                                &nbsp;<?php echo e(trans('site_lang.add_case_to_whom')); ?></option>
+                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option
+                                                    value='<?php echo e($category->id); ?>'><?php echo e($category->name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </select>
+                                        <span class="text-danger" id="cat_id"></span>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +191,7 @@
             });
 
             $('#add_user').click(function () {
-                var form = $('#users').serialize() + '&type=' + $('select option:selected').text();
+                var form = $('#users').serialize();
                 if ($('#add_user').val() == '<?php echo e(trans('site_lang.public_add_btn_text')); ?>') {
                     $.ajax({
                         url: "<?php echo e(route('users.store')); ?>",
@@ -188,6 +202,7 @@
                             $('#name_error').empty();
                             $('#password_error').empty();
                             $('#email_error').empty();
+                            $('#cat_id').empty();
                         }, success: function (data) {
                             // if (data.status == true) {
                             $('#list_users tbody').append(data.result);
@@ -200,6 +215,7 @@
                                 $('#password_error').html(data_error.responseJSON.errors.password);
                                 $('#email_error').html(data_error.responseJSON.errors.email);
                                 $('#type_error').html(data_error.responseJSON.errors.type);
+                                $('#cat_id').html(data_error.responseJSON.errors.cat_id);
                             }
                         }
                     });

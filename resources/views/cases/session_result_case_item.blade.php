@@ -1,6 +1,6 @@
 <tr>
     <td class="hidden-xs center">{{$result->id}}</td>
-    <td class="hidden-xs center">{{$client[0]->client_Name}}</td>
+    <td class="hidden-xs center">{{$result->client_Name}}</td>
     <td class="hidden-xs center">{{$result->invetation_num}}</td>
     <td class="hidden-xs center">{{$result->court}}</td>
     <td class="hidden-xs center">

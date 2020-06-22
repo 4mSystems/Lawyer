@@ -1,9 +1,9 @@
 <tr id="userRow<?php echo e($mohdar->moh_Id); ?>">
     <td class="hidden-xs center"><p id="moh_Id<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->moh_Id); ?></p></td>
-    <td class="hidden-xs center"><p id="court_mohdareen<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->court_mohdareen); ?></p></td>
-    <td class="hidden-xs center"><p id="paper_type<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->paper_type); ?></p></td>
-    <td class="hidden-xs center"><p id="deliver_data<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->deliver_data); ?></p></td>
+    <td class="hidden-xs center"><p id="paper_type<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->mokel_Name); ?></p></td>
+    <td class="hidden-xs center"><p id="deliver_data<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->khesm_Name); ?></p></td>
     <td class="hidden-xs center"><p id="paper_Number<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->paper_Number); ?></p></td>
+    <td class="hidden-xs center"><p id="court_mohdareen<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->court_mohdareen); ?></p></td>
     <td class="hidden-xs center"><p id="session_Date<?php echo e($mohdar->moh_Id); ?>"><?php echo e($mohdar->session_Date); ?></p></td>
     <?php if($mohdar->status =='لا'): ?>
         <td class="hidden-xs center">
@@ -24,12 +24,15 @@
         <div class="visible-md visible-lg hidden-sm hidden-xs">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <a id="editMohdar" class="btn btn-xs btn-blue tooltips" data-placement="top"
-               data-original-title="<?php echo e(trans('site_lang.public_edit_btn_text')); ?>" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>"><i class="fa fa-edit"></i></a>
+               data-original-title="<?php echo e(trans('site_lang.public_edit_btn_text')); ?>" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>"><i
+                    class="fa fa-edit"></i></a>
             <a id="deleteMohadr" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>" class="btn btn-xs btn-red tooltips"
                data-placement="top"
-               data-original-title="<?php echo e(trans('site_lang.public_delete_text')); ?>"><i class="fa fa-times fa fa-white"></i></a>
+               data-original-title="<?php echo e(trans('site_lang.public_delete_text')); ?>"><i
+                    class="fa fa-times fa fa-white"></i></a>
             <a id="showMohdar" class="btn btn-xs btn-blue tooltips" data-placement="top"
-               data-original-title="<?php echo e(trans('site_lang.home_see_more')); ?>" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>"><i class="fa fa-eye-slash"></i></a>
+               data-original-title="<?php echo e(trans('site_lang.home_see_more')); ?>" data-moh-Id="<?php echo e($mohdar->moh_Id); ?>"><i
+                    class="fa fa-eye-slash"></i></a>
         </div>
         <div class="visible-xs visible-sm hidden-md hidden-lg">
             <div class="btn-group">

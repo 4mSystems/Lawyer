@@ -13,7 +13,7 @@
                     <img src="<?php echo e(url('/images/avatar-1.jpg')); ?>" alt="">
                 </div>
                 <div class="inline-block">
-                     <h4 class="text-justify"> &nbsp;&nbsp;  مصطفى النجار </h4>
+                     <h4 class="text-justify"> &nbsp;&nbsp;  <?php echo e(Auth::user()->name); ?> </h4>
 
                 </div>
             </div>
@@ -52,6 +52,10 @@
                 <li>
                     <a href="<?php echo e(url('/mohdareen')); ?>"><i class="fa fa-pencil-square-o"></i> &nbsp;&nbsp;<span
                             class="title"> <?php echo e(trans('site_lang.side_mohdar')); ?> </span> </a>
+
+                </li><li>
+                    <a href="<?php echo e(url('/categories')); ?>"><i class="fa fa-pencil-square-o"></i> &nbsp;&nbsp;<span
+                            class="title"> <?php echo e(trans('site_lang.side_categories')); ?> </span> </a>
 
                 </li>
                 <li>

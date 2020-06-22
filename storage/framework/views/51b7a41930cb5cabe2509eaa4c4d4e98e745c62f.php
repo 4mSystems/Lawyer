@@ -114,7 +114,8 @@
                                                 class="form-group<?php echo e($errors->has('first_session_date')?' has-error':''); ?>">
 
                                                 <div class="input-group">
-                                                    <input type="text" data-date-format="dd-mm-yyyy" placeholder="<?php echo e(trans('site_lang.home_session_date')); ?>"
+                                                    <input type="text" data-date-format="yyyy-mm-dd"
+                                                           placeholder="<?php echo e(trans('site_lang.home_session_date')); ?>"
                                                            data-date-viewmode="years" class="form-control date-picker"
                                                            id="first_session_date" name="first_session_date"
                                                            value="<?php echo e(old('first_session_date')); ?>">
@@ -126,7 +127,7 @@
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group<?php echo e($errors->has('inventation_type')?' has-error':''); ?>">
-                                                 <input type="text" name="inventation_type" id="inventation_type"
+                                                <input type="text" name="inventation_type" id="inventation_type"
                                                        class="form-control"
                                                        placeholder="<?php echo e(trans('site_lang.add_case_inventation_type')); ?>"
                                                        value="<?php echo e(old('inventation_type')); ?>">
@@ -139,8 +140,10 @@
                                                         name="to_whome">
                                                     <option value="">
                                                         &nbsp;<?php echo e(trans('site_lang.add_case_to_whom')); ?></option>
-                                                    <option value="private">خاصة</option>
-                                                    <option value="company">شركات</option>
+                                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option
+                                                            value='<?php echo e($category->id); ?>'><?php echo e($category->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                                 <span class="text-danger" id="To_error"></span>
                                             </div>

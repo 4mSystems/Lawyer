@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Case_client;
 use App\Cases;
+use App\category;
 use App\Clients;
 use App\Sessions;
 use Illuminate\Http\Request;
@@ -25,10 +26,10 @@ class CasesController extends Controller
         if ($enabled == 'yes') {
             $clients = Clients::select('id', 'client_Name')->where('type', 'client')->get();
             $khesm = Clients::select('id', 'client_Name')->where('type', 'khesm')->get();
+            $categories = category::select('id', 'name')->get();
 
-            return view('cases.add_case', compact(['clients', 'khesm']));
-        }
-        else{
+            return view('cases.add_case', compact(['clients', 'khesm', 'categories']));
+        } else {
             return redirect(url('home'));
         }
     }
@@ -57,10 +58,7 @@ class CasesController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-
             $data = $this->validate(request(), [
-//                'mokel_name' => 'required',
-//                'khesm_name' => 'required',
                 'invetation_num' => 'required',
                 'circle_num' => 'required',
                 'court' => 'required',

@@ -64,10 +64,10 @@
                                     <tr>
 
                                         <th class="hidden-xs center">#</th>
-                                        <th class="hidden-xs center"><?php echo e(trans('site_lang.mohdar_court')); ?></th>
-                                        <th class="hidden-xs center"><?php echo e(trans('site_lang.mohdar_paper_type')); ?></th>
-                                        <th class="hidden-xs center"><?php echo e(trans('site_lang.mohdar_paper_deliver')); ?></th>
+                                        <th class="hidden-xs center"><?php echo e(trans('site_lang.clients_client_type_client')); ?></th>
+                                        <th class="hidden-xs center"><?php echo e(trans('site_lang.clients_client_type_khesm')); ?></th>
                                         <th class="hidden-xs center"><?php echo e(trans('site_lang.mohdar_paper_num')); ?></th>
+                                        <th class="hidden-xs center"><?php echo e(trans('site_lang.mohdar_court')); ?></th>
                                         <th class="hidden-xs center"><?php echo e(trans('site_lang.home_session_date')); ?></th>
                                         <th class="hidden-xs center"><?php echo e(trans('site_lang.home_session_status')); ?></th>
                                         <th class="hidden-xs center"></th>
@@ -122,7 +122,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('paper_type')?' has-error':''); ?>">
                                         <div class="input-group">
-                                            <input type="text" data-date-format="dd-mm-yyyy"
+                                            <input type="text" data-date-format="yyyy-mm-dd"
                                                    data-date-viewmode="years" class="form-control date-picker"
                                                    id="deliver_data" name="deliver_data"
                                                    placeholder="<?php echo e(trans('site_lang.mohdar_paper_deliver')); ?>"
@@ -145,7 +145,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('session_Date')?' has-error':''); ?>">
                                         <div class="input-group">
-                                            <input type="text" data-date-format="dd-mm-yyyy"
+                                            <input type="text" data-date-format="yyyy-mm-dd"
                                                    placeholder="<?php echo e(trans('site_lang.home_session_date')); ?>"
                                                    data-date-viewmode="years" class="form-control date-picker"
                                                    id="session_Date" name="session_Date"
@@ -194,7 +194,20 @@
                                         <span class="text-danger" id="notes_error"></span>
                                     </div>
                                 </div>
-
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group<?php echo e($errors->has('cat_id')?' has-error':''); ?>">
+                                        <select id="form-field-select-3" class="form-control select2-arrow"
+                                                name="cat_id">
+                                            <option value="">
+                                                &nbsp;<?php echo e(trans('site_lang.add_case_to_whom')); ?></option>
+                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option
+                                                    value='<?php echo e($category->id); ?>'><?php echo e($category->name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </select>
+                                        <span class="text-danger" id="cat_id"></span>
+                                    </div>
+                                </div>
                             </div>
                         </form>
 
@@ -380,7 +393,8 @@
                         type: 'post',
                         success: function (data) {
                             // if (data.status == true) {
-                            $('#mohdar_tbl tbody').append(data.result);
+                            $('#mohdar_tbl tbody').prepend(data.result);
+                            $('#mohdar_tbl').DataTable();
                             $('#add_mohdar_model').modal('hide');
                             toastr.success(data.msg);
                             $("#mohdars").trigger('reset');
@@ -395,6 +409,7 @@
                                 $('#mokel_Name_error').html(data_error.responseJSON.errors.mokel_Name);
                                 $('#khesm_Name_error').html(data_error.responseJSON.errors.khesm_Name);
                                 $('#case_number_error').html(data_error.responseJSON.errors.case_number);
+                                $('#cat_id').html(data_error.responseJSON.errors.cat_id);
                             }
                         }
                     });

@@ -52,7 +52,7 @@
                 <div class="toolbar row" style="direction:rtl;">
                     <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1><?php echo e(trans('site_lang.side_home')); ?> <small><?php echo e(trans('site_lang.side_welcome')); ?></small></h1>
+                            <h3 class="text-bold"><?php echo e(trans('site_lang.attachments_new_attach')); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -60,39 +60,35 @@
                 <!-- end: PAGE HEADER -->
                 <br>
                 <!-- start: PAGE CONTENT -->
-
-
-
-
                 <div class="row">
                     <div class="col-md-12">
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
-                            <div class="panel-heading">
-                                <h5 class="text-bold"><?php echo e(trans('site_lang.add_new_attachments')); ?></h5>
-                            </div>
 
-                            <div class="card-body">
+                            <div class="panel-body">
                                 <?php echo e(Form::open(array('url' =>url('attachment/'.$case_id.'/store') ,'files'=>true )   )); ?>
 
                                 <?php echo csrf_field(); ?>
 
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <?php echo e(Form::label('img_Url',trans('site_lang.attachments_file_attach'))); ?>
 
-                                <div class="form-group">
-                                    <?php echo e(Form::label('img_Description','Description ')); ?>
+                                        <?php echo e(Form::file('img_Url', ["class"=>"form-control"])); ?>
 
-                                    <?php echo e(Form::textarea('img_Description',old('img_Description'),["class"=>"form-control"])); ?>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                    <div class="form-group">
+                                        <?php echo e(Form::label('img_Description',trans('site_lang.attachments_desc_attach'))); ?>
 
+                                        <?php echo e(Form::textarea('img_Description',old('img_Description'),["class"=>"form-control"])); ?>
+
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <?php echo e(Form::label('img_Url','attachments Files')); ?>
+                                    <?php echo e(Form::submit( trans('site_lang.attachments_new_attach') ,['class'=>'btn btn-primary center-block'])); ?>
 
-                                    <?php echo e(Form::file('img_Url', ["class"=>"form-control"])); ?>
-
-                                </div>
-
-                                <?php echo e(Form::submit( trans('admin.Add') ,['class'=>'btn btn-primary'])); ?>
 
                                 <?php echo e(Form::close()); ?>
 
@@ -101,9 +97,6 @@
                         <!-- end: TABLE WITH IMAGES PANEL -->
                     </div>
                 </div>
-
-
-
 
 
             </div>
@@ -120,7 +113,6 @@
     <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
 
     <script>
-
 
 
     </script>

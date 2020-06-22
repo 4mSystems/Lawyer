@@ -112,7 +112,8 @@
                                                 class="form-group{{$errors->has('first_session_date')?' has-error':''}}">
 
                                                 <div class="input-group">
-                                                    <input type="text" data-date-format="dd-mm-yyyy" placeholder="{{trans('site_lang.home_session_date')}}"
+                                                    <input type="text" data-date-format="yyyy-mm-dd"
+                                                           placeholder="{{trans('site_lang.home_session_date')}}"
                                                            data-date-viewmode="years" class="form-control date-picker"
                                                            id="first_session_date" name="first_session_date"
                                                            value="{{ old('first_session_date') }}">
@@ -124,7 +125,7 @@
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group{{$errors->has('inventation_type')?' has-error':''}}">
-                                                 <input type="text" name="inventation_type" id="inventation_type"
+                                                <input type="text" name="inventation_type" id="inventation_type"
                                                        class="form-control"
                                                        placeholder="{{trans('site_lang.add_case_inventation_type')}}"
                                                        value="{{ old('inventation_type') }}">
@@ -137,8 +138,10 @@
                                                         name="to_whome">
                                                     <option value="">
                                                         &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
-                                                    <option value="private">خاصة</option>
-                                                    <option value="company">شركات</option>
+                                                    @foreach($categories as $category)
+                                                        <option
+                                                            value='{{$category->id}}'>{{$category->name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <span class="text-danger" id="To_error"></span>
                                             </div>

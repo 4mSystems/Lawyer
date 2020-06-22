@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cases;
+use App\category;
 use App\Clients;
 use App\Exports\MohdareenExport;
 use App\Mohdareen;
@@ -16,13 +17,14 @@ class MohdareenController extends Controller
 
     public function index()
     {
-        $user_id=auth()->user()->id;
-        $permission = Permission::where('user_id',$user_id)->first();
-        $enabled =  $permission->mohdreen;
-        if($enabled == 'yes') {
-            $mohdareen = mohdr::get();
-            return view('mohdareen.mohdareen', compact('mohdareen'));
-        }else {
+        $user_id = auth()->user()->id;
+        $permission = Permission::where('user_id', $user_id)->first();
+        $enabled = $permission->mohdreen;
+        if ($enabled == 'yes') {
+            $mohdareen = mohdr::query()->where('cat_id', '=', auth()->user()->cat_id)->get();
+            $categories = category::select('id', 'name')->get();
+            return view('mohdareen.mohdareen', compact('mohdareen', 'categories'));
+        } else {
             return redirect(url('home'));
         }
     }
@@ -57,13 +59,14 @@ class MohdareenController extends Controller
                 'paper_Number' => 'required',
                 'session_Date' => 'required',
                 'case_number' => 'required',
+                'cat_id' => 'required',
             ]);
-//            dd($request);
             $mokel = implode(',', $request->mokel_Name);
             $khesm = implode(',', $request->khesm_Name);
             $mohdar = new mohdr();
             $mohdar->mokel_Name = $mokel;
             $mohdar->khesm_Name = $khesm;
+            $mohdar->cat_id = $request->cat_id;
             $mohdar->status = 'لا';
             $mohdar->court_mohdareen = $request->court_mohdareen;
             $mohdar->deliver_data = $request->deliver_data;
@@ -73,11 +76,9 @@ class MohdareenController extends Controller
             $mohdar->case_number = $request->case_number;
             $mohdar->notes = $request->notes;
             $mohdar->save();
-//            $mohdar = mohdr::create(array_merge($request->except('mokel_Name', 'khesm_Name'), ['mokel_Name' => $mokel, 'khesm_Name' => $khesm]));
             $html = view('mohdareen.mohdareen_item', compact('mohdar'))->render();
             return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }
-        return redirect()->route('mohdareen.mohdareen')->with('success', trans('site_lang.public_success_text'));
     }
 
     public function getCase($search)

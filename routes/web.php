@@ -25,6 +25,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('clients', 'ClientsController');
     Route::post('clients/update', 'ClientsController@update')->name('clients.update');
     Route::get('clients/destroy/{id}', 'ClientsController@destroy');
+//categories
+    Route::resource('categories', 'CategoryController');
+    Route::post('categories/update', 'CategoryController@update')->name('categories.update');
+    Route::get('categories/destroy/{id}', 'CategoryController@destroy');
 
 //cases
     Route::get('addCase', 'CasesController@getClients');

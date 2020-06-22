@@ -142,17 +142,17 @@
                                 </div>
                             </div>
                             <div class="panel-footer clearfix no-padding">
-                                <a href="<?php echo e(url('publicmohdareen')); ?>"
+                                <a href="<?php echo e(url('mohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-green"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_more_options')); ?>"><i
                                         class="fa fa-cog"></i></a>
-                                <a href="<?php echo e(url('publicmohdareen')); ?>"
+                                <a href="<?php echo e(url('mohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-blue"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.mohdar_add_mohdar')); ?>"><i
                                         class="fa fa-plus"></i></a>
-                                <a href="<?php echo e(url('publicmohdareen')); ?>"
+                                <a href="<?php echo e(url('mohdareen')); ?>"
                                    class="col-xs-4 padding-10 text-center text-white tooltips partition-red"
                                    data-toggle="tooltip" data-placement="top"
                                    title="<?php echo e(trans('site_lang.home_see_more')); ?>"><i

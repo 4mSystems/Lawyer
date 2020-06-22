@@ -131,7 +131,7 @@
                                         <div class="form-group">
                                             <strong><?php echo e(trans('site_lang.empName')); ?></strong>
                                             <?php echo e(Form::label('user_id',$permission->getUser->name,
-                                                $permission->user_id
+                                                $permission->getUser->name
                                             ,["class"=>"form-control " ])); ?>
 
                                         </div>

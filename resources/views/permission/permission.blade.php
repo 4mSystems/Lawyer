@@ -128,7 +128,7 @@
                                         <div class="form-group">
                                             <strong>{{trans('site_lang.empName')}}</strong>
                                             {{ Form::label('user_id',$permission->getUser->name,
-                                                $permission->user_id
+                                                $permission->getUser->name
                                             ,["class"=>"form-control " ]) }}
                                         </div>
 

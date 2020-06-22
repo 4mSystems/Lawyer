@@ -13,7 +13,7 @@
                     <img src="{{url('/images/avatar-1.jpg') }}" alt="">
                 </div>
                 <div class="inline-block">
-                     <h4 class="text-justify"> &nbsp;&nbsp;  مصطفى النجار </h4>
+                     <h4 class="text-justify"> &nbsp;&nbsp;  {{ Auth::user()->name }} </h4>
 
                 </div>
             </div>
@@ -52,6 +52,10 @@
                 <li>
                     <a href="{{url('/mohdareen')}}"><i class="fa fa-pencil-square-o"></i> &nbsp;&nbsp;<span
                             class="title"> {{trans('site_lang.side_mohdar')}} </span> </a>
+
+                </li><li>
+                    <a href="{{url('/categories')}}"><i class="fa fa-pencil-square-o"></i> &nbsp;&nbsp;<span
+                            class="title"> {{trans('site_lang.side_categories')}} </span> </a>
 
                 </li>
                 <li>

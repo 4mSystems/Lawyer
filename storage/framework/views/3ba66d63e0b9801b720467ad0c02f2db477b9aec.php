@@ -141,9 +141,9 @@
                                                     </button>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button class="btn btn-icon btn-block" >
+                                                    <button class="btn btn-icon btn-block">
                                                         <i class="clip-list-3"></i>
-                                                       <a href="#panel_sessions"> <?php echo e(trans('site_lang.search_case_sessions')); ?></a> <span
+                                                        <?php echo e(trans('site_lang.search_case_sessions')); ?> <span
                                                             class="badge badge-info"
                                                             id="sessions_count"></span>
                                                     </button>
@@ -474,7 +474,7 @@
                         <button type="button" name="ok_button" id="ok_button"
                                 class="btn btn-danger"><?php echo e(trans('site_lang.public_accept_btn_text')); ?></button>
                         <button type="button" class="btn btn-default"
-                                data-dismiss="modal"><?php echo e(trans('site_lang.public_delete_text')); ?></button>
+                                data-dismiss="modal"><?php echo e(trans('site_lang.public_close_btn_text')); ?></button>
                     </div>
                 </div>
             </div>
@@ -507,7 +507,6 @@
                 select1_place_holder: "<?php echo e(trans('site_lang.clients_client_type_khesm_hint')); ?>",
                 add_session_btn: "<?php echo e(trans('site_lang.search_case_case_add_session')); ?>",
                 search_case_session_waiting: "<?php echo e(trans('site_lang.search_case_session_waiting')); ?>",
-                search_case_session_waiting: "<?php echo e(trans('site_lang.search_case_session_waiting')); ?>",
                 add_session_modal_title: "<?php echo e(trans('site_lang.search_case_session_modal_title')); ?>",
                 edit_session_modal_title: "<?php echo e(trans('site_lang.search_case_session_modal_title_edit')); ?>",
                 public_continue_delete_modal_text: "<?php echo e(trans('site_lang.public_continue_delete_modal_text')); ?>",
@@ -524,6 +523,7 @@
                 search_case_add_client: "<?php echo e(trans('site_lang.search_case_add_client')); ?>",
                 search_case_add_khesm: "<?php echo e(trans('site_lang.search_case_add_khesm')); ?>",
                 search_case_case_warning_text: "<?php echo e(trans('site_lang.search_case_case_warning_text')); ?>",
+                search_case_delete_session_text: "<?php echo e(trans('site_lang.search_case_delete_session_text')); ?>",
 
             }
 

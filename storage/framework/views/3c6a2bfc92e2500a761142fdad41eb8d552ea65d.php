@@ -52,9 +52,7 @@
                 <div class="toolbar row" style="direction:rtl;">
                     <div class="col-sm-12 hidden-xs">
                         <div class="page-header">
-                            <h1>attachments
-                                <small><?php echo e(trans('site_lang.side_welcome')); ?></small>
-                            </h1>
+                            <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_attachments')); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -66,12 +64,11 @@
 
                 <div class="row">
                     <div class="col-md-12"><br>
-                        <a href="<?php echo e(url('attachment/'.$case_id.'/create')); ?>" class="btn btn-primary">add new
-                            attachment</a>
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                <h5 class="text-bold">case attachments</h5>
+                                <a href="<?php echo e(url('attachment/'.$case_id.'/create')); ?>"
+                                   class="btn btn-primary text-bold"><?php echo e(trans('site_lang.attachments_new_attach')); ?></a>
                             </div>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover table-full-width"
@@ -81,16 +78,14 @@
                                         <th scope="col" class="hidden-xs center">#</th>
 
                                         <th scope="col"
-                                            class="hidden-xs center">file
+                                            class="hidden-xs center"><?php echo e(trans('site_lang.attachments_file_attach')); ?>
+
                                         </th>
                                         <th scope="col"
-                                            class="hidden-xs center">desc
+                                            class="hidden-xs center"><?php echo e(trans('site_lang.attachments_desc_attach')); ?>
+
                                         </th>
-                                        <th scope="col"
-                                            class="hidden-xs center">case id
-                                        </th>
-                                        <th scope="col"
-                                            class="hidden-xs center">
+                                        <th scope="col">
                                         </th>
 
 
@@ -123,20 +118,20 @@
 
                                             </td>
                                             <td class="hidden-xs center"><?php echo e($case_attachment->img_Description); ?></td>
-                                            <td class="hidden-xs center"><?php echo e($case_attachment->case_Id); ?></td>
-
-                                            <td><a class='btn btn-raised btn-primary btn-sml'
-                                                   href=" <?php echo e(url('attachment/'.$case_attachment->id.'/edit')); ?>"><i
+                                            <td class="hidden-xs center"><a class='btn btn-raised btn-primary btn-sml'
+                                                                            href=" <?php echo e(url('attachment/'.$case_attachment->id.'/edit')); ?>"><i
                                                         class="fa fa-edit"></i></a>
 
 
-                                                <form method="get" id='delete-form' action="<?php echo e(url('attachment/'.$case_attachment->id.'/delete')); ?>"
+                                                <form method="get" id='delete-form'
+                                                      action="<?php echo e(url('attachment/'.$case_attachment->id.'/delete')); ?>"
                                                       style='display: none;'>
                                                 <?php echo e(csrf_field()); ?>
 
-                                                <!-- <?php echo e(method_field('delete')); ?>   -->
+                                                <!-- <?php echo e(method_field('delete')); ?> -->
                                                 </form>
-                                                <button type="submit" class='btn btn-danger btn-primary btn-sml' form="delete-form">
+                                                <button type="submit" class='btn btn-danger btn-primary btn-sml'
+                                                        form="delete-form">
 
                                                     <i
                                                         class="fa fa-trash"></i>
