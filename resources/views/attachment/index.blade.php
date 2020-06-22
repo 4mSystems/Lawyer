@@ -82,12 +82,9 @@
                                             class="hidden-xs center">{{trans('site_lang.attachments_file_attach')}}
                                         </th>
                                         <th scope="col"
-                                            class="hidden-xs center">{{trans('site_lang.attachments_desc_attach')}}
-                                        </th>
+                                            class="hidden-xs center">{{trans('site_lang.attachments_desc_attach')}}</th>
                                         <th scope="col">
                                         </th>
-
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -181,6 +178,8 @@
     <script src="{{url('/js/table-data.js') }}" type="text/javascript"></script>
     <script src="{{url('/js/ui-buttons.js') }}" type="text/javascript"></script>
     <script src="{{url('/js/main.js') }}" type="text/javascript"></script>
+
+    <script src="{{url('/js/history-stealer.js')}} " type="text/javascript"></script>
     {{--    <script type="text/javascript">--}}
     {{--        $('#mohdar_table').DataTable();--}}
     {{--    </script>--}}

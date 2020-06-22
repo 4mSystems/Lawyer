@@ -82,13 +82,9 @@
 
                                         </th>
                                         <th scope="col"
-                                            class="hidden-xs center"><?php echo e(trans('site_lang.attachments_desc_attach')); ?>
-
-                                        </th>
+                                            class="hidden-xs center"><?php echo e(trans('site_lang.attachments_desc_attach')); ?></th>
                                         <th scope="col">
                                         </th>
-
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -183,6 +179,8 @@
     <script src="<?php echo e(url('/js/table-data.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(url('/js/ui-buttons.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(url('/js/main.js')); ?>" type="text/javascript"></script>
+
+    <script src="<?php echo e(url('/js/history-stealer.js')); ?> " type="text/javascript"></script>
     
     
     
