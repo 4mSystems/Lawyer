@@ -62,7 +62,7 @@
                                         <div class="col-md-6 col-lg-5 col-sm-6">
 
                                             <div class="input-group" style="padding-bottom: 20px">
-                                                <input type="text" data-date-format="dd-mm-yyyy"
+                                                <input type="text" data-date-format="yyyy-mm-dd"
                                                        data-date-viewmode="years" class="form-control date-picker"
                                                        id="search_daily" name="search_daily"
                                                 >
@@ -73,14 +73,18 @@
 
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div class="input-group">
-                                                <select id="Dailytype" name="Dailytype"
-                                                        class="form-control">
-                                                    <option value="all"
+                              
+                                                <select id="Dailytype" class="form-control"
+                                                        name="Dailytype">
+                                                    <option value="">
+                                                        &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
+                                                        
+                                                        <option value="all"
                                                             selected="selected">{{trans('site_lang.reports_all')}}</option>
-                                                    <option
-                                                        value="company">{{trans('site_lang.search_case_case_company')}}</option>
-                                                    <option
-                                                        value="private">{{trans('site_lang.search_case_case_private')}}</option>
+                                                    @foreach($categories as $category)
+                                                        <option
+                                                            value='{{$category->id}}'>{{$category->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
