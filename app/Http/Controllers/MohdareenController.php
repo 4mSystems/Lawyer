@@ -17,16 +17,45 @@ class MohdareenController extends Controller
 
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $permission = Permission::where('user_id', $user_id)->first();
-        $enabled = $permission->mohdreen;
-        if ($enabled == 'yes') {
-            $mohdareen = mohdr::query()->where('cat_id', '=', auth()->user()->cat_id)->get();
-            $categories = category::select('id', 'name')->get();
-            return view('mohdareen.mohdareen', compact('mohdareen', 'categories'));
-        } else {
-            return redirect(url('home'));
+        if (request()->ajax()) {
+            $user_id = auth()->user()->id;
+            $permission = Permission::where('user_id', $user_id)->first();
+            $enabled = $permission->mohdreen;
+            if ($enabled == 'yes') {
+                return datatables()->of(mohdr::query()->where('cat_id', '=', auth()->user()->cat_id)->get())
+                    ->addColumn('status', function ($data) {
+                        if ($data->status == trans('site_lang.public_no_text')) {
+                            $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
+                            <span class="label label-danger"> '.$data->status.'</span></p>';
+                        } else {
+                            $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
+                            <span class="label label-success"> '.$data->status.'</span></p>';
+                        }
+
+                        return $html;
+                    })
+                    ->addColumn('action', function ($data) {
+                        $button = '<button data-moh-Id="' . $data->moh_Id . '" id="editMohdar" class="btn btn-xs btn-blue tooltips" ><i
+                                    class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button data-moh-Id="' . $data->moh_Id . '" id="deleteMohadr"  class="btn btn-xs btn-red tooltips" ><i
+                                    class="fa fa-times fa fa-white"></i>&nbsp;&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button data-moh-Id="' . $data->moh_Id . '" id="showMohdar"  class="btn btn-xs btn-blue tooltips" ><i
+                                    class="fa fa-eye-slash"></i>&nbsp;&nbsp;' . trans('site_lang.home_more_options') . '</button>';
+
+                        return $button;
+                    })
+
+                    ->rawColumns(['status', 'action'])
+                    ->make(true);
+
+            } else {
+                return redirect(url('home'));
+            }
         }
+        $categories = category::select('id', 'name')->get();
+        return view('mohdareen/mohdareen', compact('categories'));
     }
 
     public function create()
@@ -51,34 +80,33 @@ class MohdareenController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->ajax()) {
-            $data = $this->validate(request(), [
-                'court_mohdareen' => 'required',
-                'paper_type' => 'required',
-                'deliver_data' => 'required',
-                'paper_Number' => 'required',
-                'session_Date' => 'required',
-                'case_number' => 'required',
-                'cat_id' => 'required',
-            ]);
-            $mokel = implode(',', $request->mokel_Name);
-            $khesm = implode(',', $request->khesm_Name);
-            $mohdar = new mohdr();
-            $mohdar->mokel_Name = $mokel;
-            $mohdar->khesm_Name = $khesm;
-            $mohdar->cat_id = $request->cat_id;
-            $mohdar->status = 'لا';
-            $mohdar->court_mohdareen = $request->court_mohdareen;
-            $mohdar->deliver_data = $request->deliver_data;
-            $mohdar->paper_type = $request->paper_type;
-            $mohdar->paper_Number = $request->paper_Number;
-            $mohdar->session_Date = $request->session_Date;
-            $mohdar->case_number = $request->case_number;
-            $mohdar->notes = $request->notes;
-            $mohdar->save();
-            $html = view('mohdareen.mohdareen_item', compact('mohdar'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
-        }
+
+        $data = $this->validate(request(), [
+            'court_mohdareen' => 'required',
+            'paper_type' => 'required',
+            'deliver_data' => 'required',
+            'mokel_Name' => 'required',
+            'khesm_Name' => 'required',
+            'paper_Number' => 'required',
+            'session_Date' => 'required',
+            'case_number' => 'required',
+
+        ]);
+        $mokel = implode(',', $request->mokel_Name);
+        $khesm = implode(',', $request->khesm_Name);
+        $mohdar = new mohdr();
+        $mohdar->mokel_Name = $mokel;
+        $mohdar->khesm_Name = $khesm;
+        $mohdar->cat_id = auth()->user()->cat_id;
+        $mohdar->court_mohdareen = $request->court_mohdareen;
+        $mohdar->deliver_data = $request->deliver_data;
+        $mohdar->paper_type = $request->paper_type;
+        $mohdar->paper_Number = $request->paper_Number;
+        $mohdar->session_Date = $request->session_Date;
+        $mohdar->case_number = $request->case_number;
+        $mohdar->notes = $request->notes;
+        $mohdar->save();
+        return response()->json(['success' => trans('site_lang.public_success_text')]);
     }
 
     public function getCase($search)
@@ -103,11 +131,11 @@ class MohdareenController extends Controller
     {
         $status = false;
         $mohdar = mohdr::find($id);
-        if ($mohdar->status == "لا") {
-            $mohdar->status = "نعم";
+        if ($mohdar->status == trans('site_lang.public_no_text')) {
+            $mohdar->status = 'Yes';
             $status = true;
         } else {
-            $mohdar->status = "لا";
+            $mohdar->status = 'No';
             $status = false;
         }
         $mohdar->update();
