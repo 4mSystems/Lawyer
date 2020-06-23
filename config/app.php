@@ -181,6 +181,8 @@ return [
         PHPJasper\PHPJasperServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        //Yajra
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -236,6 +238,8 @@ return [
 //        'PDF' => Barryvdh\DomPDF\Facade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'Up' => App\Http\Controllers\Upload::class,
+        //Yajra
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];

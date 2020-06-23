@@ -4,7 +4,7 @@
           type="text/css"/>
     <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{url('/plugins/select2/select2.css') }}"/>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 @endsection
 @section('content')
     <div class="main-container inner">
@@ -61,11 +61,6 @@
                                         <th class="center"></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    @foreach($clients as $client)
-                                        @include('clients.clients_item')
-                                    @endforeach
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -84,8 +79,8 @@
                         <h4 class="modal-title" id="modal_title"></h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" id="clients">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <form method="post" id="clients" enctype="multipart/form-data">
+                            <input type="hidden" id="token" name="_token" value="{{csrf_token()}}">
                             <input type="hidden" name="id" id="id">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -143,22 +138,24 @@
 
 
                                         </select>
-
+                                        <span class="text-danger" id="type_error"></span>
                                     </div>
                                 </div>
 
 
                             </div>
+                            <div class="form-group right">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">
+                                    {{trans('site_lang.public_close_btn_text')}}
+                                </button>
+                                <input type="hidden" name="hidden_id" id="hidden_id"/>
+                                <input type="submit" class="btn btn-primary" id="add_client" name="add_client"
+                                       value="{{trans('site_lang.public_add_btn_text')}}"/>
+                            </div>
                         </form>
 
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">
-                            {{trans('site_lang.public_close_btn_text')}}
-                        </button>
-                        <input type="submit" class="btn btn-primary" id="add_client" name="add_client"
-                               value="{{trans('site_lang.public_add_btn_text')}}"/>
-                    </div>
+
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -187,72 +184,121 @@
 @endsection
 @section('scripts')
     <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
-    <script type="text/javascript">
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $(document).ready(function () {
-            $('#client_tbl').DataTable();
+            $('#client_tbl').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('clients.index') }}",
+                },
+                columns: [
+                    {
+                        data: 'id',
+                        name: 'id',
+                        className: 'center'
+                    },
+                    {
+                        data: 'client_Name',
+                        name: 'client_Name',
+                        className: 'center'
+                    }, {
+                        data: 'client_Unit',
+                        name: 'client_Unit',
+                        className: 'center'
+                    }, {
+                        data: 'client_Address',
+                        name: 'client_Address',
+                        className: 'center'
+                    }, {
+                        data: 'notes',
+                        name: 'notes',
+                        className: 'center'
+                    }, {
+                        data: 'type',
+                        name: 'type',
+                        orderable: false,
+                        className: 'center'
+                    },
 
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        className: 'center'
+                    }
+                ]
+            });
             $('#addClientModal').click(function () {
                 $('#modal_title').text("{{trans('site_lang.clients_add_new_client_text')}}");
                 $('#add_client').val("{{trans('site_lang.public_add_btn_text')}}");
                 $('#add_client_model').modal('show');
             });
-
-            $('#add_client').click(function () {
-                var form = $('#clients').serialize();
+            $('#clients').on('submit', function (event) {
+                event.preventDefault();
                 if ($('#add_client').val() == '{{trans('site_lang.public_add_btn_text')}}') {
                     $.ajax({
                         url: "{{route('clients.store')}}",
-                        dataType: 'json',
-                        data: form,
-                        type: 'post',
+                        method: 'post',
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        dataType: "json",
                         beforeSend: function () {
                             $('#client_Name_error').empty();
                             $('#client_Unit_error').empty();
                             $('#client_Address_error').empty();
                             $('#notes_error').empty();
-                        }, success: function (data) {
-                            $('#client_tbl tbody').prepend(data.result);
-                            $('#client_tbl').DataTable();
+                            $('#type_error').empty();
+                        },
+                        success: function (data) {
                             $('#add_client_model').modal('hide');
-                            toastr.success(data.msg);
+                            toastr.success(data.success);
                             $("#clients").trigger('reset');
+                            $('#client_tbl').DataTable().ajax.reload();
                         }, error: function (data_error, exception) {
                             if (exception == 'error') {
                                 $('#client_Name_error').html(data_error.responseJSON.errors.client_Name);
                                 $('#client_Unit_error').html(data_error.responseJSON.errors.client_Unit);
                                 $('#client_Address_error').html(data_error.responseJSON.errors.client_Address);
                                 $('#notes_error').html(data_error.responseJSON.errors.notes);
+                                $('#type_error').html(data_error.responseJSON.errors.type);
                             }
                         }
                     });
                 } else {
                     $.ajax({
                         url: "{{ route('clients.update') }}",
-                        dataType: 'json',
-                        data: form,
-                        type: 'post',
+                        method: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        dataType: "json",
                         beforeSend: function () {
                             $('#client_Name_error').empty();
                             $('#client_Unit_error').empty();
                             $('#client_Address_error').empty();
                             $('#notes_error').empty();
+                            $('#type_error').empty();
                         }, success: function (data) {
-                            var data_id = data.result.id;
-                            $("#clientId" + data.result.id).html(data.result.id);
-                            $("#clientName" + data.result.id).html(data.result.client_Name);
-                            $("#clientUnit" + data.result.id).html(data.result.client_Unit);
-                            $("#clientAddress" + data.result.id).html(data.result.client_Address);
-                            $("#clientNotes" + data.result.id).html(data.result.notes);
-                            $("#clientType" + data.result.id).html(data.result.type);
-                            toastr.success(data.msg);
                             $('#add_client_model').modal('hide');
+                            toastr.success(data.success);
                             $("#clients").trigger('reset');
+                            $('#client_tbl').DataTable().ajax.reload();
                         }, error: function (data_error, exception) {
                             if (exception == 'error') {
                                 $('#client_Name_error').html(data_error.responseJSON.errors.client_Name);
                                 $('#client_Unit_error').html(data_error.responseJSON.errors.client_Unit);
                                 $('#client_Address_error').html(data_error.responseJSON.errors.client_Address);
                                 $('#notes_error').html(data_error.responseJSON.errors.notes);
+                                $('#type_error').html(data_error.responseJSON.errors.type);
                             }
                         }
                     });
@@ -268,7 +314,11 @@
                         $('#client_Unit').val(html.data.client_Unit);
                         $('#client_Address').val(html.data.client_Address);
                         $('#notes').val(html.data.notes);
-                        $('#type').val(html.data.type);
+                        if (html.data.type == '{{trans('site_lang.clients_client_type_client')}}') {
+                            $('#type').val('client');
+                        } else {
+                            $('#type').val('khesm');
+                        }
                         $('#id').val(html.data.id);
                         $('#modal_title').text("{{trans('site_lang.clients_edit_client_text')}}");
                         $('#add_client').val("{{trans('site_lang.public_edit_btn_text')}}");
@@ -283,7 +333,6 @@
                 client_id = $(this).data('client-id');
                 $('#confirmModal').modal('show');
             });
-
             $('#ok_button').click(function () {
                 $.ajax({
                     url: "clients/destroy/" + client_id,
@@ -293,17 +342,18 @@
                     success: function (data) {
                         setTimeout(function () {
                             $('#confirmModal').modal('hide');
-                            $('#userRow' + client_id).remove();
+                            $('#client_tbl').DataTable().ajax.reload();
                         }, 100);
                     }
                 })
             });
-        });
-        $(document).ready(function () {
-            $(".modal").on("hidden.bs.modal", function () {
-                $("#clients").trigger('reset');
+            $(document).ready(function () {
+                $(".modal").on("hidden.bs.modal", function () {
+                    $("#clients").trigger('reset');
+                });
             });
         });
+
     </script>
     <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
     <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
