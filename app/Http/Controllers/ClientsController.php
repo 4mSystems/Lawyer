@@ -6,6 +6,7 @@ use App\Clients;
 use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ClientsController extends Controller
 {
@@ -16,115 +17,99 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $permission = Permission::where('user_id', $user_id)->first();
-        $enabled = $permission->clients;
-        if ($enabled == 'yes') {
-            $clients = DB::table('clients')
-                ->orderBy('id', 'desc')
-                ->get();
-            return view('clients/clients', compact('clients'));
-        } else {
-            return redirect(url('home'));
+        if (request()->ajax()) {
+            $user_id = auth()->user()->id;
+            $permission = Permission::where('user_id', $user_id)->first();
+            $enabled = $permission->clients;
+            if ($enabled == 'yes') {
+                return datatables()->of(Clients::latest()->get())
+                    ->addColumn('action', function ($data) {
+                        $button = '<button data-client-id="' . $data->id . '" id="editClient" class="btn btn-xs btn-blue tooltips" ><i
+                                    class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
+                          $button .= '&nbsp;&nbsp;';    
+                        $button .= '<a href = "profile/'. $data->id .'" data-client-id="' . $data->id . '" id="viewClient" class="btn btn-xs btn-green tooltips" ><i
+                                    class="fa fa-view"></i>&nbsp;&nbsp;' . trans('site_lang.public_view_btn_text') . '</a>';            
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button data-client-id="' . $data->id . '" id="deleteClient"  class="btn btn-xs btn-red tooltips" ><i
+                                    class="fa fa-times fa fa-white"></i>&nbsp;&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
+                        return $button;
+                    })
+                    
+                    ->rawColumns(['action'])
+                    ->make(true);
+            } else {
+                return redirect(url('home'));
+            }
         }
-
+        return view('clients/clients');
     }
 
 
-/**
- * Show the form for creating a new resource.
- *
- * @return \Illuminate\Http\Response
- */
-public
-function create()
-{
-    //
-}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function create()
+    {
+        //
+    }
 
 
-public
-function store(Request $request)
-{
-    if ($request->ajax()) {
-
-        $attribute = [
-            'client_Name' => trans('usersValidations.client_Name'),
-            'client_Unit' => trans('usersValidations.client_Unit'),
-            'client_Address' => trans('usersValidations.client_Address'),
-            'notes' => trans('usersValidations.notes'),
-
-        ];
+    public
+    function store(Request $request)
+    {
         $data = $this->validate(request(), [
             'client_Name' => 'required',
-            'client_Unit' => 'required|unique:users,email',
+            'client_Unit' => 'required',
             'client_Address' => 'required',
             'notes' => 'required',
             'type' => 'required|in:client,khesm'
-        ], [], $attribute);
-        $client = Clients::create($data);
-        $html = view('clients.clients_item', compact('client'))->render();
-        return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
+        ]);
+        Clients::create($data);
+        return response()->json(['success' => trans('site_lang.public_success_text')]);
     }
-    return redirect()->route('users.users')->with('success', 'Client Added successfully');
-
-}
 
 
-public
-function show($id)
-{
+    public
+    function show($id)
+    {
 
-}
+    }
 
 
-public
-function edit($id)
-{
-    if (request()->ajax()) {
+    public
+    function edit($id)
+    {
+        if (request()->ajax()) {
+            $data = Clients::findOrFail($id);
+            return response()->json(['data' => $data]);
+        }
+    }
+
+
+    public
+    function update(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = $this->validate(request(), [
+                'client_Name' => 'required',
+                'client_Unit' => 'required|unique:users,email',
+                'client_Address' => 'required',
+                'notes' => 'required',
+                'type' => 'required|in:client,khesm'
+            ]);
+            Clients::find($request->id)->update($data);
+            return response(['success' => trans('site_lang.public_success_text')]);
+        }
+    }
+
+    public
+    function destroy($id)
+    {
         $data = Clients::findOrFail($id);
-        return response()->json(['data' => $data]);
+        $data->delete();
     }
-}
-
-
-public
-function update(Request $request)
-{
-    if ($request->ajax()) {
-        $attribute = [
-            'client_Name' => trans('usersValidations.client_Name'),
-            'client_Unit' => trans('usersValidations.client_Unit'),
-            'client_Address' => trans('usersValidations.client_Address'),
-            'notes' => trans('usersValidations.notes')
-        ];
-        $data = $this->validate(request(), [
-            'client_Name' => 'required',
-            'client_Unit' => 'required|unique:users,email',
-            'client_Address' => 'required',
-            'notes' => 'required',
-            'type' => 'required|in:client,khesm'
-        ], [], $attribute);
-        $clients = Clients::find($request->id);
-        $clients->client_Name = $request->input('client_Name');
-        $clients->client_Unit = $request->input('client_Unit');
-        $clients->client_Address = $request->input('client_Address');
-        $clients->notes = $request->input('notes');
-        $clients->type = $request->input('type');
-        $clients->update();
-        if ($clients->type == 'client') {
-            $clients->type = trans('site_lang.clients_client_type_client');
-        } else {
-            $clients->type = trans('site_lang.clients_client_type_khesm');
-        }
-        return response(['msg' => trans('site_lang.public_success_text'), 'result' => $clients]);
-    }
-}
-
-public
-function destroy($id)
-{
-    $data = Clients::findOrFail($id);
-    $data->delete();
-}
 }

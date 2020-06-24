@@ -19,8 +19,7 @@ class CaseAttachmentController extends Controller
     {
         $case_id = $id;
       $case_attachment=  attachment::where('case_id',$id)->get();
-//      dd($case_attachment);
-        return view('attachment.index',compact('case_attachment','case_id'));
+         return view('attachment.index',compact('case_attachment','case_id'));
     }
 
     /**
@@ -71,7 +70,7 @@ class CaseAttachmentController extends Controller
 
 
         $data['case_Id'] = $id;
-        attachment::create($data); 
+        attachment::create($data);
         return redirect(url('attachment/'.$id));
     }
 

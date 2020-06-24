@@ -119,13 +119,27 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group{{$errors->has('type')?' has-error':''}}">
-                                        <select id="form-field-select-1" name="form-field-select-1" required
+                                        <select id="type" name="type" required
                                                 class="form-control">
                                             <option value="" selected="selected">&nbsp;</option>
                                             <option value="Admin">ِAdmin</option>
                                             <option value="User">User</option>
                                         </select>
                                         <span class="text-danger" id=type_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group{{$errors->has('cat_id')?' has-error':''}}">
+                                        <select id="form-field-select-3" class="form-control select2-arrow"
+                                                name="cat_id">
+                                            <option value="">
+                                                &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
+                                            @foreach($categories as $category)
+                                                <option
+                                                    value='{{$category->id}}'>{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-danger" id="cat_id"></span>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +189,7 @@
             });
 
             $('#add_user').click(function () {
-                var form = $('#users').serialize() + '&type=' + $('select option:selected').text();
+                var form = $('#users').serialize();
                 if ($('#add_user').val() == '{{trans('site_lang.public_add_btn_text')}}') {
                     $.ajax({
                         url: "{{route('users.store')}}",
@@ -186,6 +200,7 @@
                             $('#name_error').empty();
                             $('#password_error').empty();
                             $('#email_error').empty();
+                            $('#cat_id').empty();
                         }, success: function (data) {
                             // if (data.status == true) {
                             $('#list_users tbody').append(data.result);
@@ -198,6 +213,7 @@
                                 $('#password_error').html(data_error.responseJSON.errors.password);
                                 $('#email_error').html(data_error.responseJSON.errors.email);
                                 $('#type_error').html(data_error.responseJSON.errors.type);
+                                $('#cat_id').html(data_error.responseJSON.errors.cat_id);
                             }
                         }
                     });

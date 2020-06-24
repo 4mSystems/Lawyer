@@ -25,6 +25,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('clients', 'ClientsController');
     Route::post('clients/update', 'ClientsController@update')->name('clients.update');
     Route::get('clients/destroy/{id}', 'ClientsController@destroy');
+//categories
+    Route::resource('categories', 'CategoryController');
+    Route::post('categories/update', 'CategoryController@update')->name('categories.update');
+    Route::get('categories/destroy/{id}', 'CategoryController@destroy');
 
 //cases
     Route::get('addCase', 'CasesController@getClients');
@@ -102,11 +106,26 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('attachment/{id}/delete', 'CaseAttachmentController@destroy');
 
 
+
     Route::post('attachment/{id}/update', 'CaseAttachmentController@update');
  
 //permission
 
     Route::resource('permission', 'PermissionController');
+
+// client profile 
+Route::get('profile/{id}', 'ClientProfileController@profile');
+
+
+Route::get('profile/deletenote/{id}', 'ClientProfileController@delete_Note');
+
+
+Route::get('profile/{id}/edit_note', 'ClientProfileController@edit_note');
+
+Route::post('profile/{id}/edit_notes', 'ClientProfileController@update_note');
+
+Route::post('profile/store/{id}', 'ClientProfileController@store');
+Route::get('profile/client_cases/{id}', 'ClientProfileController@client_cases');
 
 
 }

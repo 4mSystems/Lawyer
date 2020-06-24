@@ -8,9 +8,35 @@ $(document).ready(function () {
 
     $('#searchContainer').hide();
 
-    $('#search').on('input', function (e) {
+    // $('#search').on('input', function (e) {
+    //     $('#cases tbody').empty();
+    //     var data = $(this).val();
+    //     if (data != '') {
+    //         $('#searchContainer').show();
+    //     } else {
+    //         $('#searchContainer').hide();
+    //     }
+    //     $.ajax({
+    //         url: "caseDetails/getSearchResult/" + data,
+    //         dataType: 'json',
+    //         type: 'get',
+    //         success: function (data) {
+    //             // $.each(data.result, function (data) {
+    //
+    //             $('#cases tbody').append(data.result);
+    //             if (data.status) {
+    //                 $('#searchContainer').show();
+    //             } else {
+    //
+    //             }
+    //             // });
+    //         }
+    //
+    //     });
+    // });
+    $(document).on('click', '#search_case_btn', function () {
         $('#cases tbody').empty();
-        var data = $(this).val();
+        var data = $('#search').val();
         if (data != '') {
             $('#searchContainer').show();
         } else {
@@ -35,6 +61,9 @@ $(document).ready(function () {
         });
     });
     $(document).on('click', '#showCaseData', function () {
+        $('#mokel_table tbody').empty();
+        $('#khesm_table tbody').empty();
+        $('#sessions_table tbody').empty();
         caseId = $(this).data('case-id');
         $('#mainContainer').show();
         var href = "caseDetails/printCase/" + caseId;
@@ -135,11 +164,8 @@ $(document).ready(function () {
                 data: form,
                 type: 'post',
                 success: function (data) {
-                    // if (data.status == true) {
-                    // $('#sessions-table tbody').append(data.result);
                     $('#sessions_table').prepend(data.result);
                     $('#sessions_table').DataTable();
-
                     $('#add_session_model').modal('hide');
                     toastr.success(data.msg);
                     $("#sessionForm").trigger('reset');
@@ -207,6 +233,12 @@ $(document).ready(function () {
                         $('#userRow' + session_id).remove();
                         $('#ok_button').text(config.trans.public_delete_text);
                     }, 1000);
+                }, error: function (data_error, exception) {
+                    var warning = config.trans.search_case_delete_session_text;
+                    console.log(warning);
+                    $('#confirmModal').modal('hide');
+                    $('#ok_button').text(config.trans.public_delete_text);
+                    toastr.error(config.trans.search_case_delete_session_text);
                 }
             })
         } else if (who_delete == "clients") {

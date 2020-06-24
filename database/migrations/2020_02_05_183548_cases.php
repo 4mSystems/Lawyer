@@ -20,7 +20,8 @@ class Cases extends Migration
             $table->string('court');
             $table->string('first_session_date');
             $table->string('inventation_type');
-            $table->string('to_whome');
+            $table->bigInteger('to_whome')->unsigned();
+            $table->foreign('to_whome')->references('id')->on('categories');
             $table->string('descion')->default('not yet');
             $table->string('month')->default('2');;
             $table->string('year')->default('2');;

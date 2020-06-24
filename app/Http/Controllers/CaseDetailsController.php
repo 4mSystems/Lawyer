@@ -9,6 +9,7 @@ use App\Sessions;
 use App\Session_Notes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use PDF;
 use App\Permission;
 
@@ -36,15 +37,22 @@ class CaseDetailsController extends Controller
     {
         $cases_table = array();
         if (!empty($search)) {
-            $results = Cases::query()
-                ->Where('invetation_num', 'LIKE', "%{$search}%")
-                ->orWhere('circle_num', 'LIKE', "%{$search}%")
+            $results = Cases::join('case_clients', 'case_clients.case_id', 'cases.id')
+                ->join('clients', 'clients.id', 'case_clients.client_id')
+                ->where('cases.circle_num', 'LIKE', "%{$search}%")
+                ->orWhere('clients.client_Name', 'LIKE', "%{$search}%")
+                ->orWhere('cases.invetation_num', 'LIKE', "%{$search}%")
+                ->select('cases.id', 'clients.client_Name', 'cases.invetation_num', 'cases.court')
                 ->get();
-
-            foreach ($results as $result) {
+            //            ->orWhereHas('clients', function ($q) use ($search) {
+//                return $q->where('clients.client_Name', 'LIKE', '%' . $search . '%');
+//            })->with(['clients' => function ($query)use ($search) {
+//                return $query->where('clients.client_Name', 'LIKE', '%' . $search . '%');
+//            }])
+            foreach ($results as $key => $result) {
                 $cases_table [] = view('cases.session_result_case_item', compact('result'))->render();
             }
-            return response(['status' => true, 'result' => $cases_table]);
+            return response(['status' => true, 'result' => array_unique($cases_table)]);
         }
     }
 

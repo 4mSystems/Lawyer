@@ -15,15 +15,6 @@
                 <!-- start: PAGE HEADER -->
                 <!-- start: TOOLBAR -->
                 <div class="toolbar row">
-                    
-                    
-                    
-
-                    
-                    
-                    
-
-
                     <div class="toolbar-tools pull-right">
                         <!-- start: TOP NAVIGATION MENU -->
                         <ul class="nav navbar-right">
@@ -45,7 +36,7 @@
                                                        id="search">
                                                 <span class="input-group-btn">
 																<button class="btn btn-main-color btn-squared"
-                                                                        type="button">
+                                                                        type="button" id="search_case_btn">
 																	<i class="fa fa-search"></i>
 																</button> </span>
                                             </div>
@@ -86,6 +77,7 @@
                                 <thead>
                                 <tr>
                                     <th class="hidden-xs center">#</th>
+                                    <th class="hidden-xs center">اسم الموكل \ اسم الخصم</th>
                                     <th class="hidden-xs center">رقم الدعوى</th>
                                     <th class="hidden-xs center">المحكمة</th>
                                     <th class="hidden-xs center"></th>
@@ -141,7 +133,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button class="btn btn-icon btn-block">
+                                                    <button class="btn btn-icon btn-block" href="#panel_sessions">
                                                         <i class="clip-calendar"></i>
                                                         <?php echo e(trans('site_lang.mohdar_notes')); ?> <span
                                                             class="badge badge-info"
@@ -482,7 +474,7 @@
                         <button type="button" name="ok_button" id="ok_button"
                                 class="btn btn-danger"><?php echo e(trans('site_lang.public_accept_btn_text')); ?></button>
                         <button type="button" class="btn btn-default"
-                                data-dismiss="modal"><?php echo e(trans('site_lang.public_delete_text')); ?></button>
+                                data-dismiss="modal"><?php echo e(trans('site_lang.public_close_btn_text')); ?></button>
                     </div>
                 </div>
             </div>
@@ -515,7 +507,6 @@
                 select1_place_holder: "<?php echo e(trans('site_lang.clients_client_type_khesm_hint')); ?>",
                 add_session_btn: "<?php echo e(trans('site_lang.search_case_case_add_session')); ?>",
                 search_case_session_waiting: "<?php echo e(trans('site_lang.search_case_session_waiting')); ?>",
-                search_case_session_waiting: "<?php echo e(trans('site_lang.search_case_session_waiting')); ?>",
                 add_session_modal_title: "<?php echo e(trans('site_lang.search_case_session_modal_title')); ?>",
                 edit_session_modal_title: "<?php echo e(trans('site_lang.search_case_session_modal_title_edit')); ?>",
                 public_continue_delete_modal_text: "<?php echo e(trans('site_lang.public_continue_delete_modal_text')); ?>",
@@ -532,11 +523,9 @@
                 search_case_add_client: "<?php echo e(trans('site_lang.search_case_add_client')); ?>",
                 search_case_add_khesm: "<?php echo e(trans('site_lang.search_case_add_khesm')); ?>",
                 search_case_case_warning_text: "<?php echo e(trans('site_lang.search_case_case_warning_text')); ?>",
-
+                search_case_delete_session_text: "<?php echo e(trans('site_lang.search_case_delete_session_text')); ?>",
             }
-
         };
-
     </script>
 
     <script src="<?php echo e(url('/js/cases-details.js')); ?>"></script>
@@ -550,5 +539,4 @@
     UIModals.init();
     PagesUserProfile.init();
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/search_case.blade.php ENDPATH**/ ?>

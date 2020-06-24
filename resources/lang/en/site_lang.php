@@ -20,5 +20,6 @@ return [
     'side_add_case' => 'إضافة دعوى',
     'side_search_case' => 'البحث عن الدعاوى',
     'side_mohdar' => 'المحضرين',
+    'public_view_btn_text'=>'client profile'
 
 ];

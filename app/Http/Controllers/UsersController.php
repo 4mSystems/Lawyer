@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category;
 use App\Permission;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class UsersController extends Controller
         $enabled = $permission->users;
         if ($enabled == 'yes') {
             $users = User::all();
-            return view('users/users', compact('users'));
+            $categories = category::select('id', 'name')->get();
+            return view('users/users', compact('users', 'categories'));
         } else {
             return redirect(url('home'));
         }
@@ -36,19 +38,13 @@ class UsersController extends Controller
     {
 
         if ($request->ajax()) {
-
-            $attribute = [
-                'name' => trans('usersValidations.name'),
-                'email' => trans('usersValidations.email'),
-                'password' => trans('usersValidations.password'),
-                'type' => trans('usersValidations.type')
-            ];
             $data = $this->validate(request(), [
                 'name' => 'required',
                 'email' => 'required|unique:users,email',
                 'password' => 'required',
-                'type' => 'required'
-            ], [], $attribute);
+                'type' => 'required',
+                'cat_id' => 'required'
+            ]);
 
             $data['password'] = bcrypt(request('password'));
 
