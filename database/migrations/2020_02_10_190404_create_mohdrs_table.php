@@ -22,11 +22,11 @@ class CreateMohdrsTable extends Migration
             $table->date('session_Date');
             $table->string('mokel_Name');
             $table->string('khesm_Name');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->bigInteger('cat_id')->unsigned();
             $table->foreign('cat_id')->references('id')->on('categories');
             $table->string('case_number');
-            $table->string('status')->default('لا');
+            $table->string('status')->default('No');
             $table->timestamps();
         });
     }
