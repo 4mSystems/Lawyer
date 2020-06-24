@@ -185,6 +185,7 @@
 @section('scripts')
     <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
     <script>
+        var client_id;
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -332,6 +333,28 @@
   
             var client_id;
 
+            $(document).on('click', '.btn-lg', function () {
+                var id = $(this).data('moh-Id');
+                $.ajax({
+                    url: "mohdareen/updateStatus/" + id,
+                    dataType: "json",
+                    success: function (html) {
+                        $("#status" + html.result.moh_Id).html(html.result.status);
+                        // var status = html.status;
+                        if (html.status) {
+                            $("#status" + html.result.moh_Id).removeClass("label label-danger");
+                            $("#status" + html.result.moh_Id).addClass("label label-success");
+                            toastr.success(html.msg);
+                        } else {
+                            $("#status" + html.result.moh_Id).removeClass("label label-success");
+                            $("#status" + html.result.moh_Id).addClass("label label-danger");
+                            toastr.error(html.msg);
+                        }
+                    }
+                })
+            });
+
+            
             $(document).on('click', '#deleteClient', function () {
                 client_id = $(this).data('client-id');
                 $('#confirmModal').modal('show');

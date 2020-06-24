@@ -6,6 +6,7 @@ use App\Cases;
 use App\Permission;
 use Illuminate\Http\Request;
 use App\Sessions;
+use App\category;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
@@ -31,8 +32,10 @@ class ReportsController extends Controller
         $user_id = auth()->user()->id;
         $permission = Permission::where('user_id', $user_id)->first();
         $enabled = $permission->daily_report;
+        $categories = category::select('id', 'name')->get();
+
         if ($enabled == 'yes') {
-            return view('Reports.CasesDailyReport');
+            return view('Reports.CasesDailyReport',compact('categories'));
         } else {
             return redirect(url('home'));
         }
@@ -42,9 +45,10 @@ class ReportsController extends Controller
     {
         $user_id = auth()->user()->id;
         $permission = Permission::where('user_id', $user_id)->first();
+        $categories = category::select('id', 'name')->get();
         $enabled = $permission->monthly_report;
         if ($enabled == 'yes') {
-            return view('Reports.CasesMonthlyReport');
+            return view('Reports.CasesMonthlyReport',compact('categories'));
 
         } else {
             return redirect(url('home'));
@@ -77,12 +81,13 @@ class ReportsController extends Controller
     public function edit($searchDate, $type)
     {
         $sessions_table = array();
-
-
+        $khesm;
+        $clients;
+   
         if ($type == 'all') {
             $results = Sessions::with('cases', 'Printnotes')
-                ->where('session_date', '=', $searchDate)
-                ->get();
+            ->where('session_date', '=', $searchDate)
+            ->get();
         } else {
             $results = Sessions::with('cases', 'Printnotes')
                 ->where('session_date', '=', $searchDate)
@@ -97,7 +102,7 @@ class ReportsController extends Controller
             $clients = $case->clients;
 
             foreach ($clients as $key => $client) {
-                if ($client->type == 'khesm') {
+                if ($client->type == trans('site_lang.clients_client_type_khesm')) {
                     $khesm = $client;
                 } else {
                     $clients = $client;
@@ -134,7 +139,7 @@ class ReportsController extends Controller
             $clients = $case->clients;
 
             foreach ($clients as $key => $client) {
-                if ($client->type == 'khesm') {
+                if ($client->type == trans('site_lang.clients_client_type_khesm')) {
                     $khesm = $client;
                 } else {
                     $clients = $client;
@@ -175,7 +180,7 @@ class ReportsController extends Controller
             $clients = $case->clients;
 
             foreach ($clients as $key => $client) {
-                if ($client->type == 'khesm') {
+                if ($client->type == trans('site_lang.clients_client_type_khesm')) {
                     $khesm = $client;
                 } else {
                     $clients = $client;
@@ -208,7 +213,7 @@ class ReportsController extends Controller
             $clients = $case->clients;
 
             foreach ($clients as $key => $client) {
-                if ($client->type == 'khesm') {
+                if ($client->type == trans('site_lang.clients_client_type_khesm')) {
                     $khesm = $client;
                 } else {
                     $clients = $client;

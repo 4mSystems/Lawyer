@@ -5,7 +5,7 @@
     <td class="hidden-xs center">{{$result->cases->circle_num}}</td>
     <td class="hidden-xs center">{{$result->cases->inventation_type}}</td>
     <td class="hidden-xs center">{{$result->session_date}}</td>
-    @if ($result->notes ==null)
+    @if ($result->printnotes ==null)
         <td class="hidden-xs center">----</td>
     @else
         <td class="hidden-xs center">{{$result->printnotes->note}}</td>

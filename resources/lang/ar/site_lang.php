@@ -14,6 +14,8 @@ return [
     */
     // public use
     'public_add_btn_text' => 'إضافة',
+    'public_no_text' => 'قيد الانتظار',
+    'public_yes_text' => 'تم التنفيذ',
     'public_edit_btn_text' => 'تعديل',
     'public_close_btn_text' => 'إلغاء',
     'public_accept_btn_text' => 'موافقة',
