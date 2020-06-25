@@ -196,8 +196,6 @@
                                         </div>
                                     </div>
                                 </div> 
-                                     
-                                  
 
                                 </div>
                             </div>
@@ -310,8 +308,7 @@
     </div>
 
 
-
-
+ 
 @endsection
 @section('scripts')
     <!-- {{--    <script src="{{url('/plugins/jquery.pulsate/jquery.pulsate.min.js) }}"></script>--}}
@@ -323,6 +320,9 @@
     <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
     <script src="{{url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js') }}"></script>
+  
+    
+
     <script src="{{url('/js/form-elements.js') }}"></script> 
      <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
     <script>
@@ -332,10 +332,13 @@
             }
         });
         $(document).ready(function () {
-            var id = $('#client_id').val(); 
+            var id = $('#client_id').val();  
             $('#clientnotes_tbl').DataTable({
                 processing: true,
                 serverSide: true,
+                
+
+
                 ajax: {
                     url: "/profile/"+ id ,
                 },
@@ -357,11 +360,12 @@
                         orderable: false,
                         className: 'center'
                     }
-                ]
-            
+                ],
+          
         });
+        
     });
-// 
+     
 
 $.ajaxSetup({
             headers: {
@@ -509,6 +513,8 @@ $.ajaxSetup({
 
 
             </script>
+            
+            
 
 @endsection
 @section('scriptDocument')

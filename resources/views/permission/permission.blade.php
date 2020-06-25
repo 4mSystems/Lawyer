@@ -127,9 +127,9 @@
 
                                         <div class="form-group">
                                             <strong>{{trans('site_lang.empName')}}</strong>
-                                            {{ Form::label('user_id',$permission->getUser->name,
+                                              {{ Form::label('user_id',$permission->getUser->name,
                                                 $permission->getUser->name
-                                            ,["class"=>"form-control " ]) }}
+                                            ,["class"=>"form-control " ]) }} 
                                         </div>
 
 
@@ -273,7 +273,7 @@
                             padding-right: 15px;
                              padding-left: 20px;
                              '>
-                                        {{ Form::submit( trans('admin.edit') ,['class'=>'btn btn-primary']) }}
+                                        {{ Form::submit( trans('site_lang.edit') ,['class'=>'btn btn-primary']) }}
                                     </div>
                                     {{ Form::close() }}
                                 </div>

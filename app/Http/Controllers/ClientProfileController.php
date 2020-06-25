@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Clients;
 use App\Client_Note;
 use App\Cases;
-use App\Case_client;
+use App\Case_client; 
+use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\DataTables;
 
 
 class ClientProfileController extends Controller
@@ -16,10 +18,9 @@ class ClientProfileController extends Controller
         
         $client_data = Clients::findOrFail($id); 
         // client notes data table  
-
-        if (request()->ajax()) {
-             
-        return  datatables()->of(Client_Note::where('client_id',$id)->get())
+        $table =null;
+        if (request()->ajax()) { 
+            $table = datatables()->of(Client_Note::where('client_id',$id)->get())
                     ->addColumn('action', function ($data) {
                         $button = '<button  data-client-id="' . $data->id . '" id="editnote" class="btn btn-xs btn-green tooltips" ><i
                         class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.edit') . '</button>';            
@@ -29,13 +30,12 @@ class ClientProfileController extends Controller
                          
                        
                                     return $button;
-                    })
+                    })->rawColumns(['action'])->make(true); 
                     
-                    ->rawColumns(['action'])
-                    ->make(true);
+                    return $table;
 
-         
-                }
+           }
+           
         return view('clients/profile', compact('client_data'));
         
     }
