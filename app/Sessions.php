@@ -8,7 +8,7 @@ class Sessions extends Model
 {
     protected $table = 'sessions';
     protected $fillable = ['session_date', 'case_Id', 'month', 'year', 'status'];
-    protected $attributes = ['status' => 'waiting'];
+    protected $attributes = ['status' => 'No'];
 
     public function cases()
     {
@@ -30,4 +30,13 @@ class Sessions extends Model
         return $this->belongsToMany(Sessions::class, 'session_Id');
     }
 
+    public function getStatusAttribute($value)
+    {
+
+        if ($value == 'No') {
+            return trans('site_lang.public_no_text');
+        } else {
+            return trans('site_lang.public_yes_text');
+        }
+    }
 }

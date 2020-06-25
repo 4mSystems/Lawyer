@@ -26,10 +26,10 @@ class MohdareenController extends Controller
                     ->addColumn('status', function ($data) {
                         if ($data->status == trans('site_lang.public_no_text')) {
                             $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
-                            <span class="label label-danger"> '.$data->status.'</span></p>';
+                            <span class="label label-danger text-bold"> '.$data->status.'</span></p>';
                         } else {
                             $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
-                            <span class="label label-success"> '.$data->status.'</span></p>';
+                            <span class="label label-success text-bold"> '.$data->status.'</span></p>';
                         }
 
                         return $html;

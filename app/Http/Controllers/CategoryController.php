@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\category;
+use App\mohdr;
 use App\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,17 +18,29 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $permission = Permission::where('user_id', $user_id)->first();
-        $enabled = $permission->clients;
-        if ($enabled == 'yes') {
-            $categories = DB::table('categories')
-                ->orderBy('id', 'desc')
-                ->get();
-            return view('categories/categories', compact('categories'));
-        } else {
-            return redirect(url('home'));
+        if (request()->ajax()) {
+            $user_id = auth()->user()->id;
+            $permission = Permission::where('user_id', $user_id)->first();
+            $enabled = $permission->clients;
+            if ($enabled == 'yes') {
+                return datatables()->of(DB::table('categories')
+                    ->orderBy('id', 'desc')
+                    ->get())
+                    ->addColumn('action', function ($data) {
+                        $button = '<button data-category-id="' . $data->id . '" id="editCategory" class="btn btn-xs btn-blue tooltips" ><i
+                                    class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button data-category-id="' . $data->id . '" id="deleteCategory"  class="btn btn-xs btn-red tooltips" ><i
+                                    class="fa fa-times fa fa-white"></i>&nbsp;&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            } else {
+                return redirect(url('home'));
+            }
         }
+        return view('categories/categories');
     }
 
     /**
@@ -52,9 +65,8 @@ class CategoryController extends Controller
             $data = $this->validate(request(), [
                 'name' => 'required',
             ]);
-            $category = category::create($data);
-            $html = view('categories.category_item', compact('category'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
+            category::create($data);
+            return response(['msg' => trans('site_lang.public_success_text')]);
         }
     }
 
@@ -93,7 +105,7 @@ class CategoryController extends Controller
             $category = category::find($request->id);
             $category->name = $request->input('name');
             $category->update();
-            return response(['msg' => trans('site_lang.public_success_text'), 'result' => $category]);
+            return response(['msg' => trans('site_lang.public_success_text')]);
         }
     }
 

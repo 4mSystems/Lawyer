@@ -3,7 +3,7 @@
           type="text/css"/>
     <link href="<?php echo e(url('/plugins/bootstrap-modal/css/bootstrap-modal.css')); ?>" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo e(url('/plugins/select2/select2.css')); ?>"/>
-
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>"/>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="main-container inner">
@@ -58,11 +58,7 @@
                                         <th class="center"></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php echo $__env->make('categories.category_item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -94,17 +90,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group right">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">
+                                    <?php echo e(trans('site_lang.public_close_btn_text')); ?>
+
+                                </button>
+                                <input type="submit" class="btn btn-primary" id="add_category" name="add_category"
+                                       value="<?php echo e(trans('site_lang.public_add_btn_text')); ?>"/>
+                            </div>
                         </form>
 
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">
-                            <?php echo e(trans('site_lang.public_close_btn_text')); ?>
 
-                        </button>
-                        <input type="submit" class="btn btn-primary" id="add_category" name="add_category"
-                               value="<?php echo e(trans('site_lang.public_add_btn_text')); ?>"/>
-                    </div>
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -134,9 +131,15 @@
 <?php $__env->startSection('scripts'); ?>
     <script src="<?php echo e(url('/plugins/toastr/toastr.js')); ?>"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         // global app configuration object
         var config = {
             routes: {
+                get_category_route: "<?php echo e(route('categories.index')); ?>",
                 add_category_route: "<?php echo e(route('categories.store')); ?>",
                 update_category_route: "<?php echo e(route('categories.update')); ?>",
                 add_note_route: "<?php echo e(route('notes.store')); ?>",
@@ -160,7 +163,6 @@
         };
 
     </script>
-
     <script src="<?php echo e(url('/js/categories.js')); ?>"></script>
     <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>" type="text/javascript"></script>

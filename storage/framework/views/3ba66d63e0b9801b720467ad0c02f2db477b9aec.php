@@ -72,22 +72,20 @@
                 <!-- end: BREADCRUMB -->
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="panel bg-white" id="searchContainer">
-                            <table class="table table-striped table-bordered table-hover" id="cases">
-                                <thead>
-                                <tr>
-                                    <th class="hidden-xs center">#</th>
-                                    <th class="hidden-xs center">اسم الموكل \ اسم الخصم</th>
-                                    <th class="hidden-xs center">رقم الدعوى</th>
-                                    <th class="hidden-xs center">المحكمة</th>
-                                    <th class="hidden-xs center"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-
+                        <div class="panel panel-white" id="searchContainer">
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover" id="cases">
+                                    <thead>
+                                    <tr>
+                                        <th class="hidden-xs center">#</th>
+                                        <th class="hidden-xs center">اسم الموكل \ اسم الخصم</th>
+                                        <th class="hidden-xs center">رقم الدعوى</th>
+                                        <th class="hidden-xs center">المحكمة</th>
+                                        <th class="hidden-xs center"></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                         <div class="tabbable" id="mainContainer">
                             <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
@@ -102,7 +100,7 @@
                                             class="text-bold"><?php echo e(trans('site_lang.search_case_edit')); ?></p>
                                     </a>
                                 </li>
-                                <li style="float: right">
+                                <li style="float: right" id="session_note_tab">
                                     <a data-toggle="tab" href="#panel_sessions" class="text-large"><p class="text-bold">
                                             <?php echo e(trans('site_lang.search_case_sessions')); ?></p>
                                     </a>
@@ -400,14 +398,10 @@
                                                     <th class="hidden-xs center"></th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-
-                                                </tbody>
                                             </table>
 
                                         </div>
                                     </div>
-
                                     <div class="panel panel space20">
                                         <div class="panel-heading">
                                             <h4 class="text-bold"><?php echo e(trans('site_lang.mohdar_notes')); ?></h4>
@@ -431,18 +425,15 @@
                                                 <tr>
                                                     <th class="hidden-xs center">#</th>
                                                     <th class="hidden-xs center"><?php echo e(trans('site_lang.search_case_session_note')); ?></th>
-                                                    <th class="hidden-xs center"><?php echo e(trans('site_lang.users_username')); ?></th>
                                                     <th class="hidden-xs center"><?php echo e(trans('site_lang.home_session_status')); ?></th>
-                                                    <th class="hidden-xs center"></th>
+                                                    <th class="hidden-xs center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                </tbody>
+
                                             </table>
 
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -496,6 +487,7 @@
         // global app configuration object
         var config = {
             routes: {
+                get_cases_route: "<?php echo e(route('caseDetails.index')); ?>",
                 add_session_route: "<?php echo e(route('caseDetails.store')); ?>",
                 update_session_route: "<?php echo e(route('caseDetails.update')); ?>",
                 add_note_route: "<?php echo e(route('notes.store')); ?>",

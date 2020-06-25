@@ -4,7 +4,7 @@
           type="text/css"/>
     <link href="{{url('/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{url('/plugins/select2/select2.css') }}"/>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 @endsection
 @section('content')
     <div class="main-container inner">
@@ -57,11 +57,7 @@
                                         <th class="center"></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    @foreach($categories as $category)
-                                        @include('categories.category_item')
-                                    @endforeach
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -93,16 +89,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group right">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">
+                                    {{trans('site_lang.public_close_btn_text')}}
+                                </button>
+                                <input type="submit" class="btn btn-primary" id="add_category" name="add_category"
+                                       value="{{trans('site_lang.public_add_btn_text')}}"/>
+                            </div>
                         </form>
 
                     </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">
-                            {{trans('site_lang.public_close_btn_text')}}
-                        </button>
-                        <input type="submit" class="btn btn-primary" id="add_category" name="add_category"
-                               value="{{trans('site_lang.public_add_btn_text')}}"/>
-                    </div>
+
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -132,9 +129,15 @@
 @section('scripts')
     <script src="{{url('/plugins/toastr/toastr.js') }}"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         // global app configuration object
         var config = {
             routes: {
+                get_category_route: "{{route('categories.index')}}",
                 add_category_route: "{{route('categories.store')}}",
                 update_category_route: "{{route('categories.update')}}",
                 add_note_route: "{{route('notes.store')}}",
@@ -158,7 +161,6 @@
         };
 
     </script>
-
     <script src="{{url('/js/categories.js') }}"></script>
     <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
     <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
