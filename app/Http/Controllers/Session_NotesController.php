@@ -39,16 +39,13 @@ class Session_NotesController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-
             $data = $this->validate(request(), [
                 'note' => 'required',
+                'session_Id' => 'required',
             ]);
-            $session_Id = $request->session_Id;
-            $note = Session_Notes::create(array_merge($request->except('session_Id', 'updated_by'), ['session_Id' => $session_Id, 'updated_by' => '1']));
-            $html = view('cases.session_note_item', compact('note'))->render();
-            return response(['status' => true, 'result' => $html, 'msg' => 'تم الإضافة بنجاح']);
+            Session_Notes::create($data);
+            return response([trans('site_lang.public_success_text')]);
         }
-        return redirect()->route('cases.session_note_item')->with('success', 'تم الإضافة بنجاح');
     }
 
     /**
@@ -59,7 +56,7 @@ class Session_NotesController extends Controller
      */
     public function show($id)
     {
- 
+
     }
 
     /**
@@ -92,7 +89,7 @@ class Session_NotesController extends Controller
             $note = Session_Notes::find($request->noteId);
             $note->note = $request->input('note');
             $note->update();
-            return response(['msg' => 'تم التعديل بنجاح', 'result' => $note]);
+            return response(['msg' => trans('site_lang.public_success_text')]);
         }
     }
 
@@ -114,15 +111,16 @@ class Session_NotesController extends Controller
     {
         $status = false;
         $note = Session_Notes::find($id);
-        if ($note->status == "لا") {
-            $note->status = "نعم";
+
+        if ($note->status == trans('site_lang.public_no_text')) {
+            $note->status = "Yes";
             $status = true;
         } else {
-            $note->status = "لا";
+            $note->status = "No";
             $status = false;
         }
         $note->update();
-        return response(['msg' => 'تم التعديل بنجاح', 'result' => $note, 'status' => $status]);
+        return response(['msg' =>trans('site_lang.public_success_text'), 'status' => $status]);
 
     }
 

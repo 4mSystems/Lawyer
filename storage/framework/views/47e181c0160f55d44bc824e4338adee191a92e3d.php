@@ -9,6 +9,7 @@
                 <form method="post" id="notesForm">
                     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <input type="hidden" name="noteId" id="noteId">
+                    <input type="hidden" name="session_Id" id="session_Id">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group<?php echo e($errors->has('note')?' has-error':''); ?>">
@@ -19,16 +20,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group right">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">
+                            <?php echo e(trans('site_lang.public_close_btn_text')); ?>
+
+                        </button>
+                        <input type="submit" class="btn btn-dark-blue" id="add_note" name="add_note"
+                               value=" <?php echo e(trans('site_lang.public_add_btn_text')); ?>"/>
+                    </div>
                 </form>
 
             </div>
-            <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-default" type="button">
-                    <?php echo e(trans('site_lang.public_close_btn_text')); ?>
 
-                </button>
-                <input type="submit" class="btn btn-dark-blue" id="add_note" name="add_note" value=" <?php echo e(trans('site_lang.public_add_btn_text')); ?>"/>
-            </div>
         </div>
         <!-- /.modal-content -->
     </div>

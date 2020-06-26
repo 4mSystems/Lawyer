@@ -1,25 +1,50 @@
 $(document).ready(function () {
-    $('#categories_tbl').DataTable();
 
+    $('#categories_tbl').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: config.routes.get_category_route,
+        },
+        columns: [
+            {
+                data: 'id',
+                name: 'id',
+                className: 'center'
+            },
+            {
+                data: 'name',
+                name: 'name',
+                className: 'center'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                className: 'center'
+            }
+        ]
+    });
     $('#addCategoryModal').click(function () {
         $('#modal_title').text(config.trans.add_new_category_text);
         $('#add_category').val(config.trans.public_add_btn_text);
         $('#add_category_model').modal('show');
     });
-
-    $('#add_category').click(function () {
-        var form = $('#categories').serialize();
+    $('#categories').on('submit', function (event) {
+        event.preventDefault();
         if ($('#add_category').val() == config.trans.public_add_btn_text) {
             $.ajax({
                 url: config.routes.add_category_route,
-                dataType: 'json',
-                data: form,
-                type: 'post',
+                method: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
                 beforeSend: function () {
                     $('#category_name_error').empty();
                 }, success: function (data) {
-                    $('#categories_tbl tbody').append(data.result);
-                    $('#categories_tbl').DataTable();
+                    $('#categories_tbl').DataTable().ajax.reload();
                     $('#add_category_model').modal('hide');
                     toastr.success(data.msg);
                     $("#categories").trigger('reset');
@@ -32,14 +57,16 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 url: config.routes.update_category_route,
-                dataType: 'json',
-                data: form,
-                type: 'post',
+                method: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
                 beforeSend: function () {
                     $('#category_name_error').empty();
                 }, success: function (data) {
-                    $("#categoryId" + data.result.id).html(data.result.id);
-                    $("#categoryName" + data.result.id).html(data.result.name);
+                    $('#categories_tbl').DataTable().ajax.reload();
                     toastr.success(data.msg);
                     $('#add_category_model').modal('hide');
                     $("#categories").trigger('reset');
@@ -82,7 +109,7 @@ $(document).ready(function () {
             success: function (data) {
                 setTimeout(function () {
                     $('#confirmModal').modal('hide');
-                    $('#userRow' + category_id).remove();
+                    $('#categories_tbl').DataTable().ajax.reload();
                 }, 100);
             }
         })

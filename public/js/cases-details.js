@@ -1,65 +1,45 @@
 $(document).ready(function () {
-    // $('#mainContainer').hide();
+
     var caseId;
     var session_id;
     var client_id;
     var note_id;
     var who_delete;
 
-    $('#searchContainer').hide();
-
-    // $('#search').on('input', function (e) {
-    //     $('#cases tbody').empty();
-    //     var data = $(this).val();
-    //     if (data != '') {
-    //         $('#searchContainer').show();
-    //     } else {
-    //         $('#searchContainer').hide();
-    //     }
-    //     $.ajax({
-    //         url: "caseDetails/getSearchResult/" + data,
-    //         dataType: 'json',
-    //         type: 'get',
-    //         success: function (data) {
-    //             // $.each(data.result, function (data) {
-    //
-    //             $('#cases tbody').append(data.result);
-    //             if (data.status) {
-    //                 $('#searchContainer').show();
-    //             } else {
-    //
-    //             }
-    //             // });
-    //         }
-    //
-    //     });
-    // });
-    $(document).on('click', '#search_case_btn', function () {
-        $('#cases tbody').empty();
-        var data = $('#search').val();
-        if (data != '') {
-            $('#searchContainer').show();
-        } else {
-            $('#searchContainer').hide();
-        }
-        $.ajax({
-            url: "caseDetails/getSearchResult/" + data,
-            dataType: 'json',
-            type: 'get',
-            success: function (data) {
-                // $.each(data.result, function (data) {
-
-                $('#cases tbody').append(data.result);
-                if (data.status) {
-                    $('#searchContainer').show();
-                } else {
-
-                }
-                // });
+    $('#cases').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: config.routes.get_cases_route,
+        },
+        columns: [
+            {
+                data: 'id',
+                name: 'id',
+                className: 'center'
+            },
+            {
+                data: 'client_Name',
+                name: 'client_Name',
+                className: 'center'
+            }, {
+                data: 'invetation_num',
+                name: 'invetation_num',
+                className: 'center'
+            }, {
+                data: 'court',
+                name: 'court',
+                className: 'center'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                className: 'center'
             }
-
-        });
+        ]
     });
+
     $(document).on('click', '#showCaseData', function () {
         $('#mokel_table tbody').empty();
         $('#khesm_table tbody').empty();
@@ -89,9 +69,7 @@ $(document).ready(function () {
                 $('#attach_count').html(html.result.attachments_counts);
                 $('#notes_count').html(html.result.sessions_counts);
                 $('#sessions_count').html(html.result.sessions_counts);
-                //for sessions tabel
-                $('#sessions_table tbody').prepend(html.result.sessions);
-                $('#sessions_table').DataTable();
+
                 //for mokel_table tabel
                 $('#mokel_table tbody').prepend(html.result.clients);
                 // $('#mokel_table').DataTable();
@@ -106,6 +84,7 @@ $(document).ready(function () {
             }
         })
     });
+
     //Edit Cases data
     $('#btn_case_update').click(function () {
         var form = $('#edit_case_form').serialize() + "&case_Id=" + caseId;
@@ -126,6 +105,44 @@ $(document).ready(function () {
 
     });
     //start sessions operations
+    $(document).on('click', '#session_note_tab', function () {
+        if (caseId) {
+            $("#sessions_table").dataTable().fnDestroy();
+            $('#sessions_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "caseDetails/getSessions/" + caseId,
+                },
+                columns: [
+                    {
+                        data: 'id',
+                        name: 'id',
+                        className: 'center'
+                    },
+                    {
+                        data: 'session_date',
+                        name: 'session_date',
+                        className: 'center'
+                    }, {
+                        data: 'status',
+                        name: 'status',
+                        className: 'center'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        className: 'center'
+                    }
+                ]
+            });
+        }else {
+            console.log('eslse');
+        }
+
+    });
+
     //show modal form for adding sessions
     $('#addSessionModal').click(function () {
         if (caseId != null) {
@@ -155,17 +172,20 @@ $(document).ready(function () {
     });
 
     //adding /editnew session
-    $('#add_session').click(function () {
-        var form = $('#sessionForm').serialize() + "&case_Id=" + caseId;
+    $('#sessionForm').on('submit', function (event) {
+        event.preventDefault();
+        $('#case_Id').val(caseId);
         if ($('#add_session').val() == config.trans.add_session_btn) {
             $.ajax({
                 url: config.routes.add_session_route,
-                dataType: 'json',
-                data: form,
-                type: 'post',
+                method: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
                 success: function (data) {
-                    $('#sessions_table').prepend(data.result);
-                    $('#sessions_table').DataTable();
+                    $('#sessions_table').DataTable().ajax.reload();
                     $('#add_session_model').modal('hide');
                     toastr.success(data.msg);
                     $("#sessionForm").trigger('reset');
@@ -178,11 +198,14 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 url: config.routes.update_session_route,
-                dataType: 'json',
-                data: form,
-                type: 'post',
+                method: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
                 success: function (data) {
-                    $("#session_date" + data.result.id).html(data.result.session_date);
+                    $('#sessions_table').DataTable().ajax.reload();
                     toastr.success(data.msg);
                     $('#add_session_model').modal('hide');
                 }, error: function (data_error, exception) {
@@ -200,16 +223,10 @@ $(document).ready(function () {
             url: "caseDetails/updateStatus/" + id,
             dataType: "json",
             success: function (html) {
-                $("#status" + html.result.id).html(html.result.status);
-
-                // var status = html.status;
+                $('#sessions_table').DataTable().ajax.reload();
                 if (html.status) {
-                    $("#status" + html.result.id).removeClass("label label-danger");
-                    $("#status" + html.result.id).addClass("label label-success");
                     toastr.success(html.msg);
                 } else {
-                    $("#status" + html.result.id).removeClass("label label-success");
-                    $("#status" + html.result.id).addClass("label label-danger");
                     toastr.error(html.msg);
                 }
             }
@@ -230,7 +247,7 @@ $(document).ready(function () {
                 success: function (data) {
                     setTimeout(function () {
                         $('#confirmModal').modal('hide');
-                        $('#userRow' + session_id).remove();
+                        $('#sessions_table').DataTable().ajax.reload();
                         $('#ok_button').text(config.trans.public_delete_text);
                     }, 1000);
                 }, error: function (data_error, exception) {
@@ -264,7 +281,7 @@ $(document).ready(function () {
                 success: function (data) {
                     setTimeout(function () {
                         $('#confirmModal').modal('hide');
-                        $('#userRow' + note_id).remove();
+                        $('#session-notes-table').DataTable().ajax.reload();
                         $('#ok_button').text(config.trans.public_delete_text);
                     }, 1000);
                 }
@@ -276,21 +293,42 @@ $(document).ready(function () {
     //start for session notes
     //get notes for one session
     $(document).on('click', '#showSessionNotes', function () {
-        $('#session-notes-table tbody tr').remove();
+        // $('#session-notes-table tbody tr').remove();
+        $("#session-notes-table").dataTable().fnDestroy();
         session_id = $(this).data('session-id');
         var href = "caseDetails/printSessionNotes/" + session_id;
         $('#btnPrintNotes').attr("href", href);
-
-        $.ajax({
-            url: "caseDetails/getSessionNotes/" + session_id,
-            dataType: "json",
-            success: function (html) {
-                $('#session-notes-table tbody').prepend(html.result);
-                $('#session-notes-table').DataTable();
-
-            }
-        })
+        $('#session-notes-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "caseDetails/getSessionNotes/" + session_id,
+            },
+            columns: [
+                {
+                    data: 'id',
+                    name: 'id',
+                    className: 'center'
+                },
+                {
+                    data: 'note',
+                    name: 'note',
+                    className: 'center'
+                }, {
+                    data: 'status',
+                    name: 'status',
+                    className: 'center'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    className: 'center'
+                }
+            ]
+        });
     });
+
     //show modal form for adding notes
     $('#addNotesModal').click(function () {
         if (session_id != null) {
@@ -302,21 +340,25 @@ $(document).ready(function () {
         }
     });
     //add notes
-    $('#add_note').click(function () {
-        var form = $('#notesForm').serialize() + "&session_Id=" + session_id;
+    $('#notesForm').on('submit', function (event) {
+        event.preventDefault();
+        // var form = $('#notesForm').serialize() + "&session_Id=" + session_id;
+        $('#session_Id').val(session_id);
         if ($('#add_note').val() == config.trans.public_add_btn_text) {
             $.ajax({
                 url: config.routes.add_note_route,
-                dataType: 'json',
-                data: form,
-                type: 'post',
+                method: 'post',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
                 success: function (data) {
                     // if (data.status == true) {
                     // $('#sessions-table tbody').append(data.result);
+                    $('#session-notes-table').DataTable().ajax.reload();
                     $('#add_note_model').modal('hide');
                     $("#notesForm").trigger('reset');
-                    $('#session-notes-table').prepend(data.result);
-                    $('#session-notes-table').DataTable();
                     toastr.success(data.msg);
                 }, error: function (data_error, exception) {
                     if (exception == 'error') {
@@ -327,11 +369,14 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 url: config.routes.update_note_route,
-                dataType: 'json',
-                data: form,
-                type: 'post',
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
                 success: function (data) {
-                    $("#note" + data.result.id).html(data.result.note);
+                    $('#session-notes-table').DataTable().ajax.reload();
                     toastr.success(data.msg);
                     $('#add_note_model').modal('hide');
                     $("#notesForm").trigger('reset');
@@ -370,15 +415,10 @@ $(document).ready(function () {
             url: "notes/updateStatus/" + id,
             dataType: "json",
             success: function (html) {
-                $("#status" + html.result.id).html(html.result.status);
-                // var status = html.status;
+                $('#session-notes-table').DataTable().ajax.reload();
                 if (html.status) {
-                    $("#status" + html.result.id).removeClass("label label-danger");
-                    $("#status" + html.result.id).addClass("label label-success");
                     toastr.success(html.msg);
                 } else {
-                    $("#status" + html.result.id).removeClass("label label-success");
-                    $("#status" + html.result.id).addClass("label label-danger");
                     toastr.error(html.msg);
                 }
             }

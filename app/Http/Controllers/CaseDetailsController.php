@@ -23,14 +23,39 @@ class CaseDetailsController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $permission = Permission::where('user_id', $user_id)->first();
-        $enabled = $permission->search_case;
-        if ($enabled == 'yes') {
-            return view('cases.search_case');
-        } else {
-            return redirect(url('home'));
+        if (request()->ajax()) {
+            $user_id = auth()->user()->id;
+            $permission = Permission::where('user_id', $user_id)->first();
+            $enabled = $permission->search_case;
+            if ($enabled == 'yes') {
+                return datatables()->of(
+                    Cases::query()
+                        ->where('to_whome', '=', auth()->user()->cat_id)
+                        ->with('clients')
+                        ->get())
+                    ->addColumn('client_Name', function ($data) {
+                        $button = '';
+                        foreach ($data->clients as $client) {
+                            if ($button == '') {
+                                $button = $client->client_Name;
+                            } else
+                                $button = $button . ', ' . $client->client_Name;
+                        }
+                        return $button;
+                    })
+                    ->addColumn('action', function ($data) {
+                        $button = '<button data-case-id="' . $data->id . '" id="showCaseData" class="btn btn-m btn-blue tooltips" ><i
+                                    class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.home_see_more') . '</button>';
+                        return $button;
+                    })
+                    ->rawColumns(['client_Name', 'action'])
+                    ->make(true);
+
+            } else {
+                return redirect(url('home'));
+            }
         }
+        return view('cases.search_case');
     }
 
     public function getSearchResult($search)
@@ -39,6 +64,7 @@ class CaseDetailsController extends Controller
         if (!empty($search)) {
             $results = Cases::join('case_clients', 'case_clients.case_id', 'cases.id')
                 ->join('clients', 'clients.id', 'case_clients.client_id')
+                ->where('cases.to_whome', '=', auth()->user()->cat_id)
                 ->where('cases.circle_num', 'LIKE', "%{$search}%")
                 ->orWhere('clients.client_Name', 'LIKE', "%{$search}%")
                 ->orWhere('cases.invetation_num', 'LIKE', "%{$search}%")
@@ -61,15 +87,15 @@ class CaseDetailsController extends Controller
     {
         $status = false;
         $session = Sessions::find($id);
-        if ($session->status == "waiting") {
-            $session->status = "Done";
+        if ($session->status == trans('site_lang.public_no_text')) {
+            $session->status = "Yes";
             $status = true;
         } else {
-            $session->status = "waiting";
+            $session->status = "No";
             $status = false;
         }
         $session->update();
-        return response(['msg' => trans('site_lang.public_success_text'), 'result' => $session, 'status' => $status]);
+        return response(['msg' => trans('site_lang.public_success_text'), 'status' => $status]);
 
     }
 
@@ -94,7 +120,6 @@ class CaseDetailsController extends Controller
             $html = view('cases.session_item', compact('session'))->render();
             return response(['status' => true, 'result' => $html, 'msg' => trans('site_lang.public_success_text')]);
         }
-        return redirect()->route('cases.session_item')->with('success', 'تم إضافة الجلسة بنجاح');
     }
 
 
@@ -117,29 +142,23 @@ class CaseDetailsController extends Controller
         if (request()->ajax()) {
             $res = [];
             $case = Cases::findOrFail($id);
-            $sessions = DB::table('sessions')->where('case_Id', '=', $id)->orderBy('id', 'desc')->get();
             $attachments = DB::table('attachments')->where('case_Id', '=', $id)->get();
-            $sessions_table = array();;
-            foreach ($sessions as $session) {
-                $sessions_table [] = view('cases.session_item', compact('session'))->render();
-            }
-
             $clients = $case->clients;
             $clients_array = [];
             $khesm_array = [];
             foreach ($clients as $key => $client) {
-                if ($client->type == 'khesm') {
+                if ($client->type == trans('site_lang.clients_client_type_khesm')) {
                     $khesm_array[] = view('cases.mokel_item', compact('client'))->render();
                 } else {
                     $clients_array[] = view('cases.mokel_item', compact('client'))->render();
                 }
 
             }
+
             $res = [
                 "case" => $case,
-                "sessions" => $sessions_table,
                 "attachments" => $attachments,
-                "sessions_counts" => $sessions->count(),
+                "sessions_counts" => Sessions::query()->where('case_Id', '=', $id)->count(),
                 "sessions_notes_counts" => "0",
                 "clients" => $clients_array,
                 "khesm" => $khesm_array,
@@ -162,7 +181,7 @@ class CaseDetailsController extends Controller
             $session->year = $year;
             $session->session_date = $request->input('session_date');
             $session->update();
-            return response(['msg' => trans('site_lang.public_success_text'), 'result' => $session]);
+            return response(['msg' => trans('site_lang.public_success_text')]);
         }
     }
 
@@ -184,13 +203,58 @@ class CaseDetailsController extends Controller
     // get sessions notes for one session
     public function getSessionNotes($id)
     {
-        $session_notes = DB::table('session__notes')->where('session_Id', '=', $id)->orderBy('id', 'desc')->get();
-        $note_table = array();
+        return datatables()->of(Session_Notes::query()->where('session_Id', '=', $id)->orderBy('id', 'desc')->get())
+            ->addColumn('status', function ($data) {
+                if ($data->status == trans('site_lang.public_no_text')) {
+                    $html = '<p class="btn btn-sm" data-notes-Id="' . $data->id . '" id="change-note-status">
+                            <span class="label label-danger text-bold"> ' . $data->status . '</span></p>';
+                } else {
+                    $html = '<p class="btn btn-sm" data-notes-Id="' . $data->id . '" id="change-note-status">
+                            <span class="label label-success text-bold"> ' . $data->status . '</span></p>';
+                }
 
-        foreach ($session_notes as $note) {
-            $note_table [] = view('cases.session_note_item', compact('note'))->render();
-        }
-        return response()->json(['result' => $note_table]);
+                return $html;
+            })
+            ->addColumn('action', function ($data) {
+                $button = '<button data-notes-Id="' . $data->id . '" id="editNote" class="btn btn-s btn-blue tooltips" ><i
+                                    class="fa fa-edit"></i>&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button data-notes-Id="' . $data->id . '" id="deleteNote"  class="btn btn-s btn-red tooltips" ><i
+                                    class="fa fa-times fa fa-white"></i>&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
+                return $button;
+            })
+            ->rawColumns(['status', 'action'])
+            ->make(true);
+    }
+
+    public function getSessions($id)
+    {
+        return datatables()->of(Sessions::query()->where('case_Id', '=', $id)->orderBy('id', 'desc')->get())
+            ->addColumn('status', function ($data) {
+                if ($data->status == trans('site_lang.public_no_text')) {
+                    $html = '<p class="btn btn-sm" data-session-Id="' . $data->id . '" id="change-session-status">
+                            <span class="label label-danger text-bold"> ' . $data->status . '</span></p>';
+                } else {
+                    $html = '<p class="btn btn-sm" data-session-Id="' . $data->id . '" id="change-session-status">
+                            <span class="label label-success text-bold"> ' . $data->status . '</span></p>';
+                }
+
+                return $html;
+            })
+            ->addColumn('action', function ($data) {
+                $button = '<button data-session-Id="' . $data->id . '" id="editSession" class="btn btn-s btn-blue tooltips" ><i
+                                    class="fa fa-edit"></i>&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button data-session-Id="' . $data->id . '" id="deleteSession"  class="btn btn-s btn-red tooltips" ><i
+                                    class="fa fa-times fa fa-white"></i>&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button data-session-Id="' . $data->id . '" id="showSessionNotes"  class="btn btn-blue tooltips" ><i
+                                    class="fa fa-eye-slash"></i>&nbsp;' . trans('site_lang.mohdar_notes') . '</button>';
+
+                return $button;
+            })
+            ->rawColumns(['status', 'action'])
+            ->make(true);
     }
 
     public function getClientByType($type, $caseId)

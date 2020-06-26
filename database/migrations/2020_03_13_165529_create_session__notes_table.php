@@ -18,7 +18,7 @@ class CreateSessionNotesTable extends Migration
             $table->string('note');
             $table->bigInteger('session_Id')->unsigned();
             $table->foreign('session_Id')->references('id')->on('sessions');
-            $table->string('updated_by');
+            $table->string('updated_by')->nullable();
             $table->string('status')->default('لا');
             $table->timestamps();
         });
