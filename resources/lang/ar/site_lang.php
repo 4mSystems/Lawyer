@@ -161,5 +161,8 @@ return [
     'mohdreen'=>'المحضرين',
     'daily_report'=>'التقارير اليوميه',
     'monthly_report'=>'التقارير الشهريه',
-    'edit'=>'تعديل'
+    'edit'=>'تعديل',
+    'emp'=>'اسم الموظف ',
+    'createdAt'=>'وقت الاضافه',
+    'cannot_delete_parent_category'=>'لا يمكن حذف التصنيف '
 ];

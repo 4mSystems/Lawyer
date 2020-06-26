@@ -75,11 +75,21 @@
                         </li>
 
                     </ul>
-                    <a class="btn btn-sm log-out text-right" href="login_login.html">
-                        <i class="fa fa-power-off"></i>&nbsp;&nbsp; <span
-                            class="title"> <?php echo e(trans('site_lang.side_exit')); ?> </span>
-                    </a>
+                    
 
+
+                    <a href="<?php echo e(route('logout')); ?>" type='submit' class="btn btn-sm log-out text-right"
+
+                        onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                            <?php echo e(trans('site_lang.side_exit')); ?>
+
+ 
+</a>
+
+<form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+ <?php echo csrf_field(); ?>
+</form>
                 </li>
 
             </ul>

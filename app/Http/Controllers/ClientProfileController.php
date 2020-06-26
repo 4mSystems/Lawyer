@@ -8,33 +8,42 @@ use App\Clients;
 use App\Client_Note;
 use App\Cases;
 use App\Case_client; 
-use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Services\DataTable; 
+
+use App\DataTables\ClientNoteDataTable;
 
 
 class ClientProfileController extends Controller
 {
     public function profile ($id){
         
-        $client_data = Clients::findOrFail($id); 
-        // client notes data table  
-        $table =null;
+        $client_data = Clients::findOrFail($id);   
+        $user_type = auth()->user()->type;
+        if($user_type == 'User'){
         if (request()->ajax()) { 
-            $table = datatables()->of(Client_Note::where('client_id',$id)->get())
+            return  datatables()->of(Client_Note::where('client_id',$id)->with('user_id')->get())
                     ->addColumn('action', function ($data) {
-                        $button = '<button  data-client-id="' . $data->id . '" id="editnote" class="btn btn-xs btn-green tooltips" ><i
-                        class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.edit') . '</button>';            
-                        $button .= '&nbsp;&nbsp;';    
-                        $button .='<a  data-client-id="' . $data->id . '" id="deletenote" class="btn btn-xs btn-red tooltips" ><i
-                        class="fa fa-trash"></i>&nbsp;&nbsp;' . trans('site_lang.delete') . '</a>';  
                          
-                       
-                                    return $button;
-                    })->rawColumns(['action'])->make(true); 
-                    
-                    return $table;
-
+                    })->rawColumns(['action'])->make(true);
            }
+        }else{
+            if (request()->ajax()) { 
+                return  datatables()->of(Client_Note::where('client_id',$id)->with('user_id')->get())
+                        ->addColumn('action', function ($data) {
+                            $button = '<button  data-client-id="' . $data->id . '" id="editnote" class="btn btn-xs btn-green tooltips" ><i
+                            class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.edit') . '</button>';            
+                            $button .= '&nbsp;&nbsp;';    
+                            $button .='<a  data-client-id="' . $data->id . '" id="deletenote" class="btn btn-xs btn-red tooltips" ><i
+                            class="fa fa-trash"></i>&nbsp;&nbsp;' . trans('site_lang.delete') . '</a>';  
+                             
+                           
+                                        return $button;
+                        })->rawColumns(['action'])->make(true);
+               }
+
+        }
+
+ 
            
         return view('clients/profile', compact('client_data'));
         
@@ -46,6 +55,8 @@ class ClientProfileController extends Controller
         $data = $this->validate(request(), [ 
             'notes' => 'required', 
         ]);
+        $data['user_id'] = auth()->user()->id;
+        // dd( $data['user_id']);
         $data['client_id'] = $id;
         Client_Note::create($data);
         return response()->json(['success' => trans('site_lang.public_success_text')]);

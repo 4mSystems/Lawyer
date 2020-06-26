@@ -53,8 +53,19 @@
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
+                            @php 
+                                                    $user_type = auth()->user()->type;
+                                                    if($user_type != 'admin'){
+                                                    @endphp
+
                                 <a class="btn btn-primary" id="addMohdarModal"><i
-                                        class="fa fa-plus"></i>{{trans('site_lang.mohdar_add_mohdar')}}</a>
+                                        class="fa fa-plus"></i>{{trans('site_lang.mohdar_add_mohdar')}}
+                                        </a>
+                                        
+                                        @php
+                                                    }
+                                                    @endphp
+                                        
                             </div>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover table-full-width"

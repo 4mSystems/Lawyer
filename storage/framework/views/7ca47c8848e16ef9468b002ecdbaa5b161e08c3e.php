@@ -89,11 +89,18 @@
                                                 <div class="panel-heading">
                                                     <h3 class="text-bold"><?php echo e(trans('site_lang.notes')); ?></h3>
                                                     <div class="btn-group pull-left">
+                                                    <?php 
+                                                    $user_type = auth()->user()->type;
+                                                    if($user_type != 'admin'){
+                                                    ?>
                                                         <a class="btn btn-primary" id="createnote"><i 
                                                                 class="fa
                                                             fa-plus">&nbsp;&nbsp;</i><?php echo e(trans('site_lang.add_notes')); ?>
 
                                                         </a>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     </div>
                                                     <br>
                                                 </div>
@@ -104,6 +111,10 @@
                                     <tr>
                                         <th class="center">#</th> 
                                         <th class="center"><?php echo e(trans('site_lang.notes')); ?></th> 
+                                        
+                                        <th class="center"><?php echo e(trans('site_lang.emp')); ?></th> 
+                                        
+                                        <th class="center"><?php echo e(trans('site_lang.createdAt')); ?></th> 
                                         <th class="center"></th>
                                     </tr>
                                   
@@ -198,6 +209,9 @@
                                         </div>
                                     </div>
                                 </div> 
+
+
+                                
 
                                 </div>
                             </div>
@@ -341,7 +355,7 @@
                 processing: true,
                 serverSide: true,
                 
-
+                            //
 
                 ajax: {
                     url: "/profile/"+ id ,
@@ -357,7 +371,17 @@
                         data: 'notes',
                         name: 'notes',
                         className: 'center'
+                    },
+                    {
+                        data: 'user_id.name',
+                        name: 'user_id.name',
+                        className: 'center'
                     },  
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                        className: 'center'
+                    },    
                     {
                         data: 'action',
                         name: 'action',
