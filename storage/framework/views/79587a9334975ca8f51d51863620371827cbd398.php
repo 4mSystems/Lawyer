@@ -307,6 +307,7 @@
                     });
                 }
             });
+
             $(document).on('click', '#editClient', function () {
                 var id = $(this).data('client-id');
                 $.ajax({
@@ -330,6 +331,8 @@
                     }
                 })
             });
+            
+  
             var client_id;
 
             $(document).on('click', '#deleteClient', function () {

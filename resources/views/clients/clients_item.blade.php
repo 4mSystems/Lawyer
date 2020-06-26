@@ -28,6 +28,8 @@
                class="btn btn-xs btn-red tooltips" data-placement="top"
                data-original-title="{{trans('site_lang.public_delete_text')}}"><i
                     class="fa fa-times fa fa-white"></i></a>
+
+                  
         </div>
         <div class="visible-xs visible-sm hidden-md hidden-lg">
             <div class="btn-group">

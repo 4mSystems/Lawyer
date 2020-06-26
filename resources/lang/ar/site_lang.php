@@ -141,4 +141,16 @@ return [
     'category_name' => 'إسم التصنيف',
     'add_new_category_text' => 'إضافة تصنيف جديد',
     'edit_category_text' => 'تعديل التصنيف ',
+    'public_view_btn_text'=>'الصفحه الشخصيه',
+    'client_info'=>'بيانات العميل',
+    'Client_name'=>'اسم العميل',
+    'client_Unit'=>'الوحده',
+    'type'=>'النوع',
+    'client_Address'=>'العنوان',
+    'notes'=>'الملاحظات',
+    'edit'=>'تعديل',
+    'delete'=>'حذف',
+    'add_notes'=>'ملاحظه جديده',
+    'cases'=>'الدعاوي',
+    'edit_notes'=>'تعديل الملاحظات'
 ];

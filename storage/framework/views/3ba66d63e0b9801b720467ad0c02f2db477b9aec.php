@@ -516,11 +516,8 @@
                 search_case_add_khesm: "<?php echo e(trans('site_lang.search_case_add_khesm')); ?>",
                 search_case_case_warning_text: "<?php echo e(trans('site_lang.search_case_case_warning_text')); ?>",
                 search_case_delete_session_text: "<?php echo e(trans('site_lang.search_case_delete_session_text')); ?>",
-
             }
-
         };
-
     </script>
 
     <script src="<?php echo e(url('/js/cases-details.js')); ?>"></script>
@@ -534,5 +531,4 @@
     UIModals.init();
     PagesUserProfile.init();
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/search_case.blade.php ENDPATH**/ ?>

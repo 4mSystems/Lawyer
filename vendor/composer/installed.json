@@ -1569,6 +1569,72 @@
         ]
     },
     {
+        "name": "league/fractal",
+        "version": "0.19.2",
+        "version_normalized": "0.19.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/fractal.git",
+            "reference": "06dc15f6ba38f2dde2f919d3095d13b571190a7c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/fractal/zipball/06dc15f6ba38f2dde2f919d3095d13b571190a7c",
+            "reference": "06dc15f6ba38f2dde2f919d3095d13b571190a7c",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "doctrine/orm": "^2.5",
+            "illuminate/contracts": "~5.0",
+            "mockery/mockery": "~0.9",
+            "pagerfanta/pagerfanta": "~1.0.0",
+            "phpunit/phpunit": "^4.8.35 || ^7.5",
+            "squizlabs/php_codesniffer": "~1.5|~2.0|~3.4",
+            "zendframework/zend-paginator": "~2.3"
+        },
+        "suggest": {
+            "illuminate/pagination": "The Illuminate Pagination component.",
+            "pagerfanta/pagerfanta": "Pagerfanta Paginator",
+            "zendframework/zend-paginator": "Zend Framework Paginator"
+        },
+        "time": "2020-01-24T23:17:29+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.13-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\Fractal\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Phil Sturgeon",
+                "email": "me@philsturgeon.uk",
+                "homepage": "http://philsturgeon.uk/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Handle the output of complex data structures ready for API output.",
+        "homepage": "http://fractal.thephpleague.com/",
+        "keywords": [
+            "api",
+            "json",
+            "league",
+            "rest"
+        ]
+    },
+    {
         "name": "maatwebsite/excel",
         "version": "3.1.18",
         "version_normalized": "3.1.18.0",
@@ -6028,6 +6094,306 @@
             "assert",
             "check",
             "validate"
+        ]
+    },
+    {
+        "name": "yajra/laravel-datatables",
+        "version": "v1.5.0",
+        "version_normalized": "1.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yajra/datatables.git",
+            "reference": "50de5e20ef01da1a353e0a81c0ad5f9da6a985ec"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yajra/datatables/zipball/50de5e20ef01da1a353e0a81c0ad5f9da6a985ec",
+            "reference": "50de5e20ef01da1a353e0a81c0ad5f9da6a985ec",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.0",
+            "yajra/laravel-datatables-buttons": "4.*",
+            "yajra/laravel-datatables-editor": "1.*",
+            "yajra/laravel-datatables-fractal": "1.*",
+            "yajra/laravel-datatables-html": "4.*",
+            "yajra/laravel-datatables-oracle": "8.*|9.*"
+        },
+        "time": "2019-02-27T03:17:30+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arjay Angeles",
+                "email": "aqangeles@gmail.com"
+            }
+        ],
+        "description": "Laravel DataTables Complete Package.",
+        "keywords": [
+            "datatables",
+            "jquery",
+            "laravel"
+        ]
+    },
+    {
+        "name": "yajra/laravel-datatables-buttons",
+        "version": "v4.9.2",
+        "version_normalized": "4.9.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yajra/laravel-datatables-buttons.git",
+            "reference": "3d7bb45c00e82f7cb84ad11ec905a95d24c51821"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yajra/laravel-datatables-buttons/zipball/3d7bb45c00e82f7cb84ad11ec905a95d24c51821",
+            "reference": "3d7bb45c00e82f7cb84ad11ec905a95d24c51821",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/console": "^5.5|^6|^7",
+            "maatwebsite/excel": "^3.0",
+            "php": ">=7.0",
+            "yajra/laravel-datatables-html": "3.*|4.*",
+            "yajra/laravel-datatables-oracle": "8.*|9.*"
+        },
+        "require-dev": {
+            "mockery/mockery": "~1.0",
+            "phpunit/phpunit": "~7.0"
+        },
+        "suggest": {
+            "barryvdh/laravel-snappy": "Allows exporting of dataTable to PDF using the print view.",
+            "dompdf/dompdf": "Allows exporting of dataTable to PDF using the DomPDF."
+        },
+        "time": "2020-06-13T00:21:34+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Yajra\\DataTables\\ButtonsServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Yajra\\DataTables\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arjay Angeles",
+                "email": "aqangeles@gmail.com"
+            }
+        ],
+        "description": "Laravel DataTables Buttons Plugin.",
+        "keywords": [
+            "buttons",
+            "datatables",
+            "jquery",
+            "laravel"
+        ]
+    },
+    {
+        "name": "yajra/laravel-datatables-editor",
+        "version": "v1.21.0",
+        "version_normalized": "1.21.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yajra/laravel-datatables-editor.git",
+            "reference": "d46f8110af82daa14463c6ad7fbec23d75b90c3a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yajra/laravel-datatables-editor/zipball/d46f8110af82daa14463c6ad7fbec23d75b90c3a",
+            "reference": "d46f8110af82daa14463c6ad7fbec23d75b90c3a",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/console": "5.5.*|5.6.*|5.7.*|5.8.*|^6|^7",
+            "illuminate/database": "5.5.*|5.6.*|5.7.*|5.8.*|^6|^7",
+            "illuminate/http": "5.5.*|5.6.*|5.7.*|5.8.*|^6|^7",
+            "illuminate/validation": "5.5.*|5.6.*|5.7.*|5.8.*|^6|^7",
+            "php": ">=7.0",
+            "yajra/laravel-datatables-buttons": "3.*|4.*"
+        },
+        "require-dev": {
+            "orchestra/testbench": "~3.5"
+        },
+        "time": "2020-04-02T04:11:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Yajra\\DataTables\\EditorServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Yajra\\DataTables\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arjay Angeles",
+                "email": "aqangeles@gmail.com"
+            }
+        ],
+        "description": "Laravel DataTables Editor plugin for Laravel 5.5+.",
+        "keywords": [
+            "JS",
+            "datatables",
+            "editor",
+            "html",
+            "jquery",
+            "laravel"
+        ]
+    },
+    {
+        "name": "yajra/laravel-datatables-fractal",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yajra/laravel-datatables-fractal.git",
+            "reference": "0aa387a9b3738248fa61110f0378904ef42b4a73"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yajra/laravel-datatables-fractal/zipball/0aa387a9b3738248fa61110f0378904ef42b4a73",
+            "reference": "0aa387a9b3738248fa61110f0378904ef42b4a73",
+            "shasum": ""
+        },
+        "require": {
+            "league/fractal": "^0.19.0",
+            "php": ">=7.0",
+            "yajra/laravel-datatables-oracle": "8.*|9.*"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.*",
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2020-06-07T03:05:09+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Yajra\\DataTables\\FractalServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Yajra\\DataTables\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arjay Angeles",
+                "email": "aqangeles@gmail.com"
+            }
+        ],
+        "description": "Laravel DataTables Fractal Plugin.",
+        "keywords": [
+            "api",
+            "datatables",
+            "fractal",
+            "laravel"
+        ]
+    },
+    {
+        "name": "yajra/laravel-datatables-html",
+        "version": "v4.30.0",
+        "version_normalized": "4.30.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yajra/laravel-datatables-html.git",
+            "reference": "ceb5eea82fed6c874478d69e35175964a72384fe"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/ceb5eea82fed6c874478d69e35175964a72384fe",
+            "reference": "ceb5eea82fed6c874478d69e35175964a72384fe",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "laravelcollective/html": "^5.4|^6|^7",
+            "php": ">=7.0",
+            "yajra/laravel-datatables-oracle": "8.*|9.*"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.*",
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2020-06-18T10:30:27+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.0-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Yajra\\DataTables\\HtmlServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Yajra\\DataTables\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arjay Angeles",
+                "email": "aqangeles@gmail.com"
+            }
+        ],
+        "description": "Laravel DataTables HTML builder plugin for Laravel 5.4+.",
+        "keywords": [
+            "JS",
+            "datatables",
+            "html",
+            "jquery",
+            "laravel"
         ]
     },
     {

@@ -502,11 +502,8 @@
                 search_case_add_khesm: "{{trans('site_lang.search_case_add_khesm')}}",
                 search_case_case_warning_text: "{{trans('site_lang.search_case_case_warning_text')}}",
                 search_case_delete_session_text: "{{trans('site_lang.search_case_delete_session_text')}}",
-
             }
-
         };
-
     </script>
 
     <script src="{{url('/js/cases-details.js') }}"></script>

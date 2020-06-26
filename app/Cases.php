@@ -17,4 +17,10 @@ class Cases extends Model
     {
         return $this->belongsToMany(Clients::class, 'case_clients', 'case_id', 'client_id');
     }
+
+    public function  to_whome(){
+
+        return $this->hasOne('App\category','id','to_whome');
+        
+    }
 }

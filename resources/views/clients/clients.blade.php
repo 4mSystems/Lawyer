@@ -305,6 +305,7 @@
                     });
                 }
             });
+
             $(document).on('click', '#editClient', function () {
                 var id = $(this).data('client-id');
                 $.ajax({
@@ -328,6 +329,10 @@
                     }
                 })
             });
+            
+  
+            var client_id;
+
             $(document).on('click', '.btn-lg', function () {
                 var id = $(this).data('moh-Id');
                 $.ajax({
@@ -348,6 +353,8 @@
                     }
                 })
             });
+
+            
             $(document).on('click', '#deleteClient', function () {
                 client_id = $(this).data('client-id');
                 $('#confirmModal').modal('show');
