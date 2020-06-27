@@ -46,6 +46,7 @@
     42 => 'Barryvdh\\DomPDF\\ServiceProvider',
     43 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
     44 => 'Yajra\\Datatables\\DatatablesServiceProvider',
+    45 => 'Yajra\\DataTables\\ButtonsServiceProvider',
   ),
   'eager' => 
   array (
@@ -79,6 +80,7 @@
     27 => 'Barryvdh\\DomPDF\\ServiceProvider',
     28 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
     29 => 'Yajra\\Datatables\\DatatablesServiceProvider',
+    30 => 'Yajra\\DataTables\\ButtonsServiceProvider',
   ),
   'deferred' => 
   array (

@@ -37,7 +37,7 @@ class HomeController extends Controller
         $today = Carbon::today();
         $date = Carbon::today()->addDays(10);
         $session = Sessions::whereBetween('session_date', array($today, $date))->get();
-        $sessionNo = Sessions::where('session_date', '<=', $today)->where('status', 'waiting')->get();
+        $sessionNo = Sessions::where('session_date', '<=', $today)->where('status', 'No')->get();
         $datee = Carbon::today()->addDays(15);
         $mohder = mohdr::whereBetween('session_date', array($today, $datee))->get();
 
