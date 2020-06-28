@@ -43,8 +43,16 @@
                         <!-- start: DYNAMIC TABLE PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
+                                                     @php 
+                                                    $user_type = auth()->user()->type;
+                                                    if($user_type == 'User'){
+                                                    @endphp
                                 <a class="btn btn-primary" id="addClientModal"><i
-                                        class="fa fa-plus"></i>{{trans('site_lang.clients_add_new_client_text')}} </a>
+                                        class="fa fa-plus"></i>{{trans('site_lang.clients_add_new_client_text')}} 
+                                        </a>
+                                        @php
+                                                    }
+                                                    @endphp
                             </div>
                             <div class="panel-body">
 
@@ -119,6 +127,8 @@
                                         <span class="text-danger" id="notes_error"></span>
                                     </div>
                                 </div>
+
+                             
 
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">

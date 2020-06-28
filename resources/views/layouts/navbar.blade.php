@@ -75,11 +75,20 @@
                         </li>
 
                     </ul>
-                    <a class="btn btn-sm log-out text-right" href="login_login.html">
-                        <i class="fa fa-power-off"></i>&nbsp;&nbsp; <span
-                            class="title"> {{trans('site_lang.side_exit')}} </span>
-                    </a>
+                    
 
+
+                    <a href="{{ route('logout') }}" type='submit' class="btn btn-sm log-out text-right"
+
+                        onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                            {{trans('site_lang.side_exit')}}
+ 
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+ @csrf
+</form>
                 </li>
 
             </ul>
