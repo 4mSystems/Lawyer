@@ -29,19 +29,19 @@
                                     <div class="arrow"></div>
                                     <div class="popover-content">
                                         <!-- start: SEARCH FORM -->
-                                        <form class="" id="searchform" action="#">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control"
-                                                       placeholder="{{trans('site_lang.search_case_search_hint')}}"
-                                                       id="search">
-                                                <span class="input-group-btn">
-																<button class="btn btn-main-color btn-squared"
-                                                                        type="button" id="search_case_btn">
-																	<i class="fa fa-search"></i>
-																</button> </span>
-                                            </div>
-                                        </form>
-                                        <!-- end: SEARCH FORM -->
+                                    {{--                                        <form class="" id="searchform" action="#">--}}
+                                    {{--                                            <div class="input-group">--}}
+                                    {{--                                                <input type="text" class="form-control"--}}
+                                    {{--                                                       placeholder="{{trans('site_lang.search_case_search_hint')}}"--}}
+                                    {{--                                                       id="search">--}}
+                                    {{--                                                <span class="input-group-btn">--}}
+                                    {{--																<button class="btn btn-main-color btn-squared"--}}
+                                    {{--                                                                        type="button" id="search_case_btn">--}}
+                                    {{--																	<i class="fa fa-search"></i>--}}
+                                    {{--																</button> </span>--}}
+                                    {{--                                            </div>--}}
+                                    {{--                                        </form>--}}
+                                    <!-- end: SEARCH FORM -->
                                     </div>
                                 </div>
                                 <!-- end: SEARCH POPOVER -->
@@ -128,7 +128,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button class="btn btn-icon btn-block" href="#panel_sessions">
+                                                    <button class="btn btn-icon btn-block">
                                                         <i class="clip-calendar"></i>
                                                         {{trans('site_lang.mohdar_notes')}} <span
                                                             class="badge badge-info"
@@ -148,10 +148,18 @@
                                                 <div class="panel-heading">
                                                     <h3 class="text-bold">{{trans('site_lang.search_case_clients')}}</h3>
                                                     <div class="btn-group pull-left">
+                                                        @php
+                                                            $user_type = auth()->user()->type;
+                                                            if($user_type != 'admin'){
+                                                        @endphp
                                                         <a class="btn btn-primary" id="addMokelModal"><i
                                                                 class="fa
                                                             fa-plus">&nbsp;&nbsp;</i>{{trans('site_lang.search_case_add_client')}}
                                                         </a>
+                                                        @php
+                                                            }
+                                                        @endphp
+
                                                     </div>
                                                     <br>
                                                 </div>
@@ -179,11 +187,18 @@
                                                     <div class="panel-heading">
                                                         <h3 class="text-bold">{{trans('site_lang.search_case_khesms')}}</h3>
                                                         <div class="btn-group pull-left">
+                                                            @php
+                                                                $user_type = auth()->user()->type;
+                                                                if($user_type != 'admin'){
+                                                            @endphp
                                                             <a class="btn btn-success" id="addKhesmModal"><i
 
                                                                     class="fa fa-plus">
                                                                     &nbsp;&nbsp;</i>{{trans('site_lang.search_case_add_khesm')}}
                                                             </a>
+                                                            @php
+                                                                }
+                                                            @endphp
                                                         </div>
                                                         <br>
                                                     </div>
@@ -294,6 +309,7 @@
                                 <div id="panel_edit_account" class="tab-pane fade" style="direction: rtl">
                                     <form id="edit_case_form" method="post">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                        <input type="hidden" name="to_whome" id="to_whome">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3 class="text-bold">{{trans('site_lang.search_case_data')}}</h3>
@@ -335,24 +351,6 @@
                                                            placeholder="{{trans('site_lang.add_case_court')}}"
                                                            class="form-control" id="input_court" name="court">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        {{trans('site_lang.add_case_to_whom')}}
-                                                    </label>
-
-
-                                                    <select id="to_whome" name="to_whome" class="form-control"
-                                                            data-toggle="tooltip" data-trigger="hover"
-                                                            data-placement="top">
-                                                        <option
-                                                            value='private'>{{trans('site_lang.search_case_case_private')}}</option>
-                                                        <option
-                                                            value='company'>{{trans('site_lang.search_case_case_company')}}</option>
-
-                                                    </select>
-
-
-                                                </div>
 
                                             </div>
 
@@ -367,10 +365,19 @@
                                 </div>
                                 <div id="panel_sessions" class="tab-pane fade">
                                     <div class="panel panel">
-                                        <div class="panel-heading"><a class="btn btn-primary" id="addSessionModal"><i
+                                        <div class="panel-heading">
+                                            @php
+                                                $user_type = auth()->user()->type;
+                                                if($user_type != 'admin'){
+                                            @endphp
+                                            <a class="btn btn-primary" id="addSessionModal"><i
                                                     class="fa
                                                 fa-plus">&nbsp;&nbsp;</i> {{trans('site_lang.search_case_case_add_session')}}
-                                            </a></div>
+                                            </a>
+                                            @php
+                                                }
+                                            @endphp
+                                        </div>
                                         <div class="panel-body" id="session-div-table">
                                             <div class="alert alert-warning" style="text-align: right;">
                                                 {!!trans('site_lang.public_warn_text')!!}
@@ -398,9 +405,16 @@
                                                     class="fa
                                                     fa-print"></i>&nbsp;&nbsp;{{trans('site_lang.search_case_case_print_notes')}}
                                             </a>
+                                            @php
+                                                $user_type = auth()->user()->type;
+                                                if($user_type != 'admin'){
+                                            @endphp
                                             <a class="btn btn-primary" id="addNotesModal"><i
                                                     class="fa fa-plus"></i>&nbsp;&nbsp;{{trans('site_lang.search_case_case_add_note')}}
                                             </a>
+                                            @php
+                                                }
+                                            @endphp
                                         </div>
 
                                         <div class="panel-body">

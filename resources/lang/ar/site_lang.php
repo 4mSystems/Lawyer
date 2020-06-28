@@ -152,5 +152,17 @@ return [
     'delete'=>'حذف',
     'add_notes'=>'ملاحظه جديده',
     'cases'=>'الدعاوي',
-    'edit_notes'=>'تعديل الملاحظات'
+    'edit_notes'=>'تعديل الملاحظات',
+    'users'=>'المستخدمين',
+    'clients'=>'العملاء',
+    'empName'=>'اسم الموظف',
+    'addcases'=>'اضافه دعوى',
+    'search_case'=>'البحث عن دعاوي',
+    'mohdreen'=>'المحضرين',
+    'daily_report'=>'التقارير اليوميه',
+    'monthly_report'=>'التقارير الشهريه',
+    'edit'=>'تعديل',
+    'emp'=>'اسم الموظف ',
+    'createdAt'=>'وقت الاضافه',
+    'cannot_delete_parent_category'=>'لا يمكن حذف التصنيف '
 ];

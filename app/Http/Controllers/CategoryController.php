@@ -118,6 +118,15 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $data = category::findOrFail($id);
-        $data->delete();
+        try {
+            $data->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                //SQLSTATE[23000]: Integrity constraint violation
+                return response(['msg' => trans('site_lang.cannot_delete_parent_category')]);
+            }
+        }
+
+
     }
 }

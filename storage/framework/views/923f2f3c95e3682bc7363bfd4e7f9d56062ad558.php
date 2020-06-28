@@ -3,11 +3,17 @@
     <td class="hidden-xs center" id="client_name<?php echo e($client->id); ?>"><?php echo e($client->client_Name); ?></td>
     <td class="hidden-xs center">
         <div class="visible-md visible-lg hidden-sm hidden-xs">
-
+            <?php
+                $user_type = auth()->user()->type;
+                if($user_type == 'admin'){
+            ?>
             <a class="btn btn-red tooltips" data-placement="top" id="deleteClient"
                data-mokel-id="<?php echo e($client->id); ?>"
                data-original-title="Remove"><i
                     class="fa fa-times fa fa-white"></i></a>
+            <?php
+                }
+            ?>
 
         </div>
         <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -27,6 +33,7 @@
                 </ul>
             </div>
         </div>
+
     </td>
 </tr>
 <?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/mokel_item.blade.php ENDPATH**/ ?>

@@ -29,19 +29,19 @@
                                     <div class="arrow"></div>
                                     <div class="popover-content">
                                         <!-- start: SEARCH FORM -->
-                                        <form class="" id="searchform" action="#">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control"
-                                                       placeholder="<?php echo e(trans('site_lang.search_case_search_hint')); ?>"
-                                                       id="search">
-                                                <span class="input-group-btn">
-																<button class="btn btn-main-color btn-squared"
-                                                                        type="button" id="search_case_btn">
-																	<i class="fa fa-search"></i>
-																</button> </span>
-                                            </div>
-                                        </form>
-                                        <!-- end: SEARCH FORM -->
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <!-- end: SEARCH FORM -->
                                     </div>
                                 </div>
                                 <!-- end: SEARCH POPOVER -->
@@ -131,7 +131,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button class="btn btn-icon btn-block" href="#panel_sessions">
+                                                    <button class="btn btn-icon btn-block">
                                                         <i class="clip-calendar"></i>
                                                         <?php echo e(trans('site_lang.mohdar_notes')); ?> <span
                                                             class="badge badge-info"
@@ -151,11 +151,19 @@
                                                 <div class="panel-heading">
                                                     <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_clients')); ?></h3>
                                                     <div class="btn-group pull-left">
+                                                        <?php
+                                                            $user_type = auth()->user()->type;
+                                                            if($user_type != 'admin'){
+                                                        ?>
                                                         <a class="btn btn-primary" id="addMokelModal"><i
                                                                 class="fa
                                                             fa-plus">&nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_client')); ?>
 
                                                         </a>
+                                                        <?php
+                                                            }
+                                                        ?>
+
                                                     </div>
                                                     <br>
                                                 </div>
@@ -183,12 +191,19 @@
                                                     <div class="panel-heading">
                                                         <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_khesms')); ?></h3>
                                                         <div class="btn-group pull-left">
+                                                            <?php
+                                                                $user_type = auth()->user()->type;
+                                                                if($user_type != 'admin'){
+                                                            ?>
                                                             <a class="btn btn-success" id="addKhesmModal"><i
 
                                                                     class="fa fa-plus">
                                                                     &nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_khesm')); ?>
 
                                                             </a>
+                                                            <?php
+                                                                }
+                                                            ?>
                                                         </div>
                                                         <br>
                                                     </div>
@@ -299,6 +314,7 @@
                                 <div id="panel_edit_account" class="tab-pane fade" style="direction: rtl">
                                     <form id="edit_case_form" method="post">
                                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                        <input type="hidden" name="to_whome" id="to_whome">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_data')); ?></h3>
@@ -344,25 +360,6 @@
                                                            placeholder="<?php echo e(trans('site_lang.add_case_court')); ?>"
                                                            class="form-control" id="input_court" name="court">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <?php echo e(trans('site_lang.add_case_to_whom')); ?>
-
-                                                    </label>
-
-
-                                                    <select id="to_whome" name="to_whome" class="form-control"
-                                                            data-toggle="tooltip" data-trigger="hover"
-                                                            data-placement="top">
-                                                        <option
-                                                            value='private'><?php echo e(trans('site_lang.search_case_case_private')); ?></option>
-                                                        <option
-                                                            value='company'><?php echo e(trans('site_lang.search_case_case_company')); ?></option>
-
-                                                    </select>
-
-
-                                                </div>
 
                                             </div>
 
@@ -377,11 +374,20 @@
                                 </div>
                                 <div id="panel_sessions" class="tab-pane fade">
                                     <div class="panel panel">
-                                        <div class="panel-heading"><a class="btn btn-primary" id="addSessionModal"><i
+                                        <div class="panel-heading">
+                                            <?php
+                                                $user_type = auth()->user()->type;
+                                                if($user_type != 'admin'){
+                                            ?>
+                                            <a class="btn btn-primary" id="addSessionModal"><i
                                                     class="fa
                                                 fa-plus">&nbsp;&nbsp;</i> <?php echo e(trans('site_lang.search_case_case_add_session')); ?>
 
-                                            </a></div>
+                                            </a>
+                                            <?php
+                                                }
+                                            ?>
+                                        </div>
                                         <div class="panel-body" id="session-div-table">
                                             <div class="alert alert-warning" style="text-align: right;">
                                                 <?php echo trans('site_lang.public_warn_text'); ?>
@@ -411,10 +417,17 @@
                                                     fa-print"></i>&nbsp;&nbsp;<?php echo e(trans('site_lang.search_case_case_print_notes')); ?>
 
                                             </a>
+                                            <?php
+                                                $user_type = auth()->user()->type;
+                                                if($user_type != 'admin'){
+                                            ?>
                                             <a class="btn btn-primary" id="addNotesModal"><i
                                                     class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo e(trans('site_lang.search_case_case_add_note')); ?>
 
                                             </a>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
 
                                         <div class="panel-body">
@@ -531,4 +544,5 @@
     UIModals.init();
     PagesUserProfile.init();
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/cases/search_case.blade.php ENDPATH**/ ?>

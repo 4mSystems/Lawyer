@@ -60,7 +60,6 @@ class PermissionController extends Controller
     {
         $permission = Permission::where('user_id', $id)->first();
        
-
         return view('permission.permission', \compact('permission'));
     }
 

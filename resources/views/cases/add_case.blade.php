@@ -132,22 +132,20 @@
                                                 <span class="text-danger" id="lawsuit_error"></span>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                            <div class="form-group{{$errors->has('to_whome')?' has-error':''}}">
-                                                <select id="form-field-select-3" class="form-control select2-arrow"
-                                                        name="to_whome">
-                                                    <option value="">
-                                                        &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
-                                                    @foreach($categories as $category)
-                                                        <option
-                                                            value='{{$category->id}}'>{{$category->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                <span class="text-danger" id="To_error"></span>
-                                            </div>
-                                        </div>
-
-
+{{--                                        <div class="col-xs-6 col-sm-6 col-md-6">--}}
+{{--                                            <div class="form-group{{$errors->has('to_whome')?' has-error':''}}">--}}
+{{--                                                <select id="form-field-select-3" class="form-control select2-arrow"--}}
+{{--                                                        name="to_whome">--}}
+{{--                                                    <option value="">--}}
+{{--                                                        &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>--}}
+{{--                                                    @foreach($categories as $category)--}}
+{{--                                                        <option--}}
+{{--                                                            value='{{$category->id}}'>{{$category->name}}</option>--}}
+{{--                                                    @endforeach--}}
+{{--                                                </select>--}}
+{{--                                                <span class="text-danger" id="To_error"></span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </form>
                             </div>

@@ -23,10 +23,11 @@
     <meta content="" name="description"/>
     <meta content="" name="author"/>
     <!-- end: META -->
-    <!-- start: MAIN CSS -->
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <!-- start: MAIN CSS --> 
+    <link rel="stylesheet" href="<?php echo e(url('/css/fontcairo1.css')); ?>"> 
+    <link rel="stylesheet" href="<?php echo e(url('/css/fontcairo2.css')); ?>"> 
+    
+    <!-- <link rel="stylesheet" href="<?php echo e(url('/css/fontawsom.css')); ?>">  -->
     <link rel="stylesheet" href="<?php echo e(url('/plugins/bootstrap/css/bootstrap.min.css')); ?>">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

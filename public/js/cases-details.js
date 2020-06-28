@@ -54,7 +54,8 @@ $(document).ready(function () {
             dataType: "json",
             success: function (html) {
                 //for case data
-                $('#to_whome').html(html.result.case.to_whome); //text
+                console.log(html.result.case.to_whome);
+                $('#to_whome').val(html.result.case.to_whome); //text
                 $('#input_whome').val(html.result.case.to_whome); //input
                 $('#invetation_num').html(html.result.case.invetation_num);
                 $('#input_invetation_num').val(html.result.case.invetation_num);//input
@@ -80,7 +81,6 @@ $(document).ready(function () {
                 //attachments url
                 var attachment_url = "attachment/" + caseId;
                 $('#attachment').attr("href", attachment_url);
-
             }
         })
     });

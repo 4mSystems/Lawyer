@@ -89,11 +89,18 @@
                                                 <div class="panel-heading">
                                                     <h3 class="text-bold"><?php echo e(trans('site_lang.notes')); ?></h3>
                                                     <div class="btn-group pull-left">
+                                                    <?php 
+                                                    $user_type = auth()->user()->type;
+                                                    if($user_type != 'admin'){
+                                                    ?>
                                                         <a class="btn btn-primary" id="createnote"><i 
                                                                 class="fa
                                                             fa-plus">&nbsp;&nbsp;</i><?php echo e(trans('site_lang.add_notes')); ?>
 
                                                         </a>
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     </div>
                                                     <br>
                                                 </div>
@@ -104,6 +111,10 @@
                                     <tr>
                                         <th class="center">#</th> 
                                         <th class="center"><?php echo e(trans('site_lang.notes')); ?></th> 
+                                        
+                                        <th class="center"><?php echo e(trans('site_lang.emp')); ?></th> 
+                                        
+                                        <th class="center"><?php echo e(trans('site_lang.createdAt')); ?></th> 
                                         <th class="center"></th>
                                     </tr>
                                   
@@ -198,8 +209,9 @@
                                         </div>
                                     </div>
                                 </div> 
-                                     
-                                  
+
+
+                                
 
                                 </div>
                             </div>
@@ -314,8 +326,7 @@
     </div>
 
 
-
-
+ 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts'); ?>
     <!-- 
@@ -327,6 +338,9 @@
     <script src="<?php echo e(url('/plugins/DataTables/media/js/jquery.dataTables.min.js')); ?>"></script>
     <script src="<?php echo e(url('/plugins/DataTables/media/js/DT_bootstrap.js')); ?>"></script>
     <script src="<?php echo e(url('/plugins/jQuery-Tags-Input/jquery.tagsinput.js')); ?>"></script>
+  
+    
+
     <script src="<?php echo e(url('/js/form-elements.js')); ?>"></script> 
      <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
     <script>
@@ -336,10 +350,13 @@
             }
         });
         $(document).ready(function () {
-            var id = $('#client_id').val(); 
+            var id = $('#client_id').val();  
             $('#clientnotes_tbl').DataTable({
                 processing: true,
                 serverSide: true,
+                
+                            //
+
                 ajax: {
                     url: "/profile/"+ id ,
                 },
@@ -354,18 +371,29 @@
                         data: 'notes',
                         name: 'notes',
                         className: 'center'
+                    },
+                    {
+                        data: 'user_id.name',
+                        name: 'user_id.name',
+                        className: 'center'
                     },  
+                    {
+                        data: 'created_at',
+                        name: 'created_at',
+                        className: 'center'
+                    },    
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false,
                         className: 'center'
                     }
-                ]
-            
+                ],
+          
         });
+        
     });
-// 
+     
 
 $.ajaxSetup({
             headers: {
@@ -513,6 +541,8 @@ $.ajaxSetup({
 
 
             </script>
+            
+            
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scriptDocument'); ?>

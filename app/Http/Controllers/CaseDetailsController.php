@@ -23,23 +23,32 @@ class CaseDetailsController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()) {
-            $user_id = auth()->user()->id;
-            $permission = Permission::where('user_id', $user_id)->first();
-            $enabled = $permission->search_case;
-            if ($enabled == 'yes') {
-                return datatables()->of(
-                    Cases::query()
+
+        $user_id = auth()->user()->id;
+        $permission = Permission::where('user_id', $user_id)->first();
+        $enabled = $permission->search_case;
+        if ($enabled == 'yes') {
+            if (request()->ajax()) {
+                $user_type = auth()->user()->type;
+                $case = '';
+                if ($user_type == 'User') {
+                    $case = Cases::query()
                         ->where('to_whome', '=', auth()->user()->cat_id)
                         ->with('clients')
-                        ->get())
+                        ->get();
+
+                } else {  //
+                    $case = Cases::query()->with('clients')
+                        ->get();
+                }
+                return datatables()->of($case)
                     ->addColumn('client_Name', function ($data) {
                         $button = '';
                         foreach ($data->clients as $client) {
                             if ($button == '') {
                                 $button = $client->client_Name;
                             } else
-                                $button = $button . ', ' . $client->client_Name;
+                                $button = $button . '  , ' . $client->client_Name;
                         }
                         return $button;
                     })
@@ -51,11 +60,11 @@ class CaseDetailsController extends Controller
                     ->rawColumns(['client_Name', 'action'])
                     ->make(true);
 
-            } else {
-                return redirect(url('home'));
             }
+            return view('cases.search_case');
+        } else {
+            return redirect(url('home'));
         }
-        return view('cases.search_case');
     }
 
     public function getSearchResult($search)
@@ -203,6 +212,7 @@ class CaseDetailsController extends Controller
     // get sessions notes for one session
     public function getSessionNotes($id)
     {
+
         return datatables()->of(Session_Notes::query()->where('session_Id', '=', $id)->orderBy('id', 'desc')->get())
             ->addColumn('status', function ($data) {
                 if ($data->status == trans('site_lang.public_no_text')) {
@@ -216,16 +226,21 @@ class CaseDetailsController extends Controller
                 return $html;
             })
             ->addColumn('action', function ($data) {
-                $button = '<button data-notes-Id="' . $data->id . '" id="editNote" class="btn btn-s btn-blue tooltips" ><i
+                $user_type = auth()->user()->type;
+                if ($user_type == 'admin') {
+                    $button = '<button data-notes-Id="' . $data->id . '" id="editNote" class="btn btn-s btn-blue tooltips" ><i
                                     class="fa fa-edit"></i>&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
-                $button .= '&nbsp;&nbsp;';
-                $button .= '<button data-notes-Id="' . $data->id . '" id="deleteNote"  class="btn btn-s btn-red tooltips" ><i
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button data-notes-Id="' . $data->id . '" id="deleteNote"  class="btn btn-s btn-red tooltips" ><i
                                     class="fa fa-times fa fa-white"></i>&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
-                return $button;
+
+                    return $button;
+                }
             })
             ->rawColumns(['status', 'action'])
             ->make(true);
     }
+
 
     public function getSessions($id)
     {
@@ -242,15 +257,21 @@ class CaseDetailsController extends Controller
                 return $html;
             })
             ->addColumn('action', function ($data) {
-                $button = '<button data-session-Id="' . $data->id . '" id="editSession" class="btn btn-s btn-blue tooltips" ><i
+                $user_type = auth()->user()->type;
+                if ($user_type == 'admin') {
+                    $button = '<button data-session-Id="' . $data->id . '" id="editSession" class="btn btn-s btn-blue tooltips" ><i
                                     class="fa fa-edit"></i>&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
-                $button .= '&nbsp;&nbsp;';
-                $button .= '<button data-session-Id="' . $data->id . '" id="deleteSession"  class="btn btn-s btn-red tooltips" ><i
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button data-session-Id="' . $data->id . '" id="deleteSession"  class="btn btn-s btn-red tooltips" ><i
                                     class="fa fa-times fa fa-white"></i>&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
-                $button .= '&nbsp;&nbsp;';
-                $button .= '<button data-session-Id="' . $data->id . '" id="showSessionNotes"  class="btn btn-blue tooltips" ><i
-                                    class="fa fa-eye-slash"></i>&nbsp;' . trans('site_lang.mohdar_notes') . '</button>';
+                    $button .= '&nbsp;&nbsp;';
 
+                    $button .= '<button data-session-Id="' . $data->id . '" id="showSessionNotes"  class="btn btn-blue tooltips" ><i
+                                    class="fa fa-eye-slash"></i>&nbsp;' . trans('site_lang.mohdar_notes') . '</button>';
+                } else {
+                    $button = '<button data-session-Id="' . $data->id . '" id="showSessionNotes"  class="btn btn-blue tooltips" ><i
+                                    class="fa fa-eye-slash"></i>&nbsp;' . trans('site_lang.mohdar_notes') . '</button>';
+                }
                 return $button;
             })
             ->rawColumns(['status', 'action'])
@@ -273,12 +294,12 @@ class CaseDetailsController extends Controller
 
     public function updateCase(Request $request)
     {
+
         $data = $this->validate(request(), [
             'invetation_num' => 'required',
             'circle_num' => 'required',
             'court' => 'required',
             'inventation_type' => 'required',
-            'to_whome' => 'required|in:private,company'
         ]);
 
         Cases::where('id', $request->case_Id)->update($data);

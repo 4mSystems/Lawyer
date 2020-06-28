@@ -64,11 +64,11 @@ class CasesController extends Controller
                 'court' => 'required',
                 'first_session_date' => 'required',
                 'inventation_type' => 'required',
-                'to_whome' => 'required'
             ]);
             $month = date('m', strtotime($request->first_session_date));
             $year = date('yy', strtotime($request->first_session_date));
 //            // saving case data
+            $data['to_whome'] = auth()->user()->cat_id;
             $case = Cases::create($data);
             $case['month'] = $month;
             $case['year'] = $year;
@@ -115,14 +115,12 @@ class CasesController extends Controller
 
     public function update(Request $request)
     {
-
-
         $data = $this->validate(request(), [
             'invetation_num' => 'required',
             'circle_num' => 'required',
             'court' => 'required',
             'inventation_type' => 'required',
-            'to_whome' => 'required|in:private,company'
+            'to_whome' => 'required'
         ]);
 
 
