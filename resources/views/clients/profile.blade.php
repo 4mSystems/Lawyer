@@ -299,7 +299,7 @@
                                     <div class="form-group"> 
                                                <textarea style="width:100%;" name="notes" id="note"
                                                placeholder="{{trans('site_lang.notes')}}"
-                                               value="{{ old('notes') }}" form="client_notes"></textarea> 
+                                                 form="client_notes"></textarea> 
 
                                     </div>
                                 </div>

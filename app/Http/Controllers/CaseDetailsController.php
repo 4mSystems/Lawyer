@@ -349,7 +349,7 @@ class CaseDetailsController extends Controller
         $clients = array();
         $khesm = array();
         foreach ($case->clients as $key => $client) {
-            if ($client->type == 'khesm') {
+            if ($client->type  ==trans('site_lang.clients_client_type_khesm')) {
                 $khesm[] = $client;
             } else {
                 $clients [] = $client;

@@ -211,6 +211,14 @@
             var table = $('#client_tbl').DataTable({
                 processing: true,
                 serverSide: true,
+                // parameters  : [
+                // 'dom'     : 'Bfrtip',
+                // buttons :'print',
+       
+                // ],
+
+
+                
                  ajax: {
                     url: "<?php echo e(route('clients.index')); ?>",
                 },
