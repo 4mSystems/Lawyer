@@ -302,7 +302,7 @@
                                     <div class="form-group"> 
                                                <textarea style="width:100%;" name="notes" id="note"
                                                placeholder="<?php echo e(trans('site_lang.notes')); ?>"
-                                               value="<?php echo e(old('notes')); ?>" form="client_notes"></textarea> 
+                                                 form="client_notes"></textarea> 
 
                                     </div>
                                 </div>

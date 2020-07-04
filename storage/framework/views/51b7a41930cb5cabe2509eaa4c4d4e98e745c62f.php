@@ -48,7 +48,7 @@
 
                             </div>
                             <div class="panel-body">
-                                <form method="post" id="new_case">
+                                <form method="post" id="new_case" >
                                     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                     <input type="hidden" name="id" id="id">
                                     <div class="row">
@@ -134,6 +134,7 @@
                                                 <span class="text-danger" id="lawsuit_error"></span>
                                             </div>
                                         </div>
+<!-- 
 
 
 
@@ -146,8 +147,7 @@
 
 
 
-
-
+ -->
                                     </div>
                                 </form>
                             </div>
@@ -207,8 +207,12 @@
                         $('#lawsuit_error').empty();
                         $('#To_error').empty();
                     }, success: function (data) {
+                        if(data.status){
                         toastr.success(data.msg);
                         $("#new_case").trigger('reset');
+                    }else{
+                        toastr.error(data.msg);
+                    }
                     }, error: function (data_error, exception) {
                         if (exception == 'error') {
                             $('#mokel_error').html(data_error.responseJSON.errors.mokel_name);
