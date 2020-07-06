@@ -44,7 +44,7 @@ class Session_NotesController extends Controller
                 'session_Id' => 'required',
             ]);
             Session_Notes::create($data);
-            return response([trans('site_lang.public_success_text')]);
+            return response(['msg' => trans('site_lang.public_success_text')]);
         }
     }
 
@@ -120,7 +120,7 @@ class Session_NotesController extends Controller
             $status = false;
         }
         $note->update();
-        return response(['msg' =>trans('site_lang.public_success_text'), 'status' => $status]);
+        return response(['msg' => trans('site_lang.public_success_text'), 'status' => $status]);
 
     }
 

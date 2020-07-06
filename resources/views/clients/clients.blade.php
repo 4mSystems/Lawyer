@@ -43,13 +43,16 @@
                         <!-- start: DYNAMIC TABLE PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                                     @php 
+                                                     @php
                                                     $user_type = auth()->user()->type;
                                                     if($user_type == 'User'){
                                                     @endphp
                                 <a class="btn btn-primary" id="addClientModal"><i
-                                        class="fa fa-plus"></i>{{trans('site_lang.clients_add_new_client_text')}} 
-                                        </a>
+
+                                        class="fa fa-plus"></i>{{trans('site_lang.clients_add_new_client_text')}} </a>
+
+
+
                                         @php
                                                     }
                                                     @endphp
@@ -128,7 +131,7 @@
                                     </div>
                                 </div>
 
-                             
+
 
 
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -202,10 +205,10 @@
             }
         });
         $(document).ready(function () {
-            $('#client_tbl').DataTable({
+            var table = $('#client_tbl').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: {
+                 ajax: {
                     url: "{{ route('clients.index') }}",
                 },
                 columns: [
@@ -245,6 +248,7 @@
                     }
                 ]
             });
+
             $('#addClientModal').click(function () {
                 $('#modal_title').text("{{trans('site_lang.clients_add_new_client_text')}}");
                 $('#add_client').val("{{trans('site_lang.public_add_btn_text')}}");
@@ -339,8 +343,8 @@
                     }
                 })
             });
-            
-  
+
+
             var client_id;
 
             $(document).on('click', '.btn-lg', function () {
@@ -364,7 +368,7 @@
                 })
             });
 
-            
+
             $(document).on('click', '#deleteClient', function () {
                 client_id = $(this).data('client-id');
                 $('#confirmModal').modal('show');

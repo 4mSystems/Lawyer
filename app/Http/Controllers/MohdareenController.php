@@ -18,77 +18,73 @@ class MohdareenController extends Controller
     public function index()
     {
         $user_type = auth()->user()->type;
-         
+
         $user_id = auth()->user()->id;
         $permission = Permission::where('user_id', $user_id)->first();
-        
+
         $enabled = $permission->mohdreen;
         if ($enabled == 'yes') {
-        if (request()->ajax()) {
-            if($user_type == 'admin'){
+            if (request()->ajax()) {
+                if ($user_type == 'admin') {
                     return datatables()->of(mohdr::query()->where('cat_id', '=', auth()->user()->cat_id)->get())
-                    ->addColumn('status', function ($data) {
-                        if ($data->status == trans('site_lang.public_no_text')) {
-                            $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
-                            <span class="label label-danger text-bold"> '.$data->status.'</span></p>';
-                        } else {
-                            $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
-                            <span class="label label-success text-bold"> '.$data->status.'</span></p>';
-                        }
+                        ->addColumn('status', function ($data) {
+                            if ($data->status == trans('site_lang.public_no_text')) {
+                                $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
+                            <span class="label label-danger text-bold"> ' . $data->status . '</span></p>';
+                            } else {
+                                $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
+                            <span class="label label-success text-bold"> ' . $data->status . '</span></p>';
+                            }
 
-                        return $html;
-                    })
-                    ->addColumn('action', function ($data) {
-                        $button = '<button data-moh-Id="' . $data->moh_Id . '" id="editMohdar" class="btn btn-xs btn-blue tooltips" ><i
+                            return $html;
+                        })
+                        ->addColumn('action', function ($data) {
+                            $button = '<button data-moh-Id="' . $data->moh_Id . '" id="editMohdar" class="btn btn-xs btn-blue tooltips" ><i
                         class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<button data-moh-Id="' . $data->moh_Id . '" id="deleteMohadr"  class="btn btn-xs btn-red tooltips" ><i
+                            $button .= '&nbsp;&nbsp;';
+                            $button .= '<button data-moh-Id="' . $data->moh_Id . '" id="deleteMohadr"  class="btn btn-xs btn-red tooltips" ><i
                         class="fa fa-times fa fa-white"></i>&nbsp;&nbsp;' . trans('site_lang.public_delete_text') . '</button>';
-            $button .= '&nbsp;&nbsp;';
-            $button .= '<button data-moh-Id="' . $data->moh_Id . '" id="showMohdar"  class="btn btn-xs btn-blue tooltips" ><i
+                            $button .= '&nbsp;&nbsp;';
+                            $button .= '<button data-moh-Id="' . $data->moh_Id . '" id="showMohdar"  class="btn btn-xs btn-blue tooltips" ><i
                         class="fa fa-eye-slash"></i>&nbsp;&nbsp;' . trans('site_lang.home_more_options') . '</button>';
 
-            return $button;
-                    })
+                            return $button;
+                        })
+                        ->rawColumns(['status', 'action'])
+                        ->make(true);
 
-                    ->rawColumns(['status', 'action'])
-                    ->make(true);
-                
-            
-                }else{
+
+                } else {
                     return datatables()->of(mohdr::query()->where('cat_id', '=', auth()->user()->cat_id)->get())
-                    ->addColumn('status', function ($data) {
-                        if ($data->status == trans('site_lang.public_no_text')) {
-                            $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
-                            <span class="label label-danger text-bold"> '.$data->status.'</span></p>';
-                        } else {
-                            $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
-                            <span class="label label-success text-bold"> '.$data->status.'</span></p>';
-                        }
+                        ->addColumn('status', function ($data) {
+                            if ($data->status == trans('site_lang.public_no_text')) {
+                                $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
+                            <span class="label label-danger text-bold"> ' . $data->status . '</span></p>';
+                            } else {
+                                $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
+                            <span class="label label-success text-bold"> ' . $data->status . '</span></p>';
+                            }
 
-                        return $html;
-                    })
-                    ->addColumn('action', function ($data) {
-                    
-            $button = '<button data-moh-Id="' . $data->moh_Id . '" id="showMohdar"  class="btn btn-xs btn-blue tooltips" ><i
+                            return $html;
+                        })
+                        ->addColumn('action', function ($data) {
+
+                            $button = '<button data-moh-Id="' . $data->moh_Id . '" id="showMohdar"  class="btn btn-xs btn-blue tooltips" ><i
                         class="fa fa-eye-slash"></i>&nbsp;&nbsp;' . trans('site_lang.home_more_options') . '</button>';
 
-            return $button;
-                    })
-
-                    ->rawColumns(['status', 'action'])
-                    ->make(true);
+                            return $button;
+                        })
+                        ->rawColumns(['status', 'action'])
+                        ->make(true);
                 }
 
 
-
-           
+            }
+            $categories = category::select('id', 'name')->get();
+            return view('mohdareen/mohdareen', compact('categories'));
+        } else {
+            return redirect(url('home'));
         }
-        $categories = category::select('id', 'name')->get();
-        return view('mohdareen/mohdareen', compact('categories'));
-    } else {
-        return redirect(url('home'));
-    }
     }
 
     public function create()

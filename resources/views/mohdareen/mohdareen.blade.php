@@ -53,7 +53,7 @@
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                            @php 
+                            @php
                                                     $user_type = auth()->user()->type;
                                                     if($user_type != 'admin'){
                                                     @endphp
@@ -61,11 +61,11 @@
                                 <a class="btn btn-primary" id="addMohdarModal"><i
                                         class="fa fa-plus"></i>{{trans('site_lang.mohdar_add_mohdar')}}
                                         </a>
-                                        
+
                                         @php
                                                     }
                                                     @endphp
-                                        
+
                             </div>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover table-full-width"
@@ -481,7 +481,7 @@
                             $('#cat_id').empty();
                         }, success: function (data) {
                             $('#add_mohdar_model').modal('hide');
-                            toastr.success(data.success);
+                            toastr.success(data.msg);
                             $("#mohdars").trigger('reset');
                             $('#mohdar_tbl').DataTable().ajax.reload();
                         }, error: function (data_error, exception) {

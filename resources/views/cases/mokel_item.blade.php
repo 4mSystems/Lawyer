@@ -3,11 +3,17 @@
     <td class="hidden-xs center" id="client_name{{$client->id}}">{{$client->client_Name}}</td>
     <td class="hidden-xs center">
         <div class="visible-md visible-lg hidden-sm hidden-xs">
-
+            @php
+                $user_type = auth()->user()->type;
+                if($user_type == 'admin'){
+            @endphp
             <a class="btn btn-red tooltips" data-placement="top" id="deleteClient"
                data-mokel-id="{{$client->id}}"
                data-original-title="Remove"><i
                     class="fa fa-times fa fa-white"></i></a>
+            @php
+                }
+            @endphp
 
         </div>
         <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -27,5 +33,6 @@
                 </ul>
             </div>
         </div>
+
     </td>
 </tr>

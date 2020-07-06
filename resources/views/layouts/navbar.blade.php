@@ -13,7 +13,7 @@
                     <img src="{{url('/images/avatar-1.jpg') }}" alt="">
                 </div>
                 <div class="inline-block">
-                     <h4 class="text-justify"> &nbsp;&nbsp;  {{ Auth::user()->name }} </h4>
+                    <h4 class="text-justify"> &nbsp;&nbsp; {{ Auth::user()->name }} </h4>
 
                 </div>
             </div>
@@ -36,14 +36,24 @@
                             class="title"> {{trans('site_lang.side_cases')}} </span><i
                             class="icon-arrow"></i> </a>
                     <ul class="sub-menu">
+                        @php
+                            $user_type = auth()->user()->type;
+                            if($user_type == 'User'){
+                        @endphp
                         <li>
                             <a href="{{url('/addCase')}}">
-                                <i class="fa fa-plus"></i>&nbsp; <span class="title">{{trans('site_lang.side_add_case')}}</span>
+                                <i class="fa fa-plus"></i>&nbsp; <span
+                                    class="title">{{trans('site_lang.side_add_case')}}</span>
                             </a>
                         </li>
+                        @php
+                            }
+                        @endphp
+
                         <li>
                             <a href="{{ url('/caseDetails') }}">
-                                <i class="fa fa-eye-slash"></i> &nbsp;<span class="title">{{trans('site_lang.side_search_case')}}</span>
+                                <i class="fa fa-eye-slash"></i> &nbsp;<span
+                                    class="title">{{trans('site_lang.side_search_case')}}</span>
                             </a>
                         </li>
 
@@ -53,44 +63,57 @@
                     <a href="{{url('/mohdareen')}}"><i class="fa fa-pencil-square-o"></i> &nbsp;&nbsp;<span
                             class="title"> {{trans('site_lang.side_mohdar')}} </span> </a>
 
-                </li><li>
+                </li>
+                @php
+                    $user_type = auth()->user()->type;
+                    if($user_type == 'admin'){
+                @endphp
+                <li>
+
                     <a href="{{url('/categories')}}"><i class="fa fa-pencil-square-o"></i> &nbsp;&nbsp;<span
                             class="title"> {{trans('site_lang.side_categories')}} </span> </a>
 
                 </li>
+                @php
+                    }
+                @endphp
+
                 <li>
 
-                    <a href="javascript:void(0)"><i class="fa fa-file-excel-o"></i> &nbsp;<span class="title"> {{trans('site_lang.side_reports')}} </span><i
-                                class="icon-arrow"></i> </a>
+                    <a href="javascript:void(0)"><i class="fa fa-file-excel-o"></i> &nbsp;<span
+                            class="title"> {{trans('site_lang.side_reports')}} </span><i
+                            class="icon-arrow"></i> </a>
                     <ul class="sub-menu">
                         <li>
                             <a href="{{url('/dailyReport')}}">
-                                <i class="fa fa-hacker-news"></i>&nbsp;<span class="title">{{trans('site_lang.side_reports_daily')}}</span>
+                                <i class="fa fa-hacker-news"></i>&nbsp;<span
+                                    class="title">{{trans('site_lang.side_reports_daily')}}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('/MonthlyReport') }}">
-                                <i class="fa fa-file-movie-o"></i>&nbsp;<span class="title">{{trans('site_lang.side_reports_monthly')}}</span>
+                                <i class="fa fa-file-movie-o"></i>&nbsp;<span
+                                    class="title">{{trans('site_lang.side_reports_monthly')}}</span>
                             </a>
                         </li>
 
                     </ul>
-                    
 
 
+                </li>
+                <li>
                     <a href="{{ route('logout') }}" type='submit' class="btn btn-sm log-out text-right"
 
-                        onclick="event.preventDefault();
+                       onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
-                            {{trans('site_lang.side_exit')}}
- 
-</a>
+                        {{trans('site_lang.side_exit')}}
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
- @csrf
-</form>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
-
             </ul>
             <!-- end: MAIN NAVIGATION MENU -->
         </div>

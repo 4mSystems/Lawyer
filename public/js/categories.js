@@ -108,6 +108,8 @@ $(document).ready(function () {
             },
             success: function (data) {
                 setTimeout(function () {
+                    console.log(data);
+                    toastr.error(data.msg);
                     $('#confirmModal').modal('hide');
                     $('#categories_tbl').DataTable().ajax.reload();
                 }, 100);
