@@ -105,6 +105,7 @@
                                             <th class="center">{{trans('site_lang.home_session_case_number')}}</th>
                                             <th class="center">{{trans('site_lang.add_case_circle_num')}}</th>
                                             <th class="center">{{trans('site_lang.add_case_inventation_type')}}</th>
+                                            <th class="center">{{trans('site_lang.add_case_court')}}</th>
                                             <th class="center">{{trans('site_lang.home_session_date')}}</th>
                                             <th class="center">{{trans('site_lang.mohdar_notes')}}</th>
 

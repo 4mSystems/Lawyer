@@ -1,5 +1,6 @@
 <?php
 
+ 
 return array(
 
     /*
@@ -12,7 +13,7 @@ return array(
     |
     */
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
-    'orientation' => 'portrait',
+    'orientation' => 'portrait', 
     'defines' => array(
         /**
          * The location of the DOMPDF font directory

@@ -208,6 +208,14 @@
             var table = $('#client_tbl').DataTable({
                 processing: true,
                 serverSide: true,
+                // parameters  : [
+                // 'dom'     : 'Bfrtip',
+                // buttons :'print',
+       
+                // ],
+
+
+                
                  ajax: {
                     url: "{{ route('clients.index') }}",
                 },
