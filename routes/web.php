@@ -32,8 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('categories/destroy/{id}', 'CategoryController@destroy');
 
 //cases
+    Route::resource('cases', 'CasesController'); 
     Route::get('addCase', 'CasesController@getClients');
-    Route::resource('cases', 'CasesController');
 
 //Mohdareen
     Route::resource('mohdareen', 'MohdareenController');
@@ -69,6 +69,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('caseDetails/printSessionNotes/{id}', 'CaseDetailsController@printSessionNotes');
 //Case Report
     Route::get('caseDetails/printCase/{id}', 'CaseDetailsController@printCase');
+    //Case delete
+    
+    Route::get('caseDetails/delete/{id}', 'CaseDetailsController@delete');
 
 
 //notes operations

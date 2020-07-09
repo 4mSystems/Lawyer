@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Clients;
 use App\Permission;
 use App\category;
-use Illuminate\Http\Request;
-use Yajra\DataTables\Html\Button;
+use Illuminate\Http\Request;  
+use Yajra\DataTables\Services\DataTable;
+
 
 class ClientsController extends Controller
 {

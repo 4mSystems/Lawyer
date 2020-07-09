@@ -55,6 +55,10 @@ class CaseDetailsController extends Controller
                     ->addColumn('action', function ($data) {
                         $button = '<button data-case-id="' . $data->id . '" id="showCaseData" class="btn btn-m btn-blue tooltips" ><i
                                     class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.home_see_more') . '</button>';
+                                    $button .= '&nbsp;&nbsp;';
+                                    $button .= '<a  data-case-id="' . $data->id . '" id="deletecase" class="btn btn-m btn-red tooltips" ><i
+                                    class="fa fa-trash"></i>&nbsp;&nbsp;' . trans('site_lang.delete') . '</a>';
+                               
                         return $button;
                     })
                     ->rawColumns(['client_Name', 'action'])
@@ -349,7 +353,7 @@ class CaseDetailsController extends Controller
         $clients = array();
         $khesm = array();
         foreach ($case->clients as $key => $client) {
-            if ($client->type == 'khesm') {
+          if ($client->type  ==trans('site_lang.clients_client_type_khesm')) {
                 $khesm[] = $client;
             } else {
                 $clients [] = $client;
@@ -364,6 +368,31 @@ class CaseDetailsController extends Controller
 
         return $pdf->stream('My PDF' . 'pdf');
 
+    }
+
+    public function delete($id){
+        $caseclient =   Case_client::where('case_id',$id)->get();
+       
+        foreach ($caseclient as $caseclient){
+            $caseclient->delete(); 
+        }
+        $caseSessions = Sessions::where('case_id',$id)->get();
+        
+        foreach($caseSessions as $caseSessions){
+            $session_id = $caseSessions->id ; 
+            
+            $session_note = Session_Notes::where('session_Id',$session_id)->get();
+           
+            foreach($session_note as $session_note){
+                $session_note->delete();
+            }
+            $caseSessions->delete();
+  
+        }
+
+        Cases::where('id',$id)->delete();
+
+        return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
     }
 
 }

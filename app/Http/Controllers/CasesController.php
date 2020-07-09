@@ -59,12 +59,15 @@ class CasesController extends Controller
     {
         if ($request->ajax()) {
             $data = $this->validate(request(), [
+
                 'invetation_num' => 'required',
                 'circle_num' => 'required',
                 'court' => 'required',
                 'first_session_date' => 'required',
                 'inventation_type' => 'required',
             ]);
+            
+            if($request->mokel_name !=null && $request->khesm_name !=null ){
             $month = date('m', strtotime($request->first_session_date));
             $year = date('yy', strtotime($request->first_session_date));
 //            // saving case data
@@ -81,13 +84,21 @@ class CasesController extends Controller
             $sessions->year = $year;
             $sessions->save();
             // saving case clients data
+                 
             $res = array_merge($request->mokel_name, $request->khesm_name);
+            
             foreach ($res as $client) {
                 Case_client::create(['case_id' => $case->id, 'client_id' => $client]);
             }
             return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
         }
-        return redirect()->route('cases.add_case')->with('success', 'Case Added successfully');
+        else{
+            return response(['status' => false, 'msg' => "من فضلك قم بافراغ خانه الموكلين والخصوم واخترهم"]);
+        }
+               }
+               return redirect(url('addCase'))->with('success', 'Case Added successfully');
+               
+        // return redirect()->url('addCase')->with('success', 'Case Added successfully');
 
     }
 
@@ -135,7 +146,8 @@ class CasesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {  
+     
+
     }
 }

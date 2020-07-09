@@ -299,7 +299,7 @@
                                     <div class="form-group"> 
                                                <textarea style="width:100%;" name="notes" id="note"
                                                placeholder="{{trans('site_lang.notes')}}"
-                                               value="{{ old('notes') }}" form="client_notes"></textarea> 
+                                                 form="client_notes"></textarea> 
 
                                     </div>
                                 </div>
@@ -482,8 +482,7 @@ $.ajaxSetup({
 
     var note_id ;
     $(document).on('click', '#deletenote', function () {
-                 note_id = $(this).data('client-id');
-                
+                 note_id = $(this).data('client-id'); 
                 $('#confirmModal').modal('show');
             });
             $('#ok_button').click(function () {

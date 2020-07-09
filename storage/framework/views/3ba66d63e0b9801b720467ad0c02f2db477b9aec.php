@@ -484,6 +484,26 @@
             </div>
         </div>
     </div>
+
+                                                <!-- confirm delete modal -->
+
+    <div id="confirmModala" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <h4 align="center" style="margin:0;"><?php echo e(trans('site_lang.public_delete_modal_text')); ?></h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" name="okbutton" id="okbutton"
+                                class="btn btn-danger"><?php echo e(trans('site_lang.public_accept_btn_text')); ?></button>
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal"><?php echo e(trans('site_lang.public_close_btn_text')); ?></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts'); ?>
     
@@ -531,6 +551,27 @@
                 search_case_delete_session_text: "<?php echo e(trans('site_lang.search_case_delete_session_text')); ?>",
             }
         };
+
+        var casee_id ;
+    $(document).on('click', '#deletecase', function () {
+        casee_id = $(this).data('case-id');
+                
+                $('#confirmModala').modal('show');
+            });
+            $('#okbutton').click(function () { 
+                
+                $.ajax({  
+                    url: "/caseDetails/delete/" + casee_id,  
+                    success: function (data) {
+                        toastr.success(data.msg);
+                        setTimeout(function () {
+                            $('#confirmModala').modal('hide');
+                            $('#cases').DataTable().ajax.reload();
+                            location.reload(); 
+                        }, 100);
+                    }
+                })
+            });
     </script>
 
     <script src="<?php echo e(url('/js/cases-details.js')); ?>"></script>
