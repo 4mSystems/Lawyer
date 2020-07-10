@@ -73,17 +73,22 @@
                                                 <span class="input-group-addon"> <i
                                                         class="fa fa-calendar"></i> </span>
                                             </div>
+                                            <input id="user_type" type="hidden" value="<?php echo e(auth()->user()->type); ?>"/>
+                                            <input id="user_cat" type="hidden" value="<?php echo e(auth()->user()->cat_id); ?>"/>
                                         </div>
-
+                                        <?php
+                                            $user_type = auth()->user()->type;
+                                            if($user_type == 'admin'){
+                                        ?>
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div class="input-group">
-                              
+
                                                 <select id="Dailytype" class="form-control"
                                                         name="Dailytype">
                                                     <option value="">
                                                         &nbsp;<?php echo e(trans('site_lang.add_case_to_whom')); ?></option>
-                                                        
-                                                        <option value="all"
+
+                                                    <option value="all"
                                                             selected="selected"><?php echo e(trans('site_lang.reports_all')); ?></option>
                                                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <option
@@ -92,7 +97,9 @@
                                                 </select>
                                             </div>
                                         </div>
-
+                                        <?php
+                                            }
+                                        ?>
                                     </div>
 
 

@@ -10,18 +10,19 @@ $(document).ready(function () {
 
     }).on('changeDate', function (ev) {
         data = $(this).val();
-        type = $('#Dailytype').val();
-
+        if ($('#user_type').val() == 'User') {
+            type = $('#user_cat').val();
+        } else
+            type = $('#Dailytype').val();
         $('#dailyTable tbody').empty();
-        var href="dailyPdf/"+data+ "/"+type;
+        var href = "dailyPdf/" + data + "/" + type;
         $('#btn_search_daily').attr("href", href);
 
         $.ajax({
-            url: "dailyReport/" + data + "/"+type,
+            url: "dailyReport/" + data + "/" + type,
             dataType: 'json',
             type: 'get',
             success: function (data) {
-// console.log(data);
                 $('#dailyTable tbody').prepend(data.result);
                 $('#dailyTable').DataTable();
 
@@ -34,15 +35,18 @@ $(document).ready(function () {
     $("#Month").change(function () {
         month = $('#Month').val();
         year = $('#year').val();
-        type = $('#type').val();
-
+        // type = $('#type').val();
+        if ($('#user_type').val() == 'User') {
+            type = $('#user_cat').val();
+        } else
+            type = $('#type').val();
         $('#MonthlyTable tbody').empty();
 
-        var hrefMonthly="monthlyPdf/" + month + "/" + year+ "/"+type;
+        var hrefMonthly = "monthlyPdf/" + month + "/" + year + "/" + type;
         $('#btn_search_monthly').attr("href", hrefMonthly);
 
         $.ajax({
-            url: "dailyReport/searchMonthly/" + month + "/" + year+ "/"+type,
+            url: "dailyReport/searchMonthly/" + month + "/" + year + "/" + type,
             dataType: 'json',
             type: 'get',
             success: function (data) {
@@ -57,15 +61,18 @@ $(document).ready(function () {
     $("#year").change(function () {
         month = $('#Month').val();
         year = $('#year').val();
-        type = $('#type').val();
-
+        // type = $('#type').val();
+        if ($('#user_type').val() == 'User') {
+            type = $('#user_cat').val();
+        } else
+            type = $('#type').val();
         $('#MonthlyTable tbody').empty();
 
-        var hrefMonthly="monthlyPdf/" + month + "/" + year+ "/"+type;
+        var hrefMonthly = "monthlyPdf/" + month + "/" + year + "/" + type;
         $('#btn_search_monthly').attr("href", hrefMonthly);
 
         $.ajax({
-            url: "dailyReport/searchMonthly/" + month + "/" + year+ "/"+type,
+            url: "dailyReport/searchMonthly/" + month + "/" + year + "/" + type,
             dataType: 'json',
             type: 'get',
             success: function (data) {
@@ -80,15 +87,18 @@ $(document).ready(function () {
     $("#type").change(function () {
         month = $('#Month').val();
         year = $('#year').val();
-        type = $('#type').val();
-
+        // type = $('#type').val();
+        if ($('#user_type').val() == 'User') {
+            type = $('#user_cat').val();
+        } else
+            type = $('#type').val();
         $('#MonthlyTable tbody').empty();
 
-        var hrefMonthly="monthlyPdf/" + month + "/" + year+ "/"+type;
+        var hrefMonthly = "monthlyPdf/" + month + "/" + year + "/" + type;
         $('#btn_search_monthly').attr("href", hrefMonthly);
 
         $.ajax({
-            url: "dailyReport/searchMonthly/" + month + "/" + year+ "/"+type,
+            url: "dailyReport/searchMonthly/" + month + "/" + year + "/" + type,
             dataType: 'json',
             type: 'get',
             success: function (data) {
@@ -102,14 +112,17 @@ $(document).ready(function () {
 
     $("#Dailytype").change(function () {
 
-        type = $('#Dailytype').val();
-
+        // type = $('#Dailytype').val();
+        if ($('#user_type').val() == 'User') {
+            type = $('#user_cat').val();
+        } else
+            type = $('#Dailytype').val();
         $('#dailyTable tbody').empty();
-        var href="dailyPdf/"+data+ "/"+type;
+        var href = "dailyPdf/" + data + "/" + type;
         $('#btn_search_daily').attr("href", href);
 
         $.ajax({
-            url: "dailyReport/" + data + "/"+type,
+            url: "dailyReport/" + data + "/" + type,
             dataType: 'json',
             type: 'get',
             success: function (data) {
@@ -120,8 +133,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
 });
 
 

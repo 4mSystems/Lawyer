@@ -53,19 +53,9 @@
                         <!-- start: TABLE WITH IMAGES PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                            @php
-                                                    $user_type = auth()->user()->type;
-                                                    if($user_type != 'admin'){
-                                                    @endphp
-
                                 <a class="btn btn-primary" id="addMohdarModal"><i
                                         class="fa fa-plus"></i>{{trans('site_lang.mohdar_add_mohdar')}}
-                                        </a>
-
-                                        @php
-                                                    }
-                                                    @endphp
-
+                                </a>
                             </div>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover table-full-width"
@@ -199,6 +189,28 @@
                                         <span class="text-danger" id="notes_error"></span>
                                     </div>
                                 </div>
+
+                                @php
+                                    $user_type = auth()->user()->type;
+                                    if($user_type == 'admin'){
+                                @endphp
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group{{$errors->has('cat_id')?' has-error':''}}">
+                                        <select id="form-field-select-3" class="form-control select2-arrow"
+                                                name="cat_id">
+                                            <option value="">
+                                                &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
+                                            @foreach($categories as $category)
+                                                <option
+                                                    value='{{$category->id}}'>{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="text-danger" id="To_error"></span>
+                                    </div>
+                                </div>
+                                @php
+                                    }
+                                @endphp
                             </div>
                             <div class="form-group right">
                                 <button data-dismiss="modal" class="btn btn-default" type="button">
@@ -458,6 +470,8 @@
                                 $('#mokel_Name_error').html(data_error.responseJSON.errors.mokel_Name);
                                 $('#khesm_Name_error').html(data_error.responseJSON.errors.khesm_Name);
                                 $('#case_number_error').html(data_error.responseJSON.errors.case_number);
+                                $('#To_error').html(data_error.responseJSON.errors.cat_id);
+
                             }
                         }
                     });
@@ -493,7 +507,8 @@
                                 $('#mokel_Name_error').html(data_error.responseJSON.errors.mokel_Name);
                                 $('#khesm_Name_error').html(data_error.responseJSON.errors.khesm_Name);
                                 $('#case_number_error').html(data_error.responseJSON.errors.case_number);
-                                $('#cat_id').html(data_error.responseJSON.errors.cat_id);
+                                 $('#To_error').html(data_error.responseJSON.errors.cat_id);
+
                             }
                         }
                     });
@@ -512,6 +527,7 @@
                         $('#case_number').val(html.data.case_number);
                         $('#paper_Number').val(html.data.paper_Number);
                         $('#notes').val(html.data.notes);
+                        $("#form-field-select-3").val(html.data.cat_id);
                         $('#id').val(html.data.moh_Id);
                         $('#mokel_container').hide();
                         $('#khesm_container').hide();

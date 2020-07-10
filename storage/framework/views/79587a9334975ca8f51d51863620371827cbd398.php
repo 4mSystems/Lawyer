@@ -44,19 +44,10 @@
                         <!-- start: DYNAMIC TABLE PANEL -->
                         <div class="panel panel-white">
                             <div class="panel-heading">
-                                                     <?php
-                                                    $user_type = auth()->user()->type;
-                                                    if($user_type == 'User'){
-                                                    ?>
+
                                 <a class="btn btn-primary" id="addClientModal"><i
 
                                         class="fa fa-plus"></i><?php echo e(trans('site_lang.clients_add_new_client_text')); ?> </a>
-
-
-
-                                        <?php
-                                                    }
-                                                    ?>
                             </div>
                             <div class="panel-body">
 
@@ -133,8 +124,6 @@
                                 </div>
 
 
-
-
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group<?php echo e($errors->has('notes')?' has-error':''); ?>">
                                         <select type="select" name="type" id="type" class="form-control"
@@ -157,7 +146,27 @@
                                     </div>
                                 </div>
 
-
+                                <?php
+                                    $user_type = auth()->user()->type;
+                                    if($user_type == 'admin'){
+                                ?>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group<?php echo e($errors->has('cat_id')?' has-error':''); ?>">
+                                        <select id="form-field-select-3" class="form-control select2-arrow"
+                                                name="cat_id">
+                                            <option value="">
+                                                &nbsp;<?php echo e(trans('site_lang.add_case_to_whom')); ?></option>
+                                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option
+                                                    value='<?php echo e($category->id); ?>'><?php echo e($category->name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </select>
+                                        <span class="text-danger" id="To_error"></span>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </div>
                             <div class="form-group right">
                                 <button data-dismiss="modal" class="btn btn-default" type="button">
@@ -208,18 +217,10 @@
             }
         });
         $(document).ready(function () {
-            var table = $('#client_tbl').DataTable({
+            $('#client_tbl').DataTable({
                 processing: true,
                 serverSide: true,
-                // parameters  : [
-                // 'dom'     : 'Bfrtip',
-                // buttons :'print',
-       
-                // ],
-
-
-                
-                 ajax: {
+                ajax: {
                     url: "<?php echo e(route('clients.index')); ?>",
                 },
                 columns: [
@@ -295,6 +296,7 @@
                                 $('#client_Address_error').html(data_error.responseJSON.errors.client_Address);
                                 $('#notes_error').html(data_error.responseJSON.errors.notes);
                                 $('#type_error').html(data_error.responseJSON.errors.type);
+                                $('#To_error').html(data_error.responseJSON.errors.cat_id);
                             }
                         }
                     });
@@ -325,6 +327,7 @@
                                 $('#client_Address_error').html(data_error.responseJSON.errors.client_Address);
                                 $('#notes_error').html(data_error.responseJSON.errors.notes);
                                 $('#type_error').html(data_error.responseJSON.errors.type);
+                                $('#To_error').html(data_error.responseJSON.errors.cat_id);
                             }
                         }
                     });
@@ -341,6 +344,7 @@
                         $('#client_Unit').val(html.data.client_Unit);
                         $('#client_Address').val(html.data.client_Address);
                         $('#notes').val(html.data.notes);
+                         $("#form-field-select-3").val(html.data.cat_id);
                         if (html.data.type == '<?php echo e(trans('site_lang.clients_client_type_client')); ?>') {
                             $('#type').val('client');
                         } else {
