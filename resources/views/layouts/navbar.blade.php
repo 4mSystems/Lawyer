@@ -36,20 +36,12 @@
                             class="title"> {{trans('site_lang.side_cases')}} </span><i
                             class="icon-arrow"></i> </a>
                     <ul class="sub-menu">
-                        @php
-                            $user_type = auth()->user()->type;
-                            if($user_type == 'User'){
-                        @endphp
                         <li>
                             <a href="{{url('/addCase')}}">
                                 <i class="fa fa-plus"></i>&nbsp; <span
                                     class="title">{{trans('site_lang.side_add_case')}}</span>
                             </a>
                         </li>
-                        @php
-                            }
-                        @endphp
-
                         <li>
                             <a href="{{ url('/caseDetails') }}">
                                 <i class="fa fa-eye-slash"></i> &nbsp;<span

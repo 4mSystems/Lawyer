@@ -58,48 +58,57 @@ class CasesController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->validate(request(), [
+            if (auth()->user()->type == 'User') {
 
-                'invetation_num' => 'required',
-                'circle_num' => 'required',
-                'court' => 'required',
-                'first_session_date' => 'required',
-                'inventation_type' => 'required',
-            ]);
-            
-            if($request->mokel_name !=null && $request->khesm_name !=null ){
-            $month = date('m', strtotime($request->first_session_date));
-            $year = date('yy', strtotime($request->first_session_date));
-//            // saving case data
-            $data['to_whome'] = auth()->user()->cat_id;
-            $case = Cases::create($data);
-            $case['month'] = $month;
-            $case['year'] = $year;
-            $case->save();
-            //saving session data
-            $sessions = new Sessions();
-            $sessions->session_date = $request->first_session_date;
-            $sessions->case_Id = $case->id;
-            $sessions->month = $month;
-            $sessions->year = $year;
-            $sessions->save();
-            // saving case clients data
-                 
-            $res = array_merge($request->mokel_name, $request->khesm_name);
-            
-            foreach ($res as $client) {
-                Case_client::create(['case_id' => $case->id, 'client_id' => $client]);
+                $data = $this->validate(request(), [
+
+                    'invetation_num' => 'required',
+                    'circle_num' => 'required',
+                    'court' => 'required',
+                    'first_session_date' => 'required',
+                    'inventation_type' => 'required',
+                ]);
+                $data['to_whome'] = auth()->user()->cat_id;
+
+            } else {
+                $data = $this->validate(request(), [
+                    'invetation_num' => 'required',
+                    'circle_num' => 'required',
+                    'court' => 'required',
+                    'first_session_date' => 'required',
+                    'inventation_type' => 'required',
+                    'to_whome' => 'required',
+                ]);
+                $data['to_whome'] = $request->to_whome;
+
             }
-            return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
-        }
-        else{
-            return response(['status' => false, 'msg' => "من فضلك قم بافراغ خانه الموكلين والخصوم واخترهم"]);
-        }
-               }
-               return redirect(url('addCase'))->with('success', 'Case Added successfully');
-               
-        // return redirect()->url('addCase')->with('success', 'Case Added successfully');
+            if ($request->mokel_name != null && $request->khesm_name != null) {
+                $month = date('m', strtotime($request->first_session_date));
+                $year = date('yy', strtotime($request->first_session_date));
+//            // saving case data
+                $case = Cases::create($data);
+                $case['month'] = $month;
+                $case['year'] = $year;
+                $case->save();
+                //saving session data
+                $sessions = new Sessions();
+                $sessions->session_date = $request->first_session_date;
+                $sessions->case_Id = $case->id;
+                $sessions->month = $month;
+                $sessions->year = $year;
+                $sessions->save();
+                // saving case clients data
 
+                $res = array_merge($request->mokel_name, $request->khesm_name);
+
+                foreach ($res as $client) {
+                    Case_client::create(['case_id' => $case->id, 'client_id' => $client]);
+                }
+                return response(['status' => true, 'msg' => trans('site_lang.public_success_text')]);
+            } else {
+                return response(['status' => false, 'msg' => "من فضلك قم بافراغ خانه الموكلين والخصوم واخترهم"]);
+            }
+        }
     }
 
     /**
@@ -146,8 +155,8 @@ class CasesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {  
-     
+    {
+
 
     }
 }

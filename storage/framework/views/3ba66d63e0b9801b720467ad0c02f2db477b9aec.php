@@ -28,20 +28,7 @@
                                 <div class="popover bottom search-box transition-all">
                                     <div class="arrow"></div>
                                     <div class="popover-content">
-                                        <!-- start: SEARCH FORM -->
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    <!-- end: SEARCH FORM -->
+
                                     </div>
                                 </div>
                                 <!-- end: SEARCH POPOVER -->
@@ -151,19 +138,12 @@
                                                 <div class="panel-heading">
                                                     <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_clients')); ?></h3>
                                                     <div class="btn-group pull-left">
-                                                        <?php
-                                                            $user_type = auth()->user()->type;
-                                                            if($user_type != 'admin'){
-                                                        ?>
+
                                                         <a class="btn btn-primary" id="addMokelModal"><i
                                                                 class="fa
                                                             fa-plus">&nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_client')); ?>
 
                                                         </a>
-                                                        <?php
-                                                            }
-                                                        ?>
-
                                                     </div>
                                                     <br>
                                                 </div>
@@ -191,19 +171,12 @@
                                                     <div class="panel-heading">
                                                         <h3 class="text-bold"><?php echo e(trans('site_lang.search_case_khesms')); ?></h3>
                                                         <div class="btn-group pull-left">
-                                                            <?php
-                                                                $user_type = auth()->user()->type;
-                                                                if($user_type != 'admin'){
-                                                            ?>
                                                             <a class="btn btn-success" id="addKhesmModal"><i
 
                                                                     class="fa fa-plus">
                                                                     &nbsp;&nbsp;</i><?php echo e(trans('site_lang.search_case_add_khesm')); ?>
 
                                                             </a>
-                                                            <?php
-                                                                }
-                                                            ?>
                                                         </div>
                                                         <br>
                                                     </div>
@@ -375,18 +348,13 @@
                                 <div id="panel_sessions" class="tab-pane fade">
                                     <div class="panel panel">
                                         <div class="panel-heading">
-                                            <?php
-                                                $user_type = auth()->user()->type;
-                                                if($user_type != 'admin'){
-                                            ?>
+
                                             <a class="btn btn-primary" id="addSessionModal"><i
                                                     class="fa
                                                 fa-plus">&nbsp;&nbsp;</i> <?php echo e(trans('site_lang.search_case_case_add_session')); ?>
 
                                             </a>
-                                            <?php
-                                                }
-                                            ?>
+
                                         </div>
                                         <div class="panel-body" id="session-div-table">
                                             <div class="alert alert-warning" style="text-align: right;">
@@ -417,17 +385,11 @@
                                                     fa-print"></i>&nbsp;&nbsp;<?php echo e(trans('site_lang.search_case_case_print_notes')); ?>
 
                                             </a>
-                                            <?php
-                                                $user_type = auth()->user()->type;
-                                                if($user_type != 'admin'){
-                                            ?>
+
                                             <a class="btn btn-primary" id="addNotesModal"><i
                                                     class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo e(trans('site_lang.search_case_case_add_note')); ?>
 
                                             </a>
-                                            <?php
-                                                }
-                                            ?>
                                         </div>
 
                                         <div class="panel-body">
@@ -555,19 +517,19 @@
         var casee_id ;
     $(document).on('click', '#deletecase', function () {
         casee_id = $(this).data('case-id');
-                
+
                 $('#confirmModala').modal('show');
             });
-            $('#okbutton').click(function () { 
-                
-                $.ajax({  
-                    url: "/caseDetails/delete/" + casee_id,  
+            $('#okbutton').click(function () {
+
+                $.ajax({
+                    url: "/caseDetails/delete/" + casee_id,
                     success: function (data) {
                         toastr.success(data.msg);
                         setTimeout(function () {
                             $('#confirmModala').modal('hide');
                             $('#cases').DataTable().ajax.reload();
-                            location.reload(); 
+                            location.reload();
                         }, 100);
                     }
                 })

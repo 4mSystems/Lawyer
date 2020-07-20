@@ -69,17 +69,22 @@
                                                 <span class="input-group-addon"> <i
                                                         class="fa fa-calendar"></i> </span>
                                             </div>
+                                            <input id="user_type" type="hidden" value="{{auth()->user()->type}}"/>
+                                            <input id="user_cat" type="hidden" value="{{auth()->user()->cat_id}}"/>
                                         </div>
-
+                                        @php
+                                            $user_type = auth()->user()->type;
+                                            if($user_type == 'admin'){
+                                        @endphp
                                         <div class="col-md-6 col-lg-3 col-sm-6">
                                             <div class="input-group">
-                              
+
                                                 <select id="Dailytype" class="form-control"
                                                         name="Dailytype">
                                                     <option value="">
                                                         &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
-                                                        
-                                                        <option value="all"
+
+                                                    <option value="all"
                                                             selected="selected">{{trans('site_lang.reports_all')}}</option>
                                                     @foreach($categories as $category)
                                                         <option
@@ -88,7 +93,9 @@
                                                 </select>
                                             </div>
                                         </div>
-
+                                        @php
+                                            }
+                                        @endphp
                                     </div>
 
 
@@ -105,6 +112,7 @@
                                             <th class="center">{{trans('site_lang.home_session_case_number')}}</th>
                                             <th class="center">{{trans('site_lang.add_case_circle_num')}}</th>
                                             <th class="center">{{trans('site_lang.add_case_inventation_type')}}</th>
+                                            <th class="center">{{trans('site_lang.add_case_court')}}</th>
                                             <th class="center">{{trans('site_lang.home_session_date')}}</th>
                                             <th class="center">{{trans('site_lang.mohdar_notes')}}</th>
 

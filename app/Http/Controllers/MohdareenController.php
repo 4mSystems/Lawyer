@@ -26,7 +26,7 @@ class MohdareenController extends Controller
         if ($enabled == 'yes') {
             if (request()->ajax()) {
                 if ($user_type == 'admin') {
-                    return datatables()->of(mohdr::query()->where('cat_id', '=', auth()->user()->cat_id)->get())
+                    return datatables()->of(mohdr::get())
                         ->addColumn('status', function ($data) {
                             if ($data->status == trans('site_lang.public_no_text')) {
                                 $html = '<p class="btn btn-sm" data-moh-Id="' . $data->moh_Id . '">
@@ -109,24 +109,40 @@ class MohdareenController extends Controller
 
     public function store(Request $request)
     {
+        $cat_id = 0;
+        if (auth()->user()->type == 'User') {
+            $data = $this->validate(request(), [
+                'court_mohdareen' => 'required',
+                'paper_type' => 'required',
+                'deliver_data' => 'required',
+                'mokel_Name' => 'required',
+                'khesm_Name' => 'required',
+                'paper_Number' => 'required',
+                'session_Date' => 'required',
+                'case_number' => 'required',
 
-        $data = $this->validate(request(), [
-            'court_mohdareen' => 'required',
-            'paper_type' => 'required',
-            'deliver_data' => 'required',
-            'mokel_Name' => 'required',
-            'khesm_Name' => 'required',
-            'paper_Number' => 'required',
-            'session_Date' => 'required',
-            'case_number' => 'required',
-
-        ]);
+            ]);
+           $cat_id = auth()->user()->cat_id;
+        } else {
+            $data = $this->validate(request(), [
+                'court_mohdareen' => 'required',
+                'paper_type' => 'required',
+                'deliver_data' => 'required',
+                'mokel_Name' => 'required',
+                'khesm_Name' => 'required',
+                'paper_Number' => 'required',
+                'session_Date' => 'required',
+                'case_number' => 'required',
+                'cat_id' => 'required'
+            ]);
+            $cat_id = $request->cat_id;
+        }
         $mokel = implode(',', $request->mokel_Name);
         $khesm = implode(',', $request->khesm_Name);
         $mohdar = new mohdr();
         $mohdar->mokel_Name = $mokel;
         $mohdar->khesm_Name = $khesm;
-        $mohdar->cat_id = auth()->user()->cat_id;
+        $mohdar->cat_id = $cat_id;
         $mohdar->court_mohdareen = $request->court_mohdareen;
         $mohdar->deliver_data = $request->deliver_data;
         $mohdar->paper_type = $request->paper_type;
@@ -192,14 +208,30 @@ class MohdareenController extends Controller
     public function update(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->validate(request(), [
-                'court_mohdareen' => 'required',
-                'paper_type' => 'required',
-                'deliver_data' => 'required',
-                'paper_Number' => 'required',
-                'session_Date' => 'required',
-                'case_number' => 'required',
-            ]);
+            $cat_id = 0;
+            if (auth()->user()->type == 'User') {
+                $data = $this->validate(request(), [
+                    'court_mohdareen' => 'required',
+                    'paper_type' => 'required',
+                    'deliver_data' => 'required',
+                    'paper_Number' => 'required',
+                    'session_Date' => 'required',
+                    'case_number' => 'required',
+
+                ]);
+                $cat_id = auth()->user()->cat_id;
+            } else {
+                $data = $this->validate(request(), [
+                    'court_mohdareen' => 'required',
+                    'paper_type' => 'required',
+                    'deliver_data' => 'required',
+                    'paper_Number' => 'required',
+                    'session_Date' => 'required',
+                    'case_number' => 'required',
+                    'cat_id' => 'required'
+                ]);
+                $cat_id = $request->cat_id;
+            }
             $mohdar = mohdr::find($request->id);
             $mohdar->court_mohdareen = $request->input('court_mohdareen');
             $mohdar->paper_type = $request->input('paper_type');
@@ -207,6 +239,7 @@ class MohdareenController extends Controller
             $mohdar->session_Date = $request->input('session_Date');
             $mohdar->case_number = $request->input('case_number');
             $mohdar->paper_Number = $request->input('paper_Number');
+            $mohdar->cat_id = $cat_id;
             $mohdar->update();
             return response(['msg' => trans('site_lang.public_success_text'), 'result' => $mohdar]);
         }

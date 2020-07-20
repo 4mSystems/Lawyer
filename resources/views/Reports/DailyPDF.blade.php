@@ -33,6 +33,7 @@
                 <tr>
                     <th style="text-align: center;">{{trans('site_lang.mohdar_notes')}}</th>
                     <th style="text-align: center;">{{trans('site_lang.home_session_date')}}</th>
+                    <th style="text-align: center;">{{trans('site_lang.add_case_court')}}</th>
                     <th style="text-align: center;">{{trans('site_lang.add_case_inventation_type')}}</th>
                     <th style="text-align: center;">{{trans('site_lang.add_case_circle_num')}}</th>
                     <th style="text-align: center;">{{trans('site_lang.home_session_case_number')}}</th>
@@ -54,6 +55,7 @@
                             <td style="text-align: center;">{{$row->Printnotes->note}}</td>
                         @endif
                         <td style="text-align: center;">{{$row->session_date}}</td>
+                        <td style="text-align: center;">{{$row->cases->court}}</td>
                         <td style="text-align: center;">{{$row->cases->inventation_type}}</td>
                         <td style="text-align: center;">{{$row->cases->circle_num}}</td>
                         <td style="text-align: center;">{{$row->cases->invetation_num}}</td>

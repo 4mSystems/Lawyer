@@ -9,6 +9,7 @@ use App\Sessions;
 use App\category;
 use Illuminate\Support\Facades\DB;
 use PDF;
+// use Dompdf\Dompdf;
 
 
 class ReportsController extends Controller
@@ -193,36 +194,35 @@ class ReportsController extends Controller
     }
 
     public function pdfMonthexport($month, $year, $type)
-    {
-        if ($type == 'all') {
-            $data = Sessions::with('cases', 'Printnotes')
-                ->where('month', '=', $month)
-                ->where('year', '=', $year)
-                ->get();
-        } else {
-            $data = Sessions::with('cases', 'Printnotes')
-                ->where('month', '=', $month)
-                ->where('year', '=', $year)
-                ->whereHas('cases', function ($q) use ($type) {
-                    $q->where('to_whome', '=', $type);
-                })
-                ->get();
-        }
-        foreach ($data as $result) {
-            $case = Cases::findOrFail($result->case_Id);
-            $clients = $case->clients;
+    {if ($type == 'all') {
+        $data = Sessions::with('cases', 'Printnotes')
+            ->where('month', '=', $month)
+            ->where('year', '=', $year)
+            ->get();
+    } else {
+        $data = Sessions::with('cases', 'Printnotes')
+            ->where('month', '=', $month)
+            ->where('year', '=', $year)
+            ->whereHas('cases', function ($q) use ($type) {
+                $q->where('to_whome', '=', $type);
+            })
+            ->get();
+    }
+    foreach ($data as $result) {
+        $case = Cases::findOrFail($result->case_Id);
+        $clients = $case->clients;
 
-            foreach ($clients as $key => $client) {
-                if ($client->type == trans('site_lang.clients_client_type_khesm')) {
-                    $khesm = $client;
-                } else {
-                    $clients = $client;
-                }
+        foreach ($clients as $key => $client) {
+            if ($client->type == trans('site_lang.clients_client_type_khesm')) {
+                $khesm = $client;
+            } else {
+                $clients = $client;
             }
         }
-        $pdf = PDF::loadView('Reports.MonthlyPDF', ['data' => $data, 'month' => $month, 'year' => $year, 'khesm' => $khesm, 'clients' => $clients]);
+    }
+    $pdf = PDF::loadView('Reports.MonthlyPDF', ['data' => $data, 'month' => $month, 'year' => $year, 'khesm' => $khesm, 'clients' => $clients]);
 
 
-        return $pdf->stream('My PDF' . 'pdf');
+    return $pdf->stream('My PDF' . 'pdf');
     }
 }
