@@ -486,8 +486,7 @@ $.ajaxSetup({
 
     var note_id ;
     $(document).on('click', '#deletenote', function () {
-                 note_id = $(this).data('client-id');
-                
+                 note_id = $(this).data('client-id'); 
                 $('#confirmModal').modal('show');
             });
             $('#ok_button').click(function () {
