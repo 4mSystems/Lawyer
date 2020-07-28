@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use PDF;
 use App\Permission;
+use App\category;
 
 
 class CaseDetailsController extends Controller
@@ -301,11 +302,14 @@ class CaseDetailsController extends Controller
     public function updateCase(Request $request)
     {
 
+       
+
         $data = $this->validate(request(), [
             'invetation_num' => 'required',
             'circle_num' => 'required',
             'court' => 'required',
             'inventation_type' => 'required',
+            'to_whome' => 'required',
         ]);
 
         Cases::where('id', $request->case_Id)->update($data);

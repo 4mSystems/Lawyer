@@ -324,6 +324,7 @@
                                                            placeholder="{{trans('site_lang.add_case_court')}}"
                                                            class="form-control" id="input_court" name="court">
                                                 </div>
+                                            
 
                                             </div>
 
