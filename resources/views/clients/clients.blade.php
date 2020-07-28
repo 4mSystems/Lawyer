@@ -381,6 +381,7 @@
             });
 
 
+
             $(document).on('click', '#deleteClient', function () {
                 client_id = $(this).data('client-id');
                 $('#confirmModal').modal('show');
@@ -399,6 +400,7 @@
                     }
                 })
             });
+            
             $(document).ready(function () {
                 $(".modal").on("hidden.bs.modal", function () {
                     $("#clients").trigger('reset');

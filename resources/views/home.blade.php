@@ -461,3 +461,17 @@
         });
 
         </script>
+    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modal.js') }}" type="text/javascript"></script>
+    <script src="{{url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js') }}" type="text/javascript"></script>
+    <script src="{{url('/js/ui-modals.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{url('/plugins/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{url('/js/table-data.js') }}"></script>
+    <script src="{{url('/plugins/DataTables/media/js/DT_bootstrap.js') }}"></script>
+    <script src="{{url('/plugins/DataTables/media/js/jquery.dataTables.min.js') }}"></script>
+
+@endsection
+@section('scriptDocument')
+    UIModals.init();
+    TableData.init();
+
+@endsection
