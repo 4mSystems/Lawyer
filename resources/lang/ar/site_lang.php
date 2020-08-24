@@ -162,7 +162,9 @@ return [
     'daily_report'=>'التقارير اليوميه',
     'monthly_report'=>'التقارير الشهريه',
     'edit'=>'تعديل',
+    'client_attachments'=>'ملحقات العميل ',
     'emp'=>'اسم الموظف ',
     'createdAt'=>'وقت الاضافه',
-    'cannot_delete_parent_category'=>'لا يمكن حذف التصنيف '
+    'cannot_delete_parent_category'=>'لا يمكن حذف التصنيف ',
+    'public_attachment_btn_text'=>'الملحقات',
 ];
