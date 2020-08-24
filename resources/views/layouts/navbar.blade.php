@@ -10,10 +10,11 @@
             </div>
             <div class="user-profile border-top padding-horizontal-10 block">
                 <div class="inline-block" style="margin-top: 20px;">
-                    <img src="{{url('/images/avatar-1.jpg') }}" alt="">
+                    <img src="{{url('/images/avatar.jpg') }}" alt="">
                 </div>
                 <div class="inline-block">
-                    <h4 class="text-justify"> &nbsp;&nbsp; {{ Auth::user()->name }} </h4>
+                    
+                    <h1 class="text-justify"> &nbsp;&nbsp; {{ Auth::user()->name }} </h4>
 
                 </div>
             </div>

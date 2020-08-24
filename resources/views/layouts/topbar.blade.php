@@ -7,8 +7,8 @@
                 <i class="fa fa-bars"></i>
             </a>
             <!-- start: LOGO -->
-            <a class="navbar-brand" href="index-2.html">
-                <img src="{{url('/images/logo.png') }}" alt="Rapido"/>
+            <a class="navbar-brand" href="{{url('home')}}">
+                <img src="{{url('/images/logo.png') }}" alt="Lawyer"/>
             </a>
             <!-- end: LOGO -->
         </div>
