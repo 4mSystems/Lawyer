@@ -116,7 +116,8 @@
                                             <td class="hidden-xs center">{{$case_attachment->img_Description}}</td>
                                             <td class="hidden-xs center"><a class='btn btn-raised btn-primary btn-sml'
                                                                             href=" {{url('clientattachment/'.$case_attachment->id.'/edit')}}"><i
-                                                        class="fa fa-edit"></i></a>
+                                                        class="fa fa-edit"></i>{{trans('site_lang.public_edit_btn_text')}}
+                                                </a>
 
 
                                                 <form method="get" id='delete-form'
@@ -129,7 +130,7 @@
                                                         form="delete-form">
 
                                                     <i
-                                                        class="fa fa-trash"></i>
+                                                        class="fa fa-trash"></i>{{trans('site_lang.public_delete_text')}}
                                                 </button>
 
                                             </td>

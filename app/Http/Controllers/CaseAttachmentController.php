@@ -119,7 +119,7 @@ class CaseAttachmentController extends Controller
         if($request['img_Url'] != null)
         {
 
-                $slash =trim("uploads\attachments\ ");
+                $slash =trim("uploads/attachments/ ");
             $file_name = attachment::where('id',$id)->first('img_Url');
           //  dd($file_name);
              unlink(public_path($slash.$file_name->img_Url));
@@ -161,7 +161,7 @@ class CaseAttachmentController extends Controller
     public function destroy($id)
     {
         $attachment =  attachment::find($id);
-        $slash =trim("uploads\attachments\ ");
+        $slash =trim("uploads/attachments/ ");
         //  dd($file_name);
         unlink(public_path($slash.$attachment->img_Url));
         $attachment->delete();
