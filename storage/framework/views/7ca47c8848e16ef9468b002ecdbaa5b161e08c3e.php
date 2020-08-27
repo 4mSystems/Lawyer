@@ -462,6 +462,7 @@ $.ajaxSetup({
                 $('#createModal').modal('show');
                   client_id = $('#client_id').val(); 
             });
+            
             $('#client_note').on('submit', function (event) {
                 event.preventDefault();
                     $.ajax({

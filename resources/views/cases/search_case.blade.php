@@ -60,13 +60,20 @@
                         <div class="panel panel-white" id="searchContainer">
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover" id="cases">
+                                    <colgroup>
+                                        <col span="1" style="width: 2%;">
+                                        <col span="1" style="width: 40%;">
+                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 38%;">
+                                        </colgroup>
                                     <thead>
                                     <tr>
-                                        <th class="hidden-xs center">#</th>
-                                        <th class="hidden-xs center">اسم الموكل \ اسم الخصم</th>
-                                        <th class="hidden-xs center">رقم الدعوى</th>
-                                        <th class="hidden-xs center">المحكمة</th>
-                                        <th class="hidden-xs center"></th>
+                                        <th class="center">#</th>
+                                        <th class="center">اسم الموكل \ اسم الخصم</th>
+                                        <th class="center">رقم الدعوى</th>
+                                        <th class="center">المحكمة</th>
+                                        <th class="center"></th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -324,7 +331,26 @@
                                                            placeholder="{{trans('site_lang.add_case_court')}}"
                                                            class="form-control" id="input_court" name="court">
                                                 </div>
-
+                                                @php
+                                                    $user_type = auth()->user()->type;
+                                                    if($user_type == 'admin'){
+                                                @endphp
+                                                <div class="form-group">
+                                                    <select id="form-field-select-3"
+                                                            class="form-control"
+                                                            name="to_whome">
+                                                        <option value="">
+                                                            &nbsp;{{trans('site_lang.add_case_to_whom')}}</option>
+                                                        @foreach($categories as $category)
+                                                            <option
+                                                                value='{{$category->id}}'>{{$category->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span class="text-danger" id="To_error"></span>
+                                                </div>
+                                                @php
+                                                    }
+                                                @endphp
                                             </div>
 
                                         </div>
@@ -434,24 +460,24 @@
         </div>
     </div>
 
-                                                <!-- confirm delete modal -->
+    <!-- confirm delete modal -->
 
     <div id="confirmModala" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                    <div class="modal-body">
-                        <h4 align="center" style="margin:0;">{{trans('site_lang.public_delete_modal_text')}}</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" name="okbutton" id="okbutton"
-                                class="btn btn-danger">{{trans('site_lang.public_accept_btn_text')}}</button>
-                        <button type="button" class="btn btn-default"
-                                data-dismiss="modal">{{trans('site_lang.public_close_btn_text')}}</button>
-                    </div>
+                <div class="modal-body">
+                    <h4 align="center" style="margin:0;">{{trans('site_lang.public_delete_modal_text')}}</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="okbutton" id="okbutton"
+                            class="btn btn-danger">{{trans('site_lang.public_accept_btn_text')}}</button>
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">{{trans('site_lang.public_close_btn_text')}}</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 @section('scripts')
@@ -501,26 +527,26 @@
             }
         };
 
-        var casee_id ;
-    $(document).on('click', '#deletecase', function () {
-        casee_id = $(this).data('case-id');
+        var casee_id;
+        $(document).on('click', '#deletecase', function () {
+            casee_id = $(this).data('case-id');
 
-                $('#confirmModala').modal('show');
-            });
-            $('#okbutton').click(function () {
+            $('#confirmModala').modal('show');
+        });
+        $('#okbutton').click(function () {
 
-                $.ajax({
-                    url: "/caseDetails/delete/" + casee_id,
-                    success: function (data) {
-                        toastr.success(data.msg);
-                        setTimeout(function () {
-                            $('#confirmModala').modal('hide');
-                            $('#cases').DataTable().ajax.reload();
-                            location.reload();
-                        }, 100);
-                    }
-                })
-            });
+            $.ajax({
+                url: "/caseDetails/delete/" + casee_id,
+                success: function (data) {
+                    toastr.success(data.msg);
+                    setTimeout(function () {
+                        $('#confirmModala').modal('hide');
+                        $('#cases').DataTable().ajax.reload();
+                        location.reload();
+                    }, 100);
+                }
+            })
+        });
     </script>
 
     <script src="{{url('/js/cases-details.js') }}"></script>

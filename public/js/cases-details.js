@@ -81,6 +81,9 @@ $(document).ready(function () {
                 //attachments url
                 var attachment_url = "attachment/" + caseId;
                 $('#attachment').attr("href", attachment_url);
+                console.log(html.result.case.to_whome);
+                $("#form-field-select-3").val(html.result.case.to_whome);
+
             }
         })
     });

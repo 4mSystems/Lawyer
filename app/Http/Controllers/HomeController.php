@@ -34,6 +34,7 @@ class HomeController extends Controller
         $cases = Cases::all();
         $sessions = Sessions::all();
         $mohdreen = mohdr::all();
+
         $today = Carbon::today();
         $date = Carbon::today()->addDays(10);
         $session = Sessions::whereBetween('session_date', array($today, $date))->get();

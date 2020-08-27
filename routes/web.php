@@ -96,23 +96,30 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('monthlyPdf/{month}/{year}/{type}', 'ReportsController@pdfMonthexport');
 
 
+
+    // Case Attachments
 //id is for case id
     Route::get('attachment/{id}', 'CaseAttachmentController@index');
-
     Route::get('attachment/{id}/create', 'CaseAttachmentController@create');
-
     Route::post('attachment/{id}/store', 'CaseAttachmentController@store');
-
-
 //id is for attachment
-
     Route::get('attachment/{id}/edit', 'CaseAttachmentController@edit');
-
     Route::get('attachment/{id}/delete', 'CaseAttachmentController@destroy');
-
-
-
     Route::post('attachment/{id}/update', 'CaseAttachmentController@update');
+
+
+
+//Client Attachment
+
+//id is for client id
+Route::get('clientattachment/{id}', 'ClientAttachmentController@index');
+Route::get('clientattachment/{id}/create', 'ClientAttachmentController@create');
+Route::post('clientattachment/{id}/store', 'ClientAttachmentController@store');
+//id is for attachment
+Route::get('clientattachment/{id}/edit', 'ClientAttachmentController@edit');
+Route::get('clientattachment/{id}/delete', 'ClientAttachmentController@destroy');
+Route::post('clientattachment/{id}/update', 'ClientAttachmentController@update');
+
 
 //permission
 

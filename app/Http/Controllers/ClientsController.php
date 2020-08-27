@@ -36,7 +36,12 @@ class ClientsController extends Controller
                                     class="fa fa-edit"></i>&nbsp;&nbsp;' . trans('site_lang.public_edit_btn_text') . '</button>';
                             $button .= '&nbsp;&nbsp;';
                             $button .= '<a href = "profile/' . $data->id . '" data-client-id="' . $data->id . '" id="viewClient" class="btn btn-xs btn-green tooltips" ><i
-                                    class="fa fa-view"></i>&nbsp;&nbsp;' . trans('site_lang.public_view_btn_text') . '</a>';
+                                    class="fa fa-user"></i>&nbsp;&nbsp;' . trans('site_lang.public_view_btn_text') . '</a>';
+                                    $button .= '&nbsp;&nbsp;';
+                                    
+                                    $button .= '<a href = "clientattachment/' . $data->id . '" data-client-id="' . $data->id . '" id="viewClient" class="btn btn-xs btn-blue tooltips" ><i
+                                class="fa fa-address-book"></i>&nbsp;&nbsp;' . trans('site_lang.public_attachment_btn_text') . '</a>';
+                                
                             $button .= '&nbsp;&nbsp;';
                             $button .= '<button data-client-id="' . $data->id . '" id="deleteClient"  class="btn btn-xs btn-red tooltips" ><i
                                     class="fa fa-times fa fa-white"></i>&nbsp;&nbsp;' . trans('site_lang.public_delete_text') . '</button>';

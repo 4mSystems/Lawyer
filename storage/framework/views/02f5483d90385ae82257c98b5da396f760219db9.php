@@ -460,5 +460,19 @@
         });
 
         </script>
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modal.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/plugins/bootstrap-modal/js/bootstrap-modalmanager.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(url('/js/ui-modals.js')); ?>" type="text/javascript"></script>
+    <script type="text/javascript" src="<?php echo e(url('/plugins/select2/select2.min.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(url('/js/table-data.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/DT_bootstrap.js')); ?>"></script>
+    <script src="<?php echo e(url('/plugins/DataTables/media/js/jquery.dataTables.min.js')); ?>"></script>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scriptDocument'); ?>
+    UIModals.init();
+    TableData.init();
+
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('welcome', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Lawyer\resources\views/home.blade.php ENDPATH**/ ?>
